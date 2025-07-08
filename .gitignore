@@ -32,3 +32,34 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+#Docker　関連
+# 環境変数ファイル（機密情報含む可能性）
+*.env
+# .env.development などの拡張
+.env.*
+
+docker-compose.override.yml
+# dev.Dockerfile などのバリエーション
+Dockerfile.* 
+dev.Dockerfile
+# Docker内で生成されたGem（バージョン管理不要）
+**/vendor/bundle
+
+#Editor 系
+.vscode/
+.idea/
+# Vim 一時ファイル
+*.swp
+*.sublime-workspace
+
+#OS 系
+# macOSの不要ファイル
+.DS_Store
+# Windowsの不要ファイル
+Thumbs.databases
+
+#本番環境不要なファイル
+# SimpleCovなどのカバレッジレポート
+/coverage/
+/spec/tmp/

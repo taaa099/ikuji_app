@@ -1,7 +1,7 @@
 FROM ruby:3.4.4
 
 # 必要なパッケージをインストール
-RUN apt-get update -qq && apt-get install -y nodejs yarn mysql-client
+RUN apt-get update -qq && apt-get install -y nodejs yarn default-mysql-client
 
 # 作業ディレクトリ作成
 WORKDIR /app

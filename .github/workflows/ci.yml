@@ -5,6 +5,9 @@ on:
     branches:
       - main
       - feature/**
+      - chore/**
+      - fix/**
+      - test/**
   pull_request:
     branches:
       - main
@@ -88,12 +91,12 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Run tests
+      - name: Run RSpec tests
         env:
           RAILS_ENV: test
           DATABASE_URL: mysql2://127.0.0.1:3306
           # REDIS_URL: redis://localhost:6379/0
-        run: bin/rails db:test:prepare test test:system
+        run: bundle exec rspec
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4

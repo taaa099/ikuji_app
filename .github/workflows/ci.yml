@@ -79,11 +79,13 @@ jobs:
         run: bundle exec rails db:create db:schema:load
         env:
           RAILS_ENV: test
+          IKUJI_APP_DATABASE_PASSWORD: ${{ secrets.IKUJI_APP_DATABASE_PASSWORD }}
 
       - name: Run RSpec tests
         env:
           RAILS_ENV: test
           DATABASE_URL: mysql2://127.0.0.1:3306
+          IKUJI_APP_DATABASE_PASSWORD: ${{ secrets.IKUJI_APP_DATABASE_PASSWORD }}
           # REDIS_URL: redis://localhost:6379/0
         run: bundle exec rspec
 

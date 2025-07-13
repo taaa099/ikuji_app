@@ -62,7 +62,8 @@ default: &default
 test:
   <<: *default
   database: ikuji_test
-  host: db
+  username: root
+  password: password
 
 production:
   primary: &primary_production

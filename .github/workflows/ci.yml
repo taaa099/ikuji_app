@@ -99,9 +99,7 @@ jobs:
           done
 
       - name: Set up test database
-        run: |
-          bin/rails db:create
-          bin/rails db:schema:load
+        run: bundle exec rails db:create db:schema:load
         env:
           RAILS_ENV: test
           env:

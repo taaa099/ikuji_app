@@ -66,5 +66,5 @@ end
 
 group :development, :test do
   # RSpec導入
-  gem 'rspec-rails'
+  gem "rspec-rails"
 end

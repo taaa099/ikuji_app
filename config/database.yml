@@ -80,4 +80,5 @@ default: &default
 test:
   <<: *default
   database: ikuji_test
+  host: db
 

@@ -67,3 +67,17 @@ production:
     <<: *primary_production
     database: ikuji_production_cable
     migrations_paths: db/cable_migrate
+
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password: password
+  host: 127.0.0.1
+  port: 3306
+
+test:
+  <<: *default
+  database: ikuji_test
+  host: db

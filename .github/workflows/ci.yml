@@ -51,8 +51,8 @@ jobs:
       db:
         image: mysql:8.0
         env:
-          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
-          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: ikuji_test
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -91,12 +91,14 @@ jobs:
         run: bundle exec rails db:create db:schema:load
         env:
           RAILS_ENV: test
-          IKUJI_APP_DATABASE_PASSWORD: ${{ secrets.IKUJI_APP_DATABASE_PASSWORD }}
+          DATABASE_URL: mysql2://root:password@db:3306/ikuji_test
+          IKUJI_APP_DATABASE_PASSWORD: password
 
       - name: Run RSpec tests
         env:
           RAILS_ENV: test
-          IKUJI_APP_DATABASE_PASSWORD: ${{ secrets.IKUJI_APP_DATABASE_PASSWORD }}
+          DATABASE_URL: mysql2://root:password@db:3306/ikuji_test
+          IKUJI_APP_DATABASE_PASSWORD: password
           # REDIS_URL: redis://localhost:6379/0
         run: bundle exec rspec
 

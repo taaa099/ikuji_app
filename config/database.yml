@@ -49,6 +49,21 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
+
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password: password
+  host: db
+  port: 3306
+
+test:
+  <<: *default
+  database: ikuji_test
+  host: db
+
 production:
   primary: &primary_production
     <<: *default
@@ -67,18 +82,4 @@ production:
     <<: *primary_production
     database: ikuji_production_cable
     migrations_paths: db/cable_migrate
-
-default: &default
-  adapter: mysql2
-  encoding: utf8mb4
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password: password
-  host: db
-  port: 3306
-
-test:
-  <<: *default
-  database: ikuji_development
-  host: db
 

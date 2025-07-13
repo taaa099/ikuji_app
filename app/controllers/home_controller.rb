@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-#　未ログインユーザーをログイン画面へリダイレクトさせる
+  # 未ログインユーザーをログイン画面へリダイレクトさせる
   before_action :authenticate_user!
 
   def index

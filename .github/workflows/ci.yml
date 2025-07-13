@@ -99,19 +99,17 @@ jobs:
           done
 
       - name: Set up test database
-        run: 
-          bundle exec rails db:create
-          bundle exec rails db:schema:load
+        run: |
+          bin/rails db:create
+          bin/rails db:schema:load
         env:
           RAILS_ENV: test
           env:
-          DATABASE_URL: mysql2://root:password@db/ikuji_test
           IKUJI_APP_DATABASE_PASSWORD: password
 
       - name: Run RSpec tests
         env:
           RAILS_ENV: test
-          DATABASE_URL: mysql2://root:password@db/ikuji_test
           IKUJI_APP_DATABASE_PASSWORD: password
           # REDIS_URL: redis://localhost:6379/0
         run: bundle exec rspec

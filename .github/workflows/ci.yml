@@ -87,6 +87,9 @@ jobs:
             sleep 2
           done
 
+      - name: Test MySQL connection manually
+        run: mysql -h db -u root -ppassword -e "SHOW DATABASES;"
+
       - name: Set up test database
         run: bundle exec rails db:create db:schema:load
         env:

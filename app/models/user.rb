@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  #中間モデルとの関連
+  # 中間モデルとの関連
   has_many :UserChild, dependent: destroy
 
   # 実際に使いたいChildとの関連

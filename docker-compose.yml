@@ -15,11 +15,13 @@ services:
       context:  .
       dockerfile: dev.Dockerfile
     command: >
-      sh -c "until mysqladmin ping -h db -p$IKUJI_APP_DATABASE_PASSWORD --silent; do
-        echo 'Waiting for MySQL...';
-        sleep 2;
-      done;
-      rails server -b 0.0.0.0"
+      sh -c "
+        rm -f tmp/pids/server.pid &&
+        until mysqladmin ping -h db -p$IKUJI_APP_DATABASE_PASSWORD --silent; do
+          echo 'Waiting for MySQL...';
+          sleep 2;
+        done;
+        rails server -b 0.0.0.0"
     volumes:
       - .:/app
     ports:

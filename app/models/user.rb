@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   # 中間モデルとの関連
-  has_many :UserChild, dependent: destroy
+  has_many :user_children, dependent: :destroy
 
   # 実際に使いたいChildとの関連
   has_many :children, through: :UserChild

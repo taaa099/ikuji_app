@@ -6,5 +6,6 @@ class CreateUserChildren < ActiveRecord::Migration[8.0]
 
       t.timestamps
     end
+    add_index :user_children, [ :user_id, :child_id ], unique: true
   end
 end

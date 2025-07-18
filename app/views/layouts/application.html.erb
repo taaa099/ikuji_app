@@ -24,10 +24,14 @@
    <header>
     <% if user_signed_in? %>
     <div class="relative">
-     <div id="user-menu" class="hidden absolute right-0 mt-2 w-48 bg-white border rounded shadow">
+     <div id="user-menu" class="absolute right-0 mt-2 w-48 bg-white border rounded shadow">
       <%= link_to "子供を切り替える", children_path, class: "block px-4 py-2 hover:bg-gray-100" %>
       <%= link_to "子供の登録", new_child_path, class: "block px-4 py-2 hover:bg-gray-100" %>
-      <%= link_to "子供の編集・削除", children_path, class: "block px-4 py-2 hover:bg-gray-100" %>
+      <% if Child.any? %>
+       <%= link_to "子供の編集・削除", edit_child_path(Child.first), class: "block px-4 py-2 hover:bg-gray-100" %>
+      <% else %>
+       <%= link_to "子供の編集・削除", new_child_path, class: "block px-4 py-2 text-blue-600 hover:underline" %>
+      <% end %>
      </div>
     </div>
     <% end %>

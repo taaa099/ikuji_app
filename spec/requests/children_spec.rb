@@ -22,9 +22,9 @@ RSpec.describe "Children", type: :request do
     end
   end
 
-  describe "GET /create" do
+  describe "POST /create" do
     it "returns http success" do
-      get "/children/create"
+      post "/children/create"
       expect(response).to have_http_status(:success)
     end
   end
@@ -36,16 +36,16 @@ RSpec.describe "Children", type: :request do
     end
   end
 
-  describe "GET /update" do
+  describe "PATCH /update" do
     it "returns http success" do
-      get "/children/update"
+      patch "/children/update"
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe "GET /destroy" do
+  describe "DELETE /destroy" do
     it "returns http success" do
-      get "/children/destroy"
+      delete "/children/destroy"
       expect(response).to have_http_status(:success)
     end
   end

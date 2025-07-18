@@ -20,15 +20,24 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
   </head>
-
   <body>
+   <header>
+    <% if user_signed_in? %>
+    <div class="relative">
+     <div id="user-menu" class="hidden absolute right-0 mt-2 w-48 bg-white border rounded shadow">
+      <%= link_to "子供を切り替える", children_path, class: "block px-4 py-2 hover:bg-gray-100" %>
+      <%= link_to "子供の登録", new_child_path, class: "block px-4 py-2 hover:bg-gray-100" %>
+      <%= link_to "子供の編集・削除", children_path, class: "block px-4 py-2 hover:bg-gray-100" %>
+     </div>
+    </div>
+    <% end %>
+   </header>
   <% if notice %>
     <p class="notice"><%= notice %></p>
   <% end %>
   <% if alert %>
     <p class="alert"><%= alert %></p>
   <% end %>
-
   
   <%= yield %>
   </body>

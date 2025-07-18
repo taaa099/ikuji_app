@@ -24,6 +24,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_17_143010) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["child_id"], name: "index_user_children_on_child_id"
+    t.index ["user_id", "child_id"], name: "index_user_children_on_user_id_and_child_id", unique: true
     t.index ["user_id"], name: "index_user_children_on_user_id"
   end
 

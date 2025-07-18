@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Children", type: :request do
-  let(:child) { Child.create(name: "テスト", birthday: Date.new(2020, 1, 1)) }
+  let(:child) { Child.create(name: "テスト", birth_date: Date.new(2020, 1, 1)) }
 
   describe "GET /index" do
     it "returns http success" do
@@ -26,7 +26,7 @@ RSpec.describe "Children", type: :request do
 
   describe "POST /create" do
     it "creates a new child and redirects" do
-      post "/children", params: { child: { name: "新しい子", birthday: "2020-01-01" } }
+      post "/children", params: { child: { name: "新しい子", birth_date: "2020-01-01" } }
       expect(response).to redirect_to(assigns(:child)) # showにリダイレクトされる想定
     end
   end

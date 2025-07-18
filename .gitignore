@@ -63,3 +63,5 @@ Thumbs.databases
 # SimpleCovなどのカバレッジレポート
 /coverage/
 /spec/tmp/
+/app/assets/builds/*
+!/app/assets/builds/.keep

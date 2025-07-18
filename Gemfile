@@ -69,3 +69,5 @@ group :development, :test do
   # RSpec導入
   gem "rspec-rails"
 end
+
+gem "tailwindcss-rails", "~> 4.3"

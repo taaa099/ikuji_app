@@ -1,16 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe "Children", type: :request do
+  let(:child) { Child.create(name: "テスト", birthday: Date.new(2020, 1, 1)) }
+
   describe "GET /index" do
     it "returns http success" do
-      get "/children/index"
+      get "/children"
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET /show" do
     it "returns http success" do
-      get "/children/show"
+      get "/children/#{child.id}"
       expect(response).to have_http_status(:success)
     end
   end
@@ -23,30 +25,30 @@ RSpec.describe "Children", type: :request do
   end
 
   describe "POST /create" do
-    it "returns http success" do
-      post "/children/create"
-      expect(response).to have_http_status(:success)
+    it "creates a new child and redirects" do
+      post "/children", params: { child: { name: "新しい子", birthday: "2020-01-01" } }
+      expect(response).to redirect_to(assigns(:child)) # showにリダイレクトされる想定
     end
   end
 
   describe "GET /edit" do
     it "returns http success" do
-      get "/children/edit"
+      get "/children/#{child.id}/edit"
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "PATCH /update" do
-    it "returns http success" do
-      patch "/children/update"
-      expect(response).to have_http_status(:success)
+    it "updates the child and redirects" do
+      patch "/children/#{child.id}", params: { child: { name: "更新された名前" } }
+      expect(response).to redirect_to(assigns(:child))
     end
   end
 
   describe "DELETE /destroy" do
-    it "returns http success" do
-      delete "/children/destroy"
-      expect(response).to have_http_status(:success)
+    it "deletes the child and redirects" do
+      delete "/children/#{child.id}"
+      expect(response).to redirect_to(children_path)
     end
   end
 end

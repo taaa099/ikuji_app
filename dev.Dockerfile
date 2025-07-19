@@ -13,6 +13,10 @@ WORKDIR /app
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
+# JavaScript の依存関係をインストール ←★追加
+COPY package.json yarn.lock ./
+RUN yarn install
+
 # アプリ全体をコピー
 COPY . .
 

@@ -32,6 +32,9 @@
       <% else %>
        <%= link_to "子供の編集・削除", new_child_path, class: "block px-4 py-2 text-blue-600 hover:underline" %>
       <% end %>
+      <% if user_signed_in? %>
+       <%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: "block px-4 py-2 text-blue-600 hover:underline" %>
+      <% end %>
      </div>
     </div>
     <% end %>

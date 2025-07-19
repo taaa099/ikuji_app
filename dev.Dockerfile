@@ -1,19 +1,22 @@
 FROM ruby:3.4.4
 
-# 必要なパッケージをインストール
-RUN apt-get update -qq && apt-get install -y nodejs yarn default-mysql-client
+# Node.js + Yarn の最新版を公式スクリプトでインストール
+RUN apt-get update -qq && apt-get install -y curl gnupg default-mysql-client \
+  && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+  && apt-get install -y nodejs \
+  && npm install -g yarn
 
-# 作業ディレクトリ作成
+# 作業ディレクトリ
 WORKDIR /app
 
-# Gemfileを先にコピーし、bundle install
+# Gemfile を先にコピーして bundle install
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
 # アプリ全体をコピー
 COPY . .
 
-# 起動時に実行するシェルスクリプト
+# 起動時のスクリプト
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT [ "entrypoint.sh" ]
@@ -21,5 +24,5 @@ ENTRYPOINT [ "entrypoint.sh" ]
 # ポート指定
 EXPOSE 3000
 
-# railsサーバー起動
+# Rails サーバ起動
 CMD [ "rails", "server", "-b", "0.0.0.0" ]

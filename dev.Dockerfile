@@ -4,7 +4,9 @@ FROM ruby:3.4.4
 RUN apt-get update -qq && apt-get install -y curl gnupg default-mysql-client \
   && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
   && apt-get install -y nodejs \
-  && npm install -g yarn
+  && npm install -g yarn \
+  && yarn -v \
+  && which yarn
 
 # 作業ディレクトリ
 WORKDIR /app

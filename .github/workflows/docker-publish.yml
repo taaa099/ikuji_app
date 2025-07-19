@@ -26,10 +26,16 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Install JS dependencies
+        run: yarn install
+
+      - name: Build JavaScript
+        run: yarn build
+
       - name: Build Docker image
         run: |
           docker build -t ghcr.io/${{ github.repository_owner }}/ikuji_app-web:${{ github.ref_name }} .
 
       - name: Push Docker image to GHCR
         run: |
-          docker push ghcr.io/${{ github.repository_owner }}/ikuji_app-web:${{ github.ref_name }}
+          docker push ghcr.io/${{ github.repository_owner }}/ikuji_app-web:${{ github.ref_name }}bun

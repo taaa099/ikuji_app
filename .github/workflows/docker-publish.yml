@@ -13,7 +13,7 @@ jobs:
 
     permissions:
       contents: read
-      packages: write  # ← GHCRへのpushに必要
+      packages: write
 
     steps:
       - name: Checkout repository

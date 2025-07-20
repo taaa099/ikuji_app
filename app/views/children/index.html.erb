@@ -1,1 +1,31 @@
 <h1>子供一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>名前</th>
+      <th>誕生日</th>
+      <th>年齢</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @children.each do |child| %>
+      <tr>
+        <td><%= child.id %></td>
+        <td><%= child.name %></td>
+        <td><%= child.birth_date %></td>
+        <td><%= age_in_years(child.birth_date) %>歳</td>
+        <td>
+          <%= link_to '表示', child_path(child) %> |
+          <%= link_to '編集', edit_child_path(child) %> |
+          <%= link_to '削除', child_path(child), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to '新規作成', new_child_path, class: 'button' %>

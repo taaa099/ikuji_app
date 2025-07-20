@@ -3,5 +3,5 @@ class Child < ApplicationRecord
   has_many :user_children, dependent: :destroy
 
   # 実際に使いたいChildとの関連
-  has_many :users, through: :UserChild
+  has_many :users, through: :user_children
 end

@@ -10,9 +10,20 @@ class ChildrenController < ApplicationController
   end
 
   def new
+    @child = Child.new
   end
 
   def create
+    @child = Child.new(child_params)
+
+    if @child.save
+      current_user.children << @child unless current_user.children.include?(@child)
+      flash[:notice] = "子どもを登録しました"
+      redirect_to children_path
+    else
+      flash.now[:alert] = "登録に失敗しました"
+      render :new
+    end
   end
 
   def edit
@@ -22,5 +33,11 @@ class ChildrenController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+
+  def child_params
+    params.require(:child).permit(:name, :birth_date, :gender, :image)
   end
 end

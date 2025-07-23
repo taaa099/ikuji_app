@@ -5,9 +5,9 @@ class ChildrenController < ApplicationController
   def index
     if current_user.children.empty?
     redirect_to new_child_path, notice: "子どもを登録してください"
-  else
+    else
     @children = current_user.children
-  end
+    end
   end
 
   def show
@@ -54,4 +54,3 @@ class ChildrenController < ApplicationController
     params.require(:child).permit(:name, :birth_date, :gender, :image)
   end
 end
-

@@ -3,7 +3,11 @@ class ChildrenController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    if current_user.children.empty?
+    redirect_to new_child_path, notice: "子どもを登録してください"
+    else
     @children = current_user.children
+    end
   end
 
   def show
@@ -27,9 +31,18 @@ class ChildrenController < ApplicationController
   end
 
   def edit
+    @child = current_user.children.find(params[:id])
   end
 
   def update
+    @child = current_user.children.find(params[:id])
+  if @child.update(child_params)
+    flash[:notice] = "子どもの情報を更新しました"
+    redirect_to children_path
+  else
+    flash.now[:alert] = "更新に失敗しました"
+    render :edit
+  end
   end
 
   def destroy

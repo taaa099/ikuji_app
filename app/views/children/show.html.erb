@@ -1,1 +1,15 @@
-<h1>子供の詳細表示</h1>
+<h1><%= @child.name %>のプロフィール</h1>
+
+<p><strong>名前：</strong><%= @child.name %></p>
+<p><strong>誕生日：</strong><%= @child.birth_date %></p>
+<p><strong>年齢：</strong><%= age_in_years(@child.birth_date) %>歳</p>
+<p><strong>性別：</strong><%= @child.gender %></p>
+
+<% if @child.image.attached? %>
+  <p><strong>写真：</strong><br>
+    <%= image_tag @child.image.variant(resize_to_limit: [200, 200]) %>
+  </p>
+<% end %>
+
+<%= link_to '編集', edit_child_path(@child), class: 'btn' %> |
+<%= link_to '一覧に戻る', children_path, class: 'btn' %>

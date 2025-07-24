@@ -11,6 +11,7 @@ class ChildrenController < ApplicationController
   end
 
   def show
+    @child = current_user.children.find(params[:id])
   end
 
   def new

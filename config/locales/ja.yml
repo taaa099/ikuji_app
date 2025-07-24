@@ -25,8 +25,16 @@ ja:
         unconfirmed_email: 未確認Eメール
         unlock_token: ロック解除用トークン
         updated_at: 更新日
+
+      child:
+        name: 名前
+        birth_date: 誕生日
+        gender: 性別
+        image: 写真
+
     models:
       user: ユーザー
+      child: 子ども
   devise:
     confirmations:
       confirmed: メールアドレスが確認できました。

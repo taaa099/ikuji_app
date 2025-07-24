@@ -46,6 +46,10 @@ class ChildrenController < ApplicationController
   end
 
   def destroy
+    @child = current_user.children.find(params[:id])
+    @child.destroy
+    flash[:notice] = "子どもを削除しました"
+    redirect_to children_path
   end
 
   private

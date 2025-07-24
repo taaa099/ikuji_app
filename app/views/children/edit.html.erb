@@ -1,9 +1,9 @@
 <h1>子ども情報の編集</h1>
 
-<%= form_with(model: @child, local: true, html: { multipart: true }) do |form| %>
+<%= form_with(model: @child, local: true, data: {turbo: false}, html: { multipart: true }) do |form| %>
   <% if @child.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@child.errors.count, "error") %> が発生しました:</h2>
+      <h2>入力内容に<%= @child.errors.count %> 件のエラーがあります:</h2>
       <ul>
         <% @child.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>

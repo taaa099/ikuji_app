@@ -26,6 +26,15 @@
     <% if user_signed_in? %>
     <div class="relative">
      <div id="user-menu" class="absolute right-0 mt-2 w-48 bg-white border rounded shadow">
+       <% if current_child.present? %>
+        <p>現在の子ども: <%= current_child.name %></p>
+       <% else %>
+        <p>子どもが選択されていません</p>
+       <% end %>
+       <%= form_with( url: switch_child_path, method: :post, local: true, data: {turbo: false}) do %>
+       <%= select_tag :id, options_from_collection_for_select(current_user.children, :id, :name, session[:current_child_id]) %>
+       <%= submit_tag "切り替え" %>
+       <% end %>
       <%= link_to "子どもを切り替える", children_path, class: "block px-4 py-2 hover:bg-gray-100" %>
       <%= link_to "子供一覧", children_path, class: "block px-4 py-2 hover:bg-gray-100" %>
       <%= link_to "子供の登録", new_child_path, class: "block px-4 py-2 text-blue-600 hover:underline" %>

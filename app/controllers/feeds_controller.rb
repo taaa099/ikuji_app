@@ -3,6 +3,8 @@ class FeedsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @child = Child.find(params[:child_id])
+    @feeds = @child.feeds.order(fed_at: :desc) # 時系列順
   end
 
   def show
@@ -15,6 +17,8 @@ class FeedsController < ApplicationController
   end
 
   def edit
+    @child = Child.find(params[:child_id])
+    @feed = @child.feeds.find(params[:id])
   end
 
   def update

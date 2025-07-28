@@ -1,0 +1,33 @@
+<%= form_with(model: [@child, feed], local: true, data: {turbo: false}) do |form| %>
+  <% if feed.errors.any? %>
+    <div class="error_explanation">
+      <ul>
+        <% feed.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :fed_at, "授乳日時" %>
+    <%= form.datetime_select :fed_at %>
+  </div>
+
+  <div>
+    <%= form.label :left_time, "左の授乳時間（分）" %>
+    <%= form.number_field :left_time %>
+  </div>
+
+  <div>
+    <%= form.label :right_time, "右の授乳時間（分）" %>
+    <%= form.number_field :right_time %>
+  </div>
+
+  <div>
+    <%= form.label :memo, "メモ" %>
+    <%= form.text_field :memo %>
+  </div>
+
+  <%= form.submit %>
+<% end %>

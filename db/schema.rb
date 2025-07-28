@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_22_133213) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_28_122420) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -47,6 +47,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_22_133213) do
     t.string "gender"
   end
 
+  create_table "feeds", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "child_id", null: false
+    t.integer "left_time"
+    t.integer "right_time"
+    t.datetime "fed_at"
+    t.string "memo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["child_id"], name: "index_feeds_on_child_id"
+  end
+
   create_table "user_children", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "child_id", null: false
@@ -70,6 +81,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_22_133213) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "feeds", "children"
   add_foreign_key "user_children", "children"
   add_foreign_key "user_children", "users"
 end

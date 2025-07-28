@@ -4,6 +4,7 @@ class Child < ApplicationRecord
 
   # 実際に使いたいChildとの関連
   has_many :users, through: :user_children
+  has_many :feeds, dependent: :destroy
 
   # 子どものプロフィール画像を1枚だけ添付できるようにするActiveStorageの設定
   has_one_attached :image

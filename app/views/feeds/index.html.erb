@@ -1,4 +1,4 @@
-<h2><%= @child.name %> の授乳記録一覧</h2>
+<h2><%= current_child.name %> の授乳記録一覧</h2>
 
 <table>
   <thead>
@@ -13,13 +13,23 @@
   <tbody>
     <% @feeds.each do |feed| %>
       <tr>
-        <td><%= feed.fed_at.strftime("%Y-%m-%d %H:%M") %></td>
-        <td><%= feed.left_time %>分</td>
-        <td><%= feed.right_time %>分</td>
-        <td><%= feed.memo %></td>
+        <td><%= feed.fed_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
         <td>
-          <%= link_to "編集", edit_child_feed_path(@child, feed) %>
+         <% if feed.left_time.present? %>
+          <%= feed.left_time / 60 %>分 <%= feed.left_time % 60 %>秒
+         <% else %>
+          -
+         <% end %>
         </td>
+        <td>
+         <% if feed.right_time.present? %>
+          <%= feed.right_time / 60 %>分 <%= feed.right_time % 60 %>秒
+         <% else %>
+          -
+         <% end %>
+        </td>
+        <td><%= feed.memo %></td>
+        <td><%= link_to "編集", edit_child_feed_path(current_child, feed) %></td>
       </tr>
     <% end %>
   </tbody>

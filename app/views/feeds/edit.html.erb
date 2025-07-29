@@ -1,5 +1,5 @@
 <h2>授乳記録を編集</h2>
 <%= render "form", feed: @feed %>
 
-<%= button_to "削除", child_feed_path(@child, @feed), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' } %>
-<%= link_to "一覧に戻る", child_feeds_path(@child) %>
+<%= button_to "削除", child_feed_path(current_child, @feed), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' } %>
+<%= link_to "一覧に戻る", child_feeds_path(current_child) %>

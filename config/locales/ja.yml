@@ -31,6 +31,8 @@ ja:
         birth_date: 誕生日
         gender: 性別
         image: 写真
+      feed:
+        fed_at: 授乳日時
 
     models:
       user: ユーザー

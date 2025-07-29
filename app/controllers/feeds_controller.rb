@@ -10,14 +10,14 @@ class FeedsController < ApplicationController
   end
 
   def new
-  # インスタンス生成＋現在時刻取得（授乳日時）
+   # インスタンス生成＋現在時刻取得（授乳日時）
    @feed = current_child.feeds.new(fed_at: Time.current)
   end
 
   def create
     @feed = current_child.feeds.new
 
-  # フォームから送られた分・秒を整数で取り出して合計秒に変換
+    # フォームから送られた分・秒を整数で取り出して合計秒に変換
     left_minutes = params[:left_minutes].to_i
     left_seconds = params[:left_seconds].to_i
     right_minutes = params[:right_minutes].to_i
@@ -48,7 +48,7 @@ class FeedsController < ApplicationController
   end
 
 private
- 
+
   def feed_params
    params.require(:feed).permit(:left_time, :right_time, :memo, :fed_at)
   end

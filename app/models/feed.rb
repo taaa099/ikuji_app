@@ -3,7 +3,7 @@ class Feed < ApplicationRecord
 
   validate :left_or_right_time_present
   validates :fed_at, presence: true
-  
+
   private
 
   def left_or_right_time_present

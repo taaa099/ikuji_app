@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :children do
    resources :feeds
   end
-  
+
   # Defines the root path route ("/")
   root "home#index"
 end

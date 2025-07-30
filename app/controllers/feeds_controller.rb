@@ -39,9 +39,38 @@ class FeedsController < ApplicationController
 
   def edit
     @feed = current_child.feeds.find(params[:id])
+
+    @left_minutes = @feed.left_time.to_i / 60
+    @left_seconds = @feed.left_time.to_i % 60
+    @right_minutes = @feed.right_time.to_i / 60
+    @right_seconds = @feed.right_time.to_i % 60
   end
 
   def update
+    @feed = current_child.feeds.find(params[:id])
+
+    # フォームから送られた分・秒を整数で取り出して合計秒に変換
+    left_minutes = params[:left_minutes].to_i
+    left_seconds = params[:left_seconds].to_i
+    right_minutes = params[:right_minutes].to_i
+    right_seconds = params[:right_seconds].to_i
+
+    @feed.left_time = left_minutes * 60 + left_seconds
+    @feed.right_time = right_minutes * 60 + right_seconds
+    @feed.memo = params[:feed][:memo]
+    @feed.fed_at = params[:feed][:fed_at]
+
+    if @feed.save
+     redirect_to child_feeds_path(current_child), notice: "授乳記録を更新しました"
+    else
+     # エラー時に再表示用の値を渡す
+     @left_minutes = left_minutes
+     @left_seconds = left_seconds
+     @right_minutes = right_minutes
+     @right_seconds = right_seconds
+     flash.now[:alert] = "更新に失敗しました"
+     render :edit
+    end
   end
 
   def destroy

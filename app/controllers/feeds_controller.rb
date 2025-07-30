@@ -74,6 +74,9 @@ class FeedsController < ApplicationController
   end
 
   def destroy
+    @feed = current_child.feeds.find(params[:id])
+    @feed.destroy
+    redirect_to child_feeds_path(current_child), notice: "授乳記録を削除しました"
   end
 
 private

@@ -5,10 +5,9 @@ class Diaper < ApplicationRecord
 
   private
 
-  # カスタムバリデーションの定義
   def at_least_one_selected
-    if pee.nil? && poop.nil?
-      errors.add(:base, "おしっこ、うんちのいずれかを選択してください")
+    unless pee || poop
+     errors.add(:base, "おしっこ、うんちのいずれかを選択してください")
     end
   end
 end

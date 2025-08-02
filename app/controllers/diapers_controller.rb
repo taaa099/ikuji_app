@@ -26,9 +26,17 @@ class DiapersController < ApplicationController
   end
 
   def edit
+    @diaper = current_child.diapers.find(params[:id])
   end
 
   def update
+    @diaper = current_child.diapers.find(params[:id])
+    if @diaper.update(diaper_params)
+     redirect_to child_diapers_path(current_child), notice: "記録を更新しました"
+    else
+     flash.now[:alert] = "更新に失敗しました"
+     render :edit, status: :unprocessable_entity
+  end
   end
 
   def destroy

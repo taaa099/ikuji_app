@@ -27,6 +27,6 @@
   </div>
 
   <div class="actions">
-    <%= form.submit "記録する" %>
+    <%= form.submit diaper.persisted? ? "更新する" : "登録する" %>
   </div>
 <% end %>

@@ -36,7 +36,7 @@ class DiapersController < ApplicationController
     else
      flash.now[:alert] = "更新に失敗しました"
      render :edit, status: :unprocessable_entity
-  end
+    end
   end
 
   def destroy

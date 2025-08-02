@@ -3,6 +3,7 @@ class DiapersController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @diapers = current_child.diapers.order(changed_at: :desc)
   end
 
   def show

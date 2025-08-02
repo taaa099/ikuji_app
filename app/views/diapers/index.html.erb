@@ -1,1 +1,26 @@
-<h1>>テストindex</h1>
+<h2><%= current_child.name %> のおむつ記録</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>交換時間</th>
+      <th>内容</th>
+      <th>メモ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @diapers.each do |diaper| %>
+      <tr>
+        <td><%= diaper.changed_at.strftime("%Y-%m-%d %H:%M") %></td>
+        <td>
+          <% contents = [] %>
+          <% contents << "おしっこ" if diaper.pee %>
+          <% contents << "うんち" if diaper.poop %>
+          <%= contents.join(" + ") %>
+        </td>
+        <td><%= diaper.memo.presence || "-" %></td>
+        <td><%= link_to "編集", edit_child_diaper_path(current_child, diaper) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

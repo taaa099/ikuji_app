@@ -1,11 +1,4 @@
 Rails.application.routes.draw do
-  get "bottles/index"
-  get "bottles/show"
-  get "bottles/new"
-  get "bottles/create"
-  get "bottles/edit"
-  get "bottles/update"
-  get "bottles/destroy"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   devise_for :users
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

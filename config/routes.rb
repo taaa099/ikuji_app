@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :children do
    resources :feeds
    resources :diapers
+   resources :bottles
   end
 
   # Defines the root path route ("/")

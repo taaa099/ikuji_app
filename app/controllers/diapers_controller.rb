@@ -40,6 +40,9 @@ class DiapersController < ApplicationController
   end
 
   def destroy
+    @diaper = current_child.diapers.find(params[:id])
+    @diaper.destroy
+    redirect_to child_diapers_path(current_child), notice: "授乳記録を削除しました"
   end
 
   private

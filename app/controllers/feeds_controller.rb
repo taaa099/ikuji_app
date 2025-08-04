@@ -80,7 +80,7 @@ class FeedsController < ApplicationController
   end
 
 private
-# フォームから送信されたパラメータのうち、許可するキーを指定
+  # フォームから送信されたパラメータのうち、許可するキーを指定
   def feed_params
    params.require(:feed).permit(:left_time, :right_time, :memo, :fed_at)
   end

@@ -3,6 +3,7 @@ class BottlesController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @bottles = current_child.bottles.order(given_at: :desc)
   end
 
   def show

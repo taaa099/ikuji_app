@@ -33,6 +33,8 @@ ja:
         image: 写真
       feed:
         fed_at: 授乳日時
+      diaper:
+        changed_at: 交換日時
 
     models:
       user: ユーザー

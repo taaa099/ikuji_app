@@ -2,6 +2,7 @@ class Diaper < ApplicationRecord
   belongs_to :child
 
   validate :at_least_one_selected
+  validates :changed_at, presence: true
 
   private
 

@@ -35,6 +35,8 @@ ja:
         fed_at: 授乳日時
       diaper:
         changed_at: 交換日時
+      bottle:
+        given_at: ミルクを与えた日時
 
     models:
       user: ユーザー

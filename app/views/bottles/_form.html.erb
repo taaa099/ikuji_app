@@ -1,7 +1,7 @@
 <%= form_with(model: [current_child, bottle], local: true, data: { turbo: false }) do |form| %>
   <% if bottle.errors.any? %>
     <div id="error_explanation">
-      <h3><%= pluralize(bottle.errors.count, "error") %> prohibited this record from being saved:</h3>
+      <h3><%= pluralize(bottle.errors.count, "件のエラー") %>があります：</h3>
       <ul>
         <% bottle.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>

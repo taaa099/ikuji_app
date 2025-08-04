@@ -1,6 +1,16 @@
 class Bottle < ApplicationRecord
   belongs_to :child
 
-  validates :amount, presence: true, numericality: { greater_than: 0 }
+  validate :validate_amount
   validates :given_at, presence: true
+
+  private
+
+  def validate_amount
+   if amount.blank?
+     errors.add(:amount, "を入力してください")
+   elsif !amount.is_a?(Numeric)
+     errors.add(:amount, "は数値で入力してください")
+   end
+  end
 end

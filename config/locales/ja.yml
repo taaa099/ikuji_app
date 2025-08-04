@@ -37,6 +37,7 @@ ja:
         changed_at: 交換日時
       bottle:
         given_at: ミルクを与えた日時
+        amount: 量(ml)
 
     models:
       user: ユーザー
@@ -154,6 +155,7 @@ ja:
       expired: の有効期限が切れました。新しくリクエストしてください。
       not_found: は見つかりませんでした。
       not_locked: はロックされていません。
+      not_a_number: 数値で入力してください
       not_saved:
         one: エラーが発生したため %{resource} は保存されませんでした。
         other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした。"

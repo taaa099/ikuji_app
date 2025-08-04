@@ -36,6 +36,7 @@ class BottlesController < ApplicationController
 
 private
 
+ # フォームから送信されたパラメータのうち、許可するキーを指定
  def bottle_params
   params.require(:bottle).permit(:amount, :given_at, :memo)
  end

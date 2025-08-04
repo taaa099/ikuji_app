@@ -44,6 +44,8 @@
       <%= link_to "授乳の登録", new_child_feed_path(current_child), class: "block px-4 py-2 text-blue-600 hover:underline" %>
       <%= link_to "おむつ一覧", child_diapers_path(current_child), class: "block px-4 py-2 hover:bg-gray-100" %>
       <%= link_to "おむつの登録", new_child_diaper_path(current_child), class: "block px-4 py-2 text-blue-600 hover:underline" %>
+      <%= link_to "ミルク一覧", child_bottles_path(current_child), class: "block px-4 py-2 hover:bg-gray-100" %>
+      <%= link_to "ミルクの登録", new_child_bottle_path(current_child), class: "block px-4 py-2 text-blue-600 hover:underline" %>
       <% end %>
       <% if user_signed_in? %>
        <%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: "block px-4 py-2 text-blue-600 hover:underline" %>

@@ -7,10 +7,12 @@ class Bottle < ApplicationRecord
   private
 
   def validate_amount
-   if amount.blank?
+    if amount.blank?
      errors.add(:amount, "を入力してください")
-   elsif !amount.is_a?(Numeric)
+    elsif !amount.is_a?(Numeric)
      errors.add(:amount, "は数値で入力してください")
-   end
+    elsif amount < 1
+     errors.add(:amount, "は1以上で入力してください")
+    end
   end
 end

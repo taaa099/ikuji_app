@@ -1,0 +1,31 @@
+<%= form_with(model: [current_child, bottle], local: true, data: { turbo: false }) do |form| %>
+  <% if bottle.errors.any? %>
+    <div id="error_explanation">
+      <h3><%= pluralize(bottle.errors.count, "件のエラー") %>があります：</h3>
+      <ul>
+        <% bottle.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :given_at, "ミルクを与えた時間" %><br>
+    <%= form.text_field :given_at %>
+  </div>
+
+  <div class="field">
+    <%= form.label :amount, "量 (ml)" %><br>
+    <%= form.number_field :amount %>
+  </div>
+
+  <div class="field">
+    <%= form.label :memo, "メモ" %><br>
+    <%= form.text_area :memo %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit feed.persisted? ? "更新する" : "登録する" %>
+  </div>
+<% end %>

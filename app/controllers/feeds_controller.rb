@@ -15,7 +15,7 @@ class FeedsController < ApplicationController
   end
 
   def create
-    @feed = current_child.feeds.new
+    @feed = current_child.feeds.new(feed_params)
 
     # フォームから送られた分・秒を整数で取り出して合計秒に変換
     left_minutes = params[:left_minutes].to_i
@@ -25,8 +25,6 @@ class FeedsController < ApplicationController
 
     @feed.left_time = left_minutes * 60 + left_seconds
     @feed.right_time = right_minutes * 60 + right_seconds
-    @feed.memo = params[:feed][:memo]
-    @feed.fed_at = params[:feed][:fed_at]
 
     if @feed.save
      session.delete(:feed_fed_at) # セッションから削除

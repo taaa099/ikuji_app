@@ -40,6 +40,9 @@ class BottlesController < ApplicationController
   end
 
   def destroy
+    @bottle = current_child.bottles.find(params[:id])
+    @bottle.destroy
+    redirect_to child_bottles_path(current_child), notice: "授乳記録を削除しました"
   end
 
 private

@@ -1,4 +1,5 @@
-<div>
-  <h1 class="font-bold text-4xl">Bottles#edit</h1>
-  <p>Find me in app/views/bottles/edit.html.erb</p>
-</div>
+<h2>ミルクの編集</h2>
+
+<%= render "form", bottle: @bottle %>
+
+<%= link_to '一覧に戻る', child_bottles_path(current_child) %>

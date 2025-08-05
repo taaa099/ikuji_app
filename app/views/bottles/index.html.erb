@@ -15,6 +15,7 @@
         <td><%= bottle.amount %> ml</td>
         <td><%= bottle.given_at.strftime("%Y-%m-%d %H:%M") %></td>
         <td><%= bottle.memo %></td>
+        <td><%= link_to "編集", edit_child_bottle_path(current_child, bottle) %></td>
       </tr>
     <% end %>
   </tbody>

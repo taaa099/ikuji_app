@@ -26,9 +26,17 @@ class BottlesController < ApplicationController
   end
 
   def edit
+    @bottle = current_child.bottles.find(params[:id])
   end
 
   def update
+    @bottle = current_child.bottles.find(params[:id])
+    if @bottle.update(bottle_params)
+      redirect_to child_bottles_path(current_child), notice: "記録を更新しました"
+    else
+      flash.now[:alert] = "更新に失敗しました"
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy

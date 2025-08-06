@@ -3,6 +3,7 @@ class HydrationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @hydrations = current_child.hydrations.order(fed_at: :desc)
   end
 
   def show

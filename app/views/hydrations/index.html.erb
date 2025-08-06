@@ -1,4 +1,24 @@
-<div>
-  <h1 class="font-bold text-4xl">Hydrations#index</h1>
-  <p>Find me in app/views/hydrations/index.html.erb</p>
-</div>
+<h1>水分補給記録一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>内容</th>
+      <th>時間</th>
+      <th>メモ</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @hydrations.each do |hydration| %>
+      <tr>
+        <td><%= hydration.drink_type %> ml</td>
+        <td><%= hydration.fed_at.strftime("%Y-%m-%d %H:%M") %></td>
+        <td><%= hydration.memo %></td>
+        <td><%= link_to "編集", edit_child_hydration_path(current_child, hydration) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "新規追加", new_child_hydration_path(current_child) %>

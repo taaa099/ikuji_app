@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>内容</th>
+      <th>量（ml）</th>
       <th>時間</th>
       <th>メモ</th>
     </tr>
@@ -12,7 +13,8 @@
   <tbody>
     <% @hydrations.each do |hydration| %>
       <tr>
-        <td><%= hydration.drink_type %> ml</td>
+        <td><%= hydration.drink_type %></td>
+        <td><%= hydration.amount %>ml</td>
         <td><%= hydration.fed_at.strftime("%Y-%m-%d %H:%M") %></td>
         <td><%= hydration.memo %></td>
         <td><%= link_to "編集", edit_child_hydration_path(current_child, hydration) %></td>

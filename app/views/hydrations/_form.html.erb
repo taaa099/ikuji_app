@@ -21,6 +21,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :amount, "量(ml)" %><br>
+    <%= form.number_field :amount %>
+  </div>
+
+  <div class="field">
     <%= form.label :memo, "メモ" %><br>
     <%= form.text_area :memo %>
   </div>

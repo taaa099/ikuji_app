@@ -38,6 +38,9 @@ ja:
       bottle:
         given_at: ミルクを与えた日時
         amount: 量(ml)
+      hydration:
+        fed_at: 水分補給日時
+        amount: 量(ml)
 
     models:
       user: ユーザー
@@ -156,6 +159,7 @@ ja:
       not_found: は見つかりませんでした。
       not_locked: はロックされていません。
       not_a_number: 数値で入力してください
+      greater_than: "は1以上の値を入力してください"
       not_saved:
         one: エラーが発生したため %{resource} は保存されませんでした。
         other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした。"

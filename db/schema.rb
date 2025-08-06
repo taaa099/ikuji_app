@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_03_124827) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_06_063110) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -79,6 +79,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_03_124827) do
     t.index ["child_id"], name: "index_feeds_on_child_id"
   end
 
+  create_table "hydrations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "drink_type"
+    t.datetime "fed_at"
+    t.text "memo"
+    t.bigint "child_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["child_id"], name: "index_hydrations_on_child_id"
+  end
+
   create_table "user_children", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "child_id", null: false
@@ -106,6 +116,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_03_124827) do
   add_foreign_key "bottles", "children"
   add_foreign_key "diapers", "children"
   add_foreign_key "feeds", "children"
+  add_foreign_key "hydrations", "children"
   add_foreign_key "user_children", "children"
   add_foreign_key "user_children", "users"
 end

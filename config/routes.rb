@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get "hydrations/index"
+  get "hydrations/show"
+  get "hydrations/new"
+  get "hydrations/create"
+  get "hydrations/edit"
+  get "hydrations/update"
+  get "hydrations/destroy"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   devise_for :users
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

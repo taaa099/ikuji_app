@@ -15,7 +15,6 @@ class BottlesController < ApplicationController
 
   def create
     @bottle = current_child.bottles.new(bottle_params)
-
     if @bottle.save
      session.delete(:bottle_given_at) # セッションから削除
      redirect_to child_bottles_path(current_child), notice: "授乳記録を保存しました"

@@ -25,7 +25,7 @@ class HydrationsController < ApplicationController
 
 private
 
-# フォームから送信されたパラメータのうち、許可するキーを指定
+ # フォームから送信されたパラメータのうち、許可するキーを指定
  def hydration_params
   params.require(:hydration).permit(:drink_type, :fed_at, :memo)
  end

@@ -10,9 +10,18 @@ class HydrationsController < ApplicationController
   end
 
   def new
+    @hydration = current_child.hydrations.new(fed_at: Time.current)
   end
 
   def create
+    @hydration = current_child.hydrations.new(hydration_params)
+    if @hydration.save
+      session.delete(:hydration_fed_at) # セッションから削除
+      redirect_to child_hydrations_path(current_child), notice: "水分補給記録を保存しました"
+    else
+      flash.now[:alert] = "保存に失敗しました"
+      render :new
+    end
   end
 
   def edit

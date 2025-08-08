@@ -1,11 +1,4 @@
 Rails.application.routes.draw do
-  get "baby_foods/index"
-  get "baby_foods/show"
-  get "baby_foods/new"
-  get "baby_foods/create"
-  get "baby_foods/edit"
-  get "baby_foods/update"
-  get "baby_foods/destroy"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   devise_for :users
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -21,6 +14,7 @@ Rails.application.routes.draw do
    resources :diapers
    resources :bottles
    resources :hydrations
+   resources :baby_foods
   end
 
   # Defines the root path route ("/")

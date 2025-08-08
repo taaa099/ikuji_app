@@ -3,6 +3,7 @@ class BabyFoodsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @baby_foods = current_child.baby_foods.order(fed_at: :desc)
   end
 
   def show

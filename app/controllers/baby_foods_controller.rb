@@ -22,4 +22,11 @@ class BabyFoodsController < ApplicationController
 
   def destroy
   end
+
+private
+
+  # フォームから送信されたパラメータのうち、許可するキーを指定
+  def baby_food_params
+    params.require(:baby_food).permit(:fed_at, :amount, :memo)
+  end
 end

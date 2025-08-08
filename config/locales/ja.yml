@@ -41,6 +41,9 @@ ja:
       hydration:
         fed_at: 水分補給日時
         amount: 量(ml)
+      baby_food:
+        fed_at: 日時
+        amount: 量(ml)
 
     models:
       user: ユーザー

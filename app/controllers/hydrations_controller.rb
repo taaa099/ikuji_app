@@ -39,6 +39,9 @@ class HydrationsController < ApplicationController
   end
 
   def destroy
+    @hydration = current_child.hydrations.find(params[:id])
+    @hydration.destroy
+    redirect_to child_hydrations_path(current_child), notice: "水分補給記録を削除しました"
   end
 
 private

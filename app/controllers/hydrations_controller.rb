@@ -25,9 +25,17 @@ class HydrationsController < ApplicationController
   end
 
   def edit
+    @hydration = current_child.hydrations.find(params[:id])
   end
 
   def update
+    @hydration = current_child.hydrations.find(params[:id])
+    if @hydration.update(hydration_params)
+      redirect_to child_hydrations_path(current_child), notice: "記録を更新しました"
+    else
+      flash.now[:alert] = "更新に失敗しました"
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy

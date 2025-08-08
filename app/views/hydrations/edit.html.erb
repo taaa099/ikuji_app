@@ -1,4 +1,5 @@
-<div>
-  <h1 class="font-bold text-4xl">Hydrations#edit</h1>
-  <p>Find me in app/views/hydrations/edit.html.erb</p>
-</div>
+<h2>水分補給記録の編集</h2>
+
+<%= render "form", hydration: @hydration %>
+
+<%= link_to '一覧に戻る', child_hydrations_path(current_child) %>

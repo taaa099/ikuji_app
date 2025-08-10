@@ -50,6 +50,8 @@
       <%= link_to "水分の登録", new_child_hydration_path(current_child), class: "block px-4 py-2 text-blue-600 hover:underline" %>
       <%= link_to "離乳食一覧", child_baby_foods_path(current_child), class: "block px-4 py-2 hover:bg-gray-100" %>
       <%= link_to "離乳食の登録", new_child_baby_food_path(current_child), class: "block px-4 py-2 text-blue-600 hover:underline" %>
+      <%= link_to "睡眠一覧", child_sleep_records_path(current_child), class: "block px-4 py-2 hover:bg-gray-100" %>
+      <%= link_to "睡眠の登録", new_child_sleep_record_path(current_child), class: "block px-4 py-2 text-blue-600 hover:underline" %>
       <% end %>
       <% if user_signed_in? %>
        <%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: "block px-4 py-2 text-blue-600 hover:underline" %>

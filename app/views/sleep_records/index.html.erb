@@ -24,7 +24,10 @@
           <% end %>
         </td>
         <td><%= record.memo %></td>
+        <td><%= link_to "編集", edit_child_sleep_record_path(current_child, record) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<%= link_to "新規追加", new_child_sleep_record_path(current_child) %>

@@ -1,4 +1,30 @@
-<div>
-  <h1 class="font-bold text-4xl">SleepRecords#index</h1>
-  <p>Find me in app/views/sleep_records/index.html.erb</p>
-</div>
+<h1>睡眠記録一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>開始時間</th>
+      <th>終了時間</th>
+      <th>睡眠時間</th>
+      <th>メモ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sleep_records.each do |record| %>
+      <tr>
+        <td><%= record.start_time.strftime("%Y-%m-%d %H:%M") if record.start_time %></td>
+        <td><%= record.end_time.strftime("%Y-%m-%d %H:%M") if record.end_time %></td>
+        <td>
+          <% if record.start_time && record.end_time %>
+            <% hours = ((record.end_time - record.start_time) / 3600).floor %>
+            <% minutes = (((record.end_time - record.start_time) % 3600) / 60).round %>
+            <%= "#{hours}時間#{minutes}分" %>
+          <% else %>
+            記録なし
+          <% end %>
+        </td>
+        <td><%= record.memo %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

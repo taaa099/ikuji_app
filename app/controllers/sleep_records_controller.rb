@@ -10,9 +10,18 @@ class SleepRecordsController < ApplicationController
   end
 
   def new
+    @sleep_record = current_child.sleep_records.new(start_time: Time.current)
   end
 
   def create
+    @sleep_record = current_child.sleep_records.new(sleep_records_params)
+    if @sleep_record.save
+      session.delete(:sleep_record_start_time) # セッションから削除
+      redirect_to child_sleep_records_path(current_child), notice: " 離乳食の記録を保存しました"
+    else
+      flash.now[:alert] = "保存に失敗しました"
+      render :new
+    end
   end
 
   def edit

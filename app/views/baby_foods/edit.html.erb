@@ -2,4 +2,5 @@
 
 <%= render "form", baby_food: @baby_food %>
 
+<%= button_to "削除", child_baby_food_path(current_child, @baby_food), method: :delete, data: { turbo_confirm: '本当に削除しますか？' } %>
 <%= link_to '一覧に戻る', child_baby_foods_path(current_child) %>

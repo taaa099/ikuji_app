@@ -1,11 +1,4 @@
 Rails.application.routes.draw do
-  get "sleep_records/index"
-  get "sleep_records/show"
-  get "sleep_records/new"
-  get "sleep_records/create"
-  get "sleep_records/edit"
-  get "sleep_records/update"
-  get "sleep_records/destroy"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   devise_for :users
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -22,6 +15,7 @@ Rails.application.routes.draw do
    resources :bottles
    resources :hydrations
    resources :baby_foods
+   resources :sleep_records
   end
 
   # Defines the root path route ("/")

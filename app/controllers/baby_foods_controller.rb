@@ -25,9 +25,17 @@ class BabyFoodsController < ApplicationController
   end
 
   def edit
+    @baby_food = current_child.baby_foods.find(params[:id])
   end
 
   def update
+    @baby_food = current_child.baby_foods.find(params[:id])
+    if @baby_food.update(baby_food_params)
+      redirect_to child_baby_foods_path(current_child), notice: "記録を更新しました"
+    else
+      flash.now[:alert] = "更新に失敗しました"
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy

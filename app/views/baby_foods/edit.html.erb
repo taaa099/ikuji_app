@@ -1,4 +1,5 @@
-<div>
-  <h1 class="font-bold text-4xl">BabyFoods#edit</h1>
-  <p>Find me in app/views/baby_foods/edit.html.erb</p>
-</div>
+<h2>離乳食の編集</h2>
+
+<%= render "form", baby_food: @baby_food %>
+
+<%= link_to '一覧に戻る', child_baby_foods_path(current_child) %>

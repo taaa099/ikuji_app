@@ -3,6 +3,7 @@ class SleepRecordsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @sleep_records = current_child.sleep_records.order(start_time: :desc)
   end
 
   def show

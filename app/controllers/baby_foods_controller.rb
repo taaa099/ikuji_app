@@ -39,6 +39,9 @@ class BabyFoodsController < ApplicationController
   end
 
   def destroy
+    @baby_food = current_child.baby_foods.find(params[:id])
+    @baby_food.destroy
+    redirect_to child_baby_foods_path(current_child), notice: "記録を削除しました"
   end
 
 private

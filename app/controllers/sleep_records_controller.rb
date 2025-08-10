@@ -22,4 +22,11 @@ class SleepRecordsController < ApplicationController
 
   def destroy
   end
+
+  private
+
+  # フォームから送信されたパラメータのうち、許可するキーを指定
+  def sleep_records_params
+    params.require(:sleep_record).permit(:start_time, :end_time, :memo)
+  end
 end

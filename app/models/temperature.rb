@@ -3,6 +3,5 @@ class Temperature < ApplicationRecord
 
   validates :measured_at, presence: true
   validates :temperature, presence: true,
-  numericality: { greater_than_or_equal_to: 35.0,
-                  less_than_or_equal_to: 42.0 }
+  numericality: { greater_than_or_equal_to: 35.0, less_than_or_equal_to: 42.0, allow_nil: true }
 end

@@ -2,4 +2,5 @@
 
 <%= render "form", sleep_record: @sleep_record %>
 
+<%= button_to "削除", child_sleep_record_path(current_child, @sleep_record), method: :delete, data: { turbo_confirm: '本当に削除しますか？' } %>
 <%= link_to '一覧に戻る', child_sleep_records_path(current_child) %>

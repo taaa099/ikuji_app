@@ -39,6 +39,9 @@ class SleepRecordsController < ApplicationController
   end
 
   def destroy
+    @sleep_record = current_child.sleep_records.find(params[:id])
+    @sleep_record.destroy
+    redirect_to child_sleep_records_path(current_child), notice: "記録を削除しました"
   end
 
   private

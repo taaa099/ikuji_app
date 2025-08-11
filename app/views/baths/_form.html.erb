@@ -17,7 +17,7 @@
 
   <div class="field">
     <%= form.label :bath_type, "内容" %><br>
-    <%= form.select :bath_type, options_for_select(["お風呂", "シャワー", "その他"]) %>
+    <%= form.select :bath_type, options_for_select(["お風呂", "シャワー", "その他"], form.object.bath_type) %>
   </div>
 
   <div class="field">

@@ -1,4 +1,24 @@
-<div>
-  <h1 class="font-bold text-4xl">Temperatures#index</h1>
-  <p>Find me in app/views/temperatures/index.html.erb</p>
-</div>
+<h1>体温記録一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>測定日時</th>
+      <th>体温 (℃)</th>
+      <th>メモ</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @temperatures.each do |temperature| %>
+      <tr>
+        <td><%= temperature.measured_at.strftime("%Y-%m-%d %H:%M") if temperature.measured_at %></td>
+        <td><%= sprintf("%.1f", temperature.temperature) if temperature.temperature %></td>
+        <td><%= temperature.memo %></td>
+        <td><%= link_to "編集", edit_child_temperature_path(current_child, temperature) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "新規追加", new_child_temperature_path(current_child) %>

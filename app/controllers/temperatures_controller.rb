@@ -3,6 +3,7 @@ class TemperaturesController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @temperatures = current_child.temperatures.order(measured_at: :desc)
   end
 
   def show

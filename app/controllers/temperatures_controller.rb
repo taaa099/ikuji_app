@@ -22,4 +22,11 @@ class TemperaturesController < ApplicationController
 
   def destroy
   end
+
+  private
+
+  # フォームから送信されたパラメータのうち、許可するキーを指定
+  def temperatures_params
+    params.require(:temperature).permit(:measured_at, :temperature, :memo)
+  end
 end

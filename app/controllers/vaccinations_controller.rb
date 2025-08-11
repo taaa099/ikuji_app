@@ -25,9 +25,17 @@ class VaccinationsController < ApplicationController
   end
 
   def edit
+    @vaccination = current_child.vaccinations.find(params[:id])
   end
 
   def update
+    @vaccination = current_child.vaccinations.find(params[:id])
+    if @vaccination.update(vaccinations_params)
+      redirect_to child_vaccinations_path(current_child), notice: "記録を更新しました"
+    else
+      flash.now[:alert] = "更新に失敗しました"
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy

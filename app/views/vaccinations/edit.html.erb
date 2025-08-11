@@ -2,4 +2,5 @@
 
 <%= render "form", vaccination: @vaccination %>
 
+<%= button_to "削除", child_vaccination_path(current_child, @vaccination), method: :delete, data: { turbo_confirm: '本当に削除しますか？' } %>
 <%= link_to '一覧に戻る', child_vaccinations_path(current_child) %>

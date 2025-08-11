@@ -1,0 +1,31 @@
+<%= form_with(model: [current_child, bath], local: true, data: {turbo: false}) do |form| %>
+  <% if bath.errors.any? %>
+    <div id="error_explanation">
+      <h3><%= pluralize(bath.errors.count, "件のエラー") %>があります：</h3>
+      <ul>
+        <% bath.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :bathed_at, "お風呂時間" %><br>
+    <%= form.datetime_field :bathed_at, include_seconds: false, default: bath.bathed_at || Time.current %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bath_type, "内容" %><br>
+    <%= form.select :bath_type, options_for_select(["お風呂", "シャワー", "その他"]) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :memo, "メモ" %><br>
+    <%= form.text_area :memo %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit bath.persisted? ? "更新する" : "登録する" %>
+  </div>
+<% end %>

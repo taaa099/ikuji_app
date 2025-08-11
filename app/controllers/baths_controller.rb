@@ -3,6 +3,7 @@ class BathsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @baths = current_child.baths.order(bathed_at: :desc)
   end
 
   def show

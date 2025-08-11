@@ -1,4 +1,24 @@
-<div>
-  <h1 class="font-bold text-4xl">Baths#index</h1>
-  <p>Find me in app/views/baths/index.html.erb</p>
-</div>
+<h1>お風呂記録一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>時間</th>
+      <th>内容</th>
+      <th>メモ</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @baths.each do |bath| %>
+      <tr>
+        <td><%= bath.bathed_at.strftime("%Y-%m-%d %H:%M") %></td>
+        <td><%= bath.bath_type %></td>
+        <td><%= bath.memo %></td>
+        <td><%= link_to "編集", edit_child_bath_path(current_child, bath) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "新規追加", new_child_bath_path(current_child) %>

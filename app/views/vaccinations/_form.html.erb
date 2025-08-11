@@ -17,7 +17,7 @@
 
   <div class="field">
     <%= form.label :vaccine_name, "内容" %><br>
-    <%= form.select :vaccine_name, options_for_select(["B型肝炎", "ロタウイルス", "ヒブ", "肺炎球菌", "四種混合", "BCG", "MR", "水痘", "日本脳炎", "二種混合", "インフルエンザ", "おたふくかぜ"]) %>
+    <%= form.select :vaccine_name, options_for_select(["B型肝炎", "ロタウイルス", "ヒブ", "肺炎球菌", "四種混合", "BCG", "MR", "水痘", "日本脳炎", "二種混合", "インフルエンザ", "おたふくかぜ"], form.object.vaccine_name) %>
   </div>
 
   <div class="field">

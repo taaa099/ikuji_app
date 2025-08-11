@@ -10,6 +10,7 @@ class TemperaturesController < ApplicationController
   end
 
   def new
+    @temperature = current_child.temperatures.new(measured_at: Time.current)
   end
 
   def create

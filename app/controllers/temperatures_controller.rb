@@ -25,9 +25,17 @@ class TemperaturesController < ApplicationController
   end
 
   def edit
+    @temperature = current_child.temperatures.find(params[:id])
   end
 
   def update
+    @temperature = current_child.temperatures.find(params[:id])
+    if @temperature.update(temperatures_params)
+      redirect_to child_temperatures_path(current_child), notice: "記録を更新しました"
+    else
+      flash.now[:alert] = "更新に失敗しました"
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy

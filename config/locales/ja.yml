@@ -50,6 +50,9 @@ ja:
       temperature:
         measured_at: 測定時間
         temperature: 体温
+      bath:
+        bathed_at: 時間
+        bath_type: 種類
 
     models:
       user: ユーザー

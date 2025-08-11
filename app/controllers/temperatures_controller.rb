@@ -22,7 +22,7 @@ class TemperaturesController < ApplicationController
 
   def destroy
   end
-  
+
   private
 
   # フォームから送信されたパラメータのうち、許可するキーを指定

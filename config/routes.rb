@@ -18,6 +18,7 @@ Rails.application.routes.draw do
    resources :sleep_records
    resources :temperatures
    resources :baths
+   resources :vaccinations
   end
 
   # Defines the root path route ("/")

@@ -47,6 +47,9 @@ ja:
       sleep_record:
         start_time: 開始日時
         end_time: 終了日時
+      temperature:
+        measured_at: 測定時間
+        temperature: 体温
 
     models:
       user: ユーザー

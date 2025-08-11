@@ -1,4 +1,5 @@
-<div>
-  <h1 class="font-bold text-4xl">Baths#edit</h1>
-  <p>Find me in app/views/baths/edit.html.erb</p>
-</div>
+<h2>お風呂記録の編集</h2>
+
+<%= render "form", bath: @bath %>
+
+<%= link_to '一覧に戻る', child_baths_path(current_child) %>

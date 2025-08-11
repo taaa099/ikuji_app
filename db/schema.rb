@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_11_115645) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_11_213622) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -152,6 +152,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_11_115645) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "vaccinations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "child_id", null: false
+    t.datetime "vaccinated_at"
+    t.string "vaccine_name"
+    t.text "memo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["child_id"], name: "index_vaccinations_on_child_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "baby_foods", "children"
@@ -164,4 +174,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_11_115645) do
   add_foreign_key "temperatures", "children"
   add_foreign_key "user_children", "children"
   add_foreign_key "user_children", "users"
+  add_foreign_key "vaccinations", "children"
 end

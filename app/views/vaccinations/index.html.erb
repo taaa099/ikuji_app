@@ -1,4 +1,24 @@
-<div>
-  <h1 class="font-bold text-4xl">Vaccinations#index</h1>
-  <p>Find me in app/views/vaccinations/index.html.erb</p>
-</div>
+<h1>予防接種記録一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>時間</th>
+      <th>種類</th>
+      <th>メモ</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @vaccinations.each do |vaccination| %>
+      <tr>
+        <td><%= vaccination.vaccinated_at.strftime("%Y-%m-%d %H:%M") %></td>
+        <td><%= vaccination.vaccine_name %></td>
+        <td><%= vaccination.memo %></td>
+        <td><%= link_to "編集", edit_child_vaccination_path(current_child, vaccination) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "新規追加", new_child_vaccination_path(current_child) %>

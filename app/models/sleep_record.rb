@@ -10,7 +10,7 @@ private
       errors.add(:start_time, "を入力してください")
       errors.add(:end_time, "を入力してください")
     elsif start_time.blank? && end_time.present?
-      errors.add(:start_time, "は必須です。end_timeだけの入力はできません。")
+      errors.add(:start_time, "は必須です。終了時間だけの入力はできません。")
     elsif end_time.present? && end_time < start_time
       errors.add(:end_time, "は開始時間より後でなければなりません。")
     end

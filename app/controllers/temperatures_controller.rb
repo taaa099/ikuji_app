@@ -14,6 +14,14 @@ class TemperaturesController < ApplicationController
   end
 
   def create
+    @temperature = current_child.temperatures.new(temperatures_params)
+    if @temperature.save
+      session.delete(:temperature_measured_at) # セッションから削除
+      redirect_to child_temperatures_path(current_child), notice: "体温の記録を保存しました"
+    else
+      flash.now[:alert] = "保存に失敗しました"
+      render :new
+    end
   end
 
   def edit

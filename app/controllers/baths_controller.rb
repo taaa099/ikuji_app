@@ -25,9 +25,17 @@ class BathsController < ApplicationController
   end
 
   def edit
+    @bath = current_child.baths.find(params[:id])
   end
 
   def update
+    @bath = current_child.baths.find(params[:id])
+    if @bath.update(baths_params)
+      redirect_to child_baths_path(current_child), notice: "記録を更新しました"
+    else
+      flash.now[:alert] = "更新に失敗しました"
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy

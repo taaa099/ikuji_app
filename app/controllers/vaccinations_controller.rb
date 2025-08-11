@@ -39,6 +39,10 @@ class VaccinationsController < ApplicationController
   end
 
   def destroy
+    @vaccination = current_child.vaccinations.find(params[:id])
+    if @vaccination.destroy
+      redirect_to child_vaccinations_path(current_child), notice: "予防接種記録を削除しました"
+    end
   end
 
   private

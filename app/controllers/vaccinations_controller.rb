@@ -22,4 +22,11 @@ class VaccinationsController < ApplicationController
 
   def destroy
   end
+
+  private
+
+  # フォームから送信されたパラメータのうち、許可するキーを指定
+  def vaccinations_params
+    params.require(:vaccination).permit(:vaccinated_at, :vaccine_name, :memo)
+  end
 end

@@ -3,6 +3,7 @@ class VaccinationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @vaccinations = current_child.vaccinations.order(vaccinated_at: :desc)
   end
 
   def show

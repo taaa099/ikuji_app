@@ -1,4 +1,5 @@
-<div>
-  <h1 class="font-bold text-4xl">SleepRecords#edit</h1>
-  <p>Find me in app/views/sleep_records/edit.html.erb</p>
-</div>
+<h2>睡眠の編集</h2>
+
+<%= render "form", sleep_record: @sleep_record %>
+
+<%= link_to '一覧に戻る', child_sleep_records_path(current_child) %>

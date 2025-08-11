@@ -25,9 +25,17 @@ class SleepRecordsController < ApplicationController
   end
 
   def edit
+    @sleep_record = current_child.sleep_records.find(params[:id])
   end
 
   def update
+    @sleep_record = current_child.sleep_records.find(params[:id])
+    if @sleep_record.update(sleep_records_params)
+      redirect_to child_sleep_records_path(current_child), notice: "記録を更新しました"
+    else
+      flash.now[:alert] = "更新に失敗しました"
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy

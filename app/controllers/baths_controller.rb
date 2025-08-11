@@ -39,6 +39,10 @@ class BathsController < ApplicationController
   end
 
   def destroy
+    @bath = current_child.baths.find(params[:id])
+    if @bath.destroy
+      redirect_to child_baths_path(current_child), notice: "お風呂記録を削除しました"
+    end
   end
 
   private

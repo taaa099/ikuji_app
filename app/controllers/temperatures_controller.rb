@@ -39,6 +39,9 @@ class TemperaturesController < ApplicationController
   end
 
   def destroy
+    @temperature = current_child.temperatures.find(params[:id])
+     @temperature.destroy
+    redirect_to child_temperatures_path(current_child), notice: "記録を削除しました"
   end
 
   private

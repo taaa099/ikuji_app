@@ -22,4 +22,11 @@ class BathsController < ApplicationController
 
   def destroy
   end
+
+  private
+
+  # フォームから送信されたパラメータのうち、許可するキーを指定
+  def baths_params
+    params.require(:bath).permit(:bathed_at, :bath_type, :memo)
+  end
 end

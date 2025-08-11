@@ -53,6 +53,9 @@ ja:
       bath:
         bathed_at: 時間
         bath_type: 種類
+      vaccination:
+        vaccinated_at: 接種時間
+        vaccine_name: 種類
 
     models:
       user: ユーザー

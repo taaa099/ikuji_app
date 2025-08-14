@@ -1,13 +1,13 @@
-<h1>ダッシュボード</h1>
+<h1 class="dashboard-title">ダッシュボード</h1>
 
-<table border="1" cellpadding="5" cellspacing="0">
+<table class="dashboard-table">
   <thead>
     <tr>
-      <th>項目</th>
-      <th>日時</th>
-      <th>詳細1</th>
-      <th>詳細2</th>
-      <th>メモ</th>
+      <th class="col-item">項目</th>
+      <th class="col-date">日時</th>
+      <th class="col-detail1">詳細1</th>
+      <th class="col-detail2">詳細2</th>
+      <th class="col-memo">メモ</th>
     </tr>
   </thead>
   <tbody>
@@ -25,8 +25,8 @@
 
     <% @records.each do |record| %>
       <tr>
-        <td><%= model_names[record.class.name] || record.class.name %></td>
-        <td>
+        <td class="col-item"><%= model_names[record.class.name] || record.class.name %></td>
+        <td class="col-date">
           <% 
             date_columns = {
               "Feed" => :fed_at,
@@ -44,20 +44,24 @@
           %>
           <%= datetime ? datetime.strftime("%Y-%m-%d %H:%M") : "日時なし" %>
         </td>
+
         <% case record.class.name %>
         <% when "Feed" %>
-          <td><% left_min = record.left_time / 60 %>
+          <td class="col-detail1">
+            <% left_min = record.left_time / 60 %>
             <% left_sec = record.left_time % 60 %>
             左：<%= "#{left_min}分#{left_sec}秒" %>
           </td>
-          <td>
+          <td class="col-detail2">
             <% right_min = record.right_time / 60 %>
             <% right_sec = record.right_time % 60 %>
             右：<%= "#{right_min}分#{right_sec}秒" %>
           </td>
-          <td><%= record.memo %></td>
+          <td class="col-memo"><%= record.memo %></td>
+        
         <% when "Diaper" %>
-          <td><% pee = record.pee? %>
+          <td class="col-detail1">
+            <% pee = record.pee? %>
             <% poop = record.poop? %>
             <% if pee && poop %>
               両方
@@ -69,23 +73,29 @@
               なし
             <% end %>
           </td>
-          <td></td>
-          <td><%= record.memo %></td>
+          <td class="col-detail2"></td>
+          <td class="col-memo"><%= record.memo %></td>
+        
         <% when "Bottle" %>
-          <td><%= record.amount %>ml</td>
-          <td></td>
-          <td><%= record.memo %></td>
+          <td class="col-detail1"><%= record.amount %>ml</td>
+          <td class="col-detail2"></td>
+          <td class="col-memo"><%= record.memo %></td>
+        
         <% when "Hydration" %>
-          <td><%= record.drink_type %></td>
-          <td><%= record.amount %>ml</td>
-          <td><%= record.memo %></td>
+          <td class="col-detail1"><%= record.drink_type %></td>
+          <td class="col-detail2"><%= record.amount %>ml</td>
+          <td class="col-memo"><%= record.memo %></td>
+        
         <% when "BabyFood" %>
-          <td><%= record.amount %>ml</td>
-          <td></td>
-          <td><%= record.memo %></td>
+          <td class="col-detail1"><%= record.amount %>ml</td>
+          <td class="col-detail2"></td>
+          <td class="col-memo"><%= record.memo %></td>
+        
         <% when "SleepRecord" %>
-          <td><%= record.start_time.strftime("%H:%M") if record.start_time %>〜<%= record.end_time.strftime("%H:%M") if record.end_time %></td>
-          <td>
+          <td class="col-detail1">
+            <%= record.start_time.strftime("%H:%M") if record.start_time %>〜<%= record.end_time.strftime("%H:%M") if record.end_time %>
+          </td>
+          <td class="col-detail2">
             <% if record.start_time && record.end_time %>
               <% duration_in_seconds = record.end_time - record.start_time %>
               <% hours = (duration_in_seconds / 3600).floor %>
@@ -95,22 +105,26 @@
               記録なし
             <% end %>
           </td>
-          <td><%= record.memo %></td>
+          <td class="col-memo"><%= record.memo %></td>
+        
         <% when "Temperature" %>
-          <td><%= sprintf("%.1f", record.temperature) %>(℃)</td>
-          <td></td>
-          <td><%= record.memo %></td>
+          <td class="col-detail1"><%= sprintf("%.1f", record.temperature) %>(℃)</td>
+          <td class="col-detail2"></td>
+          <td class="col-memo"><%= record.memo %></td>
+        
         <% when "Bath" %>
-          <td><%= record.bath_type %></td>
-          <td></td>
-          <td><%= record.memo %></td>
+          <td class="col-detail1"><%= record.bath_type %></td>
+          <td class="col-detail2"></td>
+          <td class="col-memo"><%= record.memo %></td>
+        
         <% when "Vaccination" %>
-          <td><%= record.vaccine_name %></td>
-          <td></td>
-          <td></td>
+          <td class="col-detail1"><%= record.vaccine_name %></td>
+          <td class="col-detail2"></td>
+          <td class="col-memo"></td>
+        
         <% else %>
-          <td colspan="2"><%= record.respond_to?(:memo) ? record.memo : "-" %></td>
-          <td></td>
+          <td class="col-detail1" colspan="2"><%= record.respond_to?(:memo) ? record.memo : "-" %></td>
+          <td class="col-memo"></td>
         <% end %>
       </tr>
     <% end %>

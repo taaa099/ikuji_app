@@ -19,6 +19,7 @@ class HomeController < ApplicationController
 
   # 全モデルのレコードを取得し配列に追加
   date_columns.each do |model, date_col|
+    next unless current_child
     records += current_child.send(model.name.underscore.pluralize)
   end
 

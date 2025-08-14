@@ -8,10 +8,6 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 .notice {
   background-color: #fff3cd; /* やさしい黄色 */
   color: #856404;            /* 濃いめの文字色（ブラウン系） */
@@ -28,4 +24,156 @@
   border: 1px solid #f5c6cb;
   border-radius: 4px;
   margin: 10px 0;
+}
+
+/* ==============================
+   共通スタイル（全画面共通）
+   ============================== */
+
+/* ボックスサイズを全要素で border-box に */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ダッシュボードテーブル共通 */
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow-x: auto; /* 万一長い場合は横スクロール可能 */
+}
+
+.dashboard-table th,
+.dashboard-table td {
+  padding: 8px;
+  border: 1px solid #ccc;
+  word-wrap: break-word; /* テキスト折り返し */
+}
+
+/* ヘッダー共通 */
+.site-header {
+  background-color: #f8f8f8;
+  padding: 10px 20px;
+}
+
+.header-nav {
+  display: flex;
+  flex-wrap: wrap; /* 必要に応じて折り返す */
+  gap: 8px;
+  max-width: 100%;
+}
+
+.nav-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* ユーザーメニューの幅制限 */
+#user-menu {
+  width: auto;
+  max-width: 95%;
+}
+
+/* ==============================
+   PC: 1025px以上
+   ============================== */
+@media screen and (min-width: 1025px) {
+  .dashboard-table thead { display: table-header-group; }
+  .dashboard-table, .dashboard-table tbody, .dashboard-table tr, .dashboard-table td {
+    display: table, table-row-group, table-row, table-cell;
+    width: auto;
+  }
+
+  .header-nav {
+    flex-direction: row;
+  }
+
+  .nav-btn {
+    width: auto;
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+}
+
+/* ==============================
+   タブレット: 768px〜1024px
+   ============================== */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .dashboard-table thead { display: table-header-group; }
+  .dashboard-table, .dashboard-table tbody, .dashboard-table tr, .dashboard-table td {
+    display: table, table-row-group, table-row, table-cell;
+    width: auto;
+  }
+
+  .header-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .nav-btn {
+    flex: 1 1 auto;
+    font-size: 13px;
+  }
+}
+
+/* ==============================
+   スマホ: 767px以下
+   ============================== */
+@media screen and (max-width: 767px) {
+  .dashboard-table thead { display: none; }
+  .dashboard-table, .dashboard-table tbody, .dashboard-table tr, .dashboard-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .dashboard-table tr {
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    padding: 8px;
+    background: #fafafa;
+  }
+
+  .dashboard-table td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 35%; /* ラベル用スペース */
+    text-align: left;
+  }
+
+  .dashboard-table td::before {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 30%;
+    white-space: nowrap;
+    font-weight: bold;
+  }
+
+  .col-item::before { content: "項目"; }
+  .col-date::before { content: "日時"; }
+  .col-detail1::before { content: "詳細1"; }
+  .col-detail2::before { content: "詳細2"; }
+  .col-memo::before { content: "メモ"; }
+  .col-memo { padding-left: 35%; }
+
+  .header-nav {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .nav-btn {
+    width: 100%;
+    font-size: 14px;
+    padding: 8px;
+  }
 }

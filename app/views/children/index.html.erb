@@ -1,24 +1,24 @@
-<h1>子供一覧</h1>
+<h1 class="responsive-title">子供一覧</h1>
 
-<table>
+<table class="responsive-table">
   <thead>
     <tr>
-      <th>ID</th>
-      <th>名前</th>
-      <th>誕生日</th>
-      <th>年齢</th>
-      <th>操作</th>
+      <th class="col-item">ID</th>
+      <th class="col-item">名前</th>
+      <th class="col-date">誕生日</th>
+      <th class="col-detail">年齢</th>
+      <th class="col-memo">操作</th>
     </tr>
   </thead>
 
   <tbody>
     <% @children.each do |child| %>
       <tr>
-        <td><%= child.id %></td>
-        <td><%= child.name %></td>
-        <td><%= child.birth_date %></td>
-        <td><%= age_in_years(child.birth_date) %>歳</td>
-        <td>
+        <td class="col-item"><%= child.id %></td>
+        <td class="col-item"><%= child.name %></td>
+        <td class="col-date"><%= child.birth_date %></td>
+        <td class="col-detail"><%= age_in_years(child.birth_date) %>歳</td>
+        <td class="col-memo">
           <%= link_to '表示', child_path(child) %> |
           <%= link_to '編集', edit_child_path(child) %> |
           <%= link_to '削除', child_path(child), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' } %>

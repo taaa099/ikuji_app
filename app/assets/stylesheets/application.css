@@ -37,7 +37,9 @@
   padding: 0;
 }
 
-/* ヘッダー共通 */
+/* ==============================
+   ヘッダー共通
+   ============================== */
 .site-header {
   background-color: #f8f8f8;
   padding: 10px 20px;
@@ -65,6 +67,33 @@
   box-sizing: border-box;
 }
 
+/* ==============================
+   ダッシュボード共通
+   ============================== */
+.responsive-title {
+  font-size: 20px;
+  margin-bottom: 1rem;
+}
+
+.responsive-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+.responsive-table th,
+.responsive-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+  word-break: break-word;
+}
+
+.col-item { width: 15%; }
+.col-date { width: 20%; }
+.col-detail { width: 20%; }
+.col-memo { width: 25%; }
+
 /* ユーザーメニュー */
 #user-menu {
   width: auto;
@@ -75,6 +104,7 @@
    PC: 1025px以上
    ============================== */
 @media screen and (min-width: 1025px) {
+  /* ヘッダー部分*/
   .header-nav {
     flex-direction: row;
   }
@@ -84,12 +114,18 @@
     font-size: 14px;
     padding: 6px 12px;
   }
+  
+  /* indexビュー部分 */
+  .responsive-title { font-size: 24px; }
 }
+
+
 
 /* ==============================
    タブレット: 768px〜1024px
    ============================== */
 @media screen and (min-width: 768px) and (max-width: 1024px) {
+  /* ヘッダー部分*/
   .header-nav {
     flex-direction: row;
     flex-wrap: wrap;
@@ -99,12 +135,20 @@
     flex: 1 1 auto;
     font-size: 13px;
   }
+  /* indexビュー部分 */
+  .responsive-table th,
+  .responsive-table td {
+    font-size: 13px;
+    padding: 6px;
+  }
+  .responsive-title { font-size: 20px; }
 }
 
 /* ==============================
    スマホ: 767px以下
    ============================== */
 @media screen and (max-width: 767px) {
+  /* ヘッダー部分*/
   .header-nav {
     flex-direction: column;
     gap: 4px;
@@ -115,4 +159,26 @@
     font-size: 14px;
     padding: 8px;
   }
+
+  /* indexビュー部分 */
+  .responsive-table thead {
+    display: none; /* ヘッダー非表示でカード風に */
+  }
+
+  .responsive-table tr {
+    display: block;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 8px;
+  }
+
+  .responsive-table td {
+    display: block;
+    border: none;
+    padding: 4px 0;
+    font-size: 14px;
+  }
+
+  .responsive-title { font-size: 18px; }
 }

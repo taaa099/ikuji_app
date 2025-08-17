@@ -1,25 +1,26 @@
-<h2><%= current_child.name %> のおむつ記録</h2>
+<h2 class="responsive-title"><%= current_child.name %> のおむつ記録</h2>
 
-<table>
+<table class="responsive-table">
   <thead>
     <tr>
-      <th>交換時間</th>
-      <th>内容</th>
-      <th>メモ</th>
+      <th class="col-date">交換時間</th>
+      <th class="col-item">内容</th>
+      <th class="col-memo">メモ</th>
+      <th class="col-detail">操作</th>
     </tr>
   </thead>
   <tbody>
     <% @diapers.each do |diaper| %>
       <tr>
-        <td><%= diaper.changed_at.strftime("%Y-%m-%d %H:%M") %></td>
-        <td>
+        <td class="col-date"><%= diaper.changed_at.strftime("%Y-%m-%d %H:%M") %></td>
+        <td class="col-item">
           <% contents = [] %>
           <% contents << "おしっこ" if diaper.pee %>
           <% contents << "うんち" if diaper.poop %>
           <%= contents.join(" + ") %>
         </td>
-        <td><%= diaper.memo.presence || "-" %></td>
-        <td><%= link_to "編集", edit_child_diaper_path(current_child, diaper) %></td>
+        <td class="col-memo"><%= diaper.memo.presence || "-" %></td>
+        <td class="col-detail"><%= link_to "編集", edit_child_diaper_path(current_child, diaper) %></td>
       </tr>
     <% end %>
   </tbody>

@@ -1,24 +1,27 @@
-<h1>離乳食一覧</h1>
+<h1 class="responsive-title">離乳食一覧</h1>
 
-<table>
+<table class="responsive-table">
   <thead>
     <tr>
-      <th>時間</th>
-      <th>量（ml）</th>
-      <th>メモ</th>
+      <th class="col-date">時間</th>
+      <th class="col-item">量（ml）</th>
+      <th class="col-memo">メモ</th>
+      <th class="col-detail">操作</th>
     </tr>
   </thead>
 
   <tbody>
     <% @baby_foods.each do |baby_food| %>
       <tr>
-        <td><%= baby_food.fed_at.strftime("%Y-%m-%d %H:%M") %></td>
-        <td><%= baby_food.amount %>ml</td>
-        <td><%= baby_food.memo %></td>
-        <td><%= link_to "編集", edit_child_baby_food_path(current_child, baby_food) %></td>
+        <td class="col-date"><%= baby_food.fed_at.strftime("%Y-%m-%d %H:%M") %></td>
+        <td class="col-item"><%= baby_food.amount %>ml</td>
+        <td class="col-memo"><%= baby_food.memo.presence || "-" %></td>
+        <td class="col-detail">
+          <%= link_to "編集", edit_child_baby_food_path(current_child, baby_food) %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to "新規追加", new_child_baby_food_path(current_child) %>
+<%= link_to "新規追加", new_child_baby_food_path(current_child), class: "index-btn" %>

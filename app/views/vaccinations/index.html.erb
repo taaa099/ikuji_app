@@ -1,24 +1,25 @@
-<h1>予防接種記録一覧</h1>
+<h2 class="responsive-title"><%= current_child.name %> の予防接種一覧</h2>
 
-<table>
+<table class="responsive-table">
   <thead>
     <tr>
-      <th>時間</th>
-      <th>種類</th>
-      <th>メモ</th>
+      <th class="col-date">時間</th>
+      <th class="col-item">種類</th>
+      <th class="col-memo">メモ</th>
+      <th class="col-detail">操作</th>
     </tr>
   </thead>
 
   <tbody>
     <% @vaccinations.each do |vaccination| %>
       <tr>
-        <td><%= vaccination.vaccinated_at.strftime("%Y-%m-%d %H:%M") %></td>
-        <td><%= vaccination.vaccine_name %></td>
-        <td><%= vaccination.memo %></td>
-        <td><%= link_to "編集", edit_child_vaccination_path(current_child, vaccination) %></td>
+        <td class="col-date"><%= vaccination.vaccinated_at.strftime("%Y-%m-%d %H:%M") %></td>
+        <td class="col-item"><%= vaccination.vaccine_name %></td>
+        <td class="col-memo"><%= vaccination.memo.presence || "-" %></td>
+        <td class="col-detail"><%= link_to "編集", edit_child_vaccination_path(current_child, vaccination) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to "新規追加", new_child_vaccination_path(current_child) %>
+<%= link_to "新規追加", new_child_vaccination_path(current_child), class: "index-btn" %>

@@ -1,31 +1,33 @@
-<%= form_with(model: [current_child, vaccination], local: true, data: {turbo: false}) do |form| %>
-  <% if vaccination.errors.any? %>
-    <div id="error_explanation">
-      <h3><%= pluralize(vaccination.errors.count, "件のエラー") %>があります：</h3>
-      <ul>
-        <% vaccination.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+<div class="form-container">
+  <%= form_with(model: [current_child, vaccination], local: true, data: { turbo: false }) do |form| %>
+    <% if vaccination.errors.any? %>
+      <div id="error_explanation">
+        <h3><%= pluralize(vaccination.errors.count, "件のエラー") %>があります：</h3>
+        <ul>
+          <% vaccination.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.label :vaccinated_at, "接種時間", class: "form-label" %>
+      <%= form.datetime_field :vaccinated_at, include_seconds: false, default: vaccination.vaccinated_at || Time.current, class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :vaccine_name, "内容", class: "form-label" %>
+      <%= form.select :vaccine_name, options_for_select(["B型肝炎", "ロタウイルス", "ヒブ", "肺炎球菌", "四種混合", "BCG", "MR", "水痘", "日本脳炎", "二種混合", "インフルエンザ", "おたふくかぜ"], form.object.vaccine_name), class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :memo, "メモ", class: "form-label" %>
+      <%= form.text_area :memo, class: "form-input" %>
+    </div>
+
+    <div class="form-actions">
+      <%= form.submit vaccination.persisted? ? "更新する" : "登録する" %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :vaccinated_at, "接種時間" %><br>
-    <%= form.datetime_field :vaccinated_at, include_seconds: false, default: vaccination.vaccinated_at || Time.current %>
-  </div>
-
-  <div class="field">
-    <%= form.label :vaccine_name, "内容" %><br>
-    <%= form.select :vaccine_name, options_for_select(["B型肝炎", "ロタウイルス", "ヒブ", "肺炎球菌", "四種混合", "BCG", "MR", "水痘", "日本脳炎", "二種混合", "インフルエンザ", "おたふくかぜ"], form.object.vaccine_name) %>
-  </div>
-
-  <div class="field">
-    <%= form.label :memo, "メモ" %><br>
-    <%= form.text_area :memo %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit vaccination.persisted? ? "更新する" : "登録する" %>
-  </div>
-<% end %>
+</div>

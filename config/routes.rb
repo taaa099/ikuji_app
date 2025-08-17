@@ -19,6 +19,7 @@ Rails.application.routes.draw do
    resources :temperatures
    resources :baths
    resources :vaccinations
+   resources :schedules
   end
 
   # Defines the root path route ("/")

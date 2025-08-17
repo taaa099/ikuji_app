@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_11_213622) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_17_221039) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -110,6 +110,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_11_213622) do
     t.index ["child_id"], name: "index_hydrations_on_child_id"
   end
 
+  create_table "schedules", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "child_id", null: false
+    t.datetime "start_time", null: false
+    t.datetime "end_time"
+    t.string "title"
+    t.boolean "all_day", default: false, null: false
+    t.string "repeat", default: "none"
+    t.text "memo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["child_id"], name: "index_schedules_on_child_id"
+  end
+
   create_table "sleep_records", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "child_id", null: false
     t.datetime "start_time"
@@ -170,6 +183,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_11_213622) do
   add_foreign_key "diapers", "children"
   add_foreign_key "feeds", "children"
   add_foreign_key "hydrations", "children"
+  add_foreign_key "schedules", "children"
   add_foreign_key "sleep_records", "children"
   add_foreign_key "temperatures", "children"
   add_foreign_key "user_children", "children"

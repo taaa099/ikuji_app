@@ -13,6 +13,7 @@ class Child < ApplicationRecord
   has_many :temperatures, dependent: :destroy
   has_many :baths, dependent: :destroy
   has_many :vaccinations, dependent: :destroy
+  has_many :schedules, dependent: :destroy
 
 
   # 子どものプロフィール画像を1枚だけ添付できるようにするActiveStorageの設定

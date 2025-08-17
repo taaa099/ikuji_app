@@ -1,5 +1,7 @@
-<h2>予防接種記録</h2>
+<h2 class="responsive-title">予防接種記録</h2>
 
 <%= render "form", vaccination: @vaccination %>
 
+<div class="form-actions">
 <%= link_to '一覧に戻る', child_vaccinations_path(current_child) %>
+</div>

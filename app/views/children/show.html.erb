@@ -1,15 +1,20 @@
-<h1><%= @child.name %>のプロフィール</h1>
+<h1 class="responsive-title"><%= @child.name %>のプロフィール</h1>
 
-<p><strong>名前：</strong><%= @child.name %></p>
-<p><strong>誕生日：</strong><%= @child.birth_date %></p>
-<p><strong>年齢：</strong><%= age_in_years(@child.birth_date) %>歳</p>
-<p><strong>性別：</strong><%= @child.gender %></p>
+<div class="profile-container">
+  <p><strong>名前：</strong> <span class="profile-item"><%= @child.name %></span></p>
+  <p><strong>誕生日：</strong> <span class="profile-item"><%= @child.birth_date %></span></p>
+  <p><strong>年齢：</strong> <span class="profile-item"><%= age_in_years(@child.birth_date) %>歳</span></p>
+  <p><strong>性別：</strong> <span class="profile-item"><%= @child.gender %></span></p>
 
-<% if @child.image.attached? %>
-  <p><strong>写真：</strong><br>
-    <%= image_tag @child.image.variant(resize_to_limit: [200, 200]) %>
-  </p>
-<% end %>
+  <% if @child.image.attached? %>
+    <p><strong>写真：</strong></p>
+    <div class="profile-image">
+      <%= image_tag @child.image.variant(resize_to_limit: [200, 200]) %>
+    </div>
+  <% end %>
 
-<%= link_to '編集', edit_child_path(@child), class: 'btn' %> |
-<%= link_to '一覧に戻る', children_path, class: 'btn' %>
+  <div class="profile-actions">
+    <%= link_to '編集', edit_child_path(@child), class: 'profile-btn' %>
+    <%= link_to '一覧に戻る', children_path, class: 'profile-btn' %>
+  </div>
+</div>

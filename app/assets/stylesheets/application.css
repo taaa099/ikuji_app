@@ -97,7 +97,59 @@
 .col-detail { width: 20%; }
 .col-memo { width: 25%; }
 
-/* ユーザーメニュー */
+/* ==============================
+   new,editフォーム共通
+   ============================== */
+.form-container {
+  max-width: 600px;
+  margin: 0 auto; /* 中央寄せ */
+  padding: 1.5rem;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.form-actions {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.form-actions input[type="submit"] {
+  padding: 8px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  background: #4CAF50;
+  color: #fff;
+  cursor: pointer;
+}
+
+.form-actions input[type="submit"]:hover {
+  background: #45a049;
+}
+
+/* ==============================
+   ユーザーメニュー
+   ============================== */
 #user-menu {
   width: auto;
   max-width: 95%;
@@ -122,7 +174,22 @@
   .responsive-title { font-size: 24px; }
 }
 
-
+  /* new,editフォーム部分 */
+  .form-container {
+    max-width: 700px;
+    padding: 2rem;
+  }
+  .form-label {
+    font-size: 15px;
+  }
+  .form-input {
+    font-size: 15px;
+    padding: 10px;
+  }
+  .form-actions input[type="submit"] {
+    font-size: 15px;
+    padding: 10px 20px;
+  }
 
 /* ==============================
    タブレット: 768px〜1024px
@@ -146,6 +213,23 @@
   }
   .responsive-title { font-size: 20px; }
 }
+
+  /* new,editフォーム部分 */
+  .form-container {
+    max-width: 90%;
+    padding: 1.5rem;
+  }
+  .form-label {
+    font-size: 14px;
+  }
+  .form-input {
+    font-size: 14px;
+    padding: 8px;
+  }
+  .form-actions input[type="submit"] {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
 
 /* ==============================
    スマホ: 767px以下
@@ -184,4 +268,27 @@
   }
 
   .responsive-title { font-size: 18px; }
+
+  /* new,editフォーム部分 */
+  .form-container {
+    max-width: 100%;
+    padding: 1rem;
+    border: none; /* モバイルでは枠線消してシンプルに */
+  }
+  .form-label {
+    font-size: 13px;
+  }
+  .form-input {
+    font-size: 13px;
+    padding: 6px;
+  }
+  /* 写真アップロードも全幅に */
+  input[type="file"].form-input {
+    width: 100%;
+  }
+  .form-actions input[type="submit"] {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
 }

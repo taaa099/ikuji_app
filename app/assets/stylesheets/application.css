@@ -68,13 +68,16 @@
 }
 
 /* ==============================
-   ダッシュボード共通
+   ページタイトル共通
    ============================== */
 .responsive-title {
   font-size: 20px;
   margin-bottom: 1rem;
 }
 
+/* ==============================
+   indexビュー共通
+   ============================== */
 .responsive-table {
   width: 100%;
   border-collapse: collapse;

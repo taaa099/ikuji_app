@@ -1,5 +1,7 @@
-<h2>お風呂記録</h2>
+<h2 class="responsive-title">お風呂記録</h2>
 
 <%= render "form", bath: @bath %>
 
+<div class="form-actions">
 <%= link_to '一覧に戻る', child_baths_path(current_child) %>
+</div>

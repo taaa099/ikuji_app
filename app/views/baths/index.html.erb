@@ -1,24 +1,25 @@
-<h1>お風呂記録一覧</h1>
+<h2 class="responsive-title"><%= current_child.name %> のお風呂記録一覧</h2>
 
-<table>
+<table class="responsive-table">
   <thead>
     <tr>
-      <th>時間</th>
-      <th>内容</th>
-      <th>メモ</th>
+      <th class="col-date">時間</th>
+      <th class="col-item">内容</th>
+      <th class="col-memo">メモ</th>
+      <th class="col-detail">操作</th>
     </tr>
   </thead>
 
   <tbody>
     <% @baths.each do |bath| %>
       <tr>
-        <td><%= bath.bathed_at.strftime("%Y-%m-%d %H:%M") %></td>
-        <td><%= bath.bath_type %></td>
-        <td><%= bath.memo %></td>
-        <td><%= link_to "編集", edit_child_bath_path(current_child, bath) %></td>
+        <td class="col-date"><%= bath.bathed_at.strftime("%Y-%m-%d %H:%M") %></td>
+        <td class="col-item"><%= bath.bath_type %></td>
+        <td class="col-memo"><%= bath.memo.presence || "-" %></td>
+        <td class="col-detail"><%= link_to "編集", edit_child_bath_path(current_child, bath) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to "新規追加", new_child_bath_path(current_child) %>
+<%= link_to "新規追加", new_child_bath_path(current_child), class: "index-btn" %>

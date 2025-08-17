@@ -1,32 +1,34 @@
-<%= form_with(model: [current_child, diaper], local: true, data: { turbo: false }) do |form| %>
-  <% if diaper.errors.any? %>
-    <div id="error_explanation">
-      <h3><%= pluralize(diaper.errors.count, "件のエラー") %>があります：</h3>
-      <ul>
-        <% diaper.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+<div class="form-container">
+  <%= form_with(model: [current_child, diaper], local: true, data: { turbo: false }) do |form| %>
+    <% if diaper.errors.any? %>
+      <div id="error_explanation">
+        <h3><%= pluralize(diaper.errors.count, "件のエラー") %>があります：</h3>
+        <ul>
+          <% diaper.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <label class="form-label">内容</label><br>
+      <%= form.check_box :pee, class: "form-input" %> おしっこ
+      <%= form.check_box :poop, class: "form-input" %> うんち
+    </div>
+
+    <div class="form-group">
+      <%= form.label :changed_at, "交換時間", class: "form-label" %>
+      <%= form.text_field :changed_at, class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :memo, "メモ", class: "form-label" %>
+      <%= form.text_field :memo, class: "form-input" %>
+    </div>
+
+    <div class="form-actions">
+      <%= form.submit diaper.persisted? ? "更新する" : "登録する" %>
     </div>
   <% end %>
-
-  <div class="field">
-    <label>内容</label><br>
-    <%= form.check_box :pee %> おしっこ
-    <%= form.check_box :poop %> うんち
-  </div>
-
-  <div class="field">
-    <%= form.label :changed_at, "交換時間" %><br>
-    <%= form.text_field :changed_at %>
-  </div>
-
-  <div class="field">
-    <%= form.label :memo, "メモ" %>
-    <%= form.text_field :memo %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit diaper.persisted? ? "更新する" : "登録する" %>
-  </div>
-<% end %>
+</div>

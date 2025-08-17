@@ -385,6 +385,13 @@
     font-size: 14px;
     padding: 10px;
   }
+  .form-actions button,
+  .form-actions a {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
 
   /* showビュー部分 */
   .profile-container {

@@ -1,38 +1,40 @@
-<h1>子ども新規登録</h1>
+<h1 class="responsive-title">子ども新規登録</h1>
 
-<%= form_with(model: @child, local: true, data: {turbo: false}, html: { multipart: true }) do |form| %>
-  <% if @child.errors.any? %>
-    <div id="error_explanation">
-      <h2>入力内容に<%= @child.errors.count %> 件のエラーがあります:</h2>
-      <ul>
-        <% @child.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+<div class="form-container">
+  <%= form_with(model: @child, local: true, data: {turbo: false}, html: { multipart: true }) do |form| %>
+    <% if @child.errors.any? %>
+      <div id="error_explanation">
+        <h2>入力内容に <%= @child.errors.count %> 件のエラーがあります:</h2>
+        <ul>
+          <% @child.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.label :name, "名前", class: "form-label" %>
+      <%= form.text_field :name, class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :birth_date, "誕生日", class: "form-label" %>
+      <%= form.text_field :birth_date, type: :date, class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :gender, "性別", class: "form-label" %>
+      <%= form.select :gender, options_for_select([["男の子", "男"], ["女の子", "女"]]), {}, class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :image, "写真アップロード", class: "form-label" %>
+      <%= form.file_field :image, class: "form-input" %>
+    </div>
+
+    <div class="form-actions">
+      <%= form.submit "登録" %>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :name, "名前" %><br>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= form.label :birth_date, "誕生日" %><br>
-    <%= form.text_field :birth_date, type: :date %>
-  </div>
-
-  <div>
-    <%= form.label :gender, "性別" %><br>
-    <%= form.select :gender, options_for_select([["男の子", "男"], ["女の子", "女"]]) %>
-  </div>
-
-  <div>
-    <%= form.label :image, "写真アップロード" %><br>
-    <%= form.file_field :image %>
-  </div>
-
-  <div>
-    <%= form.submit "登録" %>
-  </div>
-<% end %>
+</div>

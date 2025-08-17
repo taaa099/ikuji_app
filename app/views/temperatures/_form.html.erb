@@ -1,31 +1,34 @@
-<%= form_with(model: [current_child, temperature], local: true, data: {turbo: false}) do |form| %>
-  <% if temperature.errors.any? %>
-    <div id="error_explanation">
-      <h3><%= pluralize(temperature.errors.count, "件のエラー") %>があります：</h3>
-      <ul>
-        <% temperature.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+<div class="form-container">
+  <%= form_with(model: [current_child, temperature], local: true, data: { turbo: false }) do |form| %>
+    
+    <% if temperature.errors.any? %>
+      <div id="error_explanation">
+        <h3><%= pluralize(temperature.errors.count, "件のエラー") %>があります：</h3>
+        <ul>
+          <% temperature.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.label :measured_at, "測定時間", class: "form-label" %>
+      <%= form.datetime_field :measured_at, include_seconds: false, default: temperature.measured_at || Time.current, class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :temperature, "体温(℃)", class: "form-label" %>
+      <%= form.number_field :temperature, step: 0.1, min: 35.0, max: 42.0, class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :memo, "メモ", class: "form-label" %>
+      <%= form.text_area :memo, class: "form-input" %>
+    </div>
+
+    <div class="form-actions">
+      <%= form.submit temperature.persisted? ? "更新する" : "登録する" %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :measured_at, "測定時間" %><br>
-    <%= form.datetime_field :measured_at, include_seconds: false, default: temperature.measured_at || Time.current %>
-  </div>
-
-  <div class="field">
-    <%= form.label :temperature, "体温(℃)" %><br>
-    <%= form.number_field :temperature, step: 0.1, min: 35.0, max: 42.0 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :memo, "メモ" %><br>
-    <%= form.text_area :memo %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit temperature.persisted? ? "更新する" : "登録する" %>
-  </div>
-<% end %>
+</div>

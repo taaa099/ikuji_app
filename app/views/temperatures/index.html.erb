@@ -1,24 +1,24 @@
-<h1>体温記録一覧</h1>
+<h2 class="responsive-title">体温記録一覧</h2>
 
-<table>
+<table class="responsive-table">
   <thead>
     <tr>
-      <th>測定日時</th>
-      <th>体温 (℃)</th>
-      <th>メモ</th>
-      <th>操作</th>
+      <th class="col-date">測定日時</th>
+      <th class="col-item">体温 (℃)</th>
+      <th class="col-memo">メモ</th>
+      <th class="col-detail">操作</th>
     </tr>
   </thead>
   <tbody>
     <% @temperatures.each do |temperature| %>
       <tr>
-        <td><%= temperature.measured_at.strftime("%Y-%m-%d %H:%M") if temperature.measured_at %></td>
-        <td><%= sprintf("%.1f", temperature.temperature) if temperature.temperature %></td>
-        <td><%= temperature.memo %></td>
-        <td><%= link_to "編集", edit_child_temperature_path(current_child, temperature) %></td>
+        <td class="col-date"><%= temperature.measured_at.strftime("%Y-%m-%d %H:%M") if temperature.measured_at %></td>
+        <td class="col-item"><%= sprintf("%.1f", temperature.temperature) if temperature.temperature %></td>
+        <td class="col-memo"><%= temperature.memo %></td>
+        <td class="col-detail"><%= link_to "編集", edit_child_temperature_path(current_child, temperature) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to "新規追加", new_child_temperature_path(current_child) %>
+<%= link_to "新規追加", new_child_temperature_path(current_child), class: "index-btn" %>

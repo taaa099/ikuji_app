@@ -1,5 +1,7 @@
-<h2>新しい体温の記録を追加</h2>
+<h2 class="responsive-title">新しい体温の記録を追加</h2>
 
 <%= render "form", temperature: @temperature %>
 
+<div class="form-actions">
 <%= link_to '一覧に戻る', child_temperatures_path(current_child) %>
+</div>

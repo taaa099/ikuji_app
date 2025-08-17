@@ -97,6 +97,24 @@
 .col-detail { width: 20%; }
 .col-memo { width: 25%; }
 
+.index-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-right: 8px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.index-btn:hover {
+  background-color: #ddd
+}
+
 /* ==============================
    new,editフォーム共通
    ============================== */

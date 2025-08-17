@@ -2,5 +2,7 @@
 
 <%= render "form", hydration: @hydration %>
 
+<div class="form-actions">
 <%= button_to "削除", child_hydration_path(current_child, @hydration), method: :delete, data: { turbo_confirm: '本当に削除しますか？' } %>
 <%= link_to '一覧に戻る', child_hydrations_path(current_child) %>
+</div>

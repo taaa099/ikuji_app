@@ -1,36 +1,38 @@
-<%= form_with(model: [current_child, hydration], local: true, data: {turbo: false}) do |form| %>
-  <% if hydration.errors.any? %>
-    <div id="error_explanation">
-      <h3><%= pluralize(hydration.errors.count, "件のエラー") %>があります：</h3>
-      <ul>
-        <% hydration.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+<div class="form-container">
+  <%= form_with(model: [current_child, hydration], local: true, data: {turbo: false}) do |form| %>
+    <% if hydration.errors.any? %>
+      <div id="error_explanation">
+        <h3><%= pluralize(hydration.errors.count, "件のエラー") %>があります：</h3>
+        <ul>
+          <% hydration.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.label :fed_at, "水分補給時間", class: "form-label" %>
+      <%= form.text_field :fed_at, class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :drink_type, "内容", class: "form-label" %>
+      <%= form.select :drink_type, options_for_select(["お水", "お茶", "その他"], hydration.drink_type), {}, class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :amount, "量(ml)", class: "form-label" %>
+      <%= form.number_field :amount, class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :memo, "メモ", class: "form-label" %>
+      <%= form.text_area :memo, class: "form-input" %>
+    </div>
+
+    <div class="form-actions">
+      <%= form.submit hydration.persisted? ? "更新する" : "登録する" %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :fed_at, "水分補給時間" %><br>
-    <%= form.text_field :fed_at %>
-  </div>
-
-  <div class="field">
-    <%= form.label :drink_type, "内容" %><br>
-    <%= form.select :drink_type, options_for_select(["お水", "お茶", "その他"]) %>
-  </div>
-
-  <div class="field">
-    <%= form.label :amount, "量(ml)" %><br>
-    <%= form.number_field :amount %>
-  </div>
-
-  <div class="field">
-    <%= form.label :memo, "メモ" %><br>
-    <%= form.text_area :memo %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit hydration.persisted? ? "更新する" : "登録する" %>
-  </div>
-<% end %>
+</div>

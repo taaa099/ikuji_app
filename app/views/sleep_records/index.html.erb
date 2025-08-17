@@ -1,20 +1,21 @@
-<h1>睡眠記録一覧</h1>
+<h2 class="responsive-title"><%= current_child.name %> の睡眠記録一覧</h2>
 
-<table>
+<table class="responsive-table">
   <thead>
     <tr>
-      <th>開始時間</th>
-      <th>終了時間</th>
-      <th>睡眠時間</th>
-      <th>メモ</th>
+      <th class="col-date">開始時間</th>
+      <th class="col-date">終了時間</th>
+      <th class="col-item">睡眠時間</th>
+      <th class="col-memo">メモ</th>
+      <th class="col-detail">操作</th>
     </tr>
   </thead>
   <tbody>
     <% @sleep_records.each do |record| %>
       <tr>
-        <td><%= record.start_time.strftime("%Y-%m-%d %H:%M") if record.start_time %></td>
-        <td><%= record.end_time.strftime("%Y-%m-%d %H:%M") if record.end_time %></td>
-        <td>
+        <td class="col-date"><%= record.start_time.strftime("%Y-%m-%d %H:%M") if record.start_time %></td>
+        <td class="col-date"><%= record.end_time.strftime("%Y-%m-%d %H:%M") if record.end_time %></td>
+        <td class="col-item">
           <% if record.start_time && record.end_time %>
             <% hours = ((record.end_time - record.start_time) / 3600).floor %>
             <% minutes = (((record.end_time - record.start_time) % 3600) / 60).round %>
@@ -23,11 +24,11 @@
             記録なし
           <% end %>
         </td>
-        <td><%= record.memo %></td>
-        <td><%= link_to "編集", edit_child_sleep_record_path(current_child, record) %></td>
+        <td class="col-memo"><%= record.memo %></td>
+        <td class="col-detail"><%= link_to "編集", edit_child_sleep_record_path(current_child, record) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to "新規追加", new_child_sleep_record_path(current_child) %>
+<%= link_to "新規追加", new_child_sleep_record_path(current_child), class: "index-btn" %>

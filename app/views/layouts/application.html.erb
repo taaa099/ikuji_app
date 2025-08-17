@@ -62,6 +62,8 @@
             <%= link_to "お風呂の登録", new_child_bath_path(current_child), class: "nav-btn" %>
             <%= link_to "予防接種一覧", child_vaccinations_path(current_child), class: "nav-btn" %>
             <%= link_to "予防接種の登録", new_child_vaccination_path(current_child), class: "nav-btn" %>
+            <%= link_to "スケジュール一覧", child_schedules_path(current_child), class: "nav-btn" %>
+            <%= link_to "スケジュールの登録", new_child_schedule_path(current_child), class: "nav-btn" %>
           <% end %>
 
           <%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-btn" %>

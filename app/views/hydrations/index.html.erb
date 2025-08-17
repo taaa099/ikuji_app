@@ -1,26 +1,27 @@
-<h1>水分補給記録一覧</h1>
+<h1 class="responsive-title">水分補給記録一覧</h1>
 
-<table>
+<table class="responsive-table">
   <thead>
     <tr>
-      <th>内容</th>
-      <th>量（ml）</th>
-      <th>時間</th>
-      <th>メモ</th>
+      <th class="col-item">内容</th>
+      <th class="col-item">量（ml）</th>
+      <th class="col-date">時間</th>
+      <th class="col-memo">メモ</th>
+      <th class="col-detail">操作</th>
     </tr>
   </thead>
 
   <tbody>
     <% @hydrations.each do |hydration| %>
       <tr>
-        <td><%= hydration.drink_type %></td>
-        <td><%= hydration.amount %>ml</td>
-        <td><%= hydration.fed_at.strftime("%Y-%m-%d %H:%M") %></td>
-        <td><%= hydration.memo %></td>
-        <td><%= link_to "編集", edit_child_hydration_path(current_child, hydration) %></td>
+        <td class="col-item"><%= hydration.drink_type %></td>
+        <td class="col-item"><%= hydration.amount %> ml</td>
+        <td class="col-date"><%= hydration.fed_at.strftime("%Y-%m-%d %H:%M") %></td>
+        <td class="col-memo"><%= hydration.memo.presence || "-" %></td>
+        <td class="col-detail"><%= link_to "編集", edit_child_hydration_path(current_child, hydration) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to "新規追加", new_child_hydration_path(current_child) %>
+<%= link_to "新規追加", new_child_hydration_path(current_child), class: "index-btn" %>

@@ -12,7 +12,7 @@ class SchedulesController < ApplicationController
   def new
     now = Time.current
     rounded_time = (now + 1.hour).beginning_of_hour
-    @schedule = current_child.schedules.new(start_time: rounded_time,end_time: rounded_time + 1.hour)
+    @schedule = current_child.schedules.new(start_time: rounded_time, end_time: rounded_time + 1.hour)
   end
 
   def create

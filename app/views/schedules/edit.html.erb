@@ -1,4 +1,8 @@
-<div>
-  <h1 class="font-bold text-4xl">Schedules#edit</h1>
-  <p>Find me in app/views/schedules/edit.html.erb</p>
+<h2 class="responsive-title">予定編集</h2>
+
+<%= render "form", schedule: @schedule %>
+
+<div class="form-actions">
+<%= button_to "削除", child_schedule_path(current_child, @schedule), method: :delete, data: { turbo_confirm: '本当に削除しますか？' } %>
+<%= link_to '一覧に戻る', child_schedules_path(current_child) %>
 </div>

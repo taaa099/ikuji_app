@@ -34,6 +34,7 @@ class SchedulesController < ApplicationController
     if @schedule.update(schedule_params)
       redirect_to child_schedules_path(current_child), notice: "予定を更新しました"
     else
+      flash.now[:alert] = "更新に失敗しました"
       render :edit, status: :unprocessable_entity
     end
   end

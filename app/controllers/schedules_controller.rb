@@ -10,18 +10,38 @@ class SchedulesController < ApplicationController
   end
 
   def new
+    now = Time.current
+    rounded_time = (now + 1.hour).beginning_of_hour
+    @schedule = current_child.schedules.new(start_time: rounded_time,end_time: rounded_time + 1.hour)
   end
 
   def create
+      @schedule = current_child.schedules.new(schedule_params)
+    if @schedule.save
+      redirect_to child_schedules_path(current_child), notice: "予定を登録しました"
+    else
+      flash.now[:alert] = "保存に失敗しました"
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def edit
+    @schedule = current_child.schedules.find(params[:id])
   end
 
   def update
+    @schedule = current_child.schedules.find(params[:id])
+    if @schedule.update(schedule_params)
+      redirect_to child_schedules_path(current_child), notice: "予定を更新しました"
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
+    @schedule = current_child.schedules.find(params[:id])
+    @schedule.destroy
+      redirect_to child_schedules_path(current_child), notice: "予定を削除しました"
   end
 
   private

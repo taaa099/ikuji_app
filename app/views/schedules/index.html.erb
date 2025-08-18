@@ -1,4 +1,45 @@
-<div>
-  <h1 class="font-bold text-4xl">Schedules#index</h1>
-  <p>Find me in app/views/schedules/index.html.erb</p>
-</div>
+<h1>予定一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>開始</th>
+      <th>終了</th>
+      <th>タイトル</th>
+      <th>繰り返し</th>
+      <th>メモ</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @schedules.each do |schedule| %>
+      <tr>
+        <td>
+          <% if schedule.all_day? %>
+            <%= schedule.start_time.strftime("%Y-%m-%d") %> (終日)
+          <% else %>
+            <%= schedule.start_time.strftime("%Y-%m-%d %H:%M") %>
+          <% end %>
+        </td>
+        <td>
+          <% if schedule.all_day? %>
+            <%= schedule.end_time.strftime("%Y-%m-%d") %> (終日)
+          <% else %>
+            <%= schedule.end_time.strftime("%Y-%m-%d %H:%M") %>
+          <% end %>
+        </td>
+        <td><%= schedule.title %></td>
+        <td><%= schedule.repeat %></td>
+        <td><%= schedule.memo %></td>
+        <td>
+          <%= link_to "編集", edit_child_schedule_path(current_child, schedule) %> |
+          <%= link_to "削除", child_schedule_path(current_child, schedule),
+                      data: { confirm: "本当に削除しますか？" },
+                      method: :delete %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "新規追加", new_child_schedule_path(current_child) %>

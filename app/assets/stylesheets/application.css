@@ -233,6 +233,7 @@
    PC: 1025px以上
    ============================== */
 @media screen and (min-width: 1025px) {
+
   /* ヘッダー部分*/
   .header-nav {
     flex-direction: row;
@@ -246,20 +247,22 @@
   
   /* indexビュー部分 */
   .responsive-title { font-size: 24px; }
-}
 
   /* new,editフォーム部分 */
   .form-container {
     max-width: 700px;
     padding: 2rem;
   }
+
   .form-label {
     font-size: 15px;
   }
+
   .form-input {
     font-size: 15px;
     padding: 10px;
   }
+
   .form-actions input[type="submit"] {
     font-size: 15px;
     padding: 10px 20px;
@@ -269,12 +272,15 @@
    .profile-container {
     padding: 1.5rem;
   }
+
   .profile-item strong {
     width: 80px;
   }
+
   .profile-item {
     font-size: 14px;
   }
+
   .profile-btn {
     padding: 8px 16px;
     font-size: 14px;
@@ -282,11 +288,13 @@
     width: auto;
     margin-bottom: 0;
   }
+}
 
 /* ==============================
    タブレット: 768px〜1024px
    ============================== */
 @media screen and (min-width: 768px) and (max-width: 1024px) {
+
   /* ヘッダー部分*/
   .header-nav {
     flex-direction: row;
@@ -297,27 +305,31 @@
     flex: 1 1 auto;
     font-size: 13px;
   }
+
   /* indexビュー部分 */
   .responsive-table th,
   .responsive-table td {
     font-size: 13px;
     padding: 6px;
   }
+
   .responsive-title { font-size: 20px; }
-}
 
   /* new,editフォーム部分 */
   .form-container {
     max-width: 90%;
     padding: 1.5rem;
   }
+
   .form-label {
     font-size: 14px;
   }
+
   .form-input {
     font-size: 14px;
     padding: 8px;
   }
+
   .form-actions input[type="submit"] {
     font-size: 14px;
     padding: 8px 16px;
@@ -343,11 +355,13 @@
     width: auto;
     margin-bottom: 0;
   }
+}
 
 /* ==============================
    スマホ: 767px以下
    ============================== */
 @media screen and (max-width: 767px) {
+
   /* ヘッダー部分*/
   .header-nav {
     flex-direction: column;
@@ -388,22 +402,27 @@
     padding: 1rem;
     border: none; /* モバイルでは枠線消してシンプルに */
   }
+
   .form-label {
     font-size: 13px;
   }
+
   .form-input {
     font-size: 13px;
     padding: 6px;
   }
+
   /* 写真アップロードも全幅に */
   input[type="file"].form-input {
     width: 100%;
   }
+
   .form-actions input[type="submit"] {
     width: 100%;
     font-size: 14px;
     padding: 10px;
   }
+
   .form-actions button,
   .form-actions a {
     display: block;
@@ -412,7 +431,7 @@
     text-align: center;
   }
 
-  /* showビュー部分 */
+  /* showビュー部分（childrenのみ） */
   .profile-container {
     padding: 1rem;
   }

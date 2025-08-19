@@ -1,0 +1,88 @@
+/* ==============================
+   ダッシュボード共通スタイル
+   ============================== */
+
+/* ボックスサイズを全要素で border-box に */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ページタイトル */
+.dashboard-title {
+  font-size: 20px;
+  margin-bottom: 1rem;
+}
+
+/* テーブル共通 */
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-table th,
+.dashboard-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+  word-break: break-word;
+}
+
+.dashboard-col-item { width: 15%; }
+.dashboard-col-date { width: 20%; }
+.dashboard-col-detail { width: 20%; }
+.dashboard-col-memo { width: 25%; }
+
+/* ==============================
+   PC: 1025px以上
+   ============================== */
+@media screen and (min-width: 1025px) {
+  .dashboard-title { font-size: 24px; }
+
+  .dashboard-table th,
+  .dashboard-table td {
+    font-size: 15px;
+    padding: 10px;
+  }
+}
+
+/* ==============================
+   タブレット: 768px〜1024px
+   ============================== */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .dashboard-title { font-size: 20px; }
+
+  .dashboard-table th,
+  .dashboard-table td {
+    font-size: 13px;
+    padding: 6px;
+  }
+}
+
+/* ==============================
+   スマホ: 767px以下
+   ============================== */
+@media screen and (max-width: 767px) {
+  .dashboard-title { font-size: 18px; }
+
+  .dashboard-table thead {
+    display: none; /* ヘッダー非表示でカード風表示 */
+  }
+
+  .dashboard-table tr {
+    display: block;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 8px;
+  }
+
+  .dashboard-table td {
+    display: block;
+    border: none;
+    padding: 4px 0;
+    font-size: 14px;
+  }
+}

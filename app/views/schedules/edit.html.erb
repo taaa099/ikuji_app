@@ -2,7 +2,7 @@
 
 <%= render "form", schedule: @schedule %>
 
-<div class="form-actions">
+<div class="schedule-form-actions">
 <%= button_to "削除", child_schedule_path(current_child, @schedule), method: :delete, data: { turbo_confirm: '本当に削除しますか？' } %>
 <%= link_to '一覧に戻る', child_schedules_path(current_child) %>
 </div>

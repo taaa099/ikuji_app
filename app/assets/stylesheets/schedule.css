@@ -1,0 +1,189 @@
+/* ==============================
+   スケジュール機能専用スタイル
+   ============================== */
+
+/* ==============================
+   ページタイトル（共通の .responsive-title を使用）
+   ============================== */
+
+/* ==============================
+   indexビュー（予定一覧）
+   ============================== */
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+.schedule-table th,
+.schedule-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+  word-break: break-word;
+}
+
+.schedule-col-item { width: 15%; }
+.schedule-col-date { width: 20%; }
+.schedule-col-detail { width: 25%; }
+.schedule-col-memo { width: 25%; }
+
+.schedule-index-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-right: 8px;
+  background-color: #eef; /* recordと区別して少し青系に */
+  border: 1px solid #99c;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.schedule-index-btn:hover {
+  background-color: #dde;
+}
+
+/* ==============================
+   new, editフォーム（予定登録・編集）
+   ============================== */
+.schedule-form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background: #fdfdfd;
+  border: 1px solid #ccd;
+  border-radius: 8px;
+}
+
+.schedule-form-group {
+  margin-bottom: 1rem;
+}
+
+.schedule-form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.schedule-form-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #99c;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.schedule-form-actions {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.schedule-form-actions input[type="submit"] {
+  padding: 8px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  background: #6699cc;
+  color: #fff;
+  cursor: pointer;
+}
+
+.schedule-form-actions input[type="submit"]:hover {
+  background: #5577aa;
+}
+
+/* ==============================
+   PC: 1025px以上
+   ============================== */
+@media screen and (min-width: 1025px) {
+  .schedule-table th,
+  .schedule-table td {
+    font-size: 15px;
+  }
+  .schedule-form-container {
+    max-width: 700px;
+    padding: 2rem;
+  }
+  .schedule-form-label {
+    font-size: 15px;
+  }
+  .schedule-form-input {
+    font-size: 15px;
+    padding: 10px;
+  }
+  .schedule-form-actions input[type="submit"] {
+    font-size: 15px;
+    padding: 10px 20px;
+  }
+}
+
+/* ==============================
+   タブレット: 768px〜1024px
+   ============================== */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .schedule-table th,
+  .schedule-table td {
+    font-size: 13px;
+    padding: 6px;
+  }
+  .schedule-form-container {
+    max-width: 90%;
+    padding: 1.5rem;
+  }
+  .schedule-form-label {
+    font-size: 14px;
+  }
+  .schedule-form-input {
+    font-size: 14px;
+    padding: 8px;
+  }
+  .schedule-form-actions input[type="submit"] {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
+
+/* ==============================
+   スマホ: 767px以下
+   ============================== */
+@media screen and (max-width: 767px) {
+  /* table をカード型に変換 */
+  .schedule-table thead {
+    display: none;
+  }
+  .schedule-table tr {
+    display: block;
+    margin-bottom: 1rem;
+    border: 1px solid #ccd;
+    border-radius: 6px;
+    padding: 8px;
+  }
+  .schedule-table td {
+    display: block;
+    border: none;
+    padding: 4px 0;
+    font-size: 14px;
+  }
+
+  .schedule-form-container {
+    max-width: 100%;
+    padding: 1rem;
+    border: none;
+  }
+  .schedule-form-label {
+    font-size: 13px;
+  }
+  .schedule-form-input {
+    font-size: 13px;
+    padding: 6px;
+  }
+  .schedule-form-actions input[type="submit"] {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
+}

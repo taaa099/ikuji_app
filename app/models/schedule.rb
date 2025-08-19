@@ -2,6 +2,7 @@ class Schedule < ApplicationRecord
   belongs_to :child
 
   validates :start_time, presence: true
+  validates :end_time, presence: true
   validate :end_time_after_start_time
   validates :title, presence: true, length: { maximum: 50 }
   validates :all_day, inclusion: { in: [ true, false ] }

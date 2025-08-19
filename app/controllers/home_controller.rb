@@ -29,7 +29,7 @@ class HomeController < ApplicationController
     record.send(col) || Time.at(0)  # nilなら最古扱いに
     end.reverse # 新しい順
 
-  # スケジュール一覧を取得（直近5件）
+    # スケジュール一覧を取得（直近5件）
     @schedules = current_child.schedules.order(start_time: :desc).limit(5)
   end
 end

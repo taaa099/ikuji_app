@@ -27,6 +27,9 @@ class HomeController < ApplicationController
   @records = records.sort_by do |record|
     col = date_columns[record.class]
     record.send(col) || Time.at(0)  # nilなら最古扱いに
-  end.reverse # 新しい順
+    end.reverse # 新しい順
+
+    # スケジュール一覧を取得（直近5件）
+    @schedules = current_child.schedules.order(start_time: :desc).limit(5)
   end
 end

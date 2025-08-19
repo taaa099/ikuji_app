@@ -97,27 +97,98 @@
 }
 
 /* ==============================
+   showビュー（予定詳細）
+   ============================== */
+.schedule-show-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background: #fdfdfd;
+  border: 1px solid #ccd;
+  border-radius: 8px;
+}
+
+.schedule-show-item {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 14px;
+}
+
+.schedule-show-item strong {
+  display: inline-block;
+  width: 80px;
+}
+
+.schedule-show-actions {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.schedule-show-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  margin-right: 8px;
+  background-color: #6699cc;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+}
+
+.schedule-show-btn:hover {
+  background-color: #5577aa;
+}
+
+/* ==============================
    PC: 1025px以上
    ============================== */
 @media screen and (min-width: 1025px) {
+
+  /* indexビュー部分 */
   .schedule-table th,
   .schedule-table td {
     font-size: 15px;
   }
+
+  /* new,editフォーム部分 */
   .schedule-form-container {
     max-width: 700px;
     padding: 2rem;
   }
+
   .schedule-form-label {
     font-size: 15px;
   }
+
   .schedule-form-input {
     font-size: 15px;
     padding: 10px;
   }
+
   .schedule-form-actions input[type="submit"] {
     font-size: 15px;
     padding: 10px 20px;
+  }
+
+  /* showビュー部分 */
+  .schedule-show-container {
+    max-width: 700px;
+    padding: 2rem;
+  }
+
+  .schedule-show-item {
+    font-size: 15px;
+  }
+
+  .schedule-show-item strong {
+    width: 80px;
+  }
+
+  .schedule-show-btn {
+    padding: 10px 20px;
+    font-size: 15px;
   }
 }
 
@@ -125,25 +196,52 @@
    タブレット: 768px〜1024px
    ============================== */
 @media screen and (min-width: 768px) and (max-width: 1024px) {
+
+  /* indexビュー部分 */
   .schedule-table th,
   .schedule-table td {
     font-size: 13px;
     padding: 6px;
   }
+
+  /* new,editビュー部分 */
   .schedule-form-container {
     max-width: 90%;
     padding: 1.5rem;
   }
+
   .schedule-form-label {
     font-size: 14px;
   }
+
   .schedule-form-input {
     font-size: 14px;
     padding: 8px;
   }
+
   .schedule-form-actions input[type="submit"] {
     font-size: 14px;
     padding: 8px 16px;
+  }
+
+  /* showビュー部分 */
+  .schedule-show-container {
+    max-width: 90%;
+    padding: 1.5rem;
+  }
+
+  .schedule-show-item {
+    font-size: 14px;
+  }
+
+  .schedule-show-item strong {
+    width: 70px;
+  }
+
+  .schedule-show-btn {
+    padding: 8px 16px;
+    font-size: 14px;
+    margin-bottom: 0.5rem;
   }
 }
 
@@ -151,10 +249,13 @@
    スマホ: 767px以下
    ============================== */
 @media screen and (max-width: 767px) {
+
+  /* indexビュー部分 */
   /* table をカード型に変換 */
   .schedule-table thead {
     display: none;
   }
+
   .schedule-table tr {
     display: block;
     margin-bottom: 1rem;
@@ -162,6 +263,7 @@
     border-radius: 6px;
     padding: 8px;
   }
+
   .schedule-table td {
     display: block;
     border: none;
@@ -169,21 +271,55 @@
     font-size: 14px;
   }
 
+  /* new,editビュー部分 */
   .schedule-form-container {
     max-width: 100%;
     padding: 1rem;
     border: none;
   }
+
   .schedule-form-label {
     font-size: 13px;
   }
+
   .schedule-form-input {
     font-size: 13px;
     padding: 6px;
   }
+
   .schedule-form-actions input[type="submit"] {
     width: 100%;
     font-size: 14px;
     padding: 10px;
+  }
+
+  .schedule-form-actions button,
+  .schedule-form-actions a {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  /* showビュー部分 */
+  .schedule-show-container {
+    max-width: 100%;
+    padding: 1rem;
+    border: none;
+  }
+
+  .schedule-show-item {
+    font-size: 13px;
+  }
+
+  .schedule-show-item strong {
+    width: 60px;
+  }
+
+  .schedule-show-btn {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    text-align: center;
   }
 }

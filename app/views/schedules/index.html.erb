@@ -33,6 +33,7 @@
         <td class="schedule-col-memo"><%= schedule.memo %></td>
         <td class="schedule-col-item">
           <%= link_to "編集", edit_child_schedule_path(current_child, schedule), class: "schedule-index-btn" %>
+          <%= link_to "詳細", child_schedule_path(current_child, schedule), class: "schedule-index-btn" %>
           <%= link_to "削除", child_schedule_path(current_child, schedule),
                       data: { confirm: "本当に削除しますか？" },
                       method: :delete,

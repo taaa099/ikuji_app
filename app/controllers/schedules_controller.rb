@@ -7,6 +7,7 @@ class SchedulesController < ApplicationController
   end
 
   def show
+    @schedule = current_child.schedules.find(params[:id])
   end
 
   def new

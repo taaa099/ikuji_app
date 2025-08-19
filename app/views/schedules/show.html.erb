@@ -1,4 +1,22 @@
-<div>
-  <h1 class="font-bold text-4xl">Schedules#show</h1>
-  <p>Find me in app/views/schedules/show.html.erb</p>
+<h1 class="responsive-title">予定詳細</h1>
+
+<div class="schedule-show-container">
+  <p class="schedule-show-item"><strong>タイトル:</strong> <%= @schedule.title %></p>
+
+  <p class="schedule-show-item"><strong>開始日時:</strong>
+    <%= @schedule.all_day? ? @schedule.start_time.strftime("%Y-%m-%d") + " (終日)" : @schedule.start_time.strftime("%Y-%m-%d %H:%M") %>
+  </p>
+
+  <p class="schedule-show-item"><strong>終了日時:</strong>
+    <%= @schedule.all_day? ? @schedule.end_time.strftime("%Y-%m-%d") + " (終日)" : @schedule.end_time.strftime("%Y-%m-%d %H:%M") %>
+  </p>
+
+  <p class="schedule-show-item"><strong>繰り返し:</strong> <%= @schedule.repeat %></p>
+  <p class="schedule-show-item"><strong>メモ:</strong> <%= @schedule.memo %></p>
+</div>
+
+<div class="schedule-show-actions">
+  <%= link_to "編集", edit_child_schedule_path(current_child, @schedule), class: "schedule-show-btn" %>
+  <%= link_to "削除", child_schedule_path(current_child, @schedule), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "schedule-show-btn" %>
+  <%= link_to "一覧に戻る", child_schedules_path(current_child), class: "schedule-show-btn" %>
 </div>

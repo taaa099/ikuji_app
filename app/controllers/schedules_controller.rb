@@ -3,7 +3,7 @@ class SchedulesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @schedules = current_child.schedules.order(:start_time)
+    @schedules = current_child.schedules.order(start_time: :desc)
   end
 
   def show

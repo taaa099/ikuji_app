@@ -8,6 +8,7 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
 .notice {
   background-color: #fff3cd; /* やさしい黄色 */
   color: #856404;            /* 濃いめの文字色（ブラウン系） */
@@ -430,3 +431,7 @@
     margin-bottom: 0.5rem;
   }
 }
+
+/*
+ *= require schedule
+ */

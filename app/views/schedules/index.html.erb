@@ -1,45 +1,46 @@
-<h1>予定一覧</h1>
+<h1 class="responsive-title">予定一覧</h1>
 
-<table>
+<table class="schedule-table">
   <thead>
     <tr>
-      <th>開始</th>
-      <th>終了</th>
-      <th>タイトル</th>
-      <th>繰り返し</th>
-      <th>メモ</th>
-      <th>操作</th>
+      <th class="schedule-col-item">開始</th>
+      <th class="schedule-col-date">終了</th>
+      <th class="schedule-col-detail">タイトル</th>
+      <th class="schedule-col-detail">繰り返し</th>
+      <th class="schedule-col-memo">メモ</th>
+      <th class="schedule-col-item">操作</th>
     </tr>
   </thead>
   <tbody>
     <% @schedules.each do |schedule| %>
       <tr>
-        <td>
+        <td class="schedule-col-item">
           <% if schedule.all_day? %>
             <%= schedule.start_time.strftime("%Y-%m-%d") %> (終日)
           <% else %>
             <%= schedule.start_time.strftime("%Y-%m-%d %H:%M") %>
           <% end %>
         </td>
-        <td>
+        <td class="schedule-col-date">
           <% if schedule.all_day? %>
             <%= schedule.end_time.strftime("%Y-%m-%d") %> (終日)
           <% else %>
             <%= schedule.end_time.strftime("%Y-%m-%d %H:%M") %>
           <% end %>
         </td>
-        <td><%= schedule.title %></td>
-        <td><%= schedule.repeat %></td>
-        <td><%= schedule.memo %></td>
-        <td>
-          <%= link_to "編集", edit_child_schedule_path(current_child, schedule) %> |
+        <td class="schedule-col-detail"><%= schedule.title %></td>
+        <td class="schedule-col-detail"><%= schedule.repeat %></td>
+        <td class="schedule-col-memo"><%= schedule.memo %></td>
+        <td class="schedule-col-item">
+          <%= link_to "編集", edit_child_schedule_path(current_child, schedule), class: "schedule-index-btn" %>
           <%= link_to "削除", child_schedule_path(current_child, schedule),
                       data: { confirm: "本当に削除しますか？" },
-                      method: :delete %>
+                      method: :delete,
+                      class: "schedule-index-btn" %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to "新規追加", new_child_schedule_path(current_child) %>
+<%= link_to "新規追加", new_child_schedule_path(current_child), class: "schedule-index-btn" %>

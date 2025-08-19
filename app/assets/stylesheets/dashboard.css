@@ -36,6 +36,25 @@
 .dashboard-col-memo { width: 25%; }
 
 /* ==============================
+   ダッシュボード：スケジュール専用
+   ============================== */
+
+/* カラム幅（PC向け） */
+.dashboard-schedule-col-date { width: 25%; }
+.dashboard-schedule-col-title { width: 35%; }
+.dashboard-schedule-col-detail { width: 40%; }
+
+/* PC: 1025px以上 */
+@media screen and (min-width: 1025px) {
+  .dashboard-schedule-table th,
+  .dashboard-schedule-table td {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+}
+
+
+/* ==============================
    PC: 1025px以上
    ============================== */
 @media screen and (min-width: 1025px) {
@@ -45,6 +64,13 @@
   .dashboard-table td {
     font-size: 15px;
     padding: 10px;
+  }
+
+  /* スケジュール部分 */
+  .dashboard-schedule-table th,
+  .dashboard-schedule-table td {
+    font-size: 14px;
+    padding: 8px 10px;
   }
 }
 
@@ -58,6 +84,12 @@
   .dashboard-table td {
     font-size: 13px;
     padding: 6px;
+  }
+  /* スケジュール部分 */
+  .dashboard-schedule-table th,
+  .dashboard-schedule-table td {
+    font-size: 13px;
+    padding: 6px 8px;
   }
 }
 
@@ -84,5 +116,39 @@
     border: none;
     padding: 4px 0;
     font-size: 14px;
+  }
+
+  /* スケジュール部分 */
+  .dashboard-schedule-table thead {
+    display: none; /* ヘッダー非表示 */
+  }
+
+  .dashboard-schedule-table tr {
+    display: block;
+    margin-bottom: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 8px;
+    background-color: #fafafa;
+  }
+
+  .dashboard-schedule-table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    font-size: 14px;
+  }
+
+  .dashboard-schedule-col-date::before {
+    content: "日時";
+    font-weight: bold;
+  }
+  .dashboard-schedule-col-title::before {
+    content: "タイトル";
+    font-weight: bold;
+  }
+  .dashboard-schedule-col-detail::before {
+    content: "詳細";
+    font-weight: bold;
   }
 }

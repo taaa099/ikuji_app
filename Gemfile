@@ -73,3 +73,5 @@ end
 gem "tailwindcss-rails", "~> 4.3"
 
 gem "jsbundling-rails", "~> 1.3"
+
+gem "simple_calendar", "~> 2.0"

@@ -1,3 +1,32 @@
+<h1>スケジュール一覧</h1>
+
+<h2>カレンダー</h2>
+<div class="calendar-container">
+  <h1 class="calendar-title"><%= @month.strftime("%Y年%m月") %></h1>
+
+  <div class="calendar-nav">
+    <%= link_to "← 前の月", child_schedules_path(current_child, start_date: @month.prev_month), class: "btn-nav" %>
+    <%= link_to "今月", child_schedules_path(current_child, start_date: Date.current.beginning_of_month), class: "btn-nav" %>
+    <%= link_to "次の月 →", child_schedules_path(current_child, start_date: @month.next_month), class: "btn-nav" %>
+  </div>
+
+  <div class="simple-calendar">
+    <% # 1週ごとにループ %>
+    <% (@month.beginning_of_month.beginning_of_week..@month.end_of_month.end_of_week).to_a.in_groups_of(7) do |week| %>
+      <% week.each do |date| %>
+        <div class="day-cell <%= 'other-month' if date.month != @month.month %>">
+          <div class="date-number"><%= date.day %></div>
+          <% @schedules.select { |s| s.start_time.to_date == date }.each do |schedule| %>
+            <div class="event">
+              <%= link_to schedule.title, child_schedule_path(current_child, schedule), class: "event-link" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
 <h1 class="responsive-title">予定一覧</h1>
 
 <table class="schedule-table">
@@ -12,7 +41,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @schedules.each do |schedule| %>
+    <% @all_schedules.each do |schedule| %>
       <tr>
         <td class="schedule-col-item">
           <% if schedule.all_day? %>

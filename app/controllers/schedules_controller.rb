@@ -3,7 +3,15 @@ class SchedulesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @schedules = current_child.schedules.order(start_time: :desc)
+    @month = params[:start_date] ? Date.parse(params[:start_date]) : Date.current.beginning_of_month
+
+    # 今月分のスケジュール（カレンダー表示用）
+    @schedules = current_child.schedules
+                            .where(start_time: @month.all_month)
+                            .order(start_time: :asc)
+
+  # 一覧テーブル用
+  @all_schedules = current_child.schedules.order(start_time: :desc)
   end
 
   def show

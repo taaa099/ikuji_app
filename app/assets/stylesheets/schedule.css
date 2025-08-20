@@ -314,6 +314,22 @@
     font-size: 14px;
     margin-bottom: 0.5rem;
   }
+
+  /* カレンダー部分 */
+  .simple-calendar {
+    grid-template-columns: repeat(7, 1fr); /* 7列は維持 */
+  }
+  .day-cell {
+    min-height: 80px; /* 高さを少し縮める */
+    font-size: 13px;
+    padding: 2px;
+  }
+  .date-number {
+    font-size: 13px;
+  }
+  .event {
+    font-size: 11px;
+  }
 }
 
 /* ==============================
@@ -392,5 +408,45 @@
     width: 100%;
     margin-bottom: 0.5rem;
     text-align: center;
+  }
+
+  /* カレンダー部分 */
+  .calendar-container {
+    padding: 0 2px; /* 端の余白を縮める */
+  }
+
+  .calendar-title {
+    font-size: 1.4rem;
+    margin-bottom: 6px;
+  }
+
+  .calendar-nav {
+    flex-wrap: wrap; /* ボタンが折り返せるようにする */
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+
+  .btn-nav {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+
+  .simple-calendar {
+    grid-template-columns: repeat(7, 1fr); /* 7列を維持 */
+  }
+
+  .day-cell {
+    min-height: 60px; /* 高さをさらに縮める */
+    padding: 2px;
+    font-size: 12px;
+  }
+
+  .date-number {
+    font-size: 12px;
+  }
+
+  .event {
+    font-size: 10px;
+    padding: 1px 2px;
   }
 }

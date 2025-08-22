@@ -20,6 +20,7 @@ Rails.application.routes.draw do
    resources :baths
    resources :vaccinations
    resources :schedules
+   resources :notifications
   end
 
   # Defines the root path route ("/")

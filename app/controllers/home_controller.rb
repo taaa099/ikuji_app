@@ -30,6 +30,6 @@ class HomeController < ApplicationController
     end.reverse # 新しい順
 
     # スケジュール一覧を取得（直近5件）
-    @schedules = current_child.schedules.order(start_time: :desc).limit(5)
+    @schedules = current_child&.schedules&.order(start_time: :desc)&.limit(5) || []
   end
 end

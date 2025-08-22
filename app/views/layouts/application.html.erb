@@ -67,7 +67,7 @@
             <%= link_to "予防接種の登録", new_child_vaccination_path(current_child), class: "nav-btn" %>
             <%= link_to "スケジュール一覧", child_schedules_path(current_child), class: "nav-btn" %>
             <%= link_to "スケジュールの登録", new_child_schedule_path(current_child), class: "nav-btn" %>
-            <%= link_to child_notifications_path, class: "notification-link" do %>
+            <%= link_to child_notifications_path(current_child), class: "notification-link" do %>
               <i class="fa fa-bell"></i>
               <% if current_user.notifications.where(read: false).exists? %>
                 <span class="notification-count">

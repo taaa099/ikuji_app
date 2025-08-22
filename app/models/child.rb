@@ -1,9 +1,9 @@
 class Child < ApplicationRecord
   # 中間モデルとの関連
   has_many :user_children, dependent: :destroy
-
-  # 実際に使いたいChildとの関連
   has_many :users, through: :user_children
+
+  # 各種育児記録との関連
   has_many :feeds, dependent: :destroy
   has_many :diapers, dependent: :destroy
   has_many :bottles, dependent: :destroy
@@ -13,8 +13,12 @@ class Child < ApplicationRecord
   has_many :temperatures, dependent: :destroy
   has_many :baths, dependent: :destroy
   has_many :vaccinations, dependent: :destroy
+
+  # スケジュール機能との関連
   has_many :schedules, dependent: :destroy
 
+  # 通知との関連
+  has_many :notifications, dependent: :destroy
 
   # 子どものプロフィール画像を1枚だけ添付できるようにするActiveStorageの設定
   has_one_attached :image

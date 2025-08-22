@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_17_221039) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_22_092428) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -110,6 +110,25 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_17_221039) do
     t.index ["child_id"], name: "index_hydrations_on_child_id"
   end
 
+  create_table "notifications", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "child_id", null: false
+    t.string "target_type"
+    t.bigint "target_id"
+    t.integer "notification_kind", default: 0, null: false
+    t.string "title", null: false
+    t.text "message"
+    t.boolean "read", default: false, null: false
+    t.datetime "delivered_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["child_id", "notification_kind"], name: "index_notifications_on_child_id_and_notification_kind"
+    t.index ["child_id"], name: "index_notifications_on_child_id"
+    t.index ["target_type", "target_id"], name: "index_notifications_on_target_type_and_target_id"
+    t.index ["user_id", "read"], name: "index_notifications_on_user_id_and_read"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "schedules", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "child_id", null: false
     t.datetime "start_time", null: false
@@ -183,6 +202,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_17_221039) do
   add_foreign_key "diapers", "children"
   add_foreign_key "feeds", "children"
   add_foreign_key "hydrations", "children"
+  add_foreign_key "notifications", "children"
+  add_foreign_key "notifications", "users"
   add_foreign_key "schedules", "children"
   add_foreign_key "sleep_records", "children"
   add_foreign_key "temperatures", "children"

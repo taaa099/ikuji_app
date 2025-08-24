@@ -81,6 +81,7 @@
         </nav>
       </div>
     </div>
+
   <% end %>
 </header>
    
@@ -90,7 +91,7 @@
   <% if alert %>
     <p class="alert"><%= alert %></p>
   <% end %>
-  
+  <%= render "layouts/notification_popup" %>
   <%= yield %>
   </body>
 </html>

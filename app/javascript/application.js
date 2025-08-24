@@ -4,4 +4,5 @@ import "@hotwired/turbo-rails"
 import Rails from "@rails/ujs"
 Rails.start();
 
-import { showNotification } from "./notifications";
+import { showNotification } from "./notification_popup";
+import "./notifications"

@@ -1,19 +1,32 @@
-function showNotification(title, message) {
-  const popup = document.getElementById("notification-popup");
-  if (!popup) return; // 念のため要素が存在するか確認
-  document.getElementById("notification-title").innerText = title;
-  document.getElementById("notification-message").innerText = message;
+import { showNotification } from "./notification_popup"
 
-  popup.classList.add("show");
+document.addEventListener("turbo:load", () => {
+  const childId = document.body.dataset.currentChildId; // bodyにdata-current-child-idがセットされている場合
+  if (!childId) return;
 
-  setTimeout(() => {
-    popup.classList.remove("show");
-  }, 5000);
-}
+  // 最新通知を取得
+  fetch(`/notifications/latest?child_id=${childId}`)
+    .then(response => response.json())
+    .then(data => {
+      if (data && data.id) {
+        // ポップアップ表示
+        showNotification(data.title, data.message)
 
-// ページ読み込み時にテスト通知を出す
-document.addEventListener("DOMContentLoaded", () => {
-  showNotification("テスト通知", "通知の内容がここに入ります！");
+        // 既読にする
+        fetch(`/notifications/${data.id}/mark_as_read?child_id=${childId}`, {
+          method: "PATCH",
+          headers: {
+            "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content,
+            "Content-Type": "application/json"
+          }
+        })
+      }
+    })
+    .catch(error => console.error("通知取得エラー:", error))
+})
+
+document.addEventListener("turbo:load", () => {
+  console.log("turbo:load fired"); // turbo:load イベントが発火するか確認
+  const childId = document.body.dataset.currentChildId;
+  console.log("childId:", childId); // body から childId を取得できているか確認
 });
-
-export { showNotification };

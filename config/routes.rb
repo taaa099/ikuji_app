@@ -20,8 +20,16 @@ Rails.application.routes.draw do
    resources :baths
    resources :vaccinations
    resources :schedules
-   resources :notifications
   end
+
+  resources :notifications, only: [ :index ] do
+  collection do
+    get :latest
+  end
+  member do
+    patch :mark_as_read
+  end
+end
 
   # Defines the root path route ("/")
   root "home#index"

@@ -1,6 +1,10 @@
 class NotificationsController < ApplicationController
+
   def index
     @notifications = current_child.notifications.order(delivered_at: :desc)
+
+    # 一覧ページを開いたタイミングで既読にする
+    @notifications.where(read: false).update_all(read: true)
   end
 
   # 最新の通知を返す

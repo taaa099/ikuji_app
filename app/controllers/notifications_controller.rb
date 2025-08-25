@@ -1,5 +1,4 @@
 class NotificationsController < ApplicationController
-
   def index
     @notifications = current_child.notifications.order(delivered_at: :desc)
 

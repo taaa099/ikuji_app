@@ -15,10 +15,10 @@ class Feed < ApplicationRecord
   end
 
   def create_default_notification
-    last_feed = child.feeds.order(created_at: :desc).second # 今回の直前の授乳
+    last_feed = child.feeds.order(fed_at: :desc).second # 今回の直前の授乳
     return unless last_feed
 
-    hours_since_last_feed = ((Time.current - last_feed.created_at) / 1.hour).round(1)
+    hours_since_last_feed = ((Time.current - last_feed.fed_at) / 1.hour).round(1)
 
     if hours_since_last_feed >= 3 && hours_since_last_feed < 5
       # リマインダー通知

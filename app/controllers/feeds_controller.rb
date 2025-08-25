@@ -3,7 +3,13 @@ class FeedsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @feeds = current_child.feeds.order(fed_at: :desc) # 時系列順
+    if current_child
+      @feeds = current_child.feeds.order(fed_at: :desc)
+    else
+      @feeds = Feed.none  # 空の ActiveRecord::Relation を返す
+      flash[:alert] = "表示する子供が選択されていません。"
+      redirect_to root_path and return
+    end
   end
 
   def show
@@ -15,8 +21,7 @@ class FeedsController < ApplicationController
   end
 
   def create
-    @feed = current_child.feeds.new(feed_params)
-
+    @feed = current_child.feeds.new(feed_params.merge(user: current_user))
     # フォームから送られた分・秒を整数で取り出して合計秒に変換
     left_minutes = params[:left_minutes].to_i
     left_seconds = params[:left_seconds].to_i

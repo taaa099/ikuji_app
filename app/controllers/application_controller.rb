@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
 # 子供切り替え
 def current_child
+  return nil unless current_user
   @current_child ||= current_user.children.find_by(id: session[:current_child_id])
 end
 helper_method :current_child

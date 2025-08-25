@@ -3,13 +3,7 @@ class FeedsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    if current_child
-      @feeds = current_child.feeds.order(fed_at: :desc)
-    else
-      @feeds = Feed.none  # 空の ActiveRecord::Relation を返す
-      flash[:alert] = "表示する子供が選択されていません。"
-      redirect_to root_path and return
-    end
+    @feeds = current_child.feeds.order(fed_at: :desc)
   end
 
   def show

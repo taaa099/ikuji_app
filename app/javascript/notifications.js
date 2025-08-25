@@ -11,15 +11,7 @@ document.addEventListener("turbo:load", () => {
       if (data && data.id) {
         // ポップアップ表示
         showNotification(data.title, data.message)
-
-        // 既読にする
-        fetch(`/notifications/${data.id}/mark_as_read?child_id=${childId}`, {
-          method: "PATCH",
-          headers: {
-            "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content,
-            "Content-Type": "application/json"
-          }
-        })
+    
       }
     })
     .catch(error => console.error("通知取得エラー:", error))

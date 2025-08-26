@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_24_140406) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_26_105023) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -46,7 +46,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_140406) do
     t.text "memo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["child_id"], name: "index_baby_foods_on_child_id"
+    t.index ["user_id"], name: "index_baby_foods_on_user_id"
   end
 
   create_table "baths", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -56,7 +58,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_140406) do
     t.text "memo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["child_id"], name: "index_baths_on_child_id"
+    t.index ["user_id"], name: "index_baths_on_user_id"
   end
 
   create_table "bottles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -66,7 +70,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_140406) do
     t.bigint "child_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["child_id"], name: "index_bottles_on_child_id"
+    t.index ["user_id"], name: "index_bottles_on_user_id"
   end
 
   create_table "children", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -85,7 +91,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_140406) do
     t.bigint "child_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["child_id"], name: "index_diapers_on_child_id"
+    t.index ["user_id"], name: "index_diapers_on_user_id"
   end
 
   create_table "feeds", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -109,7 +117,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_140406) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "amount"
+    t.bigint "user_id"
     t.index ["child_id"], name: "index_hydrations_on_child_id"
+    t.index ["user_id"], name: "index_hydrations_on_user_id"
   end
 
   create_table "notifications", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -151,7 +161,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_140406) do
     t.text "memo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["child_id"], name: "index_sleep_records_on_child_id"
+    t.index ["user_id"], name: "index_sleep_records_on_user_id"
   end
 
   create_table "temperatures", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -161,7 +173,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_140406) do
     t.text "memo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["child_id"], name: "index_temperatures_on_child_id"
+    t.index ["user_id"], name: "index_temperatures_on_user_id"
   end
 
   create_table "user_children", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -193,24 +207,32 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_140406) do
     t.text "memo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["child_id"], name: "index_vaccinations_on_child_id"
+    t.index ["user_id"], name: "index_vaccinations_on_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "baby_foods", "children"
+  add_foreign_key "baby_foods", "users"
   add_foreign_key "baths", "children"
+  add_foreign_key "baths", "users"
   add_foreign_key "bottles", "children"
+  add_foreign_key "bottles", "users"
   add_foreign_key "diapers", "children"
   add_foreign_key "feeds", "children"
-  add_foreign_key "feeds", "users"
   add_foreign_key "hydrations", "children"
+  add_foreign_key "hydrations", "users"
   add_foreign_key "notifications", "children"
   add_foreign_key "notifications", "users"
   add_foreign_key "schedules", "children"
   add_foreign_key "sleep_records", "children"
+  add_foreign_key "sleep_records", "users"
   add_foreign_key "temperatures", "children"
+  add_foreign_key "temperatures", "users"
   add_foreign_key "user_children", "children"
   add_foreign_key "user_children", "users"
   add_foreign_key "vaccinations", "children"
+  add_foreign_key "vaccinations", "users"
 end

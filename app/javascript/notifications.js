@@ -17,8 +17,3 @@ document.addEventListener("turbo:load", () => {
     .catch(error => console.error("通知取得エラー:", error))
 })
 
-document.addEventListener("turbo:load", () => {
-  console.log("turbo:load fired"); // turbo:load イベントが発火するか確認
-  const childId = document.body.dataset.currentChildId;
-  console.log("childId:", childId); // body から childId を取得できているか確認
-});

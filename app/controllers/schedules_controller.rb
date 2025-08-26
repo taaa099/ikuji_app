@@ -25,7 +25,7 @@ class SchedulesController < ApplicationController
   end
 
   def create
-      @schedule = current_child.schedules.new(schedule_params)
+      @schedule = current_child.schedules.new(schedule_params.merge(user: current_user))
     if @schedule.save
       redirect_to child_schedules_path(current_child), notice: "予定を登録しました"
     else

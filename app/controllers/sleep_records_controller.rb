@@ -14,7 +14,7 @@ class SleepRecordsController < ApplicationController
   end
 
   def create
-    @sleep_record = current_child.sleep_records.new(sleep_records_params)
+    @sleep_record = current_child.sleep_records.new(sleep_records_params.merge(user: current_user))
     if @sleep_record.save
       session.delete(:sleep_record_start_time) # セッションから削除
       redirect_to child_sleep_records_path(current_child), notice: " 離乳食の記録を保存しました"
@@ -30,7 +30,7 @@ class SleepRecordsController < ApplicationController
 
   def update
     @sleep_record = current_child.sleep_records.find(params[:id])
-    if @sleep_record.update(sleep_records_params)
+    if @sleep_record.update(sleep_records_params.merge(user: current_user))
       redirect_to child_sleep_records_path(current_child), notice: "記録を更新しました"
     else
       flash.now[:alert] = "更新に失敗しました"

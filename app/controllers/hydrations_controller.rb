@@ -14,7 +14,7 @@ class HydrationsController < ApplicationController
   end
 
   def create
-    @hydration = current_child.hydrations.new(hydration_params)
+    @hydration = current_child.hydrations.new(hydration_params.merge(user: current_user))
     if @hydration.save
       session.delete(:hydration_fed_at) # セッションから削除
       redirect_to child_hydrations_path(current_child), notice: "水分補給記録を保存しました"

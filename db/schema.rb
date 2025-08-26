@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_26_113139) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_26_160449) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -82,6 +82,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_26_113139) do
     t.datetime "updated_at", null: false
     t.string "gender"
     t.integer "daily_bottle_goal", default: 600, null: false
+    t.integer "daily_hydration_goal", default: 800, null: false
+    t.integer "daily_baby_food_goal", default: 3, null: false
   end
 
   create_table "diapers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

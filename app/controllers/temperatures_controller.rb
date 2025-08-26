@@ -14,7 +14,7 @@ class TemperaturesController < ApplicationController
   end
 
   def create
-    @temperature = current_child.temperatures.new(temperatures_params)
+    @temperature = current_child.temperatures.new(temperatures_params.merge(user: current_user))
     if @temperature.save
       session.delete(:temperature_measured_at) # セッションから削除
       redirect_to child_temperatures_path(current_child), notice: "体温の記録を保存しました"

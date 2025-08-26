@@ -37,7 +37,7 @@ class Bottle < ApplicationRecord
     end
 
     # 今日の摂取量チェック（アラート）
-    if child.bottles.where('DATE(given_at) = ?', Date.current).sum(:amount) < child.daily_bottle_goal
+    if child.bottles.where("DATE(given_at) = ?", Date.current).sum(:amount) < child.daily_bottle_goal
       Notification.create!(
         user: user,
         child: child,

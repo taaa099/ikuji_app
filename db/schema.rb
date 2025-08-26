@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_26_160449) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_26_173419) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -154,7 +154,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_26_160449) do
     t.text "memo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["child_id"], name: "index_schedules_on_child_id"
+    t.index ["user_id"], name: "index_schedules_on_user_id"
   end
 
   create_table "sleep_records", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -232,6 +234,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_26_160449) do
   add_foreign_key "notifications", "children"
   add_foreign_key "notifications", "users"
   add_foreign_key "schedules", "children"
+  add_foreign_key "schedules", "users"
   add_foreign_key "sleep_records", "children"
   add_foreign_key "sleep_records", "users"
   add_foreign_key "temperatures", "children"

@@ -14,7 +14,7 @@ class BabyFoodsController < ApplicationController
   end
 
   def create
-    @baby_food = current_child.baby_foods.new(baby_food_params)
+    @baby_food = current_child.baby_foods.new(baby_food_params.merge(user: current_user))
     if @baby_food.save
       session.delete(:baby_food_fed_at) # セッションから削除
       redirect_to child_baby_foods_path(current_child), notice: " 離乳食の記録を保存しました"

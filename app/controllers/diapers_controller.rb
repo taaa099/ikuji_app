@@ -14,7 +14,7 @@ class DiapersController < ApplicationController
   end
 
   def create
-    @diaper = current_child.diapers.new(diaper_params)
+    @diaper = current_child.diapers.new(diaper_params.merge(user: current_user))
 
     if @diaper.save
      session.delete(:diaper_changed_at) # セッションから削除

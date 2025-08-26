@@ -37,7 +37,7 @@ class BabyFood < ApplicationRecord
     end
 
     # 今日の食事回数
-    today_count = child.baby_foods.where('DATE(fed_at) = ?', Date.current).count
+    today_count = child.baby_foods.where("DATE(fed_at) = ?", Date.current).count
 
     #  目標未達成かつ、今回でちょうど未達の状態のときのみ通知
     if today_count < child.daily_baby_food_goal &&

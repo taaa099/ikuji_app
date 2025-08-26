@@ -29,7 +29,7 @@ class Hydration < ApplicationRecord
     end
 
     # アラート通知（1日の目安摂取量未達成）
-    if child.hydrations.where('DATE(fed_at) = ?', Date.current).sum(:amount) < child.daily_hydration_goal
+    if child.hydrations.where("DATE(fed_at) = ?", Date.current).sum(:amount) < child.daily_hydration_goal
       Notification.create!(
         user: user,
         child: child,

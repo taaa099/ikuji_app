@@ -4,27 +4,10 @@ import "@hotwired/turbo-rails"
 import Rails from "@rails/ujs"
 Rails.start();
 
+// 通知機能用
 import { showNotification } from "./notification_popup";
 import "./notifications"
 
-import { Chart, registerables } from "chart.js";
-Chart.register(...registerables);
-
-
-document.addEventListener("DOMContentLoaded", () => {
-  const ctx = document.getElementById("myChart");
-  if (ctx) {
-    new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: ["Red", "Blue", "Yellow"],
-        datasets: [{
-          label: "# of Votes",
-          data: [12, 19, 3],
-          backgroundColor: ["red", "blue", "yellow"]
-        }]
-      },
-      options: {}
-    });
-  }
-});
+// 成長記録グラフ用
+import "./growth_height";
+import "./growth_weight";

@@ -4,6 +4,20 @@ class GrowthsController < ApplicationController
 
   def index
     @growths = current_child.growths.order(:recorded_at)
+
+    @growths_for_chart = @growths.map do |g|
+      months = (g.recorded_at.year * 12 + g.recorded_at.month) -
+               (current_child.birth_date.year * 12 + current_child.birth_date.month)
+      # 日も考慮して調整
+      months -= 1 if g.recorded_at.day < current_child.birth_date.day
+
+      {
+        recorded_at: g.recorded_at.strftime("%Y-%m-%d"),
+        height: g.height,
+        weight: g.weight,
+        month_age: months
+      }
+    end
   end
 
   def show

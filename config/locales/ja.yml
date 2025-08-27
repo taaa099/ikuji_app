@@ -60,6 +60,11 @@ ja:
         start_time: 開始日時
         end_time: 終了日時
         title: タイトル
+      growth:
+        height: 身長
+        weight: 体重
+        head_circumference: 頭囲
+        chest_circumference: 胸囲
 
     models:
       user: ユーザー

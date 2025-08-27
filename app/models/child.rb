@@ -13,6 +13,7 @@ class Child < ApplicationRecord
   has_many :temperatures, dependent: :destroy
   has_many :baths, dependent: :destroy
   has_many :vaccinations, dependent: :destroy
+  has_many :growths, dependent: :destroy
 
   # スケジュール機能との関連
   has_many :schedules, dependent: :destroy

@@ -1,0 +1,42 @@
+<div class="form-container">
+  <%= form_with(model: [current_child, growth], local: true, data: {turbo: false}) do |form| %>
+    <% if growth.errors.any? %>
+      <div class="error_explanation">
+        <h3><%= pluralize(growth.errors.count, "件のエラー") %>があります：</h3>
+        <ul>
+          <% growth.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+  <div>
+    <%= form.label :height, "身長(cm)" %><br>
+    <%= form.number_field :height, step: 0.1 %>
+  </div>
+
+  <div>
+    <%= form.label :weight, "体重(kg)" %><br>
+    <%= form.number_field :weight, step: 0.1 %>
+  </div>
+
+  <div>
+    <%= form.label :head_circumference, "頭囲(cm)" %><br>
+    <%= form.number_field :head_circumference, step: 0.1 %>
+  </div>
+
+  <div>
+    <%= form.label :chest_circumference, "胸囲(cm)" %><br>
+    <%= form.number_field :chest_circumference, step: 0.1 %>
+  </div>
+
+  <div>
+    <%= form.label :recorded_at, "計測日" %><br>
+    <%= form.date_field :recorded_at %>
+  </div>
+
+  <div>
+    <%= form.submit growth.persisted? ? "更新する" : "登録する" %>
+  </div>
+<% end %>

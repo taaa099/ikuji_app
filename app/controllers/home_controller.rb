@@ -33,33 +33,35 @@ class HomeController < ApplicationController
     @schedules = current_child&.schedules&.order(start_time: :desc)&.limit(5) || []
 
     # ----- 成長記録（グラフ用） -----
-    @growths = current_child.growths.order(:recorded_at)
-    @growths_for_chart = @growths.map do |g|
-      months = (g.recorded_at.year * 12 + g.recorded_at.month) -
-               (current_child.birth_date.year * 12 + current_child.birth_date.month)
-      months -= 1 if g.recorded_at.day < current_child.birth_date.day
+    if current_child
+      @growths = current_child.growths.order(:recorded_at)
+      @growths_for_chart = @growths.map do |g|
+        months = (g.recorded_at.year * 12 + g.recorded_at.month) -
+                 (current_child.birth_date.year * 12 + current_child.birth_date.month)
+        months -= 1 if g.recorded_at.day < current_child.birth_date.day
 
-      {
-        recorded_at: g.recorded_at.strftime("%Y-%m-%d"),
-        height: g.height,
-        weight: g.weight,
-        month_age: months
-      }
-    end
+        {
+          recorded_at: g.recorded_at.strftime("%Y-%m-%d"),
+          height: g.height,
+          weight: g.weight,
+          month_age: months
+        }
+      end
 
-    # ----- 簡易分析 -----
-    if @growths.any?
-      last = @growths.last
-      prev = @growths[-2]
+      # ----- 簡易分析 -----
+      if @growths.any?
+        last = @growths.last
+        prev = @growths[-2]
 
-      @latest_height = last.height
-      @latest_weight = last.weight
+        @latest_height = last.height
+        @latest_weight = last.weight
 
-      @height_diff = prev ? last.height - prev.height : 0
-      @weight_diff = prev ? last.weight - prev.weight : 0
+        @height_diff = prev ? last.height - prev.height : 0
+        @weight_diff = prev ? last.weight - prev.weight : 0
 
-      @avg_height = @growths.average(:height).to_f.round(1)
-      @avg_weight = @growths.average(:weight).to_f.round(1)
+        @avg_height = @growths.average(:height).to_f.round(1)
+        @avg_weight = @growths.average(:weight).to_f.round(1)
+      end
     end
   end
 end

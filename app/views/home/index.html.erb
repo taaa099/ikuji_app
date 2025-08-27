@@ -3,10 +3,14 @@
 
 <%# ----- 成長記録(グラフ) ----- %>
 <div class="stats">
-  <p>最新身長: <strong><%= @latest_height %> cm</strong> (<%= @height_diff >= 0 ? "+" : "" %><%= @height_diff %>)</p>
-  <p>最新体重: <strong><%= @latest_weight %> kg</strong> (<%= @weight_diff >= 0 ? "+" : "" %><%= @weight_diff %>)</p>
-  <p>平均身長: <strong><%= @avg_height %> cm</strong></p>
-  <p>平均体重: <strong><%= @avg_weight %> kg</strong></p>
+  <% if @latest_height && @latest_weight %>
+    <p>最新身長: <strong><%= @latest_height %> cm</strong> (<%= @height_diff >= 0 ? "+" : "" %><%= @height_diff %>)</p>
+    <p>最新体重: <strong><%= @latest_weight %> kg</strong> (<%= @weight_diff >= 0 ? "+" : "" %><%= @weight_diff %>)</p>
+    <p>平均身長: <strong><%= @avg_height %> cm</strong></p>
+    <p>平均体重: <strong><%= @avg_weight %> kg</strong></p>
+  <% else %>
+    <p>成長記録はまだ登録されていません。</p>
+  <% end %>
 </div>
 
 <canvas id="dashboardChart" data-growths='<%= raw @growths_for_chart.to_json %>'></canvas>

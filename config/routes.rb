@@ -20,6 +20,11 @@ Rails.application.routes.draw do
    resources :baths
    resources :vaccinations
    resources :schedules
+   resources :growths do
+     collection do
+       get :analysis
+      end
+    end
   end
 
   resources :notifications, only: [ :index ] do

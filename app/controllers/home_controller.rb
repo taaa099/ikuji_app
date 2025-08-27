@@ -39,7 +39,7 @@ class HomeController < ApplicationController
                (current_child.birth_date.year * 12 + current_child.birth_date.month)
       months -= 1 if g.recorded_at.day < current_child.birth_date.day
 
-      { 
+      {
         recorded_at: g.recorded_at.strftime("%Y-%m-%d"),
         height: g.height,
         weight: g.weight,

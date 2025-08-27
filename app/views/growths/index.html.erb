@@ -1,1 +1,37 @@
-<canvas id="myChart" width="400" height="200"></canvas>
+<%= link_to "新規成長記録を追加", new_child_growth_path(current_child), class: "index-btn" %>
+
+
+<!-- 身長グラフ -->
+<canvas id="heightChart" data-growths='<%= raw @growths_for_chart.to_json %>'></canvas>
+<!-- 体重グラフ -->
+<canvas id="weightChart" data-growths='<%= raw @growths_for_chart.to_json %>'></canvas>
+
+
+
+<h1 class="responsive-title">成長記録一覧</h1>
+
+<table class="responsive-table">
+  <thead>
+    <tr>
+      <th class="col-date">記録日</th>
+      <th class="col-item">身長 (cm)</th>
+      <th class="col-item">体重 (kg)</th>
+      <th class="col-item">頭囲 (cm)</th>
+      <th class="col-item">胸囲 (cm)</th>
+      <th class="col-detail">操作</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @growths.reverse_each do |growth| %>
+    <tr>
+      <td class="col-date"><%= growth.recorded_at.strftime("%Y-%m-%d") %></td>
+      <td class="col-item"><%= growth.height %></td>
+      <td class="col-item"><%= growth.weight %></td>
+      <td class="col-item"><%= growth.head_circumference %></td>
+      <td class="col-item"><%= growth.chest_circumference %></td>
+      <td class="col-detail"><%= link_to "編集", edit_child_growth_path(current_child, growth) %></td>
+    </tr>
+  <% end %>
+</tbody>
+</table>

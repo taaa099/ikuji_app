@@ -11,3 +11,6 @@ import "./notifications"
 // 成長記録グラフ用
 import "./growth_height";
 import "./growth_weight";
+
+// ダッシュボード表示用
+import "./dashboard_chart";

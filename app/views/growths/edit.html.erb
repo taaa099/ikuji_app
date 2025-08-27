@@ -1,0 +1,8 @@
+<h2 class="responsive-title">成長記録を編集</h2>
+
+<%= render "form", growth: @growth %>
+
+<div class="form-actions">
+<%= button_to "削除", child_growth_path(current_child, @growth), method: :delete, data: { turbo_confirm: '本当に削除しますか？' } %>
+<%= link_to '成長記録ページ', child_growths_path(current_child) %>
+</div>

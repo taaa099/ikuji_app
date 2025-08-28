@@ -1,0 +1,55 @@
+/* ==============================
+   睡眠分析機能専用スタイル
+   ============================== */
+
+/* ==============================
+   タイトル & 概要
+   ============================== */
+.responsive-title {
+  font-size: 20px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.sleep-summary p {
+  font-size: 16px;
+  margin: 4px 0;
+  text-align: center;
+}
+
+/* ==============================
+   グラフ
+   ============================== */
+#weeklySleepChart {
+  width: 100%;
+  max-width: 1000px;
+  height: 250px;
+  margin: 0 auto 2rem auto;
+}
+
+/* ==============================
+   PC: 1025px以上
+   ============================== */
+@media screen and (min-width: 1025px) {
+  .responsive-title { font-size: 28px; }
+  #weeklySleepChart { max-width: 1200px; height: 300px; }
+  .sleep-summary p { font-size: 18px; }
+}
+
+/* ==============================
+   タブレット: 768px〜1024px
+   ============================== */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .responsive-title { font-size: 22px; }
+  #weeklySleepChart { max-width: 800px; height: 250px; }
+  .sleep-summary p { font-size: 16px; }
+}
+
+/* ==============================
+   スマホ: 767px以下
+   ============================== */
+@media screen and (max-width: 767px) {
+  .responsive-title { font-size: 18px; }
+  #weeklySleepChart { max-width: 100%; height: 200px; }
+  .sleep-summary p { font-size: 14px; }
+}

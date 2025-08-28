@@ -14,3 +14,8 @@ import "./growth_weight";
 
 // ダッシュボード表示用
 import "./dashboard_chart";
+
+// 睡眠分析表示用
+import "./sleep_analysis_controller";
+
+

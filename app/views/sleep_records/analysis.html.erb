@@ -1,0 +1,11 @@
+<h2 class="responsive-title"><%= current_child.name %> の睡眠分析</h2>
+
+<p>集計期間: <%= @start_date.strftime("%Y-%m-%d") %> 〜 <%= @end_date.strftime("%Y-%m-%d") %></p>
+<p>平均睡眠時間: <%= (@average_sleep_minutes / 60.0).round(1) %> 時間</p>
+<p>昼寝パターン（日中 09:00〜17:00 の回数）: <%= @daytime_naps %> 回</p>
+
+<canvas id="weeklySleepChart"
+        width="400" height="200"
+        data-labels='<%= @weekly_sleep.keys.to_json %>'
+        data-values='<%= @weekly_sleep.values.to_json %>'>
+</canvas>

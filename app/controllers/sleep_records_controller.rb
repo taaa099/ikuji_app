@@ -60,7 +60,7 @@ class SleepRecordsController < ApplicationController
       day_records = records.select { |r| r.start_time.to_date == day }
 
       daytime_minutes = day_records.sum do |r|
-        if r.start_time.hour.between?(9,16)
+        if r.start_time.hour.between?(9, 16)
           ((r.end_time - r.start_time)/60).to_i
         else
           0
@@ -68,7 +68,7 @@ class SleepRecordsController < ApplicationController
       end
 
       nighttime_minutes = day_records.sum do |r|
-        if !r.start_time.hour.between?(9,16)
+        if !r.start_time.hour.between?(9, 16)
           ((r.end_time - r.start_time)/60).to_i
         else
           0
@@ -79,7 +79,7 @@ class SleepRecordsController < ApplicationController
         date: day.strftime("%m/%d"),
         daytime: daytime_minutes,
         nighttime: nighttime_minutes,
-        naps: day_records.count { |r| r.start_time.hour.between?(9,16) }
+        naps: day_records.count { |r| r.start_time.hour.between?(9, 16) }
       }
     end
 
@@ -89,15 +89,15 @@ class SleepRecordsController < ApplicationController
 
     @average_daytime_sleep = if daytime_durations.any?
                                (daytime_durations.sum / daytime_durations.size.to_f).round(1)
-                             else
+    else
                                0
-                             end
+    end
 
     @average_nighttime_sleep = if nighttime_durations.any?
                                  (nighttime_durations.sum / nighttime_durations.size.to_f).round(1)
-                               else
+    else
                                  0
-                               end
+    end
   end
 
   private

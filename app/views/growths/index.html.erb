@@ -1,37 +1,36 @@
-<%= link_to "新規成長記録を追加", new_child_growth_path(current_child), class: "index-btn" %>
+<%= link_to "新規成長記録を追加", new_child_growth_path(current_child), class: "growth-index-btn" %>
 
+<div>
+  <!-- 身長グラフ -->
+  <canvas id="heightChart" class="growth-chart" data-growths='<%= raw @growths_for_chart.to_json %>'></canvas>
+  <!-- 体重グラフ -->
+  <canvas id="weightChart" class="growth-chart" data-growths='<%= raw @growths_for_chart.to_json %>'></canvas>
+</div>
 
-<!-- 身長グラフ -->
-<canvas id="heightChart" data-growths='<%= raw @growths_for_chart.to_json %>'></canvas>
-<!-- 体重グラフ -->
-<canvas id="weightChart" data-growths='<%= raw @growths_for_chart.to_json %>'></canvas>
+<h1 class="growth-title">成長記録一覧</h1>
 
-
-
-<h1 class="responsive-title">成長記録一覧</h1>
-
-<table class="responsive-table">
+<table class="growth-table">
   <thead>
     <tr>
-      <th class="col-date">記録日</th>
-      <th class="col-item">身長 (cm)</th>
-      <th class="col-item">体重 (kg)</th>
-      <th class="col-item">頭囲 (cm)</th>
-      <th class="col-item">胸囲 (cm)</th>
-      <th class="col-detail">操作</th>
+      <th class="growth-col-date">記録日</th>
+      <th class="growth-col-item">身長 (cm)</th>
+      <th class="growth-col-item">体重 (kg)</th>
+      <th class="growth-col-item">頭囲 (cm)</th>
+      <th class="growth-col-item">胸囲 (cm)</th>
+      <th class="growth-col-detail">操作</th>
     </tr>
   </thead>
 
   <tbody>
     <% @growths.reverse_each do |growth| %>
-    <tr>
-      <td class="col-date"><%= growth.recorded_at.strftime("%Y-%m-%d") %></td>
-      <td class="col-item"><%= growth.height %></td>
-      <td class="col-item"><%= growth.weight %></td>
-      <td class="col-item"><%= growth.head_circumference %></td>
-      <td class="col-item"><%= growth.chest_circumference %></td>
-      <td class="col-detail"><%= link_to "編集", edit_child_growth_path(current_child, growth) %></td>
-    </tr>
-  <% end %>
-</tbody>
+      <tr>
+        <td class="growth-col-date"><%= growth.recorded_at.strftime("%Y-%m-%d") %></td>
+        <td class="growth-col-item"><%= growth.height %></td>
+        <td class="growth-col-item"><%= growth.weight %></td>
+        <td class="growth-col-item"><%= growth.head_circumference %></td>
+        <td class="growth-col-item"><%= growth.chest_circumference %></td>
+        <td class="growth-col-detail"><%= link_to "編集", edit_child_growth_path(current_child, growth) %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>

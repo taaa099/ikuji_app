@@ -15,7 +15,11 @@ Rails.application.routes.draw do
    resources :bottles
    resources :hydrations
    resources :baby_foods
-   resources :sleep_records
+   resources :sleep_records do
+     collection do
+        get :analysis  # 追加: 睡眠分析ページ
+      end
+    end
    resources :temperatures
    resources :baths
    resources :vaccinations

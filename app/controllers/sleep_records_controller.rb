@@ -73,7 +73,7 @@ class SleepRecordsController < ApplicationController
     end
 
     # 昼寝パターン（日中 09:00〜17:00）
-    @daytime_naps = records.count { |r| r.start_time.hour.between?(9,16) }
+    @daytime_naps = records.count { |r| r.start_time.hour.between?(9, 16) }
   end
 
   private

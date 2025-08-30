@@ -69,6 +69,7 @@
             <%= link_to "スケジュールの登録", new_child_schedule_path(current_child), class: "nav-btn" %>
             <%= link_to "成長記録", child_growths_path(current_child), class: "nav-btn" %>
             <%= link_to "成長記録の登録", new_child_growth_path(current_child), class: "nav-btn" %>
+            <%= link_to "プロフィールを見る", user_path(current_user), class: "nav-btn" %>
             <%= link_to "プロフィール編集", edit_user_registration_path, class: "nav-btn" %>
             <%= link_to notifications_path(current_child), class: "notification-link" do %>
               <i class="fa fa-bell"></i>

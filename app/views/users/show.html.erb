@@ -1,0 +1,19 @@
+<h1><%= @user.name %>さんのプロフィール</h1>
+
+<div class="profile">
+  <% if @user.avatar.attached? %>
+    <div class="avatar">
+      <%= image_tag @user.avatar.variant(resize_to_limit: [150, 150]) %>
+    </div>
+  <% else %>
+    <p>アバターは未設定です</p>
+  <% end %>
+
+  <p><strong>名前:</strong> <%= @user.name %></p>
+
+  <% if @user.bio.present? %>
+    <p><strong>自己紹介:</strong> <%= simple_format(@user.bio) %></p>
+  <% else %>
+    <p>自己紹介は未設定です</p>
+  <% end %>
+</div>

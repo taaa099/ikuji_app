@@ -76,5 +76,5 @@ gem "jsbundling-rails", "~> 1.3"
 
 gem "simple_calendar", "~> 2.0"
 
-gem 'image_processing', '~> 1.12'
-gem 'ruby-vips'
+gem "image_processing", "~> 1.12"
+gem "ruby-vips"

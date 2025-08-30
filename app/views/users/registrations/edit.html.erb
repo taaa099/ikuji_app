@@ -12,44 +12,48 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name, "名前" %><br>
-    <%= f.text_field :name, autofocus: true, class: "form-control" %>
-  </div>
+  <% if params[:tab] == "password" %>
+    <!-- パスワード変更フォーム -->
+    <div class="field">
+      <%= f.label :password, "新しいパスワード（変更する場合）" %><br>
+      <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :bio, "自己紹介" %><br>
-    <%= f.text_area :bio, rows: 5, class: "form-control" %>
-  </div>
+    <div class="field">
+      <%= f.label :password_confirmation, "新しいパスワード確認" %><br>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :avatar, "アバター" %><br>
-    <%= f.file_field :avatar, class: "form-control" %>
-    <% if resource.avatar.attached? && resource.avatar.persisted? %>
-      <p>現在のアバター:</p>
-      <%= image_tag resource.avatar.variant(resize_to_limit: [150, 150]) %>
-    <% end %>
-  </div>
+    <div class="field">
+      <%= f.label :current_password, "現在のパスワード（必須）" %><br>
+      <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
+    </div>
+  <% else %>
+    <!-- プロフィール編集フォーム -->
+    <div class="field">
+      <%= f.label :name, "名前" %><br>
+      <%= f.text_field :name, autofocus: true, class: "form-control" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :email, "メールアドレス" %><br>
-    <%= f.email_field :email, class: "form-control" %>
-  </div>
+    <div class="field">
+      <%= f.label :bio, "自己紹介" %><br>
+      <%= f.text_area :bio, rows: 5, class: "form-control" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password, "新しいパスワード（変更する場合）" %><br>
-    <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
-  </div>
+    <div class="field">
+      <%= f.label :avatar, "アバター" %><br>
+      <%= f.file_field :avatar, class: "form-control" %>
+      <% if resource.avatar.attached? && resource.avatar.persisted? %>
+        <p>現在のアバター:</p>
+        <%= image_tag resource.avatar.variant(resize_to_limit: [150, 150]) %>
+      <% end %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "新しいパスワード確認" %><br>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password, "現在のパスワード（必須）" %><br>
-    <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
-  </div>
+    <div class="field">
+      <%= f.label :email, "メールアドレス" %><br>
+      <%= f.email_field :email, class: "form-control" %>
+    </div>
+  <% end %>
 
   <div class="actions mt-3">
     <%= f.submit "更新", class: "btn btn-primary" %>

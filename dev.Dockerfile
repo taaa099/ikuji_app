@@ -1,12 +1,19 @@
 FROM ruby:3.4.4
 
-# Node.js + Yarn の最新版を公式スクリプトでインストール
-RUN apt-get update -qq && apt-get install -y curl gnupg default-mysql-client \
+# 必要なパッケージのインストール
+RUN apt-get update -qq && apt-get install -y \
+    curl \
+    gnupg \
+    default-mysql-client \
+    libvips42 \
+    libvips-dev \
+    imagemagick \
   && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
   && apt-get install -y nodejs \
   && npm install -g yarn \
   && yarn -v \
-  && which yarn
+  && which yarn \
+  && rm -rf /var/lib/apt/lists/*
 
 # 作業ディレクトリ
 WORKDIR /app
@@ -15,7 +22,7 @@ WORKDIR /app
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
-# JavaScript の依存関係をインストール ←★追加
+# JavaScript の依存関係をインストール
 COPY package.json yarn.lock ./
 RUN yarn install
 

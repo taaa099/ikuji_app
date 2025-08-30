@@ -25,7 +25,7 @@
   <div class="field">
     <%= f.label :avatar, "アバター" %><br>
     <%= f.file_field :avatar, class: "form-control" %>
-    <% if resource.avatar.attached? %>
+    <% if resource.avatar.attached? && resource.avatar.persisted? %>
       <p>現在のアバター:</p>
       <%= image_tag resource.avatar.variant(resize_to_limit: [150, 150]) %>
     <% end %>

@@ -37,6 +37,9 @@ document.addEventListener("turbo:load", () => {
   if (typeof createDashboardChart === "function") {
     createDashboardChart(isDark);
   }
+  if (typeof createSleepChart === "function") {
+    createSleepChart(isDark);
+  }
 
   // ボタンクリック時
   if (toggle) {
@@ -55,6 +58,9 @@ document.addEventListener("turbo:load", () => {
       }
       if (typeof createDashboardChart === "function") {
         createDashboardChart(isDarkNow);
+      }
+      if (typeof createSleepChart === "function") {
+        createSleepChart(isDarkNow);
       }
     });
   }

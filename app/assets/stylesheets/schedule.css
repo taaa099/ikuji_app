@@ -15,12 +15,24 @@
   margin-bottom: 1.5rem;
 }
 
+/* ダークモード用 */
+.dark .schedule-table {
+  background-color: #1f2937; /* gray-800 */
+  color: #f9fafb;
+}
+
 .schedule-table th,
 .schedule-table td {
   border: 1px solid #ccc;
   padding: 8px;
   text-align: left;
   word-break: break-word;
+}
+
+/* ダークモードでのセル枠 */
+.dark .schedule-table th,
+.dark .schedule-table td {
+  border-color: #374151; /* gray-700 */
 }
 
 .schedule-col-item { width: 15%; }
@@ -46,6 +58,13 @@
   background-color: #dde;
 }
 
+/* ダークモードボタン */
+.dark .schedule-index-btn {
+  background-color: #2563eb; /* 青系 */
+  color: #f9fafb;
+  border-color: #1e40af;
+}
+
 /* ==============================
    new, editフォーム（予定登録・編集）
    ============================== */
@@ -56,6 +75,13 @@
   background: #fdfdfd;
   border: 1px solid #ccd;
   border-radius: 8px;
+}
+
+/* ダークモード用 */
+.dark .schedule-form-container {
+  background: #1f2937; /* gray-800 */
+  border-color: #374151;
+  color: #f9fafb;
 }
 
 .schedule-form-group {
@@ -75,25 +101,59 @@
   border: 1px solid #99c;
   border-radius: 4px;
   font-size: 14px;
+  background-color: #fff; /* 通常 */
+  color: #000;
+}
+
+/* 入力欄のダークモード用 */
+.dark .schedule-form-input {
+  background-color: #374151; /* gray-700 */
+  color: #f9fafb;
+  border-color: #4b5563; /* gray-600 */
 }
 
 .schedule-form-actions {
   text-align: center;
   margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem; /* ボタンとリンクの間隔 */
 }
 
-.schedule-form-actions input[type="submit"] {
+/* 通常のボタン・リンク */
+.schedule-form-actions a,
+.schedule-form-actions input[type="submit"],
+.schedule-form-actions button {
   padding: 8px 16px;
   font-size: 14px;
   border: none;
   border-radius: 4px;
-  background: #6699cc;
+  background: #4CAF50; /* 緑系 */
   color: #fff;
   cursor: pointer;
+  text-decoration: none; /* aタグの下線を消す */
+  display: inline-block;
 }
 
-.schedule-form-actions input[type="submit"]:hover {
-  background: #5577aa;
+/* hover */
+.schedule-form-actions a:hover,
+.schedule-form-actions input[type="submit"]:hover,
+.schedule-form-actions button:hover {
+  background: #45a049;
+}
+
+/* ダークモード用 */
+.dark .schedule-form-actions a,
+.dark .schedule-form-actions input[type="submit"],
+.dark .schedule-form-actions button {
+  background: #2563eb; /* 青系 */
+  color: #f9fafb;
+}
+
+.dark .schedule-form-actions a:hover,
+.dark .schedule-form-actions input[type="submit"]:hover,
+.dark .schedule-form-actions button:hover {
+  background: #1d4ed8;
 }
 
 /* ==============================
@@ -106,6 +166,13 @@
   background: #fdfdfd;
   border: 1px solid #ccd;
   border-radius: 8px;
+}
+
+/* ダークモード用 */
+.dark .schedule-show-container {
+  background: #1f2937; /* gray-800 */
+  border-color: #374151;
+  color: #f9fafb;
 }
 
 .schedule-show-item {
@@ -122,23 +189,38 @@
 .schedule-show-actions {
   text-align: center;
   margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem; /* ボタン間の隙間 */
 }
 
+/* 通常のボタン・リンク */
 .schedule-show-btn {
   display: inline-block;
   padding: 8px 16px;
-  margin-right: 8px;
-  background-color: #6699cc;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 4px;
   font-size: 14px;
   border: none;
+  border-radius: 4px;
+  background-color: #6699cc; /* 青系 */
+  color: #fff;
+  text-decoration: none;
   cursor: pointer;
+  text-align: center;
 }
 
+/* hover */
 .schedule-show-btn:hover {
   background-color: #5577aa;
+}
+
+/* ダークモード用 */
+.dark .schedule-show-btn {
+  background-color: #2563eb; /* 青系 */
+  color: #f9fafb;
+}
+
+.dark .schedule-show-btn:hover {
+  background-color: #1d4ed8;
 }
 
 /* ==============================
@@ -210,6 +292,41 @@
   padding: 2px 4px;
   border-radius: 4px;
   font-size: 12px;
+}
+
+/* ==============================
+   カレンダー（ダークモード）
+   ============================== */
+.dark .calendar-container {
+  background-color: #111827; /* gray-900 */
+  color: #f9fafb;
+}
+
+.dark .btn-nav {
+  background: #1f2937; /* gray-800 */
+  border-color: #374151;
+  color: #f9fafb;
+}
+
+.dark .btn-nav:hover {
+  background: #2563eb;
+  color: #f9fafb;
+}
+
+.dark .day-cell {
+  background-color: #1f2937; /* gray-800 */
+  border-color: #374151;
+  color: #f9fafb;
+}
+
+.dark .day-cell.other-month {
+  background-color: #111827; /* gray-900 */
+  color: #6b7280; /* gray-400 */
+}
+
+.dark .event {
+  background-color: #2563eb; /* 青系 */
+  color: #f9fafb;
 }
 
 /* ==============================

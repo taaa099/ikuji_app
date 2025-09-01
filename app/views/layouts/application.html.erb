@@ -24,7 +24,7 @@
     <%= javascript_importmap_tags %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="..." crossorigin="anonymous">
   </head>
-  <body data-current-child-id="<%= current_child&.id %>">
+  <body data-current-child-id="<%= current_child&.id %>" class="bg-white text-black dark:bg-gray-900 dark:text-gray-100">
     <header class="site-header">
       <% if user_signed_in? %>
         <div>
@@ -73,6 +73,9 @@
                 <%= link_to "プロフィールを見る", user_path(current_user), class: "nav-btn" %>
                 <%= link_to "プロフィールを編集", edit_user_registration_path(tab: "profile"), class: "nav-btn" %>
                 <%= link_to "パスワード変更", edit_user_registration_path(tab: "password"), class: "nav-btn" %>
+                <button id="dark-mode-toggle" class="p-2 border rounded ml-2">
+                  🌙 / ☀️
+                </button>
                 <%= link_to notifications_path(current_child), class: "notification-link" do %>
                   <i class="fa fa-bell"></i>
                   <% if current_user.notifications.where(read: false).exists? %>

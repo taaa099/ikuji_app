@@ -1,0 +1,213 @@
+/* ==============================
+   プロフィール共通スタイル
+   ============================== */
+
+/* ページタイトル */
+.profile-title {
+  font-size: 20px;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* ==============================
+   プロフィール編集フォーム (edit)
+   ============================== */
+.profile-form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.profile-form-group {
+  margin-bottom: 1rem;
+}
+
+.profile-form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.profile-form-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.profile-form-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.profile-form-btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  background: #4CAF50; /* 緑系 */
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.profile-form-btn:hover {
+  background: #45a049;
+}
+
+.profile-form-btn-danger {
+  background: #e11d48; /* 赤系 */
+}
+
+.profile-form-btn-danger:hover {
+  background: #be123c;
+}
+
+/* ==============================
+   プロフィール表示 (show)
+   ============================== */
+.profile-show-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.profile-show-avatar {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.profile-show-avatar img {
+  max-width: 150px;
+  height: auto;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+}
+
+.profile-show-item {
+  margin-bottom: 0.5rem;
+  font-size: 14px;
+}
+
+.profile-show-label {
+  display: inline-block;
+  width: 80px;
+  font-weight: bold;
+}
+
+/* ==============================
+   PC: 1025px以上
+   ============================== */
+@media screen and (min-width: 1025px) {
+  .profile-title { font-size: 24px; }
+
+  .profile-form-container {
+    max-width: 700px;
+    padding: 2rem;
+  }
+
+  .profile-form-label {
+    font-size: 15px;
+  }
+
+  .profile-form-input {
+    font-size: 15px;
+    padding: 10px;
+  }
+
+  .profile-show-container {
+    padding: 2rem;
+  }
+
+  .profile-show-item {
+    font-size: 15px;
+  }
+
+  .profile-show-label {
+    width: 100px;
+  }
+}
+
+/* ==============================
+   タブレット: 768px〜1024px
+   ============================== */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .profile-title { font-size: 20px; }
+
+  .profile-form-container {
+    max-width: 90%;
+    padding: 1.5rem;
+  }
+
+  .profile-form-label {
+    font-size: 14px;
+  }
+
+  .profile-form-input {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .profile-show-container {
+    padding: 1.5rem;
+  }
+
+  .profile-show-item {
+    font-size: 14px;
+  }
+
+  .profile-show-label {
+    width: 80px;
+  }
+}
+
+/* ==============================
+   スマホ: 767px以下
+   ============================== */
+@media screen and (max-width: 767px) {
+  .profile-title { font-size: 18px; }
+
+  .profile-form-container {
+    max-width: 100%;
+    padding: 1rem;
+    border: none;
+  }
+
+  .profile-form-label {
+    font-size: 13px;
+  }
+
+  .profile-form-input {
+    font-size: 13px;
+    padding: 6px;
+  }
+
+  .profile-show-container {
+    padding: 1rem;
+    border: none;
+  }
+
+  .profile-show-item {
+    font-size: 13px;
+  }
+
+  .profile-show-label {
+    width: auto;
+    margin-right: 0.5rem;
+  }
+
+  .profile-show-avatar img {
+    max-width: 120px;
+  }
+}

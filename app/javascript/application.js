@@ -19,3 +19,37 @@ import "./dashboard_chart";
 import "./sleep_analysis_controller";
 
 
+// 共通：ダークモード管理
+document.addEventListener("turbo:load", () => {
+  const toggle = document.getElementById("dark-mode-toggle");
+
+  // ページロード時の復元
+  const isDark = localStorage.getItem("darkMode") === "true";
+  document.documentElement.classList.toggle("dark", isDark);
+
+  // ページロード時にチャート描画を呼ぶ
+  if (typeof createHeightChart === "function") {
+    createHeightChart(isDark);
+  }
+  if (typeof createWeightChart === "function") {
+    createWeightChart(isDark);
+  }
+
+  // ボタンクリック時
+  if (toggle) {
+    toggle.addEventListener("click", () => {
+      const isDarkNow = !document.documentElement.classList.contains("dark");
+      document.documentElement.classList.toggle("dark");
+
+      localStorage.setItem("darkMode", isDarkNow);
+
+      // 両方存在すれば両方再描画、片方だけでもOK
+      if (typeof createHeightChart === "function") {
+        createHeightChart(isDarkNow);
+      }
+      if (typeof createWeightChart === "function") {
+        createWeightChart(isDarkNow);
+      }
+    });
+  }
+});

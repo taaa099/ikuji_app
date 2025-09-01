@@ -18,7 +18,7 @@
         <td class="col-item"><%= child.name %></td>
         <td class="col-date"><%= child.birth_date %></td>
         <td class="col-detail"><%= age_in_years(child.birth_date) %>歳</td>
-        <td class="col-memo">
+        <td class="col-detail">
           <%= link_to '表示', child_path(child) %> |
           <%= link_to '編集', edit_child_path(child) %> |
           <%= link_to '削除', child_path(child), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' } %>

@@ -1,7 +1,9 @@
 import { Chart, registerables } from "chart.js";
 Chart.register(...registerables);
 
-document.addEventListener("turbo:load", function() {
+let dashboardChart;
+
+function createDashboardChart(isDarkMode) {
   const ctx = document.getElementById("dashboardChart");
   if (!ctx) return;
 
@@ -14,22 +16,32 @@ document.addEventListener("turbo:load", function() {
   const heightData = growths.map(g => g.height);
   const weightData = growths.map(g => g.weight);
 
-  new Chart(ctx.getContext("2d"), {
+  const textColor = isDarkMode ? "#fff" : "#333";
+  const gridColor = isDarkMode ? "#374151" : "#ccc";
+
+  if (dashboardChart) dashboardChart.destroy();
+
+  dashboardChart = new Chart(ctx.getContext("2d"), {
     type: "line",
     data: {
       labels: labels,
       datasets: [
-        { label: "身長(cm)", data: heightData, borderColor: "blue", fill: false, tension: 0.4 },
-        { label: "体重(kg)", data: weightData, borderColor: "green", fill: false, tension: 0.4 }
+        { label: "身長(cm)", data: heightData, borderColor: isDarkMode ? "skyblue" : "blue", fill: false, tension: 0.4 },
+        { label: "体重(kg)", data: weightData, borderColor: isDarkMode ? "lightgreen" : "green", fill: false, tension: 0.4 }
       ]
     },
     options: {
       responsive: true,
-      plugins: { legend: { position: 'top' }, title: { display: true, text: '成長ダッシュボード' } },
+      plugins: { 
+        legend: { position: 'top', labels: { color: textColor } }, 
+        title: { display: true, text: '成長ダッシュボード', color: textColor } 
+      },
       scales: { 
-        y: { title: { display: true, text: "数値" }, beginAtZero: false },
-        x: { title: { display: true, text: "月齢" } }
+        y: { title: { display: true, text: "数値", color: textColor }, ticks: { color: textColor }, grid: { color: gridColor }, beginAtZero: false },
+        x: { title: { display: true, text: "月齢", color: textColor }, ticks: { color: textColor }, grid: { color: gridColor } }
       }
     }
   });
-});
+}
+
+window.createDashboardChart = createDashboardChart; // ダークモード切替から呼べるようにグローバル化

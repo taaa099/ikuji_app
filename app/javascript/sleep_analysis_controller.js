@@ -1,6 +1,9 @@
-import Chart from "chart.js/auto";
+import { Chart, registerables } from "chart.js";
+Chart.register(...registerables);
 
-document.addEventListener("turbo:load", () => {
+let sleepChart;
+
+function createSleepChart(isDarkMode) {
   const canvas = document.getElementById("dailySleepChart");
   if (!canvas) return;
 
@@ -9,7 +12,12 @@ document.addEventListener("turbo:load", () => {
   const nighttime = JSON.parse(canvas.dataset.nighttime || "[]");
   const naps = JSON.parse(canvas.dataset.naps || "[]");
 
-  new Chart(canvas.getContext("2d"), {
+  const textColor = isDarkMode ? "#fff" : "#333";
+  const gridColor = isDarkMode ? "#374151" : "#ccc";
+
+  if (sleepChart) sleepChart.destroy();
+
+  sleepChart = new Chart(canvas.getContext("2d"), {
     type: "bar",
     data: {
       labels: labels,
@@ -17,18 +25,20 @@ document.addEventListener("turbo:load", () => {
         {
           label: "昼睡眠時間（分）",
           data: daytime,
-          backgroundColor: "rgba(54, 162, 235, 0.5)"
+          backgroundColor: isDarkMode ? "rgba(96, 165, 250, 0.6)" : "rgba(54, 162, 235, 0.5)" // 明るい青
         },
         {
           label: "夜睡眠時間（分）",
           data: nighttime,
-          backgroundColor: "rgba(255, 206, 86, 0.5)"
+          backgroundColor: isDarkMode ? "rgba(250, 204, 21, 0.6)" : "rgba(255, 206, 86, 0.5)" // 黄色系
         }
       ]
     },
     options: {
       responsive: true,
       plugins: {
+        legend: { labels: { color: textColor } },
+        title: { display: true, text: "日別睡眠分析", color: textColor },
         tooltip: {
           callbacks: {
             afterBody: function(context) {
@@ -39,8 +49,19 @@ document.addEventListener("turbo:load", () => {
         }
       },
       scales: {
-        y: { beginAtZero: true }
+        x: {
+          ticks: { color: textColor },
+          grid: { color: gridColor }
+        },
+        y: {
+          beginAtZero: true,
+          ticks: { color: textColor },
+          grid: { color: gridColor },
+          title: { display: true, text: "睡眠時間（分）", color: textColor }
+        }
       }
     }
   });
-});
+}
+
+window.createSleepChart = createSleepChart; // ダークモード切替から呼べるようにグローバル化

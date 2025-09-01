@@ -193,3 +193,46 @@
 .dark .growth-form-actions button:hover {
   background-color: #1d4ed8;
 }
+
+/* ==============================
+   profile.css ダークモード
+   ============================== */
+.dark .profile-form-container {
+  background: #1f2937;
+  border-color: #374151;
+  color: #f9fafb;
+}
+
+.dark .profile-form-input {
+  background-color: #374151;
+  color: #f9fafb;
+  border-color: #4b5563;
+}
+
+.dark .profile-form-btn {
+  background-color: #2563eb;
+  color: #f9fafb;
+}
+
+.dark .profile-form-btn:hover {
+  background-color: #1d4ed8;
+}
+
+.dark .profile-form-btn-danger {
+  background-color: #e11d48;
+  color: #f9fafb;
+}
+
+.dark .profile-form-btn-danger:hover {
+  background-color: #be123c;
+}
+
+.dark .profile-show-container {
+  background: #1f2937;
+  border-color: #374151;
+  color: #f9fafb;
+}
+
+.dark .profile-show-avatar img {
+  border-color: #4b5563;
+}

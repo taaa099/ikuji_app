@@ -1,0 +1,195 @@
+/* ==============================
+   record.css ダークモード
+   ============================== */
+.dark .col-detail a {
+  background-color: #2563eb;
+  color: #f9fafb;
+}
+
+.dark .col-detail a:hover {
+  background-color: #1d4ed8;
+}
+
+.dark .form-container {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+.dark .form-input {
+  background-color: #374151;
+  color: #f9fafb;
+  border-color: #4b5563;
+}
+
+.dark .form-actions a,
+.dark .form-actions input[type="submit"],
+.dark .form-actions button {
+  background: #2563eb;
+  color: #f9fafb;
+}
+
+.dark .form-actions a:hover,
+.dark .form-actions input[type="submit"]:hover,
+.dark .form-actions button:hover {
+  background: #1d4ed8;
+}
+
+/* ==============================
+   schedule.css ダークモード
+   ============================== */
+.dark .schedule-table {
+  background-color: #1f2937;
+  color: #f9fafb;
+}
+
+.dark .schedule-table th,
+.dark .schedule-table td {
+  border-color: #374151;
+}
+
+.dark .schedule-index-btn {
+  background-color: #2563eb;
+  color: #f9fafb;
+  border-color: #1e40af;
+}
+
+.dark .schedule-form-container {
+  background: #1f2937;
+  border-color: #374151;
+  color: #f9fafb;
+}
+
+.dark .schedule-form-input {
+  background-color: #374151;
+  color: #f9fafb;
+  border-color: #4b5563;
+}
+
+.dark .schedule-form-actions a,
+.dark .schedule-form-actions input[type="submit"],
+.dark .schedule-form-actions button {
+  background: #2563eb;
+  color: #f9fafb;
+}
+
+.dark .schedule-form-actions a:hover,
+.dark .schedule-form-actions input[type="submit"]:hover,
+.dark .schedule-form-actions button:hover {
+  background: #1d4ed8;
+}
+
+.dark .schedule-show-container {
+  background: #1f2937;
+  border-color: #374151;
+  color: #f9fafb;
+}
+
+.dark .schedule-show-btn {
+  background-color: #2563eb;
+  color: #f9fafb;
+}
+
+.dark .schedule-show-btn:hover {
+  background-color: #1d4ed8;
+}
+
+.dark .calendar-container {
+  background-color: #111827;
+  color: #f9fafb;
+}
+
+.dark .btn-nav {
+  background: #1f2937;
+  border-color: #374151;
+  color: #f9fafb;
+}
+
+.dark .btn-nav:hover {
+  background: #2563eb;
+  color: #f9fafb;
+}
+
+.dark .day-cell {
+  background-color: #1f2937;
+  border-color: #374151;
+  color: #f9fafb;
+}
+
+.dark .day-cell.other-month {
+  background-color: #111827;
+  color: #6b7280;
+}
+
+.dark .event {
+  background-color: #2563eb;
+  color: #f9fafb;
+}
+
+/* ==============================
+   growth.css ダークモード
+   ============================== */
+.dark .growth-index-btn {
+  background-color: #2563eb;
+  color: #f9fafb;
+}
+
+.dark .growth-index-btn:hover {
+  background-color: #1d4ed8;
+}
+
+.dark .growth-table {
+  background-color: #1f2937;
+  border-color: #374151;
+  color: #f9fafb;
+}
+
+.dark .growth-table th,
+.dark .growth-table td {
+  border-color: #4b5563;
+}
+
+.dark .growth-table th {
+  background-color: #374151;
+}
+
+.dark .growth-table td {
+  background-color: #1f2937;
+}
+
+.dark .growth-col-detail a {
+  background-color: #2563eb;
+  color: #f9fafb;
+}
+
+.dark .growth-col-detail a:hover {
+  background-color: #1d4ed8;
+}
+
+.dark .growth-chart {
+  background-color: #1f2937;
+}
+
+.dark .growth-form-container {
+  background-color: #1f2937;
+  border-color: #374151;
+  color: #f9fafb;
+}
+
+.dark .growth-form-input {
+  background-color: #374151;
+  color: #f9fafb;
+  border-color: #4b5563;
+}
+
+.dark .growth-form-actions input[type="submit"],
+.dark .growth-form-actions a,
+.dark .growth-form-actions button {
+  background-color: #2563eb;
+  color: #f9fafb;
+}
+
+.dark .growth-form-actions input[type="submit"]:hover,
+.dark .growth-form-actions a:hover,
+.dark .growth-form-actions button:hover {
+  background-color: #1d4ed8;
+}

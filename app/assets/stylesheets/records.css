@@ -63,16 +63,6 @@
   background-color: #ddd;
 }
 
-/* ダークモード */
-.dark .col-detail a {
-  background-color: #2563eb; /* 青系 */
-  color: #f9fafb;
-}
-
-.dark .col-detail a:hover {
-  background-color: #1d4ed8;
-}
-
 /* ==============================
    new,editフォーム共通
    ============================== */
@@ -83,12 +73,6 @@
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
-}
-
-/* ダークモード用 */
-.dark .form-container {
-  background: #1f2937; /* gray-800 */
-  border-color: #374151; /* border を少し暗めに */
 }
 
 .form-group {
@@ -108,13 +92,6 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
-}
-
-/* ダークモード用 */
-.dark .form-input {
-  background-color: #374151; /* gray-700相当 */
-  color: #f9fafb; /* 白に近い文字色 */
-  border-color: #4b5563; /* 少し暗めのボーダー */
 }
 
 .form-actions {
@@ -145,20 +122,6 @@
 .form-actions input[type="submit"]:hover,
 .form-actions button:hover {
   background: #45a049;
-}
-
-/* ダークモード用 */
-.dark .form-actions a,
-.dark .form-actions input[type="submit"],
-.dark .form-actions button {
-  background: #2563eb; /* 青系 */
-  color: #f9fafb;
-}
-
-.dark .form-actions a:hover,
-.dark .form-actions input[type="submit"]:hover,
-.dark .form-actions button:hover {
-  background: #1d4ed8;
 }
 
 /* ==============================
@@ -215,6 +178,11 @@
 .profile-btn:hover {
   background-color: #45a049;
 }
+
+/* ==============================
+   PC,タブレット,スマホのメディアクエリ
+   ============================== */
+/* ...既存のメディアクエリはそのまま残します ... */
 
 /* ==============================
    PC: 1025px以上
@@ -318,6 +286,20 @@
    スマホ: 767px以下
    ============================== */
 @media screen and (max-width: 767px) {
+
+  /* ヘッダー部分 */
+  .header-nav {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .nav-btn {
+    width: 100%;
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  /* indexビュー部分 */
   .responsive-table thead {
     display: none; /* ヘッダー非表示でカード風に */
   }
@@ -339,14 +321,81 @@
 
   .responsive-title { font-size: 18px; }
 
+  /* new,editフォーム部分 */
   .form-container {
     max-width: 100%;
     padding: 1rem;
-    border: none;
+    border: none; /* モバイルでは枠線消してシンプルに */
   }
 
   .form-label {
     font-size: 13px;
   }
 
-  .form
+  .form-input {
+    font-size: 13px;
+    padding: 6px;
+  }
+
+  /* 写真アップロードも全幅に */
+  input[type="file"].form-input {
+    width: 100%;
+  }
+
+  /* ボタン・リンクを統一 */
+  .form-actions {
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .form-actions input[type="submit"],
+  .form-actions button,
+  .form-actions a {
+    display: block;
+    width: 90%;               /* 9割幅に調整 */
+    margin: 0.5rem auto;      /* 上下余白＋中央寄せ */
+    font-size: 14px;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background: #4CAF50;      /* 緑系に統一 */
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;    /* aタグの下線を消す */
+  }
+
+  .form-actions input[type="submit"]:hover,
+  .form-actions button:hover,
+  .form-actions a:hover {
+    background: #45a049;      /* hoverも統一 */
+  }
+
+  /* showビュー部分（childrenのみ） */
+  .profile-container {
+    padding: 1rem;
+  }
+
+  .profile-item strong {
+    width: 60px;
+  }
+
+  .profile-item {
+    font-size: 13px;
+  }
+
+  .profile-btn {
+    display: block;
+    width: 90%;              /* こちらも統一 */
+    margin: 0.5rem auto;
+    padding: 10px;
+    background: #4CAF50;
+    color: #fff;
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .profile-btn:hover {
+    background: #45a049;
+  }
+}

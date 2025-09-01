@@ -1,4 +1,19 @@
 /* ==============================
+   notice / alert ダークモード
+   ============================== */
+.dark .notice {
+  background-color: #78350f; /* ダークイエロー系 */
+  color: #ffecb5;            /* 明るめ文字 */
+  border-color: #b45309;
+}
+
+.dark .alert {
+  background-color: #7f1d1d; /* ダークレッド系 */
+  color: #fecaca;             /* 明るめ文字 */
+  border-color: #991b1b;
+}
+
+/* ==============================
    record.css ダークモード
    ============================== */
 .dark .col-detail a {

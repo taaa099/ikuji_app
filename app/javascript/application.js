@@ -34,6 +34,9 @@ document.addEventListener("turbo:load", () => {
   if (typeof createWeightChart === "function") {
     createWeightChart(isDark);
   }
+  if (typeof createDashboardChart === "function") {
+    createDashboardChart(isDark);
+  }
 
   // ボタンクリック時
   if (toggle) {
@@ -49,6 +52,9 @@ document.addEventListener("turbo:load", () => {
       }
       if (typeof createWeightChart === "function") {
         createWeightChart(isDarkNow);
+      }
+      if (typeof createDashboardChart === "function") {
+        createDashboardChart(isDarkNow);
       }
     });
   }

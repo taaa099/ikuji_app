@@ -14,6 +14,59 @@
 }
 
 /* ==============================
+   header ダークモード
+   ============================== */
+.dark .site-header {
+  background-color: #111827; /* ダーク背景 */
+  border-bottom: 1px solid #374151;
+  color: #f9fafb;
+}
+
+.dark .header-nav {
+  background-color: #1f2937;
+  border-radius: 6px;
+  padding: 6px 10px;
+}
+
+.dark .nav-btn {
+  background-color: transparent;
+  color: #f9fafb;
+  border: 1px solid #4b5563;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.dark .nav-btn:hover {
+  background-color: #2563eb;
+  color: #f9fafb;
+  border-color: #1d4ed8;
+}
+
+.dark #dark-mode-toggle {
+  background-color: #374151;
+  color: #f9fafb;
+  border: 1px solid #4b5563;
+}
+
+.dark #dark-mode-toggle:hover {
+  background-color: #2563eb;
+  border-color: #1d4ed8;
+}
+
+.dark .notification-link {
+  color: #f9fafb;
+  position: relative;
+}
+
+.dark .notification-link:hover {
+  color: #60a5fa;
+}
+
+.dark .notification-link .fa-bell {
+  color: #f9fafb;
+}
+
+/* ==============================
    record.css ダークモード
    ============================== */
 .dark .col-detail a {
@@ -250,6 +303,37 @@
 
 .dark .profile-show-avatar img {
   border-color: #4b5563;
+}
+
+/* ==============================
+   children/show (プロフィール) ダークモード
+   ============================== */
+.dark .profile-container {
+  background-color: #1f2937; /* ダーク背景 */
+  border-color: #374151;
+  color: #f9fafb;
+}
+
+.dark .profile-item {
+  color: #f9fafb;
+}
+
+.dark .profile-item strong {
+  color: #f9fafb;
+}
+
+.dark .profile-image img {
+  border: 1px solid #4b5563;
+  border-radius: 6px;
+}
+
+.dark .profile-btn {
+  background-color: #2563eb;
+  color: #f9fafb;
+}
+
+.dark .profile-btn:hover {
+  background-color: #1d4ed8;
 }
 
 /* ==============================

@@ -251,3 +251,59 @@
 .dark .profile-show-avatar img {
   border-color: #4b5563;
 }
+
+/* ==============================
+   notification.css ダークモード
+   ============================== */
+.dark .notifications-list {
+  background-color: #1f2937; /* ダーク背景 */
+  color: #f9fafb;            /* 明るい文字 */
+  border: 1px solid #374151;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.dark .notification-item {
+  border-bottom: 1px solid #374151;
+  padding: 8px 0;
+}
+
+.dark .notification-item.unread {
+  background-color: #374151; /* 未読は強調 */
+}
+
+.dark .notification-item .kind {
+  color: #93c5fd; /* 青系で通知種別 */
+}
+
+.dark .notification-item strong {
+  color: #facc15; /* タイトルは黄色で目立たせる */
+}
+
+.dark .notification-item p {
+  color: #d1d5db; /* 本文はグレーで読みやすく */
+}
+
+.dark .notification-item .target-link a {
+  color: #60a5fa;
+}
+
+.dark .notification-item .target-link a:hover {
+  color: #3b82f6;
+}
+
+.dark .notification-item .status {
+  font-size: 12px;
+  color: #9ca3af; /* 既読/未読は薄め */
+}
+
+.dark .notification-popup {
+  background: #1f2937;
+  border: 1px solid #374151;
+  color: #f9fafb;
+}
+
+.dark .notification-count {
+  background: #ef4444; /* 赤系バッジ */
+  color: #fff;
+}

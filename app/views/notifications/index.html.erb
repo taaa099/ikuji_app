@@ -15,7 +15,12 @@
         <!-- 通知本文 -->
         <p><%= notification.message %></p>
 
-        <!-- 紐づく対象（例: Bottle, Scheduleなど） -->
+        <!-- 作成日時（例: 5分前） -->
+        <small class="notification-time">
+          <%= time_ago_in_words(notification.created_at) %> 前
+        </small>
+
+        <!-- 詳細リンク -->
         <% if notification.target.present? %>
           <div class="target-link">
             <%= link_to "#{notification.target_type} 詳細へ", polymorphic_path([notification.child, notification.target]) %>

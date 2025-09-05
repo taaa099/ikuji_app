@@ -80,6 +80,6 @@ gem "ruby-vips", require: false, group: :production
 
 gem "tailwindcss-rails", "~> 4.3"
 
-gem 'sidekiq'
-gem 'sidekiq-scheduler'
-gem 'redis', '~> 5.0'
+gem "sidekiq"
+gem "sidekiq-scheduler"
+gem "redis", "~> 5.0"

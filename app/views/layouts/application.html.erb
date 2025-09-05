@@ -24,7 +24,7 @@
     <%= javascript_importmap_tags %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="..." crossorigin="anonymous">
   </head>
-  <body data-current-child-id="<%= current_child&.id %>" class="bg-white text-black dark:bg-gray-900 dark:text-gray-100">
+  <body data-current-child-id="<%= @current_child&.id || 0 %>" class="bg-white text-black dark:bg-gray-900 dark:text-gray-100">
     <header class="site-header">
       <% if user_signed_in? %>
         <div>
@@ -78,9 +78,9 @@
                 </button>
                 <%= link_to notifications_path(current_child), class: "notification-link" do %>
                   <i class="fa fa-bell"></i>
-                  <% if current_user.notifications.where(read: false).exists? %>
+                  <% if current_child.notifications.where(read: false).exists? %>
                     <span class="notification-count">
-                      <%= current_user.notifications.where(read: false).count %>
+                      <%= current_child.notifications.where(read: false).count %>
                     </span>
                   <% end %>
                 <% end %>
@@ -99,7 +99,8 @@
     <% if alert %>
       <p class="alert"><%= alert %></p>
     <% end %>
-    <%= render "layouts/notification_popup" %>
     <%= yield %>
+    <!-- 通知用コンテナをページ末尾に常駐 -->
+    <div id="notification-container"></div>
   </body>
 </html>

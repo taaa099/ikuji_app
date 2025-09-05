@@ -1,0 +1,8 @@
+:concurrency: 5
+:queues:
+  - default
+:schedule:
+  notification_job:
+    cron: "*/1 * * * *" # 1分ごとにジョブ実行
+    class: "NotificationJob"
+    

@@ -1,13 +1,13 @@
 class BottleNotificationService
   NOTIFICATION_HOURS = {
-    reminder: [ 3, 4 ] # 3時間と4時間でリマインダー
+    reminder: [3, 4] # 3時間と4時間でリマインダー
   }
 
-  DAILY_ALERT_INTERVALS = [ 3, 6, 9, 12, 15, 18, 21 ] # 3時間ごとのチェック
+  DAILY_ALERT_INTERVALS = [3, 6, 9, 12, 15, 18, 21] # 3時間ごとのチェック
 
   def self.create_notifications_for(child)
     latest_bottle = child.bottles.order(given_at: :desc).first
-    return unless latest_bottle
+    return unless latest_bottle # 1件もなければ通知出さない
 
     # --- 時間経過リマインダー ---
     hours_since_last_bottle = ((Time.current - latest_bottle.given_at) / 1.hour).floor
@@ -41,12 +41,14 @@ class BottleNotificationService
     today_total   = today_bottles.sum(:amount)
     today_count   = today_bottles.count
     daily_goal    = child.daily_bottle_goal || 600
+
+    # 今日のレコードが0件でも、使ったことあるユーザーなら 0ml として扱う
     return if today_total >= daily_goal
 
     hours_since_midnight = ((Time.current - Time.current.beginning_of_day) / 1.hour).floor
 
     DAILY_ALERT_INTERVALS.each do |interval|
-      # 「interval時間以上、次のinterval未満」であればその時間帯
+      # interval時間帯のチェック（3時間区切り）
       next unless hours_since_midnight >= interval && hours_since_midnight < interval + 3
 
       # 同じ interval 帯で既に通知があるかチェック

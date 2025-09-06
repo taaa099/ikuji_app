@@ -5,6 +5,7 @@ class NotificationJob < ApplicationJob
     Child.find_each do |child|
       FeedNotificationService.create_notifications_for(child)
       DiaperNotificationService.create_notifications_for(child)
+      BottleNotificationService.create_notifications_for(child)
     end
   end
 end

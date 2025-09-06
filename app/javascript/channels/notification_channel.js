@@ -2,13 +2,14 @@ import consumer from "./consumer"
 import { showNotification } from "../notification_popup"
 
 function subscribeNotifications() {
+  if (window.notificationSubscription) return;
   console.log("subscribeNotifications running")
 
   const childId = document.body.dataset.currentChildId
   console.log("Subscribing to childId:", childId)
   if (!childId || childId === "0") return;
 
-  consumer.subscriptions.create(
+  window.notificationSubscription = consumer.subscriptions.create(
     { channel: "NotificationChannel", id: childId },
     {
       connected() {

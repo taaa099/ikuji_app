@@ -6,6 +6,7 @@ class NotificationJob < ApplicationJob
       FeedNotificationService.create_notifications_for(child)
       DiaperNotificationService.create_notifications_for(child)
       BottleNotificationService.create_notifications_for(child)
+      HydrationNotificationService.create_notifications_for(child)
     end
   end
 end

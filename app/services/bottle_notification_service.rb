@@ -1,9 +1,9 @@
 class BottleNotificationService
   NOTIFICATION_HOURS = {
-    reminder: [3, 4] # 3時間と4時間でリマインダー
+    reminder: [ 3, 4 ] # 3時間と4時間でリマインダー
   }
 
-  DAILY_ALERT_INTERVALS = [3, 6, 9, 12, 15, 18, 21] # 3時間ごとのチェック
+  DAILY_ALERT_INTERVALS = [ 3, 6, 9, 12, 15, 18, 21 ] # 3時間ごとのチェック
 
   def self.create_notifications_for(child)
     latest_bottle = child.bottles.order(given_at: :desc).first

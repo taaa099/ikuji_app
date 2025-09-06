@@ -1,7 +1,7 @@
 # app/services/hydration_notification_service.rb
 class HydrationNotificationService
-  NOTIFICATION_HOURS = { reminder: [3, 4] }
-  DAILY_ALERT_INTERVALS = [3, 6, 9, 12, 15, 18, 21]
+  NOTIFICATION_HOURS = { reminder: [ 3, 4 ] }
+  DAILY_ALERT_INTERVALS = [ 3, 6, 9, 12, 15, 18, 21 ]
 
   def self.create_notifications_for(child)
     latest_hydration = child.hydrations.order(fed_at: :desc).first

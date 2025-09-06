@@ -1,7 +1,7 @@
 class DiaperNotificationService
   NOTIFICATION_HOURS = {
-    reminder: [3, 4], # 3時間と4時間のリマインダー
-    alert: [5, 6]     # 5時間と6時間のアラート
+    reminder: [ 3, 4 ], # 3時間と4時間のリマインダー
+    alert: [ 5, 6 ]     # 5時間と6時間のアラート
   }
 
   def self.create_notifications_for(child)
@@ -24,11 +24,11 @@ class DiaperNotificationService
         next if notification_exists
 
         message = case kind
-                  when :reminder
+        when :reminder
                     "リマインダー: 前回のオムツ交換から#{hours_since_last_change}時間経過しました"
-                  when :alert
+        when :alert
                     "アラート: 前回のオムツ交換から#{hours_since_last_change}時間以上経過しています"
-                  end
+        end
 
         Notification.create!(
           user: latest_diaper.user || child.user,

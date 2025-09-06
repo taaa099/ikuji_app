@@ -1,7 +1,7 @@
 class FeedNotificationService
   NOTIFICATION_HOURS = {
-    reminder: [3, 4], # 3時間と4時間のリマインダー
-    alert: [5]        # 5時間以上でアラート
+    reminder: [ 3, 4 ], # 3時間と4時間のリマインダー
+    alert: [ 5 ]        # 5時間以上でアラート
   }
 
   def self.create_notifications_for(child)
@@ -24,11 +24,11 @@ class FeedNotificationService
         next if notification_exists
 
         message = case kind
-                  when :reminder
+        when :reminder
                     "リマインダー: 前回の授乳から#{hours_since_last_feed}時間経過しました"
-                  when :alert
+        when :alert
                     "アラート: 授乳間隔が通常より長すぎます！（#{hours_since_last_feed}時間）"
-                  end
+        end
 
         Notification.create!(
           user: latest_feed.user || child.user,

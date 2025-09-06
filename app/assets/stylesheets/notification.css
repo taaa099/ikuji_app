@@ -1,9 +1,11 @@
+/* 通知リンクのベルマーク用 */
 .notification-link {
   position: relative;
   display: inline-block;
   margin-left: 20px;
 }
 
+/* 未読件数の赤丸表示 */
 .notification-count {
   position: absolute;
   top: -5px;
@@ -15,20 +17,43 @@
   padding: 2px 5px;
 }
 
-.notification-popup {
+/* 通知コンテナ：複数通知を縦に積む */
+#notification-container {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  opacity: 0;
-  transform: translateY(20px);
+  display: flex;
+  flex-direction: column-reverse; /* 新しい通知が下に積まれる */
+  gap: 10px; /* 通知同士の間隔 */
+  z-index: 1000;
+}
+
+/* 各通知ポップアップ */
+.notification-popup {
   background: #fff;
   border: 1px solid #ccc;
   padding: 10px;
-  z-index: 1000;
+  opacity: 0;
+  transform: translateY(20px);
   transition: opacity 0.3s ease, transform 0.3s ease;
+  min-width: 200px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
 }
 
+/* 表示時 */
 .notification-popup.show {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* タイトル部分 */
+.notification-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* メッセージ部分 */
+.notification-message {
+  font-size: 14px;
 }

@@ -3,7 +3,7 @@ class BabyFoodNotificationService
   # リマインダー通知の時間帯（10時・15時・20時）
   REMINDER_INTERVALS = {
     morning:  (10..14),   # 10:00〜14:59
-    afternoon:(15..19),   # 15:00〜19:59
+    afternoon: (15..19),   # 15:00〜19:59
     evening:  (20..23)    # 20:00〜23:59
   }
 

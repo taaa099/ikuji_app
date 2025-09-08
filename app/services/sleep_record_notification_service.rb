@@ -1,5 +1,5 @@
 class SleepRecordNotificationService
-  REMINDER_HOURS = [3, 4]        # リマインダー時間帯（3時間・4時間経過）
+  REMINDER_HOURS = [ 3, 4 ]        # リマインダー時間帯（3時間・4時間経過）
   SHORT_SLEEP_MINUTES = 30       # 短すぎる睡眠の閾値（分）
   LONG_SLEEP_HOURS = 4           # 長すぎる睡眠の閾値（時間）
 
@@ -64,11 +64,11 @@ class SleepRecordNotificationService
 
       alert_message = if duration_minutes < SHORT_SLEEP_MINUTES
                         "アラート: 本日の#{message_prefix}（#{start_str}〜#{end_str}）は#{duration_str}で、やや短めです"
-                      elsif duration_minutes >= LONG_SLEEP_HOURS * 60
+      elsif duration_minutes >= LONG_SLEEP_HOURS * 60
                         "アラート: 本日の#{message_prefix}（#{start_str}〜#{end_str}）は#{duration_str}で、やや長めです"
-                      else
+      else
                         next # 正常範囲なら通知不要
-                      end
+      end
 
       # 同じレコード・同じ種類の通知が既にあるかチェック
       notification_exists = Notification.exists?(

@@ -1,6 +1,6 @@
 # app/services/bath_notification_service.rb
 class BathNotificationService
-  REMINDER_HOURS = [21, 22, 23] # リマインダー対象時間（21〜23時）
+  REMINDER_HOURS = [ 21, 22, 23 ] # リマインダー対象時間（21〜23時）
   ALERT_DAYS = 2                # 2日以上入浴なしでアラート
 
   def self.create_notifications_for(child)
@@ -13,7 +13,7 @@ class BathNotificationService
     # --- リマインダー（本日の記録がまだない場合、21〜23時のみ） ---
     if (latest_bath.nil? || latest_bath.bathed_at.to_date != Date.current) &&
        REMINDER_HOURS.include?(Time.current.hour)
-      
+
       notification_exists = Notification.exists?(
         child: child,
         target: latest_bath,

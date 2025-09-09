@@ -1,4 +1,3 @@
-# app/services/bottle_notification_service.rb
 class BottleNotificationService
   NOTIFICATION_HOURS = { reminder: [ 3, 4 ] }
   DAILY_ALERT_INTERVALS = [ 3, 6, 9, 12, 15, 18, 21 ]

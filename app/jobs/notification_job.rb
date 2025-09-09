@@ -12,6 +12,7 @@ class NotificationJob < ApplicationJob
       TemperatureNotificationService.create_notifications_for(child)
       BathNotificationService.create_notifications_for(child)
       VaccinationNotificationService.create_notifications_for(child)
+      ScheduleNotificationService.create_notifications_for(child)
     end
   end
 end

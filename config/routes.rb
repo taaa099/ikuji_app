@@ -27,9 +27,11 @@ Rails.application.routes.draw do
    resources :temperatures
    resources :baths
    resources :vaccinations
-   resources :schedules
    resources :growths
   end
+
+  # ユーザー単位で schedules を管理
+  resources :schedules
 
   resources :notifications, only: [ :index ] do
   collection do

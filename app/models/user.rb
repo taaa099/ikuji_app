@@ -12,6 +12,10 @@ class User < ApplicationRecord
   # 実際に使いたいChildとの関連
   has_many :children, through: :user_children
 
+  # スケジュールとの関連
+  has_many :schedules, dependent: :destroy
+  has_many :schedule_children, through: :schedules
+
   # 通知との関連
   has_many :notifications, dependent: :destroy
 

@@ -1,4 +1,4 @@
-<%= form_with(model: [current_child, schedule], local: true, data: {turbo: false}) do |form| %>
+<%= form_with(model: schedule, local: true, data: {turbo: false}) do |form| %>
   <% if @schedule.errors.any? %>
     <div class="schedule-error-messages">
       <h2><%= pluralize(@schedule.errors.count, "件のエラー") %>があります:</h2>
@@ -15,6 +15,24 @@
       <%= form.label :title, "タイトル", class: "schedule-form-label" %>
       <%= form.text_field :title, class: "schedule-form-input" %>
     </div>
+
+  <div class="schedule-form-group">
+    <%= form.label :child_ids, "対象の子供", class: "schedule-form-label" %>
+
+    <!-- ユーザー予定 -->
+    <div>
+      <%= form.check_box :child_ids, { multiple: true }, "", nil %>
+      <%= "#{current_user.name.presence || 'ユーザー'} 予定として登録" %>
+    </div>
+
+    <!-- 子供たち -->
+    <%= form.collection_check_boxes :child_ids, current_user.children, :id, :name do |b| %>
+      <div>
+        <%= b.check_box %>
+        <%= b.text %>
+      </div>
+    <% end %>
+  </div>
 
     <div class="schedule-form-group">
       <%= form.label :start_time, "開始日時", class: "schedule-form-label" %>

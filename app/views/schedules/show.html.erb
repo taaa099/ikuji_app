@@ -16,7 +16,7 @@
 </div>
 
 <div class="schedule-show-actions">
-  <%= link_to "編集", edit_child_schedule_path(current_child, @schedule), class: "schedule-show-btn" %>
-  <%= link_to "削除", child_schedule_path(current_child, @schedule), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "schedule-show-btn" %>
-  <%= link_to "一覧に戻る", child_schedules_path(current_child), class: "schedule-show-btn" %>
+  <%= link_to "編集", edit_schedule_path(@schedule), class: "schedule-show-btn" %>
+  <%= link_to "削除", schedule_path(@schedule), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "schedule-show-btn" %>
+  <%= link_to "一覧に戻る", schedules_path, class: "schedule-show-btn" %>
 </div>

@@ -194,6 +194,53 @@
   border: 1px solid #ddd;
   min-height: 100px;
   padding: 4
+}
+
+.event-link {
+  display: block;
+  margin: 2px 0;
+  padding: 2px 4px;
+  background-color: #2563eb; /* 通常青 */
+  color: #fff;
+  border-radius: 4px;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.event-link:hover {
+  background-color: #1d4ed8;
+}
+
+/* 複数子供の場合（青固定） */
+.event-link.multiple-children {
+  background-color: #3b82f6; /* 青 */
+  color: #fff;
+}
+
+/* 単独子供の場合は従来通りインデックスやIDで色を設定 */
+.event-link.child-color-0 { background-color: #f59e0b; } /* オレンジ */
+.event-link.child-color-1 { background-color: #10b981; } /* 緑 */
+.event-link.child-color-2 { background-color: #8b5cf6; } /* 紫 */
+.event-link.child-color-3 { background-color: #f43f5e; } /* 赤など必要に応じて追加 */
+.event-link.child-color-4 { background-color: #facc15; } /* 黄など */
+
+/* ユーザー予定 */
+.event-link.user-event { background-color: #6b7280; } /* グレー */
+
+/* 共通スタイル */
+.event-link {
+  display: block;
+  margin: 2px 0;
+  padding: 2px 4px;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.event-link:hover {
+  filter: brightness(0.9);
+}
 
 /* ==============================
    PC: 1025px以上

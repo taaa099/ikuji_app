@@ -193,6 +193,22 @@
   color: #f9fafb;
 }
 
+.dark .event-link {
+  background-color: #3b82f6;
+  color: #fff;
+}
+
+.dark .event-link:hover {
+  background-color: #2563eb;
+}
+
+.dark .event-link.child-color-0 { background-color: #f59e0b; }
+.dark .event-link.child-color-1 { background-color: #10b981; }
+.dark .event-link.child-color-2 { background-color: #8b5cf6; }
+.dark .event-link.child-color-3 { background-color: #f43f5e; }
+.dark .event-link.child-color-4 { background-color: #facc15; }
+.dark .event-link.user-event { background-color: #6b7280; }
+
 /* ==============================
    growth.css ダークモード
    ============================== */

@@ -16,7 +16,8 @@ class Child < ApplicationRecord
   has_many :growths, dependent: :destroy
 
   # スケジュール機能との関連
-  has_many :schedules, dependent: :destroy
+  has_many :schedule_children, dependent: :destroy
+  has_many :schedules, through: :schedule_children
 
   # 通知との関連
   has_many :notifications, dependent: :destroy

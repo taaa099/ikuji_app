@@ -1,7 +1,8 @@
 class Schedule < ApplicationRecord
   include Notifiable
   belongs_to :user
-  belongs_to :child
+  has_many :schedule_children, dependent: :destroy
+  has_many :children, through: :schedule_children
 
   validates :start_time, presence: true
   validates :end_time, presence: true

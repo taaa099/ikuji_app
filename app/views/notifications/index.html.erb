@@ -23,7 +23,7 @@
         <!-- 詳細リンク -->
         <% if notification.target.present? %>
           <div class="target-link">
-            <%= link_to "#{notification.target_type} 詳細へ", polymorphic_path([notification.child, notification.target]) %>
+            <%= notification_target_link(notification) %>
           </div>
         <% end %>
 

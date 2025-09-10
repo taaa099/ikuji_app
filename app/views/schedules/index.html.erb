@@ -4,26 +4,41 @@
   <h1 class="calendar-title"><%= @month.strftime("%Y年%m月") %></h1>
 
   <div class="calendar-nav">
-    <%= link_to "← 前の月", child_schedules_path(current_child, start_date: @month.prev_month), class: "btn-nav" %>
-    <%= link_to "今月", child_schedules_path(current_child, start_date: Date.current.beginning_of_month), class: "btn-nav" %>
-    <%= link_to "次の月 →", child_schedules_path(current_child, start_date: @month.next_month), class: "btn-nav" %>
+    <%= link_to "← 前の月", schedules_path(start_date: @month.prev_month), class: "btn-nav" %>
+    <%= link_to "今月", schedules_path(start_date: Date.current.beginning_of_month), class: "btn-nav" %>
+    <%= link_to "次の月 →", schedules_path(start_date: @month.next_month), class: "btn-nav" %>
   </div>
 
   <div class="simple-calendar">
-    <% # 1週ごとにループ %>
     <% (@month.beginning_of_month.beginning_of_week..@month.end_of_month.end_of_week).to_a.in_groups_of(7) do |week| %>
       <% week.each do |date| %>
         <div class="day-cell <%= 'other-month' if date.month != @month.month %>">
           <div class="date-number"><%= date.day %></div>
+
           <% @schedules.select { |s| s.start_time.to_date == date }.each do |schedule| %>
-            <div class="event">
-              <%= link_to schedule.title, child_schedule_path(current_child, schedule), class: "event-link" %>
-            </div>
+            <% if schedule.children.any? %>
+              <% if schedule.children.size > 1 %>
+                <%= link_to schedule.title,
+                            schedule_path(schedule),
+                            class: "event-link multiple-children" %>
+              <% else %>
+                <% child = schedule.children.first %>
+                <% # ユーザー内でのインデックス取得 %>
+                <% index = current_user.children.order(:id).pluck(:id).index(child.id) %>
+                <%= link_to schedule.title,
+                            schedule_path(schedule),
+                            class: "event-link child-color-#{index}" %>
+              <% end %>
+            <% else %>
+              <%= link_to schedule.title,
+                          schedule_path(schedule),
+                          class: "event-link user-event" %>
+            <% end %>
           <% end %>
-        </div>
-      <% end %>
+
+      </div>
     <% end %>
-  </div>
+  <% end %>
 </div>
 
 <h1 class="responsive-title">予定一覧</h1>
@@ -35,6 +50,7 @@
       <th class="schedule-col-date">終了</th>
       <th class="schedule-col-detail">タイトル</th>
       <th class="schedule-col-detail">繰り返し</th>
+      <th class="schedule-col-detail">対象の子供</th>
       <th class="schedule-col-memo">メモ</th>
       <th class="schedule-col-item">操作</th>
     </tr>
@@ -58,11 +74,14 @@
         </td>
         <td class="schedule-col-detail"><%= schedule.title %></td>
         <td class="schedule-col-detail"><%= schedule.repeat %></td>
+        <td class="schedule-col-detail">
+          <%= schedule.children.map(&:name).join(", ") %>
+        </td>
         <td class="schedule-col-memo"><%= schedule.memo %></td>
         <td class="schedule-col-item">
-          <%= link_to "編集", edit_child_schedule_path(current_child, schedule), class: "schedule-index-btn" %>
-          <%= link_to "詳細", child_schedule_path(current_child, schedule), class: "schedule-index-btn" %>
-          <%= link_to "削除", child_schedule_path(current_child, schedule),
+          <%= link_to "編集", edit_schedule_path(schedule), class: "schedule-index-btn" %>
+          <%= link_to "詳細", schedule_path(schedule), class: "schedule-index-btn" %>
+          <%= link_to "削除", schedule_path(schedule),
                       data: { confirm: "本当に削除しますか？" },
                       method: :delete,
                       class: "schedule-index-btn" %>
@@ -72,4 +91,4 @@
   </tbody>
 </table>
 
-<%= link_to "新規追加", new_child_schedule_path(current_child), class: "schedule-index-btn" %>
+<%= link_to "新規追加", new_schedule_path, class: "schedule-index-btn" %>

@@ -202,12 +202,12 @@
   background-color: #2563eb;
 }
 
-.dark .event-link.child-color-0 { background-color: #f59e0b; }
-.dark .event-link.child-color-1 { background-color: #10b981; }
-.dark .event-link.child-color-2 { background-color: #8b5cf6; }
-.dark .event-link.child-color-3 { background-color: #f43f5e; }
-.dark .event-link.child-color-4 { background-color: #facc15; }
-.dark .event-link.user-event { background-color: #6b7280; }
+.dark .event-link.child-color-0 { background-color: #d97706; } /* 落ち着いたオレンジ */
+.dark .event-link.child-color-1 { background-color: #059669; } /* 深めの緑 */
+.dark .event-link.child-color-2 { background-color: #6d28d9; } /* 濃い紫 */
+.dark .event-link.child-color-3 { background-color: #be123c; } /* 落ち着いた赤 */
+.dark .event-link.child-color-4 { background-color: #ca8a04; } /* 深い黄色 */
+.dark .event-link.user-event { background-color: #4b5563; } /* より暗いグレー */
 
 /* ==============================
    growth.css ダークモード

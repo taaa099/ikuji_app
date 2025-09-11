@@ -357,7 +357,7 @@
    ============================== */
 .dark .notifications-list {
   background-color: #1f2937; /* ダーク背景 */
-  color: #f9fafb;            /* 明るい文字 */
+  color: #e5e7eb;            /* 標準文字色 */
   border: 1px solid #374151;
   border-radius: 6px;
   padding: 10px;
@@ -368,41 +368,62 @@
   padding: 8px 0;
 }
 
+/* 未読強調 */
 .dark .notification-item.unread {
-  background-color: #374151; /* 未読は強調 */
+  background-color: #374151;
 }
 
+/* 通知種別（アイコンやラベル） */
 .dark .notification-item .kind {
   color: #93c5fd; /* 青系で通知種別 */
 }
 
+/* タイトル */
 .dark .notification-item strong {
-  color: #facc15; /* タイトルは黄色で目立たせる */
+  color: #facc15; /* 黄色で目立たせる */
 }
 
+/* 本文 */
 .dark .notification-item p {
-  color: #d1d5db; /* 本文はグレーで読みやすく */
+  color: #e5e7eb; /* 明るめグレーで読みやすく */
 }
 
+/* リンク */
 .dark .notification-item .target-link a {
-  color: #60a5fa;
+  color: #f3f4f6;
 }
 
 .dark .notification-item .target-link a:hover {
-  color: #3b82f6;
+  color: #60a5fa;
 }
 
+/* ステータス表示 */
 .dark .notification-item .status {
   font-size: 12px;
-  color: #9ca3af; /* 既読/未読は薄め */
+  color: #9ca3af;
 }
 
+/* ポップアップ全体 */
 .dark .notification-popup {
-  background: #1f2937;
   border: 1px solid #374151;
-  color: #f9fafb;
+  border-radius: 6px;
+  padding: 10px;
 }
 
+/* アラートごとの背景色に応じた文字色 */
+.dark .notification-popup.reminder {
+  background-color: #059669; /* 緑系 */
+  color: #e5e7eb;            /* 明るめ文字 */
+  border-color: #065f46;
+}
+
+.dark .notification-popup.alert {
+  background-color: #be123c; /* ピンク系 / ダークレッド寄り */
+  color: #fce7f3;            /* 明るすぎず読みやすい文字色 */
+  border-color: #991b1b;
+}
+
+/* 未読件数バッジ */
 .dark .notification-count {
   background: #ef4444; /* 赤系バッジ */
   color: #fff;

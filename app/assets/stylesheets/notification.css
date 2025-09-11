@@ -39,6 +39,16 @@
   min-width: 200px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
+  color: #000; /* デフォルト文字色を黒に */
+}
+
+/* notification_kind に応じた背景色（ライトモード） */
+.notification-popup.reminder {
+  background-color: #ccffcc; /* 緑系 */
+}
+
+.notification-popup.alert {
+  background-color: #ffcccc; /* 赤系 */
 }
 
 /* 表示時 */

@@ -1,5 +1,5 @@
 class BathNotificationService
-  REMINDER_HOURS = [21, 22, 23] # リマインダー対象時間（21〜23時）
+  REMINDER_HOURS = [ 21, 22, 23 ] # リマインダー対象時間（21〜23時）
   ALERT_DAYS = 2                 # 2日以上入浴なしでアラート
 
   def self.create_notifications_for(child)
@@ -9,11 +9,11 @@ class BathNotificationService
     Rails.logger.info("Latest bath: #{latest_bath.inspect}")
 
     # --- リマインダー（本日の記録がまだない場合、21〜23時のみ） ---
-    if Bath.where(child: child).exists? && 
+    if Bath.where(child: child).exists? &&
        (latest_bath.nil? || latest_bath.bathed_at.to_date != Date.current) &&
        REMINDER_HOURS.include?(Time.current.hour)
 
-      users_for_notification = latest_bath ? [latest_bath.user] : child.users.to_a
+      users_for_notification = latest_bath ? [ latest_bath.user ] : child.users.to_a
 
       users_for_notification.each do |user|
         notification_exists = Notification.exists?(
@@ -44,7 +44,7 @@ class BathNotificationService
     if latest_bath
       days_since_last_bath = (Date.current - latest_bath.bathed_at.to_date).to_i
       if days_since_last_bath >= ALERT_DAYS
-        users_for_notification = [latest_bath.user] # アラートは最新Bathのuserのみ通知
+        users_for_notification = [ latest_bath.user ] # アラートは最新Bathのuserのみ通知
 
         users_for_notification.each do |user|
           notification_exists = Notification.exists?(

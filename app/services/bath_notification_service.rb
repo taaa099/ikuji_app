@@ -42,9 +42,10 @@ class BathNotificationService
 
     # --- アラート（最後の入浴から2日以上経過） ---
     if latest_bath
-      days_since_last_bath = (Date.current - latest_bath.bathed_at.to_date).to_i
-      if days_since_last_bath >= ALERT_DAYS
-        users_for_notification = [ latest_bath.user ] # アラートは最新Bathのuserのみ通知
+      hours_since_last_bath = ((Time.current - latest_bath.bathed_at) / 1.hour).floor
+
+      if hours_since_last_bath >= ALERT_DAYS * 24 # 48時間以上
+        users_for_notification = [ latest_bath.user ]
 
         users_for_notification.each do |user|
           notification_exists = Notification.exists?(
@@ -63,8 +64,8 @@ class BathNotificationService
               target_type: "Bath",
               notification_kind: :alert,
               title: "🛁 お風呂",
-              message: "アラート: 2日以上入浴記録がありません",
-              delivered_at: Time.current
+              message: "アラート: 最後の入浴から2日以上経過しました",
+             delivered_at: Time.current
             )
             Rails.logger.info("Created alert notification for user_id=#{user.id}")
           end

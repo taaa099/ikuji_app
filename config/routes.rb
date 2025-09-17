@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   resources :children do
+   patch :update_daily_goal, on: :member
    resources :feeds
    resources :diapers
    resources :bottles
@@ -29,6 +30,8 @@ Rails.application.routes.draw do
    resources :vaccinations
    resources :growths
   end
+
+  resources :notification_settings, only: [ :update ]
 
   # ユーザー単位で schedules を管理
   resources :schedules

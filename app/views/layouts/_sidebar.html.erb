@@ -1,0 +1,127 @@
+<div class="sidebar">
+  <h3>メニュー</h3>
+  <ul>
+    <li><%= link_to "ホーム", root_path %></li>
+    <li><%= link_to "子ども一覧", children_path %></li>
+    <li><%= link_to "スケジュール", schedules_path %></li>
+  </ul>
+
+  <h4>通知設定</h4>
+  <% current_user.notification_settings.each do |setting| %>
+    <div class="notification-setting">
+      <h5><%= setting.target_type.humanize %></h5>
+
+      <!-- リマインダー関連は temperature の場合表示しない -->
+      <% unless setting.target_type == "temperature" %>
+        <!-- リマインダーオンオフ -->
+        <label>
+          Reminder On
+          <%= check_box_tag "reminder_switch_#{setting.id}",
+                            1,
+                            setting.reminder_on,
+                            data: { id: setting.id, field: "reminder_on" },
+                            class: "notification-switch" %>
+        </label>
+
+        <!-- リマインダー時間（1〜12時間） -->
+        <% if setting.reminder_after.present? %>
+          <label>
+            Reminder After (hours)
+            <%= number_field_tag "reminder_after_#{setting.id}",
+                                 setting.reminder_after,
+                                 min: 1,
+                                 max: 12,
+                                 data: { id: setting.id, field: "reminder_after" },
+                                 class: "notification-number" %>
+          </label>
+        <% end %>
+      <% end %>
+
+      <!-- アラートオンオフ -->
+      <label>
+        Alert On
+        <%= check_box_tag "alert_switch_#{setting.id}",
+                          1,
+                          setting.alert_on,
+                          data: { id: setting.id, field: "alert_on" },
+                          class: "notification-switch" %>
+      </label>
+
+      <!-- アラート時間・閾値（bottle と hydration は除外） -->
+      <% if setting.alert_after.present? && !["bottle", "hydration"].include?(setting.target_type) %>
+        <label>
+          Alert After (hours)
+          <%= number_field_tag "alert_after_#{setting.id}",
+                               setting.alert_after,
+                               min: 1,
+                               max: 6,
+                               data: { id: setting.id, field: "alert_after" },
+                               class: "notification-number" %>
+        </label>
+      <% end %>
+
+      <% if setting.alert_threshold.present? %>
+        <label>
+          Alert Threshold
+          <%= number_field_tag "alert_threshold_#{setting.id}",
+                               setting.alert_threshold,
+                               step: 0.1,
+                               min: 35.0,
+                               max: 42.0,
+                               data: { id: setting.id, field: "alert_threshold" },
+                               class: "notification-number" %>
+        </label>
+      <% end %>
+
+      <% if setting.alert_time.present? %>
+        <label>
+          Alert Time
+          <%= select_tag "alert_time_#{setting.id}",
+                         options_for_select(
+                           (6..11).map { |h| ["#{h}:00", "#{h}:00"] },
+                           selected: setting.alert_time&.strftime("%H:%M")
+                         ),
+                         data: { id: setting.id, field: "alert_time" },
+                         class: "notification-time" %>
+        </label>
+      <% end %>
+
+      <!-- Daily Goal 入力 -->
+      <% if current_child.present? %>
+        <% case setting.target_type %>
+        <% when "bottle" %>
+          <label>
+            Daily Bottle Goal (ml)
+            <%= number_field_tag "daily_bottle_goal_#{current_child.id}",
+                                 current_child.daily_bottle_goal,
+                                 min: 0,
+                                 step: 1,
+                                 data: { child_id: current_child.id, field: "daily_bottle_goal" },
+                                 class: "child-goal" %>
+          </label>
+        <% when "hydration" %>
+          <label>
+            Daily Hydration Goal (ml)
+            <%= number_field_tag "daily_hydration_goal_#{current_child.id}",
+                                 current_child.daily_hydration_goal,
+                                 min: 0,
+                                 step: 1,
+                                 data: { child_id: current_child.id, field: "daily_hydration_goal" },
+                                 class: "child-goal" %>
+          </label>
+        <% when "baby_food" %>
+          <label>
+            Daily Baby Food Goal (g)
+            <%= number_field_tag "daily_baby_food_goal_#{current_child.id}",
+                                 current_child.daily_baby_food_goal,
+                                 min: 0,
+                                 step: 1,
+                                 data: { child_id: current_child.id, field: "daily_baby_food_goal" },
+                                 class: "child-goal" %>
+          </label>
+        <% end %>
+      <% end %>
+
+    </div>
+  <% end %>
+</div>

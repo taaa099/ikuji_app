@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  after_create :create_default_notification_settings
 
   # Deviseの認証機能
   devise :database_authenticatable, :registerable,
@@ -18,6 +19,7 @@ class User < ApplicationRecord
 
   # 通知との関連
   has_many :notifications, dependent: :destroy
+  has_many :notification_settings, dependent: :destroy
 
   # Avatar（ActiveStorage）
   has_one_attached :avatar
@@ -25,4 +27,118 @@ class User < ApplicationRecord
   # バリデーション
   validates :name, presence: true, length: { maximum: 50 }
   validates :bio, length: { maximum: 300 }
+
+  private
+
+  def create_default_notification_settings
+    NotificationSetting.target_types.keys.each do |type|
+      defaults = case type
+      when "feed"
+                   {
+                     reminder_after: 3,     # 3時間経過でリマインダー
+                     alert_after: 5,        # 5時間経過でアラート
+                     alert_threshold: nil,
+                     reminder_on: true,
+                     alert_on: true,
+                     alert_time: nil,
+                     extra_setting: nil
+                   }
+      when "diaper"
+                   {
+                     reminder_after: 3,     # 3時間経過でリマインダー
+                     alert_after: 6,        # 6時間経過でアラート
+                     alert_threshold: nil,
+                     reminder_on: true,
+                     alert_on: true,
+                     alert_time: nil,
+                     extra_setting: nil
+                   }
+      when "bottle"
+                   {
+                     reminder_after: 3,   # 時間経過リマインダーなし
+                     alert_after: nil,      # 時間経過アラートなし
+                     alert_threshold: nil,
+                     reminder_on: true,     # オン/オフのみ
+                     alert_on: true,        # daily_bottle_goal に基づく
+                     alert_time: nil,
+                     extra_setting: nil
+                   }
+      when "hydration"
+                   {
+                     reminder_after: 3,
+                     alert_after: nil,
+                     alert_threshold: nil,
+                     reminder_on: true,     # オン/オフのみ
+                     alert_on: true,        # daily_hydration_goal に基づく
+                     alert_time: nil,
+                     extra_setting: nil
+                   }
+      when "baby_food"
+                   {
+                     reminder_after: nil,   # 時間経過なし、固定時間帯で通知
+                     alert_after: nil,
+                     alert_threshold: nil,
+                     reminder_on: true,     # オン/オフのみ
+                     alert_on: true,        # daily_baby_food_goal に基づく
+                     alert_time: nil,
+                     extra_setting: nil
+                   }
+      when "sleep_record"
+                   {
+                     reminder_after: 3,    # 前回の睡眠から◯時間経過
+                     alert_after: nil,
+                     alert_threshold: nil,
+                     reminder_on: true,
+                     alert_on: true,        # オン/オフのみ
+                     alert_time: nil,
+                     extra_setting: nil
+                   }
+      when "temperature"
+                   {
+                     reminder_after: nil,
+                     alert_after: nil,
+                     alert_threshold: 37.6, # 閾値のみ
+                     reminder_on: false,     # リマインダーなし
+                     alert_on: true,
+                     alert_time: nil,
+                     extra_setting: nil
+                   }
+      when "bath"
+                   {
+                     reminder_after: nil,
+                     alert_after: 2,       # 2日経過でアラート
+                     alert_threshold: nil,
+                     reminder_on: true,      # オン/オフのみ
+                     alert_on: true,
+                     alert_time: nil,
+                     extra_setting: nil
+                   }
+      when "vaccination"
+                   {
+                     reminder_after: 3,
+                     alert_after: nil,
+                     alert_threshold: nil,
+                     reminder_on: true,
+                     alert_on: true,
+                     alert_time: "08:00",    # 通知時刻指定
+                     extra_setting: nil
+                   }
+      when "schedule"
+                   {
+                     reminder_after: 3,
+                     alert_after: nil,
+                     alert_threshold: nil,
+                     reminder_on: true,
+                     alert_on: true,
+                     alert_time: "08:00",    # 通知時刻指定
+                     extra_setting: nil
+                   }
+      end
+
+      self.notification_settings.create!(
+        target_type: type,
+        **defaults
+      )
+    end
+  end
 end

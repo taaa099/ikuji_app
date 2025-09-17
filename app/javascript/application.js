@@ -7,6 +7,7 @@ Rails.start();
 // 通知機能用
 import { showNotification } from "./notification_popup";
 import "./channels"
+import "./notification_settings"
 
 // 成長記録グラフ用
 import "./growth_height";

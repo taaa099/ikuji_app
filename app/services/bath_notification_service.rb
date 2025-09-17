@@ -1,53 +1,56 @@
 class BathNotificationService
   REMINDER_HOURS = [ 21, 22, 23 ] # リマインダー対象時間（21〜23時）
-  ALERT_DAYS = 2                 # 2日以上入浴なしでアラート
 
   def self.create_notifications_for(child)
-    latest_bath = child.baths.order(bathed_at: :desc).first
-
     Rails.logger.info("BathNotificationService start for child_id=#{child.id}")
+
+    latest_bath = child.baths.order(bathed_at: :desc).first
     Rails.logger.info("Latest bath: #{latest_bath.inspect}")
 
-    # --- リマインダー（本日の記録がまだない場合、21〜23時のみ） ---
-    if Bath.where(child: child).exists? &&
-       (latest_bath.nil? || latest_bath.bathed_at.to_date != Date.current) &&
-       REMINDER_HOURS.include?(Time.current.hour)
+    child.users.each do |user|
+      setting = user.notification_settings.find_by(target_type: "bath")
+      Rails.logger.info("User=#{user.id} setting=#{setting&.attributes}")
 
-      users_for_notification = latest_bath ? [ latest_bath.user ] : child.users.to_a
+      next unless setting&.reminder_on? || setting&.alert_on?
 
-      users_for_notification.each do |user|
-        notification_exists = Notification.exists?(
-          child: child,
-          target: latest_bath,
-          target_type: "Bath",
-          notification_kind: :reminder,
-          user: user
-        )
+      # --- リマインダー（21〜23時、記録なしの場合） ---
+      if setting&.reminder_on? &&
+         (latest_bath.nil? || latest_bath.bathed_at.to_date != Date.current) &&
+         REMINDER_HOURS.include?(Time.current.hour)
 
-        unless notification_exists
-          Notification.create!(
-            user: user,
+        if latest_bath
+          notification_exists = Notification.exists?(
             child: child,
             target: latest_bath,
             target_type: "Bath",
             notification_kind: :reminder,
-            title: "🛁 お風呂",
-            message: "リマインダー: 本日の入浴記録がまだありません",
-            delivered_at: Time.current
+            user: user
           )
-          Rails.logger.info("Created reminder notification for user_id=#{user.id}")
+
+          unless notification_exists
+            Notification.create!(
+              user: user,
+              child: child,
+              target: latest_bath,
+              target_type: "Bath",
+              notification_kind: :reminder,
+              title: "🛁 お風呂",
+              message: "リマインダー: 本日の入浴記録がまだありません",
+              delivered_at: Time.current
+            )
+            Rails.logger.info("Created reminder notification for user_id=#{user.id}")
+          end
+        else
+          Rails.logger.info("Skipping reminder for child_id=#{child.id}, no latest bath record")
         end
       end
-    end
 
-    # --- アラート（最後の入浴から2日以上経過） ---
-    if latest_bath
-      hours_since_last_bath = ((Time.current - latest_bath.bathed_at) / 1.hour).floor
+      # --- アラート（最後の入浴から alert_after 日経過） ---
+      if setting&.alert_on? && latest_bath && setting.alert_after.present?
+        days_since_last_bath = ((Time.current.to_date - latest_bath.bathed_at.to_date).to_i)
+        Rails.logger.info("User=#{user.id} days_since_last_bath=#{days_since_last_bath}, alert_after=#{setting.alert_after}")
 
-      if hours_since_last_bath >= ALERT_DAYS * 24 # 48時間以上
-        users_for_notification = [ latest_bath.user ]
-
-        users_for_notification.each do |user|
+        if days_since_last_bath >= setting.alert_after
           notification_exists = Notification.exists?(
             child: child,
             target: latest_bath,
@@ -64,8 +67,8 @@ class BathNotificationService
               target_type: "Bath",
               notification_kind: :alert,
               title: "🛁 お風呂",
-              message: "アラート: 最後の入浴から2日以上経過しました",
-             delivered_at: Time.current
+              message: "アラート: 最後の入浴から#{days_since_last_bath}日以上経過しました",
+              delivered_at: Time.current
             )
             Rails.logger.info("Created alert notification for user_id=#{user.id}")
           end

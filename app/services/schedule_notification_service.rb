@@ -1,71 +1,81 @@
 class ScheduleNotificationService
-  REMINDER_A_DAYS = 3   # デフォルト3日前
-  REMINDER_A_HOUR = 19  # デフォルト19時
-  REMINDER_B_HOUR = 8   # デフォルト当日8時
+  REMINDER_HOUR = 19..23 # リマインダーは19時〜23時の間のみ
 
   def self.create_notifications_for(child)
     now = Time.current
+    child.users.each do |user|
+      setting = user.notification_settings.find_by(target_type: "schedule")
+      next unless setting
 
-    # === リマインダーA: 3日前の19時〜23:59にまとめて通知 ===
-    if now.hour >= REMINDER_A_HOUR
-      target_date = Date.current + REMINDER_A_DAYS
-      schedules = child.schedules.where("DATE(start_time) = ?", target_date)
+      # === リマインダー: 事前通知 ===
+      if setting.reminder_on? && setting.reminder_after.present? && REMINDER_HOUR.cover?(now.hour)
+        target_date = Date.current + setting.reminder_after.days
+        schedules = child.schedules.where("DATE(start_time) = ?", target_date)
 
-      if schedules.any?
-        notification_exists = Notification.where(
-          child: child,
-          target_type: "Schedule",
-          notification_kind: :reminder
-        ).where("DATE(delivered_at) = ?", Date.current)
-         .where("message LIKE ?", "%#{target_date}%")
-         .exists?
-
-        unless notification_exists
-          titles = schedules.map(&:title).join(" / ")
-          Notification.create!(
-            user: schedules.first.user,
+        if schedules.any?
+          notification_exists = Notification.where(
             child: child,
-            target: schedules.first,
             target_type: "Schedule",
             notification_kind: :reminder,
-            title: "📅 スケジュール",
-            message: "リマインダー: #{target_date.strftime("%m/%d")}に予定があります（#{titles}）",
-            delivered_at: now
-          )
+            user: user
+          ).where("DATE(delivered_at) = ?", Date.current)
+           .exists?
+
+          unless notification_exists
+            titles = schedules.map(&:title).join(" / ")
+            Notification.create!(
+              user: user,
+              child: child,
+              target: schedules.first,
+              target_type: "Schedule",
+              notification_kind: :reminder,
+              title: "📅 スケジュール",
+              message: "リマインダー: #{target_date.strftime("%m/%d")}に予定があります（#{titles}）",
+              delivered_at: now
+            )
+            Rails.logger.info("Created schedule reminder for child_id=#{child.id}, user_id=#{user.id}, schedules=#{schedules.pluck(:id).join(',')}")
+          end
+        end
+      end
+
+      # === アラート: 当日通知 ===
+      if setting.alert_on?
+        today = Date.current
+        schedules = child.schedules.where("DATE(start_time) = ?", today)
+
+        if schedules.any?
+          if setting.alert_time.present?
+            alert_hour = setting.alert_time.hour
+            alert_min  = setting.alert_time.min
+            next unless now.hour == alert_hour && now.min >= alert_min
+          end
+
+          # 当日アラートがすでに送られていないかチェック
+          notification_exists = Notification.where(
+            child: child,
+            target_type: "Schedule",
+            notification_kind: :alert,
+            user: user
+          ).where("DATE(delivered_at) = ?", today)
+          .exists?
+
+          unless notification_exists
+            titles = schedules.map(&:title).join(" / ")
+            Notification.create!(
+              user: user,
+              child: child,
+              target: schedules.first,
+              target_type: "Schedule",
+              notification_kind: :alert,
+              title: "📅 スケジュール",
+              message: "アラート: 本日の予定があります（#{titles}）",
+              delivered_at: now
+            )
+            Rails.logger.info("Created schedule alert for child_id=#{child.id}, user_id=#{user.id}, schedules=#{schedules.pluck(:id).join(',')}")
+          end
         end
       end
     end
-
-    # === リマインダーB: 当日の8時以降に1回通知 ===
-    if now.hour >= REMINDER_B_HOUR
-      today = Date.current
-      schedules = child.schedules.where("DATE(start_time) = ?", today)
-
-      if schedules.any?
-        notification_exists = Notification.where(
-          child: child,
-          target_type: "Schedule",
-          notification_kind: :reminder
-        ).where("DATE(delivered_at) = ?", today)
-         .where("message LIKE ?", "%本日の予定%")
-         .exists?
-
-        unless notification_exists
-          titles = schedules.map(&:title).join(" / ")
-          Notification.create!(
-            user: schedules.first.user,
-            child: child,
-            target: schedules.first,
-            target_type: "Schedule",
-            notification_kind: :reminder,
-            title: "📅 スケジュール",
-            message: "リマインダー: 本日の予定があります（#{titles}）",
-            delivered_at: now
-          )
-        end
-      end
-    end
-
   rescue => e
     Rails.logger.error("ScheduleNotificationService error for child_id=#{child.id}: #{e.message}")
   end

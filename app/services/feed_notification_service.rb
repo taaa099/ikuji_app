@@ -1,45 +1,57 @@
 class FeedNotificationService
-  NOTIFICATION_HOURS = {
-    reminder: [ 3, 4 ], # 3時間と4時間のリマインダー
-    alert: [ 5 ]        # 5時間以上でアラート
-  }
-
   def self.create_notifications_for(child)
     latest_feed = child.feeds.order(fed_at: :desc).first
+    return unless latest_feed
 
-    if latest_feed
-      hours_since_last_feed = ((Time.current - latest_feed.fed_at) / 1.hour).floor
+    hours_since_last_feed = ((Time.current - latest_feed.fed_at) / 1.hour).floor
 
-      NOTIFICATION_HOURS.each do |kind, hours_array|
-        next unless hours_array.include?(hours_since_last_feed)
+    # Feed に紐づくユーザー全員をループ
+    child.users.each do |user|
+      # 各ユーザーの feed 通知設定を取得
+      setting = user.notification_settings.find_by(target_type: "feed")
+      next unless setting
 
-        # 同じ Feed, 同じ kind, 同じ時間の通知が既にあるかチェック
-        notification_exists = Notification.where(
-          child: child,
-          target_type: "Feed",
-          target_id: latest_feed.id,
-          notification_kind: kind
-        ).where("message LIKE ?", "%#{hours_since_last_feed}時間%").exists?
+      # reminder チェック
+      if setting.reminder_on? && setting.reminder_after.present? &&
+         hours_since_last_feed == setting.reminder_after
+        create_notification(child, latest_feed, user, :reminder, hours_since_last_feed)
+      end
 
-        next if notification_exists
-
-        message = case kind
-        when :reminder
-                    "リマインダー: 前回の授乳から#{hours_since_last_feed}時間経過しました"
-        when :alert
-                    "アラート: 授乳間隔が通常より長すぎます！（#{hours_since_last_feed}時間）"
-        end
-
-        Notification.create!(
-          user: latest_feed.user || child.user,
-          child: child,
-          target: latest_feed,
-          notification_kind: kind,
-          title: "🍼 授乳（feed）",
-          message: message,
-          delivered_at: Time.current
-        )
+      # alert チェック
+      if setting.alert_on? && setting.alert_after.present? &&
+         hours_since_last_feed == setting.alert_after
+        create_notification(child, latest_feed, user, :alert, hours_since_last_feed)
       end
     end
+  end
+
+  def self.create_notification(child, latest_feed, user, kind, hours_since_last_feed)
+    # 重複チェック
+    notification_exists = Notification.where(
+      child: child,
+      target_type: "Feed",
+      target_id: latest_feed.id,
+      user: user,
+      notification_kind: kind
+    ).where("message LIKE ?", "%#{hours_since_last_feed}時間%").exists?
+
+    return if notification_exists
+
+    message = case kind
+    when :reminder
+                "リマインダー: 前回の授乳から#{hours_since_last_feed}時間経過しました"
+    when :alert
+                "アラート: 授乳間隔が通常より長すぎます！（#{hours_since_last_feed}時間）"
+    end
+
+    Notification.create!(
+      user: user,
+      child: child,
+      target: latest_feed,
+      notification_kind: kind,
+      title: "🍼 授乳（feed）",
+      message: message,
+      delivered_at: Time.current
+    )
   end
 end

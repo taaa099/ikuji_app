@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_09_112823) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_11_114037) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -137,6 +137,21 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_09_112823) do
     t.index ["user_id"], name: "index_hydrations_on_user_id"
   end
 
+  create_table "notification_settings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "target_type", null: false
+    t.integer "reminder_after"
+    t.integer "alert_after"
+    t.decimal "alert_threshold", precision: 5, scale: 2
+    t.boolean "reminder_on", default: false, null: false
+    t.boolean "alert_on", default: false, null: false
+    t.time "alert_time"
+    t.json "extra_settings"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notification_settings_on_user_id"
+  end
+
   create_table "notifications", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "child_id", null: false
@@ -254,6 +269,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_09_112823) do
   add_foreign_key "growths", "children"
   add_foreign_key "hydrations", "children"
   add_foreign_key "hydrations", "users"
+  add_foreign_key "notification_settings", "users"
   add_foreign_key "notifications", "children"
   add_foreign_key "notifications", "users"
   add_foreign_key "schedule_children", "children"

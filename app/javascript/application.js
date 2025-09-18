@@ -60,4 +60,19 @@ document.addEventListener("turbo:load", () => {
       overlay.classList.remove("active");
     });
   }
+
+  // 通知設定ブロックの表示切替（Turbo対応）
+  const toggleNotificationBtn = document.getElementById("toggle-notification-settings");
+  const notificationBlock = document.getElementById("notification-settings-block");
+
+  if (toggleNotificationBtn && notificationBlock) {
+    // ボタンを一度クローンしてイベント重複を防止
+    toggleNotificationBtn.replaceWith(toggleNotificationBtn.cloneNode(true));
+    const newToggleBtn = document.getElementById("toggle-notification-settings");
+
+    newToggleBtn.addEventListener("click", () => {
+      notificationBlock.style.display =
+        notificationBlock.style.display === "none" ? "block" : "none";
+    });
+  }
 });

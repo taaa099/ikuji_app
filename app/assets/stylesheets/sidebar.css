@@ -52,7 +52,9 @@
   margin-bottom: 8px;
 }
 
-.sidebar ul li a {
+/* 通常リンク */
+.sidebar ul li a,
+.sidebar ul li button.nav-btn {
   display: block;
   padding: 6px 10px;
   background-color: #fff;
@@ -61,9 +63,14 @@
   text-decoration: none;
   color: #333;
   transition: background-color 0.2s, color 0.2s;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
 }
 
-.sidebar ul li a:hover {
+/* ホバー時 */
+.sidebar ul li a:hover,
+.sidebar ul li button.nav-btn:hover {
   background-color: #4CAF50;
   color: #fff;
   border-color: #4CAF50;
@@ -116,6 +123,14 @@
   display: block;
 }
 
+#notification-settings-block {
+  display: none;
+}
+
+#notification-settings-block.open {
+  display: block;
+}
+
 /* ==============================
    レスポンシブ対応
    ============================== */
@@ -133,7 +148,8 @@
     padding: 10px;
   }
 
-  .sidebar ul li a {
+  .sidebar ul li a,
+  .sidebar ul li button.nav-btn {
     padding: 8px;
     font-size: 14px;
   }

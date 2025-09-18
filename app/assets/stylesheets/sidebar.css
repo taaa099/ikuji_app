@@ -1,0 +1,144 @@
+/* ==============================
+   サイドバー専用スタイル
+   ============================== */
+
+/* デフォルト非表示で左に隠す */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -260px; /* 隠しておく */
+  width: 240px;
+  height: 100%;
+  background-color: #f9f9f9;
+  border-right: 1px solid #ddd;
+  padding: 16px;
+  font-size: 14px;
+  overflow-y: auto;
+  transition: left 0.3s ease;
+  z-index: 1000;
+}
+
+/* 表示状態 */
+.sidebar.open {
+  left: 0;
+}
+
+.sidebar h3 {
+  font-size: 16px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+}
+
+.sidebar h4 {
+  font-size: 15px;
+  margin: 20px 0 8px 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 4px;
+}
+
+.sidebar h5 {
+  font-size: 14px;
+  margin: 10px 0 6px 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 8px;
+}
+
+.sidebar ul li a {
+  display: block;
+  padding: 6px 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #333;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.sidebar ul li a:hover {
+  background-color: #4CAF50;
+  color: #fff;
+  border-color: #4CAF50;
+}
+
+/* 通知設定ブロック */
+.notification-setting {
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  background-color: #fff;
+}
+
+.notification-setting label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.notification-number,
+.notification-time,
+.child-goal {
+  width: 100%;
+  padding: 4px 6px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.notification-switch {
+  margin-left: 6px;
+}
+
+/* オーバーレイ */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  display: none;
+  z-index: 999;
+}
+
+.sidebar-overlay.active {
+  display: block;
+}
+
+/* ==============================
+   レスポンシブ対応
+   ============================== */
+@media screen and (max-width: 1024px) {
+  .sidebar {
+    width: 200px;
+    padding: 12px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .sidebar {
+    width: 80%;
+    max-width: 280px;
+    padding: 10px;
+  }
+
+  .sidebar ul li a {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .notification-setting {
+    padding: 8px;
+  }
+}

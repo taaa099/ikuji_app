@@ -1,6 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :authenticate_user!
-  before_action :set_current_tab, only: [:edit, :update]
+  before_action :set_current_tab, only: [ :edit, :update ]
 
   # GET /resource/edit
   def edit
@@ -14,11 +14,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # パラメータがあればそれを優先、なければ既存値かデフォルト profile
     @current_tab = if params[:tab].present?
                      params[:tab]
-                   elsif defined?(@current_tab)
+    elsif defined?(@current_tab)
                      @current_tab
-                   else
+    else
                      "profile"
-                   end
+    end
   end
 
   # プロフィール変更とパスワード変更で挙動を分ける

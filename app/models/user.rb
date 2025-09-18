@@ -6,6 +6,8 @@ class User < ApplicationRecord
   # Deviseの認証機能
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  attr_accessor :skip_password_validation
+  validate :password_required_for_password_tab, on: :update
 
   # 中間モデルとの関連
   has_many :user_children, dependent: :destroy
@@ -29,6 +31,18 @@ class User < ApplicationRecord
   validates :bio, length: { maximum: 300 }
 
   private
+
+  def password_required_for_password_tab
+    return if skip_password_validation
+    return unless @current_tab == "password"
+
+    if password.blank? || password_confirmation.blank?
+      errors.add(:password, "を入力してください")
+    end
+    if current_password.blank? || !valid_password?(current_password)
+      errors.add(:current_password, "が正しくありません")
+    end
+  end
 
   def create_default_notification_settings
     NotificationSetting.target_types.keys.each do |type|

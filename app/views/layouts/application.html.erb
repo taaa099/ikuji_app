@@ -69,6 +69,8 @@
                 <%= link_to "スケジュールの登録", new_schedule_path(current_child), class: "nav-btn" %>
                 <%= link_to "成長記録", child_growths_path(current_child), class: "nav-btn" %>
                 <%= link_to "成長記録の登録", new_child_growth_path(current_child), class: "nav-btn" %>
+                <%= link_to "日記一覧", diaries_path, class: "nav-btn" %>
+                <%= link_to "日記を投稿", new_diary_path, class: "nav-btn" %>
                 <%= link_to "プロフィールを見る", user_path(current_user), class: "nav-btn" %>
                 <%= link_to "プロフィールを編集", edit_user_registration_path(tab: "profile"), class: "nav-btn" %>
                 <%= link_to "パスワード変更", edit_user_registration_path(tab: "password"), class: "nav-btn" %>

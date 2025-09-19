@@ -22,7 +22,7 @@ Rails.application.routes.draw do
    resources :baby_foods
    resources :sleep_records do
      collection do
-        get :analysis  # 追加: 睡眠分析ページ
+        get :analysis
       end
     end
    resources :temperatures
@@ -35,6 +35,9 @@ Rails.application.routes.draw do
 
   # ユーザー単位で schedules を管理
   resources :schedules
+
+  # 日記投稿機能
+  resources :diaries
 
   resources :notifications, only: [ :index ] do
   collection do

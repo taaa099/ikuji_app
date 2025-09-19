@@ -65,6 +65,10 @@ ja:
         weight: 体重
         head_circumference: 頭囲
         chest_circumference: 胸囲
+      diary:
+        title: タイトル
+        content: 本文
+        date: 日付
 
     models:
       user: ユーザー

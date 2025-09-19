@@ -1,41 +1,43 @@
-<%= form_with(model: @diary, local: true, data: { turbo: false }) do |f| %>
-  <% if @diary.errors.any? %>
-    <div class="alert alert-danger">
-      <h4>入力に問題があります:</h4>
-      <ul>
-        <% @diary.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+<div class="form-container">
+  <%= form_with(model: @diary, local: true, data: { turbo: false }) do |f| %>
+    <% if @diary.errors.any? %>
+      <div id="error_explanation">
+        <h3><%= pluralize(@diary.errors.count, "件のエラー") %>があります：</h3>
+        <ul>
+          <% @diary.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :title, "タイトル", class: "form-label" %>
+      <%= f.text_field :title, class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :content, "内容", class: "form-label" %>
+      <%= f.text_area :content, class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :date, "日付", class: "form-label" %>
+      <%= f.date_field :date, class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :images, "写真", class: "form-label" %>
+      <%= f.file_field :images, multiple: true, class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :videos, "動画", class: "form-label" %>
+      <%= f.file_field :videos, multiple: true, class: "form-input" %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit @diary.persisted? ? "更新する" : "保存", class: "form-submit-btn" %>
     </div>
   <% end %>
-
-  <div>
-    <%= f.label :title, "タイトル" %>
-    <%= f.text_field :title %>
-  </div>
-
-  <div>
-    <%= f.label :content, "内容" %>
-    <%= f.text_area :content %>
-  </div>
-
-  <div>
-    <%= f.label :date, "日付" %>
-    <%= f.date_field :date %>
-  </div>
-
-  <div>
-    <%= f.label :images, "写真" %>
-    <%= f.file_field :images, multiple: true %>
-  </div>
-
-  <div>
-    <%= f.label :videos, "動画" %>
-    <%= f.file_field :videos, multiple: true %>
-  </div>
-
-  <div>
-    <%= f.submit "保存" %>
-  </div>
-<% end %>
+</div>

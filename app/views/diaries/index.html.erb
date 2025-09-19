@@ -1,0 +1,46 @@
+<h2>日記一覧</h2>
+
+<%= link_to "新しい日記を投稿", new_diary_path, class: "nav-btn" %>
+
+<% if @diaries.any? %>
+  <div class="diary-list">
+    <% @diaries.each do |diary| %>
+      <div class="diary-item">
+        <h3 class="diary-title">
+          <%= link_to diary.title, diary_path(diary) %>
+          (<%= diary.date.strftime("%Y-%m-%d") %>)
+        </h3>
+
+        <div class="diary-content">
+          <%= simple_format(diary.content) %>
+        </div>
+
+        <% if diary.images.attached? %>
+          <div class="diary-images">
+            <% diary.images.each do |img| %>
+              <%= image_tag img.variant(resize_to_limit: [150, 150]), class: "diary-thumb" %>
+            <% end %>
+          </div>
+        <% end %>
+
+        <% if diary.videos.attached? %>
+          <div class="diary-videos">
+            <% diary.videos.each do |video| %>
+              <video controls class="diary-video-thumb">
+                <source src="<%= url_for(video) %>" type="<%= video.content_type %>">
+                Your browser does not support the video tag.
+              </video>
+            <% end %>
+          </div>
+        <% end %>
+
+        <div class="diary-actions">
+          <%= link_to "編集", edit_diary_path(diary), class: "nav-btn" %>
+          <%= link_to "削除", diary_path(diary), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "nav-btn nav-btn-danger" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>まだ日記がありません。<%= link_to "新しい日記を投稿", new_diary_path %> してみましょう。</p>
+<% end %>

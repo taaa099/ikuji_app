@@ -1,0 +1,44 @@
+/* ==============================
+   日記投稿機能専用スタイル
+   ============================== */
+
+.diary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.diary-item {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+
+.diary-title {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.diary-content {
+  margin-bottom: 0.5rem;
+}
+
+.diary-images,
+.diary-videos {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.diary-thumb,
+.diary-video-thumb {
+  max-width: 150px;
+  max-height: 150px;
+}
+
+.diary-actions {
+  display: flex;
+  gap: 0.5rem;
+}

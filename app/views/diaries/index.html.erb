@@ -7,8 +7,7 @@
     <% @diaries.each do |diary| %>
       <div class="diary-item">
         <h3 class="diary-title">
-          <%= link_to diary.title, diary_path(diary) %>
-          (<%= diary.date.strftime("%Y-%m-%d") %>)
+          <%= diary.title %> (<%= diary.date.strftime("%Y-%m-%d") %>)
         </h3>
 
         <div class="diary-content">

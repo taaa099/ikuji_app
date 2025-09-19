@@ -94,7 +94,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_19_171848) do
     t.bigint "child_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.index ["child_id"], name: "index_diapers_on_child_id"
     t.index ["user_id"], name: "index_diapers_on_user_id"
   end
@@ -199,7 +199,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_19_171848) do
     t.text "memo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_schedules_on_user_id"
   end
 
@@ -247,6 +247,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_19_171848) do
     t.datetime "updated_at", null: false
     t.string "name", default: "ユーザー"
     t.text "bio"
+    t.string "otp_secret"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -272,8 +273,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_19_171848) do
   add_foreign_key "bottles", "children"
   add_foreign_key "bottles", "users"
   add_foreign_key "diapers", "children"
+  add_foreign_key "diapers", "users"
   add_foreign_key "diaries", "users"
   add_foreign_key "feeds", "children"
+  add_foreign_key "feeds", "users"
   add_foreign_key "growths", "children"
   add_foreign_key "hydrations", "children"
   add_foreign_key "hydrations", "users"
@@ -282,6 +285,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_19_171848) do
   add_foreign_key "notifications", "users"
   add_foreign_key "schedule_children", "children"
   add_foreign_key "schedule_children", "schedules"
+  add_foreign_key "schedules", "users"
   add_foreign_key "sleep_records", "children"
   add_foreign_key "sleep_records", "users"
   add_foreign_key "temperatures", "children"

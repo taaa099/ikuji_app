@@ -23,6 +23,9 @@ class User < ApplicationRecord
   has_many :notifications, dependent: :destroy
   has_many :notification_settings, dependent: :destroy
 
+  # 日記との関連
+  has_many :diaries, dependent: :destroy
+
   # Avatar（ActiveStorage）
   has_one_attached :avatar
 

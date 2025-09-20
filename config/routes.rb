@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   resources :diaries
 
   # パパママtips機能
-  resources :tips, only: [:index, :show]
+  resources :tips, only: [ :index, :show ]
 
   resources :notifications, only: [ :index ] do
   collection do

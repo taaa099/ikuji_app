@@ -1,9 +1,9 @@
 <div class="tip-container">
   <h2><%= @tip.title %> (<%= @tip.category %>)</h2>
 
-  <div class="tip-content-show">
-    <%= @tip.content.present? ? @tip.content.html_safe : "まだ内容がありません" %>
-  </div>
+<div class="tip-content-show">
+  <%= @tip.content.present? ? sanitize(@tip.content, tags: %w[h2 p strong em ul ol li br], attributes: %w[]) : "まだ内容がありません" %>
+</div>
 
   <div class="tip-actions">
     <%= link_to "一覧に戻る", tips_path, class: "nav-btn" %>

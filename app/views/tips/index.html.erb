@@ -1,0 +1,17 @@
+<h2>パパママTips一覧</h2>
+
+<% if @tips.any? %>
+  <div class="tips-list">
+    <% @tips.each do |tip| %>
+      <div class="tip-item">
+        <h3 class="tip-title">
+          <%= link_to tip.title, tip_path(tip) %>
+          (<%= tip.category %>)
+        </h3>
+        <p class="tip-content"><%= truncate(tip.content, length: 200) %></p>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>まだTipsはありません。</p>
+<% end %>

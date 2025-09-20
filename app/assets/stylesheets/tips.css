@@ -1,0 +1,99 @@
+/* ==============================
+   パパママTips show用スタイル
+   ============================== */
+.tip-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tip-container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #f0c040;
+  padding-bottom: 0.5rem;
+}
+
+.tip-content-show {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #333;
+}
+
+.tip-content-show h2 {
+  font-size: 1.4rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #444;
+  border-left: 4px solid #f0c040;
+  padding-left: 0.5rem;
+}
+
+.tip-content-show p {
+  margin-bottom: 1rem;
+}
+
+.tip-actions {
+  margin-top: 2rem;
+  text-align: right;
+}
+
+.tip-actions .nav-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  background: #f0c040;
+  color: #fff;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.tip-actions .nav-btn:hover {
+  background: #d9a030;
+}
+
+/* ==============================
+   パパママTips index用スタイル
+   ============================== */
+.tips-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 2rem auto;
+}
+
+.tip-item {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tip-title {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #1f2937;
+}
+
+.tip-title a {
+  text-decoration: none;
+  color: #1f2937;
+}
+
+.tip-title a:hover {
+  color: #2563eb;
+}
+
+.tip-category {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-left: 0.5rem;
+}
+
+/* 一覧では内容非表示 */
+.tip-content-index {
+  display: none;
+}

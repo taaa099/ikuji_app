@@ -6,9 +6,9 @@
       <div class="tip-item">
         <h3 class="tip-title">
           <%= link_to tip.title, tip_path(tip) %>
-          (<%= tip.category %>)
+          <span class="tip-category">(<%= tip.category %>)</span>
         </h3>
-        <p class="tip-content"><%= truncate(tip.content, length: 200) %></p>
+        <p class="tip-content-index"><%= truncate(tip.content, length: 200) %></p>
       </div>
     <% end %>
   </div>

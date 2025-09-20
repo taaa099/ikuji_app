@@ -1,0 +1,7 @@
+<h2><%= @tip.title %> (<%= @tip.category %>)</h2>
+
+<div class="tip-content">
+  <%= simple_format(@tip.content) %>
+</div>
+
+<%= link_to "一覧に戻る", tips_path, class: "nav-btn" %>

@@ -39,6 +39,9 @@ Rails.application.routes.draw do
   # 日記投稿機能
   resources :diaries
 
+  # パパママtips機能
+  resources :tips, only: [ :index, :show ]
+
   resources :notifications, only: [ :index ] do
   collection do
     get :latest

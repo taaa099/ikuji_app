@@ -1,7 +1,11 @@
-<h2><%= @tip.title %> (<%= @tip.category %>)</h2>
+<div class="tip-container">
+  <h2><%= @tip.title %> (<%= @tip.category %>)</h2>
 
-<div class="tip-content">
-  <%= simple_format(@tip.content) %>
+  <div class="tip-content-show">
+    <%= @tip.content.present? ? @tip.content.html_safe : "まだ内容がありません" %>
+  </div>
+
+  <div class="tip-actions">
+    <%= link_to "一覧に戻る", tips_path, class: "nav-btn" %>
+  </div>
 </div>
-
-<%= link_to "一覧に戻る", tips_path, class: "nav-btn" %>

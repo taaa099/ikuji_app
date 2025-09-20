@@ -540,3 +540,65 @@
   background-color: #1d4ed8;
   border-color: #1d4ed8;
 }
+
+/* ==============================
+   tips.css ダークモード
+   ============================== */
+
+/* --- show ページ用 --- */
+.dark .tip-container {
+  background-color: #1f2937; /* ダーク背景 */
+  color: #f9fafb;
+  border: 1px solid #374151;
+}
+
+.dark .tip-container h2 {
+  border-bottom: 2px solid #facc15; /* 黄色系でアクセント */
+  color: #f9fafb;
+}
+
+.dark .tip-content-show {
+  color: #e5e7eb; /* 明るめのグレー */
+}
+
+.dark .tip-content-show h2 {
+  color: #facc15; /* サブ見出しを黄色系で強調 */
+  border-left: 4px solid #facc15;
+}
+
+.dark .tip-actions .nav-btn {
+  background: #2563eb;
+  color: #f9fafb;
+  border: 1px solid #1d4ed8;
+}
+
+.dark .tip-actions .nav-btn:hover {
+  background: #1d4ed8;
+}
+
+/* --- index ページ用 --- */
+.dark .tips-list {
+  background-color: transparent;
+}
+
+.dark .tip-item {
+  background-color: #1f2937;
+  border: 1px solid #374151;
+  color: #f9fafb;
+}
+
+.dark .tip-title a {
+  color: #f9fafb;
+}
+
+.dark .tip-title a:hover {
+  color: #60a5fa; /* 青系でホバー */
+}
+
+.dark .tip-category {
+  color: #9ca3af; /* グレーでカテゴリー表示 */
+}
+
+.dark .tip-content-index {
+  color: #d1d5db; /* トーンを落としたグレー */
+}

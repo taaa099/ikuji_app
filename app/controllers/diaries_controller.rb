@@ -4,7 +4,18 @@ class DiariesController < ApplicationController
   before_action :set_diary, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @diaries = current_user.diaries.order(date: :desc)
+    # ログインユーザーの日記を取得
+    @diaries = current_user.diaries
+
+    # 並び順指定
+    @diaries = case params[:sort]
+    when "date_desc"
+                 @diaries.order(date: :desc)
+    when "date_asc"
+                 @diaries.order(date: :asc)
+    else
+                 @diaries.order(created_at: :desc)
+    end
   end
 
   def show

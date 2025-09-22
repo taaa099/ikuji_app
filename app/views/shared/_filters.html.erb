@@ -1,0 +1,8 @@
+<div class="filter-bar">
+  <%= form_with url: diaries_path, method: :get, local: true do |f| %>
+    <label>並び順:
+      <%= f.select :sort, options_for_select([["日付が新しい順", "date_desc"], ["日付が古い順", "date_asc"]], params[:sort]) %>
+    </label>
+    <%= f.submit "並び替え", class: "nav-btn" %>
+  <% end %>
+</div>

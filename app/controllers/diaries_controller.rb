@@ -9,13 +9,13 @@ class DiariesController < ApplicationController
 
     # 並び順指定
     @diaries = case params[:sort]
-               when "date_desc"
+    when "date_desc"
                  @diaries.order(date: :desc)
-               when "date_asc"
+    when "date_asc"
                  @diaries.order(date: :asc)
-               else
+    else
                  @diaries.order(created_at: :desc)
-              end
+    end
   end
 
   def show

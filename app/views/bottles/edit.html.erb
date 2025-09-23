@@ -1,8 +1,1 @@
-<h2 class="responsive-title">ミルクの編集</h2>
-
-<%= render "form", bottle: @bottle %>
-
-<div class="form-actions">
-<%= button_to "削除", child_bottle_path(current_child, @bottle), method: :delete, data: { turbo_confirm: '本当に削除しますか？' } %>
-<%= link_to '一覧に戻る', child_bottles_path(current_child) %>
-</div>
+<%= render "form_modal", bottle: @bottle %>

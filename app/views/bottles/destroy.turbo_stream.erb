@@ -1,0 +1,5 @@
+<%= turbo_stream.remove "bottle_#{@bottle.id}" %>
+<%= turbo_stream.replace "flash-messages", partial: "shared/flash", locals: { flash: { notice: "ミルク記録を削除しました" } } %>
+<%= turbo_stream.update "modal" do %>
+  <turbo-frame id="modal"></turbo-frame>
+<% end %>

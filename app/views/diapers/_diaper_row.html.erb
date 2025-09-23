@@ -1,0 +1,15 @@
+<tr id="diaper_<%= diaper.id %>">
+  <td class="col-date"><%= diaper.changed_at.strftime("%Y-%m-%d %H:%M") %></td>
+  <td class="col-item">
+    <% contents = [] %>
+    <% contents << "おしっこ" if diaper.pee %>
+    <% contents << "うんち" if diaper.poop %>
+    <%= contents.join(" + ") %>
+  </td>
+  <td class="col-memo"><%= diaper.memo.presence || "-" %></td>
+  <td class="col-detail">
+    <%= link_to "編集", edit_child_diaper_path(current_child, diaper),
+          class: "edit-link",
+          data: { turbo_frame: "modal" } %>
+  </td>
+</tr>

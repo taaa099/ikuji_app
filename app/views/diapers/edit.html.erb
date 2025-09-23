@@ -1,8 +1,1 @@
-<h2 class="responsive-title">おむつ記録の編集</h2>
-
-<%= render "form", diaper: @diaper %>
-
-<div class="form-actions">
-<%= button_to "削除", child_diaper_path(current_child, @diaper), method: :delete, data: { turbo_confirm: '本当に削除しますか？' } %>
-<%= link_to '一覧に戻る', child_diapers_path(current_child) %>
-</div>
+<%= render "form_modal", diaper: @diaper %>

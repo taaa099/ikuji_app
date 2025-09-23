@@ -5,14 +5,14 @@ class DiapersController < ApplicationController
   def index
     @diapers = current_child.diapers
 
-    # 並び順指定
+    # 並び順
     @diapers = case params[:sort]
     when "date_desc"
-               @diapers.order(changed_at: :desc)
+      @diapers.order(changed_at: :desc)
     when "date_asc"
-               @diapers.order(changed_at: :asc)
+      @diapers.order(changed_at: :asc)
     else
-               @diapers.order(changed_at: :desc)
+      @diapers.order(changed_at: :desc)
     end
   end
 
@@ -26,33 +26,68 @@ class DiapersController < ApplicationController
   def create
     @diaper = current_child.diapers.new(diaper_params.merge(user: current_user))
 
-    if @diaper.save
-     session.delete(:diaper_changed_at) # セッションから削除
-     redirect_to child_diapers_path(current_child), notice: "授乳記録を保存しました"
-    else
-     flash.now[:alert] = "保存に失敗しました"
-     render :new
+    respond_to do |format|
+      if @diaper.save
+        session.delete(:diaper_changed_at)
+        format.html { redirect_to child_diapers_path(current_child), notice: "おむつ記録を保存しました" }
+        format.turbo_stream
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "modal",
+            partial: "diapers/form_modal",
+            locals: { diaper: @diaper }
+          )
+        end
+      end
     end
   end
 
   def edit
     @diaper = current_child.diapers.find(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(
+          "modal",
+          partial: "diapers/form_modal",
+          locals: { diaper: @diaper }
+        )
+      end
+    end
   end
 
   def update
     @diaper = current_child.diapers.find(params[:id])
-    if @diaper.update(diaper_params)
-     redirect_to child_diapers_path(current_child), notice: "記録を更新しました"
-    else
-     flash.now[:alert] = "更新に失敗しました"
-     render :edit, status: :unprocessable_entity
+    @diaper.assign_attributes(diaper_params)
+
+    respond_to do |format|
+      if @diaper.save
+        format.html { redirect_to child_diapers_path(current_child), notice: "おむつ記録を更新しました" }
+        format.turbo_stream
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "modal",
+            partial: "diapers/form_modal",
+            locals: { diaper: @diaper }
+          )
+        end
+      end
     end
   end
 
   def destroy
     @diaper = current_child.diapers.find(params[:id])
     @diaper.destroy
-    redirect_to child_diapers_path(current_child), notice: "授乳記録を削除しました"
+
+    respond_to do |format|
+      format.html { redirect_to child_diapers_path(current_child), notice: "おむつ記録を削除しました" }
+      format.turbo_stream
+    end
   end
 
   private

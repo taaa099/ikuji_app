@@ -12,26 +12,14 @@
       <th class="col-detail">操作</th>
     </tr>
   </thead>
-  <tbody>
-    <% @sleep_records.each do |record| %>
-      <tr>
-        <td class="col-date"><%= record.start_time.strftime("%Y-%m-%d %H:%M") if record.start_time %></td>
-        <td class="col-date"><%= record.end_time.strftime("%Y-%m-%d %H:%M") if record.end_time %></td>
-        <td class="col-item">
-          <% if record.start_time && record.end_time %>
-            <% hours = ((record.end_time - record.start_time) / 3600).floor %>
-            <% minutes = (((record.end_time - record.start_time) % 3600) / 60).round %>
-            <%= "#{hours}時間#{minutes}分" %>
-          <% else %>
-            記録なし
-          <% end %>
-        </td>
-        <td class="col-memo"><%= record.memo %></td>
-        <td class="col-detail"><%= link_to "編集", edit_child_sleep_record_path(current_child, record) %></td>
-      </tr>
-    <% end %>
+
+  <tbody id="sleep-records-list">
+    <%= render partial: "sleep_records/sleep_record_row", collection: @sleep_records, as: :sleep_record %>
   </tbody>
 </table>
 
-<%= link_to "新規追加", new_child_sleep_record_path(current_child), class: "index-btn" %>
+<%= link_to "新規追加", new_child_sleep_record_path(current_child), class: "index-btn", data: { turbo_frame: "modal" } %>
 <%= link_to "睡眠分析を見る", analysis_child_sleep_records_path(current_child), class: "index-btn" %>
+
+<!-- モーダル枠 -->
+<turbo-frame id="modal"></turbo-frame>

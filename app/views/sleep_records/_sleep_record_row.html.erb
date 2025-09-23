@@ -1,0 +1,19 @@
+<tr id="sleep_record_<%= sleep_record.id %>">
+  <td class="col-date"><%= sleep_record.start_time.strftime("%Y-%m-%d %H:%M") if sleep_record.start_time %></td>
+  <td class="col-date"><%= sleep_record.end_time.strftime("%Y-%m-%d %H:%M") if sleep_record.end_time %></td>
+  <td class="col-item">
+    <% if sleep_record.start_time && sleep_record.end_time %>
+      <% hours = ((sleep_record.end_time - sleep_record.start_time) / 3600).floor %>
+      <% minutes = (((sleep_record.end_time - sleep_record.start_time) % 3600) / 60).round %>
+      <%= "#{hours}時間#{minutes}分" %>
+    <% else %>
+      記録なし
+    <% end %>
+  </td>
+  <td class="col-memo"><%= sleep_record.memo %></td>
+  <td class="col-detail">
+    <%= link_to "編集", edit_child_sleep_record_path(current_child, sleep_record),
+          class: "edit-link",
+          data: { turbo_frame: "modal" } %>
+  </td>
+</tr>

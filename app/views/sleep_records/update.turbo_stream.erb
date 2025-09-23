@@ -1,0 +1,5 @@
+<%= turbo_stream.replace "sleep_record_#{@sleep_record.id}", partial: "sleep_records/sleep_record_row", locals: { sleep_record: @sleep_record } %>
+<%= turbo_stream.update "modal" do %>
+  <turbo-frame id="modal"></turbo-frame>
+<% end %>
+<%= turbo_stream.replace "flash-messages", partial: "shared/flash", locals: { flash: { notice: "睡眠記録を更新しました" } } %>

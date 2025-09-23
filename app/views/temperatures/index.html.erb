@@ -1,6 +1,6 @@
 <%= render "shared/filters", url: child_temperatures_path(current_child) %>
 
-<h2 class="responsive-title">体温記録一覧</h2>
+<h2 class="responsive-title"><%= current_child.name %> の体温記録一覧</h2>
 
 <table class="responsive-table">
   <thead>
@@ -11,16 +11,12 @@
       <th class="col-detail">操作</th>
     </tr>
   </thead>
-  <tbody>
-    <% @temperatures.each do |temperature| %>
-      <tr>
-        <td class="col-date"><%= temperature.measured_at.strftime("%Y-%m-%d %H:%M") if temperature.measured_at %></td>
-        <td class="col-item"><%= sprintf("%.1f", temperature.temperature) if temperature.temperature %></td>
-        <td class="col-memo"><%= temperature.memo %></td>
-        <td class="col-detail"><%= link_to "編集", edit_child_temperature_path(current_child, temperature) %></td>
-      </tr>
-    <% end %>
+  <tbody id="temperatures-list">
+    <%= render partial: "temperatures/temperature_row", collection: @temperatures, as: :temperature %>
   </tbody>
 </table>
 
-<%= link_to "新規追加", new_child_temperature_path(current_child), class: "index-btn" %>
+<%= link_to "新規追加", new_child_temperature_path(current_child), class: "index-btn", data: { turbo_frame: "modal" } %>
+
+<!-- モーダル枠 -->
+<turbo-frame id="modal"></turbo-frame>

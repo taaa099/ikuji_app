@@ -20,44 +20,80 @@ class TemperaturesController < ApplicationController
   end
 
   def new
+    # インスタンス生成＋現在時刻取得（測定日時）
     @temperature = current_child.temperatures.new(measured_at: Time.current)
   end
 
   def create
-    @temperature = current_child.temperatures.new(temperatures_params.merge(user: current_user))
-    if @temperature.save
-      session.delete(:temperature_measured_at) # セッションから削除
-      redirect_to child_temperatures_path(current_child), notice: "体温の記録を保存しました"
-    else
-      flash.now[:alert] = "保存に失敗しました"
-      render :new
+    @temperature = current_child.temperatures.new(temperature_params.merge(user: current_user))
+
+    respond_to do |format|
+      if @temperature.save
+        session.delete(:temperature_measured_at)
+        format.html { redirect_to child_temperatures_path(current_child), notice: "体温記録を保存しました" }
+        format.turbo_stream
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "modal",
+            partial: "temperatures/form_modal",
+            locals: { temperature: @temperature }
+          )
+        end
+      end
     end
   end
 
   def edit
     @temperature = current_child.temperatures.find(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(
+          "modal",
+          partial: "temperatures/form_modal",
+          locals: { temperature: @temperature }
+        )
+      end
+    end
   end
 
   def update
     @temperature = current_child.temperatures.find(params[:id])
-    if @temperature.update(temperatures_params)
-      redirect_to child_temperatures_path(current_child), notice: "記録を更新しました"
-    else
-      flash.now[:alert] = "更新に失敗しました"
-      render :edit, status: :unprocessable_entity
+
+    respond_to do |format|
+      if @temperature.update(temperature_params)
+        format.html { redirect_to child_temperatures_path(current_child), notice: "体温記録を更新しました" }
+        format.turbo_stream
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "modal",
+            partial: "temperatures/form_modal",
+            locals: { temperature: @temperature }
+          )
+        end
+      end
     end
   end
 
   def destroy
     @temperature = current_child.temperatures.find(params[:id])
-     @temperature.destroy
-    redirect_to child_temperatures_path(current_child), notice: "記録を削除しました"
+    @temperature.destroy
+
+    respond_to do |format|
+      format.html { redirect_to child_temperatures_path(current_child), notice: "体温記録を削除しました" }
+      format.turbo_stream
+    end
   end
 
   private
 
   # フォームから送信されたパラメータのうち、許可するキーを指定
-  def temperatures_params
+  def temperature_params
     params.require(:temperature).permit(:measured_at, :temperature, :memo)
   end
 end

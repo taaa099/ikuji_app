@@ -1,0 +1,11 @@
+<tr id="growth_<%= growth.id %>">
+  <td class="col-date"><%= growth.recorded_at.strftime("%Y-%m-%d") %></td>
+  <td class="col-item"><%= growth.height %></td>
+  <td class="col-item"><%= growth.weight %></td>
+  <td class="col-item"><%= growth.head_circumference %></td>
+  <td class="col-item"><%= growth.chest_circumference %></td>
+  <td class="col-detail">
+    <%= link_to "編集", edit_child_growth_path(current_child, growth),
+                class: "edit-link", data: { turbo_frame: "modal" } %>
+  </td>
+</tr>

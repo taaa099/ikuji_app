@@ -1,5 +1,5 @@
 <div class="growth-form-container">
-  <%= form_with(model: [current_child, growth], local: true, data: {turbo: false}) do |form| %>
+  <%= form_with(model: [current_child, growth], data: { turbo_frame: "modal" }) do |form| %>
     <% if growth.errors.any? %>
       <div class="error_explanation">
         <h3><%= pluralize(growth.errors.count, "件のエラー") %>があります：</h3>

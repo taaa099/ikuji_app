@@ -8,19 +8,12 @@ class GrowthsController < ApplicationController
     @growths_for_chart = @growths.map do |g|
       months = (g.recorded_at.year * 12 + g.recorded_at.month) -
                (current_child.birth_date.year * 12 + current_child.birth_date.month)
-      # 日も考慮して調整
       months -= 1 if g.recorded_at.day < current_child.birth_date.day
-
-      {
-        recorded_at: g.recorded_at.strftime("%Y-%m-%d"),
+      { recorded_at: g.recorded_at.strftime("%Y-%m-%d"),
         height: g.height,
         weight: g.weight,
-        month_age: months
-      }
+        month_age: months }
     end
-  end
-
-  def show
   end
 
   def new
@@ -29,39 +22,69 @@ class GrowthsController < ApplicationController
 
   def create
     @growth = current_child.growths.new(growth_params)
-    if @growth.save
-      session.delete(:growth_recorded_at) # セッションから削除
-      redirect_to child_growths_path(current_child), notice: "成長の記録を保存しました"
-    else
-      flash.now[:alert] = "保存に失敗しました"
-      render :new
+    respond_to do |format|
+      if @growth.save
+        format.html { redirect_to child_growths_path(current_child), notice: "成長記録を保存しました" }
+        format.turbo_stream
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "modal",
+            partial: "growths/form_modal",
+            locals: { growth: @growth }
+          )
+        end
+      end
     end
   end
 
   def edit
     @growth = current_child.growths.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(
+          "modal",
+          partial: "growths/form_modal",
+          locals: { growth: @growth }
+        )
+      end
+    end
   end
 
   def update
     @growth = current_child.growths.find(params[:id])
-    if @growth.update(growth_params)
-     redirect_to child_growths_path(current_child), notice: "記録を更新しました"
-    else
-     flash.now[:alert] = "更新に失敗しました"
-     render :edit, status: :unprocessable_entity
+    respond_to do |format|
+      if @growth.update(growth_params)
+        format.html { redirect_to child_growths_path(current_child), notice: "成長記録を更新しました" }
+        format.turbo_stream
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "modal",
+            partial: "growths/form_modal",
+            locals: { growth: @growth }
+          )
+        end
+      end
     end
   end
 
   def destroy
     @growth = current_child.growths.find(params[:id])
     @growth.destroy
-    redirect_to child_growths_path(current_child), notice: "成長記録を削除しました"
+    respond_to do |format|
+      format.html { redirect_to child_growths_path(current_child), notice: "成長記録を削除しました" }
+      format.turbo_stream
+    end
   end
 
   private
 
   # フォームから送信されたパラメータのうち、許可するキーを指定
   def growth_params
-   params.require(:growth).permit(:height, :weight, :head_circumference, :chest_circumference, :recorded_at)
+    params.require(:growth).permit(:height, :weight, :head_circumference, :chest_circumference, :recorded_at)
   end
 end

@@ -47,16 +47,18 @@ class ScheduleNotificationService
           if setting.alert_time.present?
             alert_hour = setting.alert_time.hour
             alert_min  = setting.alert_time.min
-            next unless now.hour == alert_hour && now.min >= alert_min
+            # ピッタリの時間だけ実行する
+            next unless now.hour == alert_hour && now.min == alert_min
           end
 
-          # 当日アラートがすでに送られていないかチェック
+          # 当日のアラートが既に同じ分に送られていないかチェック
           notification_exists = Notification.where(
-            child: child,
-            target_type: "Schedule",
-            notification_kind: :alert,
+           child: child,
+           target_type: "Schedule",
+           notification_kind: :alert,
             user: user
           ).where("DATE(delivered_at) = ?", today)
+           .where("EXTRACT(HOUR FROM delivered_at) = ? AND EXTRACT(MINUTE FROM delivered_at) = ?", now.hour, now.min)
           .exists?
 
           unless notification_exists

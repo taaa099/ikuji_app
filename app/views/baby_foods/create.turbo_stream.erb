@@ -1,0 +1,5 @@
+<%= turbo_stream.prepend "baby_foods-list", partial: "baby_foods/baby_food_row", locals: { baby_food: @baby_food } %>
+<%= turbo_stream.update "modal" do %>
+  <turbo-frame id="modal"></turbo-frame>
+<% end %>
+<%= turbo_stream.replace "flash-messages", partial: "shared/flash", locals: { flash: { notice: "離乳食を保存しました" } } %>

@@ -3,7 +3,17 @@ class BathsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @baths = current_child.baths.order(bathed_at: :desc)
+    @baths = current_child.baths
+
+    # 並び順指定
+    @baths = case params[:sort]
+    when "date_desc"
+               @baths.order(bathed_at: :desc)
+    when "date_asc"
+               @baths.order(bathed_at: :asc)
+    else
+               @baths.order(bathed_at: :desc)
+    end
   end
 
   def show

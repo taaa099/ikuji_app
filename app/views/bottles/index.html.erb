@@ -1,6 +1,6 @@
 <%= render "shared/filters", url: child_bottles_path(current_child) %>
 
-<h1 class="responsive-title">ミルクの記録一覧</h1>
+<h1 class="responsive-title"><%= current_child.name %> のミルク記録</h1>
 
 <table class="responsive-table">
   <thead>
@@ -12,16 +12,12 @@
     </tr>
   </thead>
 
-  <tbody>
-    <% @bottles.each do |bottle| %>
-      <tr>
-        <td class="col-item"><%= bottle.amount %> ml</td>
-        <td class="col-date"><%= bottle.given_at.strftime("%Y-%m-%d %H:%M") %></td>
-        <td class="col-memo"><%= bottle.memo.presence || "-" %></td>
-        <td class="col-detail"><%= link_to "編集", edit_child_bottle_path(current_child, bottle) %></td>
-      </tr>
-    <% end %>
+  <tbody id="bottles-list">
+    <%= render partial: "bottles/bottle_row", collection: @bottles, as: :bottle %>
   </tbody>
 </table>
 
-<%= link_to "新規ミルク記録を追加", new_child_bottle_path(current_child), class: "index-btn" %>
+<%= link_to "新規ミルク記録を追加", new_child_bottle_path(current_child), class: "index-btn", data: { turbo_frame: "modal" } %>
+
+<!-- モーダル枠 -->
+<turbo-frame id="modal"></turbo-frame>

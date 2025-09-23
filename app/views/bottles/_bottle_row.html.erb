@@ -1,0 +1,10 @@
+<tr id="bottle_<%= bottle.id %>">
+  <td class="col-item"><%= bottle.amount %> ml</td>
+  <td class="col-date"><%= bottle.given_at.strftime("%Y-%m-%d %H:%M") %></td>
+  <td class="col-memo"><%= bottle.memo.presence || "-" %></td>
+  <td class="col-detail">
+    <%= link_to "編集", edit_child_bottle_path(current_child, bottle),
+          class: "edit-link",
+          data: { turbo_frame: "modal" } %>
+  </td>
+</tr>

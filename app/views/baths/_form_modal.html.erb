@@ -1,0 +1,18 @@
+<turbo-frame id="modal">
+  <div class="modal-background">
+    <div class="modal-container">
+      <h2 class="responsive-title">
+        <%= bath.persisted? ? "編集" : "新規作成" %> お風呂記録
+      </h2>
+
+      <%= render "form", bath: bath %>
+
+      <div class="form-actions">
+        <% if bath.persisted? %>
+          <%= button_to "削除", child_bath_path(current_child, bath), method: :delete, data: { turbo_confirm: '本当に削除しますか？' } %>
+        <% end %>
+        <a href="#" class="modal-close">閉じる</a>
+      </div>
+    </div>
+  </div>
+</turbo-frame>

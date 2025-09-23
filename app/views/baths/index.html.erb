@@ -12,16 +12,12 @@
     </tr>
   </thead>
 
-  <tbody>
-    <% @baths.each do |bath| %>
-      <tr>
-        <td class="col-date"><%= bath.bathed_at.strftime("%Y-%m-%d %H:%M") %></td>
-        <td class="col-item"><%= bath.bath_type %></td>
-        <td class="col-memo"><%= bath.memo.presence || "-" %></td>
-        <td class="col-detail"><%= link_to "編集", edit_child_bath_path(current_child, bath) %></td>
-      </tr>
-    <% end %>
+  <tbody id="baths-list">
+    <%= render partial: "baths/bath_row", collection: @baths, as: :bath %>
   </tbody>
 </table>
 
-<%= link_to "新規追加", new_child_bath_path(current_child), class: "index-btn" %>
+<%= link_to "新規追加", new_child_bath_path(current_child), class: "index-btn", data: { turbo_frame: "modal" } %>
+
+<!-- モーダル枠 -->
+<turbo-frame id="modal"></turbo-frame>

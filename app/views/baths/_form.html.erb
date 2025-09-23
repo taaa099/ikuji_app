@@ -1,5 +1,5 @@
 <div class="form-container">
-  <%= form_with(model: [current_child, bath], local: true, data: { turbo: false }) do |form| %>
+  <%= form_with(model: [current_child, bath], data: { turbo_frame: "modal" }) do |form| %>
     <% if bath.errors.any? %>
       <div id="error_explanation">
         <h3><%= pluralize(bath.errors.count, "件のエラー") %>があります：</h3>

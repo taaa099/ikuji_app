@@ -1,0 +1,11 @@
+<tr id="hydration_<%= hydration.id %>">
+  <td class="col-item"><%= hydration.drink_type %></td>
+  <td class="col-item"><%= hydration.amount %> ml</td>
+  <td class="col-date"><%= hydration.fed_at.strftime("%Y-%m-%d %H:%M") %></td>
+  <td class="col-memo"><%= hydration.memo.presence || "-" %></td>
+  <td class="col-detail">
+    <%= link_to "編集", edit_child_hydration_path(current_child, hydration),
+          class: "edit-link",
+          data: { turbo_frame: "modal" } %>
+  </td>
+</tr>

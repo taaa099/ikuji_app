@@ -1,0 +1,19 @@
+<turbo-frame id="modal">
+  <div class="modal-background">
+    <div class="modal-container">
+      <h2 class="responsive-title">予定詳細</h2>
+
+      <p><strong>タイトル:</strong> <%= schedule.title %></p>
+      <p><strong>開始日時:</strong> <%= schedule.all_day? ? schedule.start_time.strftime("%Y-%m-%d") + " (終日)" : schedule.start_time.strftime("%Y-%m-%d %H:%M") %></p>
+      <p><strong>終了日時:</strong> <%= schedule.all_day? ? schedule.end_time.strftime("%Y-%m-%d") + " (終日)" : schedule.end_time.strftime("%Y-%m-%d %H:%M") %></p>
+      <p><strong>繰り返し:</strong> <%= schedule.repeat %></p>
+      <p><strong>メモ:</strong> <%= schedule.memo %></p>
+
+      <div class="form-actions">
+        <%= link_to "編集", edit_schedule_path(schedule), data: { turbo_frame: "modal" }, class: "schedule-show-btn" %>
+        <%= link_to "削除", schedule_path(schedule), method: :delete, data: { turbo_confirm: '本当に削除しますか？' }, class: "schedule-show-btn" %>
+        <a href="#" class="modal-close">閉じる</a>
+      </div>
+    </div>
+  </div>
+</turbo-frame>

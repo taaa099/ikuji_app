@@ -1,0 +1,21 @@
+<turbo-frame id="modal">
+  <div class="modal-background">
+    <div class="modal-container">
+      <h2 class="responsive-title">
+        <%= schedule.persisted? ? "編集" : "新規作成" %> 予定
+      </h2>
+
+      <%= render "form", schedule: schedule %>
+
+      <div class="form-actions">
+        <% if schedule.persisted? %>
+          <%= button_to "削除", schedule_path(schedule),
+                        method: :delete,
+                        data: { turbo_confirm: '本当に削除しますか？' },
+                        class: "schedule-form-submit" %>
+        <% end %>
+        <a href="#" class="modal-close">閉じる</a>
+      </div>
+    </div>
+  </div>
+</turbo-frame>

@@ -1,8 +1,1 @@
-<h2 class="responsive-title">体温の編集</h2>
-
-<%= render "form", temperature: @temperature %>
-
-<div class="form-actions">
-<%= button_to "削除", child_temperature_path(current_child, @temperature), method: :delete, data: { turbo_confirm: '本当に削除しますか？' } %>
-<%= link_to '一覧に戻る', child_temperatures_path(current_child) %>
-</div>
+<%= render "form_modal", temperature: @temperature %>

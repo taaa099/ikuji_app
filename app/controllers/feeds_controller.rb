@@ -3,7 +3,6 @@ class FeedsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    # 現在選択中の子どもの授乳記録を取得
     @feeds = current_child.feeds
 
     # 並び順指定
@@ -13,7 +12,7 @@ class FeedsController < ApplicationController
     when "date_asc"
                @feeds.order(fed_at: :asc)
     else
-               @feeds.order(created_at: :desc)
+               @feeds.order(fed_at: :desc)
     end
   end
 

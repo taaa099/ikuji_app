@@ -1,0 +1,5 @@
+<%= turbo_stream.remove "feed_#{@feed.id}" %>
+<%= turbo_stream.replace "flash-messages", partial: "shared/flash", locals: { flash: { notice: "授乳記録を削除しました" } } %>
+<%= turbo_stream.update "modal" do %>
+  <turbo-frame id="modal"></turbo-frame>
+<% end %>

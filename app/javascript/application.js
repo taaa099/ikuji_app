@@ -19,6 +19,9 @@ import "./dashboard_chart";
 // 睡眠分析表示用
 import "./sleep_analysis_controller";
 
+// モーダル表示用
+import "./modal";
+
 // 共通：ダークモード管理
 document.addEventListener("turbo:load", () => {
   const toggle = document.getElementById("dark-mode-toggle");

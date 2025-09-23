@@ -26,64 +26,90 @@ class FeedsController < ApplicationController
 
   def create
     @feed = current_child.feeds.new(feed_params.merge(user: current_user))
-    # フォームから送られた分・秒を整数で取り出して合計秒に変換
-    left_minutes = params[:left_minutes].to_i
-    left_seconds = params[:left_seconds].to_i
-    right_minutes = params[:right_minutes].to_i
-    right_seconds = params[:right_seconds].to_i
+    @feed.left_time  = params[:left_minutes].to_i * 60 + params[:left_seconds].to_i
+    @feed.right_time = params[:right_minutes].to_i * 60 + params[:right_seconds].to_i
 
-    @feed.left_time = left_minutes * 60 + left_seconds
-    @feed.right_time = right_minutes * 60 + right_seconds
-
-    if @feed.save
-     session.delete(:feed_fed_at) # セッションから削除
-     redirect_to child_feeds_path(current_child), notice: "授乳記録を保存しました"
-    else
-     flash.now[:alert] = "保存に失敗しました"
-     render :new
+    respond_to do |format|
+      if @feed.save
+        session.delete(:feed_fed_at)
+        format.html { redirect_to child_feeds_path(current_child), notice: "授乳記録を保存しました" }
+        format.turbo_stream
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "modal",
+            partial: "feeds/form_modal",
+            locals: {
+              feed: @feed,
+              left_minutes: params[:left_minutes],
+              left_seconds: params[:left_seconds],
+              right_minutes: params[:right_minutes],
+              right_seconds: params[:right_seconds]
+            }
+          )
+        end
+      end
     end
   end
 
   def edit
     @feed = current_child.feeds.find(params[:id])
-
-    @left_minutes = @feed.left_time.to_i / 60
-    @left_seconds = @feed.left_time.to_i % 60
+    @left_minutes  = @feed.left_time.to_i / 60
+    @left_seconds  = @feed.left_time.to_i % 60
     @right_minutes = @feed.right_time.to_i / 60
     @right_seconds = @feed.right_time.to_i % 60
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(
+          "modal",
+          partial: "feeds/form_modal",
+          locals: { feed: @feed }
+        )
+      end
+    end
   end
 
   def update
     @feed = current_child.feeds.find(params[:id])
+    @feed.left_time  = params[:left_minutes].to_i * 60 + params[:left_seconds].to_i
+    @feed.right_time = params[:right_minutes].to_i * 60 + params[:right_seconds].to_i
+    @feed.memo       = params[:feed][:memo]
+    @feed.fed_at     = params[:feed][:fed_at]
 
-    # フォームから送られた分・秒を整数で取り出して合計秒に変換
-    left_minutes = params[:left_minutes].to_i
-    left_seconds = params[:left_seconds].to_i
-    right_minutes = params[:right_minutes].to_i
-    right_seconds = params[:right_seconds].to_i
-
-    @feed.left_time = left_minutes * 60 + left_seconds
-    @feed.right_time = right_minutes * 60 + right_seconds
-    @feed.memo = params[:feed][:memo]
-    @feed.fed_at = params[:feed][:fed_at]
-
-    if @feed.save
-     redirect_to child_feeds_path(current_child), notice: "授乳記録を更新しました"
-    else
-     # エラー時に再表示用の値を渡す
-     @left_minutes = left_minutes
-     @left_seconds = left_seconds
-     @right_minutes = right_minutes
-     @right_seconds = right_seconds
-     flash.now[:alert] = "更新に失敗しました"
-     render :edit
+    respond_to do |format|
+      if @feed.save
+        format.html { redirect_to child_feeds_path(current_child), notice: "授乳記録を更新しました" }
+        format.turbo_stream
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "modal",
+            partial: "feeds/form_modal",
+            locals: {
+              feed: @feed,
+              left_minutes: params[:left_minutes],
+              left_seconds: params[:left_seconds],
+              right_minutes: params[:right_minutes],
+              right_seconds: params[:right_seconds]
+            }
+          )
+        end
+      end
     end
   end
 
   def destroy
     @feed = current_child.feeds.find(params[:id])
     @feed.destroy
-    redirect_to child_feeds_path(current_child), notice: "授乳記録を削除しました"
+
+    respond_to do |format|
+      format.html { redirect_to child_feeds_path(current_child), notice: "授乳記録を削除しました" }
+      format.turbo_stream
+    end
   end
 
 private

@@ -12,27 +12,13 @@
       <th class="col-detail">操作</th>
     </tr>
   </thead>
-  <tbody>
-    <% @feeds.each do |feed| %>
-      <tr>
-        <td class="col-date"><%= feed.fed_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
-        <td class="col-item">
-         <% if feed.left_time.present? %>
-          <%= feed.left_time / 60 %>分 <%= feed.left_time % 60 %>秒
-         <% else %>
-          -
-         <% end %>
-        </td>
-        <td class="col-item">
-         <% if feed.right_time.present? %>
-          <%= feed.right_time / 60 %>分 <%= feed.right_time % 60 %>秒
-         <% else %>
-          -
-         <% end %>
-        </td>
-        <td class="col-memo"><%= feed.memo %></td>
-        <td class="col-detail"><%= link_to "編集", edit_child_feed_path(current_child, feed) %></td>
-      </tr>
-    <% end %>
+
+  <tbody id="feeds-list">
+    <%= render partial: "feeds/feed_row", collection: @feeds, as: :feed %>
   </tbody>
 </table>
+
+<%= link_to "新規追加", new_child_feed_path(current_child), class: "index-btn", data: { turbo_frame: "modal" } %>
+
+<!-- モーダル枠 -->
+<turbo-frame id="modal"></turbo-frame>

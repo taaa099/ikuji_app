@@ -1,5 +1,5 @@
 <div class="form-container">
-  <%= form_with(model: [current_child, feed], local: true, data: {turbo: false}) do |form| %>
+  <%= form_with(model: [current_child, feed], data: { turbo_frame: "modal" }) do |form| %>
     <% if feed.errors.any? %>
       <div class="error_explanation">
         <ul>

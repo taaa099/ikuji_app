@@ -15,7 +15,7 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "application", "sidebar", "records", "schedule", "dashboard", "growth", "sleep_analysis", "daily", "user_settings/profile", "user_settings/darkmode", "notification", "tips", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "sidebar", "records", "schedule", "dashboard", "growth", "sleep_analysis", "daily", "user_settings/profile", "user_settings/darkmode", "modals", "notification", "tips", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <%= javascript_importmap_tags %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
@@ -49,7 +49,6 @@
 
               <% if current_child.present? %>
                 <%= link_to "授乳一覧", child_feeds_path(current_child), class: "nav-btn" %>
-                <%= link_to "授乳の登録", new_child_feed_path(current_child), class: "nav-btn" %>
                 <%= link_to "おむつ一覧", child_diapers_path(current_child), class: "nav-btn" %>
                 <%= link_to "おむつの登録", new_child_diaper_path(current_child), class: "nav-btn" %>
                 <%= link_to "ミルク一覧", child_bottles_path(current_child), class: "nav-btn" %>
@@ -95,12 +94,10 @@
       <% end %>
     </header>
    
-    <% if notice %>
-      <p class="notice"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert"><%= alert %></p>
-    <% end %>
+    <!-- フラッシュ表示用 -->
+    <div id="flash-messages">
+      <%= render "shared/flash" %>
+    </div>
 
     <!-- サイドバー -->
     <div class="sidebar-overlay" id="sidebar-overlay"></div>

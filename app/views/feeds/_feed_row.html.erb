@@ -1,0 +1,11 @@
+<tr id="feed_<%= feed.id %>">
+  <td class="col-date"><%= feed.fed_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
+  <td class="col-item"><%= feed.left_time.present? ? "#{feed.left_time/60}分 #{feed.left_time%60}秒" : "-" %></td>
+  <td class="col-item"><%= feed.right_time.present? ? "#{feed.right_time/60}分 #{feed.right_time%60}秒" : "-" %></td>
+  <td class="col-memo"><%= feed.memo %></td>
+  <td class="col-detail">
+    <%= link_to "編集", edit_child_feed_path(current_child, feed),
+          class: "edit-link",
+          data: { turbo_frame: "modal" } %>
+  </td>
+</tr>

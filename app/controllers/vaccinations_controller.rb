@@ -3,7 +3,17 @@ class VaccinationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @vaccinations = current_child.vaccinations.order(vaccinated_at: :desc)
+    @vaccinations = current_child.vaccinations
+
+    # 並び順指定
+    @vaccinations = case params[:sort]
+    when "date_desc"
+               @vaccinations.order(vaccinated_at: :desc)
+    when "date_asc"
+               @vaccinations.order(vaccinated_at: :asc)
+    else
+               @vaccinations.order(vaccinated_at: :desc)
+    end
   end
 
   def show

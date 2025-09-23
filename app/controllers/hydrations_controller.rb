@@ -3,7 +3,17 @@ class HydrationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @hydrations = current_child.hydrations.order(fed_at: :desc)
+    @hydrations = current_child.hydrations
+
+    # 並び順指定
+    @hydrations = case params[:sort]
+    when "date_desc"
+               @hydrations.order(fed_at: :desc)
+    when "date_asc"
+               @hydrations.order(fed_at: :asc)
+    else
+               @hydrations.order(fed_at: :desc)
+    end
   end
 
   def show

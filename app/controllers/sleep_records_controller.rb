@@ -3,7 +3,17 @@ class SleepRecordsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @sleep_records = current_child.sleep_records.order(start_time: :desc)
+    @sleep_records = current_child.sleep_records
+
+    # 並び順指定
+    @sleep_records = case params[:sort]
+    when "date_desc"
+               @sleep_records.order(start_time: :desc)
+    when "date_asc"
+               @sleep_records.order(start_time: :asc)
+    else
+               @sleep_records.order(start_time: :desc)
+    end
   end
 
   def show

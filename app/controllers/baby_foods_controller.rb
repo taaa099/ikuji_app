@@ -3,7 +3,17 @@ class BabyFoodsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @baby_foods = current_child.baby_foods.order(fed_at: :desc)
+    @baby_foods = current_child.baby_foods
+
+    # 並び順指定
+    @baby_foods = case params[:sort]
+    when "date_desc"
+               @baby_foods.order(fed_at: :desc)
+    when "date_asc"
+               @baby_foods.order(fed_at: :asc)
+    else
+               @baby_foods.order(fed_at: :desc)
+    end
   end
 
   def show

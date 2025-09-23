@@ -3,7 +3,17 @@ class BottlesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @bottles = current_child.bottles.order(given_at: :desc)
+    @bottles = current_child.bottles
+
+    # 並び順指定
+    @bottles = case params[:sort]
+    when "date_desc"
+               @bottles.order(given_at: :desc)
+    when "date_asc"
+               @bottles.order(given_at: :asc)
+    else
+               @bottles.order(given_at: :desc)
+    end
   end
 
   def show

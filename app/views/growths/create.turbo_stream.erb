@@ -1,0 +1,9 @@
+<%= turbo_stream.prepend "growths-list", partial: "growth_row", locals: { growth: @growth } %>
+
+<%= turbo_stream.update "modal" do %>
+  <turbo-frame id="modal"></turbo-frame>
+<% end %>
+
+<%= turbo_stream.replace "flash-messages",
+    partial: "shared/flash",
+    locals: { flash: { notice: "成長記録を保存しました" } } %>

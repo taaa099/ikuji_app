@@ -1,4 +1,4 @@
-<%= link_to "新規成長記録を追加", new_child_growth_path(current_child), class: "growth-index-btn" %>
+<h2 class="responsive-title"><%= current_child.name %> の成長記録一覧</h2>
 
 <div>
   <!-- 身長グラフ -->
@@ -7,30 +7,25 @@
   <canvas id="weightChart" class="growth-chart" data-growths='<%= raw @growths_for_chart.to_json %>'></canvas>
 </div>
 
-<h1 class="growth-title">成長記録一覧</h1>
-
-<table class="growth-table">
+<table class="responsive-table">
   <thead>
     <tr>
-      <th class="growth-col-date">記録日</th>
-      <th class="growth-col-item">身長 (cm)</th>
-      <th class="growth-col-item">体重 (kg)</th>
-      <th class="growth-col-item">頭囲 (cm)</th>
-      <th class="growth-col-item">胸囲 (cm)</th>
-      <th class="growth-col-detail">操作</th>
+      <th class="col-date">計測日</th>
+      <th class="col-item">身長(cm)</th>
+      <th class="col-item">体重(kg)</th>
+      <th class="col-item">頭囲(cm)</th>
+      <th class="col-item">胸囲(cm)</th>
+      <th class="col-detail">操作</th>
     </tr>
   </thead>
 
-  <tbody>
-    <% @growths.reverse_each do |growth| %>
-      <tr>
-        <td class="growth-col-date"><%= growth.recorded_at.strftime("%Y-%m-%d") %></td>
-        <td class="growth-col-item"><%= growth.height %></td>
-        <td class="growth-col-item"><%= growth.weight %></td>
-        <td class="growth-col-item"><%= growth.head_circumference %></td>
-        <td class="growth-col-item"><%= growth.chest_circumference %></td>
-        <td class="growth-col-detail"><%= link_to "編集", edit_child_growth_path(current_child, growth) %></td>
-      </tr>
-    <% end %>
+  <tbody id="growths-list">
+    <%= render partial: "growth_row", collection: @growths, as: :growth %>
   </tbody>
 </table>
+
+<%= link_to "新規成長記録を追加", new_child_growth_path(current_child),
+            class: "index-btn", data: { turbo_frame: "modal" } %>
+
+<!-- モーダル枠 -->
+<turbo-frame id="modal"></turbo-frame>

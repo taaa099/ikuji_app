@@ -1,0 +1,20 @@
+<turbo-frame id="modal">
+  <div class="modal-background">
+    <div class="modal-container">
+      <h2 class="responsive-title">
+        <%= sleep_record.persisted? ? "編集" : "新規作成" %> 睡眠記録
+      </h2>
+
+      <%= render "form", sleep_record: sleep_record %>
+
+      <div class="form-actions">
+        <% if sleep_record.persisted? %>
+          <%= button_to "削除", child_sleep_record_path(current_child, sleep_record),
+                        method: :delete,
+                        data: { turbo_confirm: '本当に削除しますか？' } %>
+        <% end %>
+        <a href="#" class="modal-close">閉じる</a>
+      </div>
+    </div>
+  </div>
+</turbo-frame>

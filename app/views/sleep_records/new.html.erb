@@ -1,7 +1,1 @@
-<h2 class="responsive-title">新しい睡眠の記録を追加</h2>
-
-<%= render "form", sleep_record: @sleep_record %>
-
-<div class="form-actions">
-<%= link_to '一覧に戻る', child_sleep_records_path(current_child) %>
-</div>
+<%= render "form_modal", sleep_record: @sleep_record %>

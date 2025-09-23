@@ -1,0 +1,21 @@
+<turbo-frame id="modal">
+  <div class="modal-background">
+    <div class="modal-container">
+      <h2 class="responsive-title">
+        <%= vaccination.persisted? ? "編集" : "新規作成" %> 予防接種記録
+      </h2>
+
+      <%= render "form", vaccination: vaccination %>
+
+      <div class="form-actions">
+        <% if vaccination.persisted? %>
+          <%= button_to "削除",
+                        child_vaccination_path(current_child, vaccination),
+                        method: :delete,
+                        data: { turbo_confirm: '本当に削除しますか？' } %>
+        <% end %>
+        <a href="#" class="modal-close">閉じる</a>
+      </div>
+    </div>
+  </div>
+</turbo-frame>

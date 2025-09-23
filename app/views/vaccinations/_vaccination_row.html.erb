@@ -1,0 +1,11 @@
+<tr id="vaccination_<%= vaccination.id %>">
+  <td class="col-date"><%= vaccination.vaccinated_at.strftime("%Y-%m-%d %H:%M") if vaccination.vaccinated_at %></td>
+  <td class="col-item"><%= vaccination.vaccine_name %></td>
+  <td class="col-memo"><%= vaccination.memo.presence || "-" %></td>
+  <td class="col-detail">
+    <%= link_to "編集",
+                edit_child_vaccination_path(current_child, vaccination),
+                class: "edit-link",
+                data: { turbo_frame: "modal" } %>
+  </td>
+</tr>

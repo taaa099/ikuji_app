@@ -12,16 +12,12 @@
     </tr>
   </thead>
 
-  <tbody>
-    <% @vaccinations.each do |vaccination| %>
-      <tr>
-        <td class="col-date"><%= vaccination.vaccinated_at.strftime("%Y-%m-%d %H:%M") %></td>
-        <td class="col-item"><%= vaccination.vaccine_name %></td>
-        <td class="col-memo"><%= vaccination.memo.presence || "-" %></td>
-        <td class="col-detail"><%= link_to "編集", edit_child_vaccination_path(current_child, vaccination) %></td>
-      </tr>
-    <% end %>
+  <tbody id="vaccinations-list">
+    <%= render partial: "vaccinations/vaccination_row", collection: @vaccinations, as: :vaccination %>
   </tbody>
 </table>
 
-<%= link_to "新規追加", new_child_vaccination_path(current_child), class: "index-btn" %>
+<%= link_to "新規追加", new_child_vaccination_path(current_child), class: "index-btn", data: { turbo_frame: "modal" } %>
+
+<!-- モーダル枠 -->
+<turbo-frame id="modal"></turbo-frame>

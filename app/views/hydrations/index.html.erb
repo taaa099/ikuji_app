@@ -1,6 +1,6 @@
 <%= render "shared/filters", url: child_hydrations_path(current_child) %>
 
-<h1 class="responsive-title">水分補給記録一覧</h1>
+<h1 class="responsive-title"><%= current_child.name %> の水分補給記録一覧</h1>
 
 <table class="responsive-table">
   <thead>
@@ -13,17 +13,12 @@
     </tr>
   </thead>
 
-  <tbody>
-    <% @hydrations.each do |hydration| %>
-      <tr>
-        <td class="col-item"><%= hydration.drink_type %></td>
-        <td class="col-item"><%= hydration.amount %> ml</td>
-        <td class="col-date"><%= hydration.fed_at.strftime("%Y-%m-%d %H:%M") %></td>
-        <td class="col-memo"><%= hydration.memo.presence || "-" %></td>
-        <td class="col-detail"><%= link_to "編集", edit_child_hydration_path(current_child, hydration) %></td>
-      </tr>
-    <% end %>
+  <tbody id="hydrations-list">
+    <%= render partial: "hydrations/hydration_row", collection: @hydrations, as: :hydration %>
   </tbody>
 </table>
 
-<%= link_to "新規追加", new_child_hydration_path(current_child), class: "index-btn" %>
+<%= link_to "新規追加", new_child_hydration_path(current_child), class: "index-btn", data: { turbo_frame: "modal" } %>
+
+<!-- モーダル枠 -->
+<turbo-frame id="modal"></turbo-frame>

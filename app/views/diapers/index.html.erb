@@ -11,19 +11,13 @@
       <th class="col-detail">操作</th>
     </tr>
   </thead>
-  <tbody>
-    <% @diapers.each do |diaper| %>
-      <tr>
-        <td class="col-date"><%= diaper.changed_at.strftime("%Y-%m-%d %H:%M") %></td>
-        <td class="col-item">
-          <% contents = [] %>
-          <% contents << "おしっこ" if diaper.pee %>
-          <% contents << "うんち" if diaper.poop %>
-          <%= contents.join(" + ") %>
-        </td>
-        <td class="col-memo"><%= diaper.memo.presence || "-" %></td>
-        <td class="col-detail"><%= link_to "編集", edit_child_diaper_path(current_child, diaper) %></td>
-      </tr>
-    <% end %>
+
+  <tbody id="diapers-list">
+    <%= render partial: "diapers/diaper_row", collection: @diapers, as: :diaper %>
   </tbody>
 </table>
+
+<%= link_to "新規追加", new_child_diaper_path(current_child), class: "index-btn", data: { turbo_frame: "modal" } %>
+
+<!-- モーダル枠 -->
+<turbo-frame id="modal"></turbo-frame>

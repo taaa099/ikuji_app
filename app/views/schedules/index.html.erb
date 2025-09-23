@@ -1,47 +1,11 @@
 <h1>スケジュール一覧</h1>
+
 <h2>カレンダー</h2>
-<div class="calendar-container">
-  <h1 class="calendar-title"><%= @month.strftime("%Y年%m月") %></h1>
+<turbo-frame id="calendar">
+  <%= render partial: "schedules/calendar", locals: { month: @month, schedules: @schedules } %>
+</turbo-frame>
 
-  <div class="calendar-nav">
-    <%= link_to "← 前の月", schedules_path(start_date: @month.prev_month), class: "btn-nav" %>
-    <%= link_to "今月", schedules_path(start_date: Date.current.beginning_of_month), class: "btn-nav" %>
-    <%= link_to "次の月 →", schedules_path(start_date: @month.next_month), class: "btn-nav" %>
-  </div>
-
-  <div class="simple-calendar">
-    <% (@month.beginning_of_month.beginning_of_week..@month.end_of_month.end_of_week).to_a.in_groups_of(7) do |week| %>
-      <% week.each do |date| %>
-        <div class="day-cell <%= 'other-month' if date.month != @month.month %>">
-          <div class="date-number"><%= date.day %></div>
-
-          <% @schedules.select { |s| s.start_time.to_date == date }.each do |schedule| %>
-            <% if schedule.children.any? %>
-              <% if schedule.children.size > 1 %>
-                <%= link_to schedule.title,
-                            schedule_path(schedule),
-                            class: "event-link multiple-children" %>
-              <% else %>
-                <% child = schedule.children.first %>
-                <% # ユーザー内でのインデックス取得 %>
-                <% index = current_user.children.order(:id).pluck(:id).index(child.id) %>
-                <%= link_to schedule.title,
-                            schedule_path(schedule),
-                            class: "event-link child-color-#{index}" %>
-              <% end %>
-            <% else %>
-              <%= link_to schedule.title,
-                          schedule_path(schedule),
-                          class: "event-link user-event" %>
-            <% end %>
-          <% end %>
-
-      </div>
-    <% end %>
-  <% end %>
-</div>
-
-<h1 class="responsive-title">予定一覧</h1>
+<h2 class="responsive-title">予定一覧</h2>
 
 <table class="schedule-table">
   <thead>
@@ -55,40 +19,12 @@
       <th class="schedule-col-item">操作</th>
     </tr>
   </thead>
-  <tbody>
-    <% @all_schedules.each do |schedule| %>
-      <tr>
-        <td class="schedule-col-item">
-          <% if schedule.all_day? %>
-            <%= schedule.start_time.strftime("%Y-%m-%d") %> (終日)
-          <% else %>
-            <%= schedule.start_time.strftime("%Y-%m-%d %H:%M") %>
-          <% end %>
-        </td>
-        <td class="schedule-col-date">
-          <% if schedule.all_day? %>
-            <%= schedule.end_time.strftime("%Y-%m-%d") %> (終日)
-          <% else %>
-            <%= schedule.end_time.strftime("%Y-%m-%d %H:%M") %>
-          <% end %>
-        </td>
-        <td class="schedule-col-detail"><%= schedule.title %></td>
-        <td class="schedule-col-detail"><%= schedule.repeat %></td>
-        <td class="schedule-col-detail">
-          <%= schedule.children.map(&:name).join(", ") %>
-        </td>
-        <td class="schedule-col-memo"><%= schedule.memo %></td>
-        <td class="schedule-col-item">
-          <%= link_to "編集", edit_schedule_path(schedule), class: "schedule-index-btn" %>
-          <%= link_to "詳細", schedule_path(schedule), class: "schedule-index-btn" %>
-          <%= link_to "削除", schedule_path(schedule),
-                      data: { confirm: "本当に削除しますか？" },
-                      method: :delete,
-                      class: "schedule-index-btn" %>
-        </td>
-      </tr>
-    <% end %>
+  <tbody id="schedules-list">
+    <%= render partial: "schedules/schedule_row", collection: @all_schedules, as: :schedule %>
   </tbody>
 </table>
 
-<%= link_to "新規追加", new_schedule_path, class: "schedule-index-btn" %>
+<%= link_to "新規追加", new_schedule_path, class: "schedule-index-btn", data: { turbo_frame: "modal" } %>
+
+<!-- モーダル枠 -->
+<turbo-frame id="modal"></turbo-frame>

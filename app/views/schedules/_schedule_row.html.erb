@@ -1,0 +1,25 @@
+<tr id="schedule_<%= schedule.id %>">
+  <td class="schedule-col-item">
+    <% if schedule.all_day? %>
+      <%= schedule.start_time.strftime("%Y-%m-%d") %> (終日)
+    <% else %>
+      <%= schedule.start_time.strftime("%Y-%m-%d %H:%M") %>
+    <% end %>
+  </td>
+  <td class="schedule-col-date">
+    <% if schedule.all_day? %>
+      <%= schedule.end_time.strftime("%Y-%m-%d") %> (終日)
+    <% else %>
+      <%= schedule.end_time.strftime("%Y-%m-%d %H:%M") %>
+    <% end %>
+  </td>
+  <td class="schedule-col-detail"><%= schedule.title %></td>
+  <td class="schedule-col-detail"><%= schedule.repeat %></td>
+  <td class="schedule-col-detail">
+    <%= schedule.children.map(&:name).join(", ") %>
+  </td>
+  <td class="schedule-col-memo"><%= schedule.memo.presence || "-" %></td>
+  <td class="schedule-col-item">
+    <%= link_to "編集", edit_schedule_path(schedule), class: "schedule-index-btn", data: { turbo_frame: "modal" } %>
+  </td>
+</tr>

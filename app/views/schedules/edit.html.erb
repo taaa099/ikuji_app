@@ -1,8 +1,1 @@
-<h2 class="responsive-title">予定編集</h2>
-
-<%= render "form", schedule: @schedule %>
-
-<div class="schedule-form-actions">
-  <%= button_to "削除", schedule_path(@schedule), method: :delete, data: { turbo_confirm: '本当に削除しますか？' } %>
-  <%= link_to '一覧に戻る', schedules_path %>
-</div>
+<%= render "form_modal", schedule: @schedule %>

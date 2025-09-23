@@ -1,6 +1,6 @@
 <%= render "shared/filters", url: child_baby_foods_path(current_child) %>
 
-<h1 class="responsive-title">離乳食一覧</h1>
+<h2 class="responsive-title"><%= current_child.name %> の離乳食一覧</h2>
 
 <table class="responsive-table">
   <thead>
@@ -12,18 +12,12 @@
     </tr>
   </thead>
 
-  <tbody>
-    <% @baby_foods.each do |baby_food| %>
-      <tr>
-        <td class="col-date"><%= baby_food.fed_at.strftime("%Y-%m-%d %H:%M") %></td>
-        <td class="col-item"><%= baby_food.amount %>ml</td>
-        <td class="col-memo"><%= baby_food.memo.presence || "-" %></td>
-        <td class="col-detail">
-          <%= link_to "編集", edit_child_baby_food_path(current_child, baby_food) %>
-        </td>
-      </tr>
-    <% end %>
+  <tbody id="baby_foods-list">
+    <%= render partial: "baby_foods/baby_food_row", collection: @baby_foods, as: :baby_food %>
   </tbody>
 </table>
 
-<%= link_to "新規追加", new_child_baby_food_path(current_child), class: "index-btn" %>
+<%= link_to "新規追加", new_child_baby_food_path(current_child), class: "index-btn", data: { turbo_frame: "modal" } %>
+
+<!-- モーダル枠 -->
+<turbo-frame id="modal"></turbo-frame>

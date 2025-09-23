@@ -1,0 +1,10 @@
+<tr id="baby_food_<%= baby_food.id %>">
+  <td class="col-date"><%= baby_food.fed_at.strftime("%Y-%m-%d %H:%M") %></td>
+  <td class="col-item"><%= baby_food.amount %> ml</td>
+  <td class="col-memo"><%= baby_food.memo.presence || "-" %></td>
+  <td class="col-detail">
+    <%= link_to "編集", edit_child_baby_food_path(current_child, baby_food),
+                class: "edit-link",
+                data: { turbo_frame: "modal" } %>
+  </td>
+</tr>

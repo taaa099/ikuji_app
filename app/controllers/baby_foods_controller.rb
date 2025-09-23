@@ -25,33 +25,68 @@ class BabyFoodsController < ApplicationController
 
   def create
     @baby_food = current_child.baby_foods.new(baby_food_params.merge(user: current_user))
-    if @baby_food.save
-      session.delete(:baby_food_fed_at) # セッションから削除
-      redirect_to child_baby_foods_path(current_child), notice: " 離乳食の記録を保存しました"
-    else
-      flash.now[:alert] = "保存に失敗しました"
-      render :new
+
+    respond_to do |format|
+      if @baby_food.save
+        session.delete(:baby_food_fed_at) # セッションから削除
+        format.html { redirect_to child_baby_foods_path(current_child), notice: "離乳食の記録を保存しました" }
+        format.turbo_stream
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "modal",
+            partial: "baby_foods/form_modal",
+            locals: { baby_food: @baby_food }
+          )
+        end
+      end
     end
   end
 
   def edit
     @baby_food = current_child.baby_foods.find(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(
+          "modal",
+          partial: "baby_foods/form_modal",
+          locals: { baby_food: @baby_food }
+        )
+      end
+    end
   end
 
   def update
     @baby_food = current_child.baby_foods.find(params[:id])
-    if @baby_food.update(baby_food_params)
-      redirect_to child_baby_foods_path(current_child), notice: "記録を更新しました"
-    else
-      flash.now[:alert] = "更新に失敗しました"
-      render :edit, status: :unprocessable_entity
+
+    respond_to do |format|
+      if @baby_food.update(baby_food_params)
+        format.html { redirect_to child_baby_foods_path(current_child), notice: "記録を更新しました" }
+        format.turbo_stream
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "modal",
+            partial: "baby_foods/form_modal",
+            locals: { baby_food: @baby_food }
+          )
+        end
+      end
     end
   end
 
   def destroy
     @baby_food = current_child.baby_foods.find(params[:id])
     @baby_food.destroy
-    redirect_to child_baby_foods_path(current_child), notice: "記録を削除しました"
+
+    respond_to do |format|
+      format.html { redirect_to child_baby_foods_path(current_child), notice: "記録を削除しました" }
+      format.turbo_stream
+    end
   end
 
 private

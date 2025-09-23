@@ -1,0 +1,5 @@
+<%= turbo_stream.remove "baby_food_#{@baby_food.id}" %>
+<%= turbo_stream.replace "flash-messages", partial: "shared/flash", locals: { flash: { notice: "離乳食を削除しました" } } %>
+<%= turbo_stream.update "modal" do %>
+  <turbo-frame id="modal"></turbo-frame>
+<% end %>

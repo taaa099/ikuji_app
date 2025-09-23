@@ -3,7 +3,17 @@ class DiapersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @diapers = current_child.diapers.order(changed_at: :desc)
+    @diapers = current_child.diapers
+
+    # 並び順指定
+    @diapers = case params[:sort]
+    when "date_desc"
+               @diapers.order(changed_at: :desc)
+    when "date_asc"
+               @diapers.order(changed_at: :asc)
+    else
+               @diapers.order(changed_at: :desc)
+    end
   end
 
   def show

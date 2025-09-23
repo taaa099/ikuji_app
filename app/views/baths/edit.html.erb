@@ -1,8 +1,1 @@
-<h2 class="responsive-title">お風呂記録の編集</h2>
-
-<%= render "form", bath: @bath %>
-
-<div class="form-actions">
-<%= button_to "削除", child_bath_path(current_child, @bath), method: :delete, data: { turbo_confirm: '本当に削除しますか？' } %>
-<%= link_to '一覧に戻る', child_baths_path(current_child) %>
-</div>
+<%= render "form_modal", bath: @bath %>

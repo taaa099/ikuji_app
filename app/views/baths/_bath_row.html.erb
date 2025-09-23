@@ -1,0 +1,10 @@
+<tr id="bath_<%= bath.id %>">
+  <td class="col-date"><%= bath.bathed_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
+  <td class="col-item"><%= bath.bath_type %></td>
+  <td class="col-memo"><%= bath.memo %></td>
+  <td class="col-detail">
+    <%= link_to "編集", edit_child_bath_path(current_child, bath),
+          class: "edit-link",
+          data: { turbo_frame: "modal" } %>
+  </td>
+</tr>

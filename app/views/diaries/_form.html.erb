@@ -1,10 +1,10 @@
 <div class="form-container">
-  <%= form_with(model: @diary, local: true, data: { turbo: false }) do |f| %>
-    <% if @diary.errors.any? %>
+  <%= form_with(model: diary, data: { turbo_frame: "modal" }) do |f| %>
+    <% if diary.errors.any? %>
       <div id="error_explanation">
-        <h3><%= pluralize(@diary.errors.count, "件のエラー") %>があります：</h3>
+        <h3><%= pluralize(diary.errors.count, "件のエラー") %>があります：</h3>
         <ul>
-          <% @diary.errors.full_messages.each do |msg| %>
+          <% diary.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>
           <% end %>
         </ul>
@@ -37,7 +37,7 @@
     </div>
 
     <div class="form-actions">
-      <%= f.submit @diary.persisted? ? "更新する" : "保存", class: "form-submit-btn" %>
+      <%= f.submit diary.persisted? ? "更新する" : "保存", class: "form-submit-btn" %>
     </div>
   <% end %>
 </div>

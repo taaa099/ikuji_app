@@ -1,13 +1,13 @@
 class DiariesController < ApplicationController
   # 未ログインユーザーをログイン画面へリダイレクトさせる
   before_action :authenticate_user!
+
   before_action :set_diary, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    # ログインユーザーの日記を取得
     @diaries = current_user.diaries
 
-    # 並び順指定
+    # 並び順
     @diaries = case params[:sort]
     when "date_desc"
                  @diaries.order(date: :desc)
@@ -18,38 +18,68 @@ class DiariesController < ApplicationController
     end
   end
 
-  def show
-  end
-
   def new
     @diary = current_user.diaries.new
   end
 
   def create
     @diary = current_user.diaries.new(diary_params)
-    if @diary.save
-      redirect_to diaries_path, notice: "日記を作成しました"
-    else
-      flash.now[:alert] = "保存に失敗しました"
-      render :new
+
+    respond_to do |format|
+      if @diary.save
+        format.html { redirect_to diaries_path, notice: "日記を作成しました" }
+        format.turbo_stream
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "modal",
+            partial: "diaries/form_modal",
+            locals: { diary: @diary }
+          )
+        end
+      end
     end
   end
 
   def edit
+    respond_to do |format|
+      format.html
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(
+          "modal",
+          partial: "diaries/form_modal",
+          locals: { diary: @diary }
+        )
+      end
+    end
   end
 
   def update
-    if @diary.update(diary_params)
-      redirect_to diaries_path, notice: "日記を更新しました"
-    else
-      flash.now[:alert] = "更新に失敗しました"
-      render :edit
+    respond_to do |format|
+      if @diary.update(diary_params)
+        format.html { redirect_to diaries_path, notice: "日記を更新しました" }
+        format.turbo_stream
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "modal",
+            partial: "diaries/form_modal",
+            locals: { diary: @diary }
+          )
+        end
+      end
     end
   end
 
   def destroy
     @diary.destroy
-    redirect_to diaries_path, notice: "日記を削除しました"
+
+    respond_to do |format|
+      format.html { redirect_to diaries_path, notice: "日記を削除しました" }
+      format.turbo_stream
+    end
   end
 
   private

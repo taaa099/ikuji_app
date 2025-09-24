@@ -41,36 +41,22 @@
 
             <nav class="header-nav">
               <%= link_to "トップページ", root_path, class: "nav-btn" %>
-              <%= link_to "子どもを切り替える", children_path, class: "nav-btn" %>
               <%= link_to "子供一覧", children_path, class: "nav-btn" %>
-              <%= link_to "子供の登録", new_child_path, class: "nav-btn" %>
-              <%= link_to "子供の編集・削除", children_path, class: "nav-btn" %>
               <%= link_to "パパママTips", tips_path, class: "nav-btn" %>
 
               <% if current_child.present? %>
                 <%= link_to "授乳一覧", child_feeds_path(current_child), class: "nav-btn" %>
                 <%= link_to "おむつ一覧", child_diapers_path(current_child), class: "nav-btn" %>
-                <%= link_to "おむつの登録", new_child_diaper_path(current_child), class: "nav-btn" %>
                 <%= link_to "ミルク一覧", child_bottles_path(current_child), class: "nav-btn" %>
-                <%= link_to "ミルクの登録", new_child_bottle_path(current_child), class: "nav-btn" %>
                 <%= link_to "水分補給一覧", child_hydrations_path(current_child), class: "nav-btn" %>
-                <%= link_to "水分の登録", new_child_hydration_path(current_child), class: "nav-btn" %>
                 <%= link_to "離乳食一覧", child_baby_foods_path(current_child), class: "nav-btn" %>
-                <%= link_to "離乳食の登録", new_child_baby_food_path(current_child), class: "nav-btn" %>
                 <%= link_to "睡眠一覧", child_sleep_records_path(current_child), class: "nav-btn" %>
-                <%= link_to "睡眠の登録", new_child_sleep_record_path(current_child), class: "nav-btn" %>
                 <%= link_to "体温一覧", child_temperatures_path(current_child), class: "nav-btn" %>
-                <%= link_to "体温の登録", new_child_temperature_path(current_child), class: "nav-btn" %>
                 <%= link_to "お風呂一覧", child_baths_path(current_child), class: "nav-btn" %>
-                <%= link_to "お風呂の登録", new_child_bath_path(current_child), class: "nav-btn" %>
                 <%= link_to "予防接種一覧", child_vaccinations_path(current_child), class: "nav-btn" %>
-                <%= link_to "予防接種の登録", new_child_vaccination_path(current_child), class: "nav-btn" %>
                 <%= link_to "スケジュール一覧", schedules_path(current_child), class: "nav-btn" %>
-                <%= link_to "スケジュールの登録", new_schedule_path(current_child), class: "nav-btn" %>
                 <%= link_to "成長記録", child_growths_path(current_child), class: "nav-btn" %>
-                <%= link_to "成長記録の登録", new_child_growth_path(current_child), class: "nav-btn" %>
                 <%= link_to "日記一覧", diaries_path, class: "nav-btn" %>
-                <%= link_to "日記を投稿", new_diary_path, class: "nav-btn" %>
                 <%= link_to "プロフィールを見る", user_path(current_user), class: "nav-btn" %>
                 <%= link_to "プロフィールを編集", edit_user_registration_path(tab: "profile"), class: "nav-btn" %>
                 <%= link_to "パスワード変更", edit_user_registration_path(tab: "password"), class: "nav-btn" %>

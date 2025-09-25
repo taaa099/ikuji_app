@@ -612,3 +612,18 @@
 .dark .tip-content-index {
   color: #d1d5db; /* トーンを落としたグレー */
 }
+
+/* ==============================
+   modal ダークモード
+   ============================== */
+.dark .modal-background {
+  background-color: rgba(0, 0, 0, 0.7); /* 半透明の黒背景に */
+}
+
+.dark .modal-container {
+  background-color: #1f2937; /* フォームと同じダーク背景 */
+  color: #f9fafb;           /* 文字色を明るめに */
+  border: 1px solid #374151;
+  border-radius: 8px;
+  padding: 1rem;
+}

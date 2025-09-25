@@ -22,6 +22,9 @@ import "./sleep_analysis_controller";
 // モーダル表示用
 import "./modal";
 
+// フラッシュ表示用
+import "./flash";
+
 // 共通：ダークモード管理
 document.addEventListener("turbo:load", () => {
   const toggle = document.getElementById("dark-mode-toggle");

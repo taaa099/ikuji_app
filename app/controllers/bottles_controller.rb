@@ -30,10 +30,24 @@ class BottlesController < ApplicationController
     respond_to do |format|
       if @bottle.save
         session.delete(:bottle_given_at)
+
         format.html { redirect_to child_bottles_path(current_child), notice: "ミルク記録を保存しました" }
-        format.turbo_stream
+
+        format.turbo_stream do
+          render turbo_stream: [
+            # 作成したレコードをリストに追加
+            turbo_stream.prepend("bottles-list", partial: "bottles/bottle_row", locals: { bottle: @bottle }),
+
+            # フラッシュ通知を追加
+            turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "ミルク記録を保存しました" } }),
+
+            # モーダルを閉じる
+            turbo_stream.update("modal") { "" }
+          ]
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
+
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace(
             "modal",
@@ -66,7 +80,19 @@ class BottlesController < ApplicationController
     respond_to do |format|
       if @bottle.update(bottle_params)
         format.html { redirect_to child_bottles_path(current_child), notice: "ミルク記録を更新しました" }
-        format.turbo_stream
+
+        # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace("bottle_#{@bottle.id}", partial: "bottles/bottle_row", locals: { bottle: @bottle }),
+            turbo_stream.prepend(
+              "flash-messages",
+              partial: "shared/flash",
+              locals: { flash: { notice: "ミルク記録を更新しました" } }
+            ),
+            turbo_stream.update("modal") { "" }
+          ]
+        end
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.turbo_stream do
@@ -86,7 +112,19 @@ class BottlesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to child_bottles_path(current_child), notice: "ミルク記録を削除しました" }
-      format.turbo_stream
+
+      # Turbo Streamで一覧削除＋フラッシュ追加＋モーダル閉じる
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.remove("bottle_#{@bottle.id}"),
+          turbo_stream.prepend(
+            "flash-messages",
+            partial: "shared/flash",
+            locals: { flash: { notice: "ミルク記録を削除しました" } }
+          ),
+          turbo_stream.update("modal") { "" }
+        ]
+      end
     end
   end
 

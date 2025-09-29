@@ -8,11 +8,11 @@ class BathsController < ApplicationController
     # 並び順指定
     @baths = case params[:sort]
     when "date_desc"
-               @baths.order(bathed_at: :desc)
+      @baths.order(bathed_at: :desc)
     when "date_asc"
-               @baths.order(bathed_at: :asc)
+      @baths.order(bathed_at: :asc)
     else
-               @baths.order(bathed_at: :desc)
+      @baths.order(bathed_at: :desc)
     end
   end
 
@@ -40,7 +40,19 @@ class BathsController < ApplicationController
     respond_to do |format|
       if @bath.save
         format.html { redirect_to child_baths_path(current_child), notice: "お風呂記録を保存しました" }
-        format.turbo_stream
+
+        format.turbo_stream do
+          render turbo_stream: [
+            # 作成したレコードをリストに追加
+            turbo_stream.prepend("baths-list", partial: "baths/bath_row", locals: { bath: @bath }),
+
+            # フラッシュ通知を追加
+            turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "お風呂記録を保存しました" } }),
+
+            # モーダルを閉じる
+            turbo_stream.update("modal") { "" }
+          ]
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
         format.turbo_stream do
@@ -75,7 +87,19 @@ class BathsController < ApplicationController
     respond_to do |format|
       if @bath.update(baths_params)
         format.html { redirect_to child_baths_path(current_child), notice: "記録を更新しました" }
-        format.turbo_stream
+
+        # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace("bath_#{@bath.id}", partial: "baths/bath_row", locals: { bath: @bath }),
+            turbo_stream.prepend(
+              "flash-messages",
+              partial: "shared/flash",
+              locals: { flash: { notice: "記録を更新しました" } }
+            ),
+            turbo_stream.update("modal") { "" }
+          ]
+        end
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.turbo_stream do
@@ -95,7 +119,19 @@ class BathsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to child_baths_path(current_child), notice: "お風呂記録を削除しました" }
-      format.turbo_stream
+
+      # Turbo Streamで一覧削除＋フラッシュ追加＋モーダル閉じる
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.remove("bath_#{@bath.id}"),
+          turbo_stream.prepend(
+            "flash-messages",
+            partial: "shared/flash",
+            locals: { flash: { notice: "お風呂記録を削除しました" } }
+          ),
+          turbo_stream.update("modal") { "" }
+        ]
+      end
     end
   end
 

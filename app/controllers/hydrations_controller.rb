@@ -8,11 +8,11 @@ class HydrationsController < ApplicationController
     # 並び順指定
     @hydrations = case params[:sort]
     when "date_desc"
-                    @hydrations.order(fed_at: :desc)
+      @hydrations.order(fed_at: :desc)
     when "date_asc"
-                    @hydrations.order(fed_at: :asc)
+      @hydrations.order(fed_at: :asc)
     else
-                    @hydrations.order(fed_at: :desc)
+      @hydrations.order(fed_at: :desc)
     end
   end
 
@@ -31,9 +31,22 @@ class HydrationsController < ApplicationController
       if @hydration.save
         session.delete(:hydration_fed_at)
         format.html { redirect_to child_hydrations_path(current_child), notice: "水分補給記録を保存しました" }
-        format.turbo_stream
+
+        format.turbo_stream do
+          render turbo_stream: [
+            # 作成したレコードをリストに追加
+            turbo_stream.prepend("hydrations-list", partial: "hydrations/hydration_row", locals: { hydration: @hydration }),
+
+            # フラッシュ通知を追加
+            turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "水分補給記録を保存しました" } }),
+
+            # モーダルを閉じる
+            turbo_stream.update("modal") { "" }
+          ]
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
+
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace(
             "modal",
@@ -66,7 +79,19 @@ class HydrationsController < ApplicationController
     respond_to do |format|
       if @hydration.update(hydration_params)
         format.html { redirect_to child_hydrations_path(current_child), notice: "水分補給記録を更新しました" }
-        format.turbo_stream
+
+        # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace("hydration_#{@hydration.id}", partial: "hydrations/hydration_row", locals: { hydration: @hydration }),
+            turbo_stream.prepend(
+              "flash-messages",
+              partial: "shared/flash",
+              locals: { flash: { notice: "水分補給記録を更新しました" } }
+            ),
+            turbo_stream.update("modal") { "" }
+          ]
+        end
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.turbo_stream do
@@ -86,7 +111,19 @@ class HydrationsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to child_hydrations_path(current_child), notice: "水分補給記録を削除しました" }
-      format.turbo_stream
+
+      # Turbo Streamで一覧削除＋フラッシュ追加＋モーダル閉じる
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.remove("hydration_#{@hydration.id}"),
+          turbo_stream.prepend(
+            "flash-messages",
+            partial: "shared/flash",
+            locals: { flash: { notice: "水分補給記録を削除しました" } }
+          ),
+          turbo_stream.update("modal") { "" }
+        ]
+      end
     end
   end
 

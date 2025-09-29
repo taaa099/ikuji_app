@@ -33,7 +33,19 @@ class FeedsController < ApplicationController
       if @feed.save
         session.delete(:feed_fed_at)
         format.html { redirect_to child_feeds_path(current_child), notice: "授乳記録を保存しました" }
-        format.turbo_stream
+
+        format.turbo_stream do
+          render turbo_stream: [
+            # 作成したレコードをリストに追加
+            turbo_stream.prepend("feeds-list", partial: "feeds/feed_row", locals: { feed: @feed }),
+
+            # フラッシュ通知を追加
+            turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "授乳記録を保存しました" } }),
+
+            # モーダルを閉じる
+            turbo_stream.update("modal") { "" }
+          ]
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
         format.turbo_stream do
@@ -82,7 +94,19 @@ class FeedsController < ApplicationController
     respond_to do |format|
       if @feed.save
         format.html { redirect_to child_feeds_path(current_child), notice: "授乳記録を更新しました" }
-        format.turbo_stream
+
+        # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace("feed_#{@feed.id}", partial: "feeds/feed_row", locals: { feed: @feed }),
+            turbo_stream.prepend(
+              "flash-messages",
+              partial: "shared/flash",
+              locals: { flash: { notice: "授乳記録を更新しました" } }
+            ),
+            turbo_stream.update("modal") { "" }
+          ]
+        end
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.turbo_stream do
@@ -108,7 +132,19 @@ class FeedsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to child_feeds_path(current_child), notice: "授乳記録を削除しました" }
-      format.turbo_stream
+
+      # Turbo Streamで一覧削除＋フラッシュ追加＋モーダル閉じる
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.remove("feed_#{@feed.id}"),
+          turbo_stream.prepend(
+            "flash-messages",
+            partial: "shared/flash",
+            locals: { flash: { notice: "授乳記録を削除しました" } }
+          ),
+          turbo_stream.update("modal") { "" }
+        ]
+      end
     end
   end
 

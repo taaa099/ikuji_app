@@ -10,11 +10,11 @@ class DiariesController < ApplicationController
     # 並び順
     @diaries = case params[:sort]
     when "date_desc"
-                 @diaries.order(date: :desc)
+      @diaries.order(date: :desc)
     when "date_asc"
-                 @diaries.order(date: :asc)
+      @diaries.order(date: :asc)
     else
-                 @diaries.order(created_at: :desc)
+      @diaries.order(created_at: :desc)
     end
   end
 
@@ -28,7 +28,16 @@ class DiariesController < ApplicationController
     respond_to do |format|
       if @diary.save
         format.html { redirect_to diaries_path, notice: "日記を作成しました" }
-        format.turbo_stream
+        format.turbo_stream do
+          render turbo_stream: [
+            # 作成したレコードをリストに追加
+            turbo_stream.prepend("diaries-list", partial: "diaries/diary_row", locals: { diary: @diary }),
+            # フラッシュ通知を追加
+            turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "日記を作成しました" } }),
+            # モーダルを閉じる
+            turbo_stream.update("modal") { "" }
+          ]
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
         format.turbo_stream do
@@ -59,7 +68,18 @@ class DiariesController < ApplicationController
     respond_to do |format|
       if @diary.update(diary_params)
         format.html { redirect_to diaries_path, notice: "日記を更新しました" }
-        format.turbo_stream
+        # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace("diary_#{@diary.id}", partial: "diaries/diary_row", locals: { diary: @diary }),
+            turbo_stream.prepend(
+              "flash-messages",
+              partial: "shared/flash",
+              locals: { flash: { notice: "日記を更新しました" } }
+            ),
+            turbo_stream.update("modal") { "" }
+          ]
+        end
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.turbo_stream do
@@ -78,7 +98,18 @@ class DiariesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to diaries_path, notice: "日記を削除しました" }
-      format.turbo_stream
+      # Turbo Streamで一覧削除＋フラッシュ追加＋モーダル閉じる
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.remove("diary_#{@diary.id}"),
+          turbo_stream.prepend(
+            "flash-messages",
+            partial: "shared/flash",
+            locals: { flash: { notice: "日記を削除しました" } }
+          ),
+          turbo_stream.update("modal") { "" }
+        ]
+      end
     end
   end
 

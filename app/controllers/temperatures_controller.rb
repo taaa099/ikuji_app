@@ -8,11 +8,11 @@ class TemperaturesController < ApplicationController
     # 並び順指定
     @temperatures = case params[:sort]
     when "date_desc"
-               @temperatures.order(measured_at: :desc)
+      @temperatures.order(measured_at: :desc)
     when "date_asc"
-               @temperatures.order(measured_at: :asc)
+      @temperatures.order(measured_at: :asc)
     else
-               @temperatures.order(measured_at: :desc)
+      @temperatures.order(measured_at: :desc)
     end
   end
 
@@ -31,7 +31,17 @@ class TemperaturesController < ApplicationController
       if @temperature.save
         session.delete(:temperature_measured_at)
         format.html { redirect_to child_temperatures_path(current_child), notice: "体温記録を保存しました" }
-        format.turbo_stream
+
+        format.turbo_stream do
+          render turbo_stream: [
+            # 作成したレコードをリストに追加
+            turbo_stream.prepend("temperatures-list", partial: "temperatures/temperature_row", locals: { temperature: @temperature }),
+            # フラッシュ通知を追加
+            turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "体温記録を保存しました" } }),
+            # モーダルを閉じる
+            turbo_stream.update("modal") { "" }
+          ]
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
         format.turbo_stream do
@@ -66,7 +76,18 @@ class TemperaturesController < ApplicationController
     respond_to do |format|
       if @temperature.update(temperature_params)
         format.html { redirect_to child_temperatures_path(current_child), notice: "体温記録を更新しました" }
-        format.turbo_stream
+        # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace("temperature_#{@temperature.id}", partial: "temperatures/temperature_row", locals: { temperature: @temperature }),
+            turbo_stream.prepend(
+              "flash-messages",
+              partial: "shared/flash",
+              locals: { flash: { notice: "体温記録を更新しました" } }
+            ),
+            turbo_stream.update("modal") { "" }
+          ]
+        end
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.turbo_stream do
@@ -86,7 +107,18 @@ class TemperaturesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to child_temperatures_path(current_child), notice: "体温記録を削除しました" }
-      format.turbo_stream
+      # Turbo Streamで一覧削除＋フラッシュ追加＋モーダル閉じる
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.remove("temperature_#{@temperature.id}"),
+          turbo_stream.prepend(
+            "flash-messages",
+            partial: "shared/flash",
+            locals: { flash: { notice: "体温記録を削除しました" } }
+          ),
+          turbo_stream.update("modal") { "" }
+        ]
+      end
     end
   end
 

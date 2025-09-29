@@ -30,7 +30,19 @@ class SleepRecordsController < ApplicationController
       if @sleep_record.save
         session.delete(:sleep_record_start_time) # セッションから削除
         format.html { redirect_to child_sleep_records_path(current_child), notice: "睡眠の記録を保存しました" }
-        format.turbo_stream
+
+        format.turbo_stream do
+          render turbo_stream: [
+            # 作成したレコードをリストに追加
+            turbo_stream.prepend("sleep-records-list", partial: "sleep_records/sleep_record_row", locals: { sleep_record: @sleep_record }),
+
+            # フラッシュ通知を追加
+            turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "睡眠の記録を保存しました" } }),
+
+            # モーダルを閉じる
+            turbo_stream.update("modal") { "" }
+          ]
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
         format.turbo_stream do
@@ -65,7 +77,19 @@ class SleepRecordsController < ApplicationController
     respond_to do |format|
       if @sleep_record.update(sleep_record_params.merge(user: current_user))
         format.html { redirect_to child_sleep_records_path(current_child), notice: "記録を更新しました" }
-        format.turbo_stream
+
+        # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace("sleep_record_#{@sleep_record.id}", partial: "sleep_records/sleep_record_row", locals: { sleep_record: @sleep_record }),
+            turbo_stream.prepend(
+              "flash-messages",
+              partial: "shared/flash",
+              locals: { flash: { notice: "記録を更新しました" } }
+            ),
+            turbo_stream.update("modal") { "" }
+          ]
+        end
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.turbo_stream do
@@ -85,7 +109,19 @@ class SleepRecordsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to child_sleep_records_path(current_child), notice: "記録を削除しました" }
-      format.turbo_stream
+
+      # Turbo Streamで一覧削除＋フラッシュ追加＋モーダル閉じる
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.remove("sleep_record_#{@sleep_record.id}"),
+          turbo_stream.prepend(
+            "flash-messages",
+            partial: "shared/flash",
+            locals: { flash: { notice: "記録を削除しました" } }
+          ),
+          turbo_stream.update("modal") { "" }
+        ]
+      end
     end
   end
 

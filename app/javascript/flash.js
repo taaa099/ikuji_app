@@ -15,14 +15,19 @@ function setupFlash(flash) {
   }
 }
 
-// 初回フラッシュ
-document.querySelectorAll(".flash").forEach(setupFlash);
+function initFlash() {
+  // ページ内の全ての flash に対して処理
+  document.querySelectorAll(".flash").forEach(setupFlash);
 
-// Turbo Stream対応
-const flashContainer = document.getElementById("flash-messages");
-if (flashContainer) {
-  const observer = new MutationObserver(() => {
-    flashContainer.querySelectorAll(".flash").forEach(setupFlash);
-  });
-  observer.observe(flashContainer, { childList: true, subtree: true });
+  // Turbo Streamで新しく追加されたflashも処理
+  const flashContainer = document.getElementById("flash-messages");
+  if (flashContainer) {
+    const observer = new MutationObserver(() => {
+      flashContainer.querySelectorAll(".flash").forEach(setupFlash);
+    });
+    observer.observe(flashContainer, { childList: true, subtree: true });
+  }
 }
+
+// Turboでページがロードされるたびに初期化
+document.addEventListener("turbo:load", initFlash);

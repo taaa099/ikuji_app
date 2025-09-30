@@ -25,60 +25,11 @@ import "./modal";
 // フラッシュ表示用
 import "./flash";
 
-// 共通：ダークモード管理
-document.addEventListener("turbo:load", () => {
-  const toggle = document.getElementById("dark-mode-toggle");
+//ダークモード表示用
+import "./dark_mode";
 
-  const isDark = localStorage.getItem("darkMode") === "true";
-  document.documentElement.classList.toggle("dark", isDark);
+//サイドバー表示用
+import "./sidebar";
 
-  if (typeof createHeightChart === "function") createHeightChart(isDark);
-  if (typeof createWeightChart === "function") createWeightChart(isDark);
-  if (typeof createDashboardChart === "function") createDashboardChart(isDark);
-  if (typeof createSleepChart === "function") createSleepChart(isDark);
-
-  if (toggle) {
-    toggle.addEventListener("click", () => {
-      const isDarkNow = !document.documentElement.classList.contains("dark");
-      document.documentElement.classList.toggle("dark");
-      localStorage.setItem("darkMode", isDarkNow);
-
-      if (typeof createHeightChart === "function") createHeightChart(isDarkNow);
-      if (typeof createWeightChart === "function") createWeightChart(isDarkNow);
-      if (typeof createDashboardChart === "function") createDashboardChart(isDarkNow);
-      if (typeof createSleepChart === "function") createSleepChart(isDarkNow);
-    });
-  }
-
-  // サイドバー開閉
-  const sidebar = document.querySelector(".sidebar");
-  const toggleBtn = document.getElementById("sidebar-toggle");
-  const overlay = document.getElementById("sidebar-overlay");
-
-  if (toggleBtn && sidebar && overlay) {
-    toggleBtn.addEventListener("click", () => {
-      sidebar.classList.toggle("open");
-      overlay.classList.toggle("active");
-    });
-
-    overlay.addEventListener("click", () => {
-      sidebar.classList.remove("open");
-      overlay.classList.remove("active");
-    });
-  }
-
-  // 通知設定ブロックの表示切替（Turbo対応）
-  const toggleNotificationBtn = document.getElementById("toggle-notification-settings");
-  const notificationBlock = document.getElementById("notification-settings-block");
-
-  if (toggleNotificationBtn && notificationBlock) {
-    // ボタンを一度クローンしてイベント重複を防止
-    toggleNotificationBtn.replaceWith(toggleNotificationBtn.cloneNode(true));
-    const newToggleBtn = document.getElementById("toggle-notification-settings");
-
-    newToggleBtn.addEventListener("click", () => {
-      notificationBlock.style.display =
-        notificationBlock.style.display === "none" ? "block" : "none";
-    });
-  }
-});
+//ヘッダー機能関連
+import "./header";

@@ -23,46 +23,87 @@
   <body data-current-child-id="<%= @current_child&.id || 0 %>" class="bg-white text-black dark:bg-gray-900 dark:text-gray-100">
     <header class="site-header">
       <% if user_signed_in? %>
-        <div class="header-nav">
-          <!-- サイドバーボタン -->
-          <button id="sidebar-toggle" class="nav-btn">☰ メニュー</button>
+        <div class="header-container flex justify-between items-center">
+          <!-- 左端ロゴ -->
+          <div class="header-logo">
+            <%= link_to "IkujiApp", root_path, class: "logo-text" %>
+          </div>
 
-          <div id="user-menu">
-            <% if current_child.present? %>
-              <p>現在の子ども: <%= current_child.name %></p>
-            <% else %>
-              <p>子どもが選択されていません</p>
-            <% end %>
+          <!-- 右端アクション群 -->
+          <div class="header-actions flex items-center gap-4">
+            <!-- 作成ボタン -->
+            <div class="relative">
+            <button id="new-record-button" class="bg-blue-500 hover:bg-blue-600 text-white rounded-full px-4 py-2 flex items-center gap-2 shadow-md transition duration-200">
+              <i class="fa fa-plus"></i>
+             作成
+            </button>
 
-            <%= form_with(url: switch_child_path, method: :post, local: true, data: {turbo: false}) do %>
-              <%= select_tag :id, options_from_collection_for_select(current_user.children, :id, :name, session[:current_child_id]) %>
-              <%= submit_tag "切り替え" %>
-            <% end %>
-
-            <nav class="header-nav">
-              <%= link_to "トップページ", root_path, class: "nav-btn" %>
-              <%= link_to "子供一覧", children_path, class: "nav-btn" %>
-              <%= link_to "パパママTips", tips_path, class: "nav-btn" %>
-
-              <% if current_child.present? %>
-                <%= link_to "授乳一覧", child_feeds_path(current_child), class: "nav-btn" %>
-                <%= link_to "おむつ一覧", child_diapers_path(current_child), class: "nav-btn" %>
-                <%= link_to "ミルク一覧", child_bottles_path(current_child), class: "nav-btn" %>
-                <%= link_to "水分補給一覧", child_hydrations_path(current_child), class: "nav-btn" %>
-                <%= link_to "離乳食一覧", child_baby_foods_path(current_child), class: "nav-btn" %>
-                <%= link_to "睡眠一覧", child_sleep_records_path(current_child), class: "nav-btn" %>
-                <%= link_to "体温一覧", child_temperatures_path(current_child), class: "nav-btn" %>
-                <%= link_to "お風呂一覧", child_baths_path(current_child), class: "nav-btn" %>
-                <%= link_to "予防接種一覧", child_vaccinations_path(current_child), class: "nav-btn" %>
-                <%= link_to "スケジュール一覧", schedules_path, class: "nav-btn" %>
-                <%= link_to "成長記録", child_growths_path(current_child), class: "nav-btn" %>
-                <%= link_to "日記一覧", diaries_path, class: "nav-btn" %>
-                <%= link_to "プロフィールを見る", user_path(current_user), class: "nav-btn" %>
-                <%= link_to "プロフィールを編集", edit_user_registration_path(tab: "profile"), class: "nav-btn" %>
-                <%= link_to "パスワード変更", edit_user_registration_path(tab: "password"), class: "nav-btn" %>
-                <button id="dark-mode-toggle" class="p-2 border rounded ml-2">
-                  🌙 / ☀️
+              <!-- ドロップダウン -->
+             <div id="record-icons" class="absolute right-0 mt-2 hidden bg-white border rounded shadow-md w-48 z-50 flex flex-col gap-2 p-2">
+                <%= link_to new_child_feed_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
+                  Feed
+                <% end %>
+                <%= link_to new_child_diaper_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
+                  Diaper
+                <% end %>
+                <%= link_to new_child_bottle_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
+                  Bottle
+                <% end %>
+                <%= link_to new_child_hydration_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
+                  Hydration
+                <% end %>
+                <%= link_to new_child_baby_food_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
+                  Baby_food
+                <% end %>
+                <%= link_to new_child_sleep_record_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
+                  Sleep_record
+                <% end %>
+                <%= link_to new_child_bath_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
+                  Bath
+                <% end %>
+               <%= link_to new_child_temperature_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
+                  Temperature
+                <% end %>
+               <%= link_to new_child_vaccination_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
+                  vaccination
+                <% end %>
+                <%= link_to new_schedule_path, data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
+                  Schedule  
+                <% end %>
+                <%= link_to new_child_growth_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
+                  Growth
+                <% end %>
+                <%= link_to new_diary_path, data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
+                  Diary
+                <% end %>
+              </div>          
+            </div>
+            <!-- 現在の子ども切替 -->
+            <div class="child-selector relative inline-block">
+             <% if current_child.present? %>
+                <!-- 選択中はフォームだけ表示 -->
+                <%= form_with(url: switch_child_path, method: :post, local: true, data: {turbo: false}, class: "inline-block") do %>
+                 <%= select_tag :id, options_from_collection_for_select(current_user.children, :id, :name, session[:current_child_id]), class: "border rounded px-2 py-1" %>
+                  <%= submit_tag "切り替え", class: "ml-2 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600" %>
+                <% end %>
+              <% else %>
+               <!-- 未選択時はテキスト+矢印、クリックでフォーム表示 -->
+                <button type="button" class="px-3 py-1 border rounded bg-gray-100 hover:bg-gray-200 inline-flex items-center" id="child-toggle">
+                 子どもが選択されていません <span class="ml-1"></span>
                 </button>
+
+                <div id="child-menu" class="absolute hidden mt-1 bg-white border rounded shadow-md w-48 z-50">
+                 <%= form_with(url: switch_child_path, method: :post, local: true, data: {turbo: false}, class: "p-2") do %>
+                    <%= select_tag :id, options_from_collection_for_select(current_user.children, :id, :name, session[:current_child_id]), class: "w-full border rounded px-2 py-1 mb-2" %>
+                    <%= submit_tag "切り替え", class: "w-full px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600" %>
+                 <% end %>
+                </div>
+             <% end %>
+            </div>
+
+            <!-- 通知ベル -->
+            <div class="notification">
+              <% if current_child.present? %>
                 <%= link_to notifications_path(current_child), class: "notification-link" do %>
                   <i class="fa fa-bell"></i>
                   <% if current_child.notifications.where(read: false).exists? %>
@@ -72,22 +113,42 @@
                   <% end %>
                 <% end %>
               <% end %>
+            </div>
 
-              <%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-btn" %>
-            </nav>
+            <!-- アカウントアイコン -->
+            <div class="account relative">
+             <button id="account-toggle" class="flex items-center bg-transparent border-none p-0 focus:outline-none cursor-pointer">
+                <% if current_user.avatar.attached? %>
+                  <%= image_tag url_for(current_user.avatar), class: "rounded-full w-12 h-12" %>
+                <% else %>
+                 <svg class="bg-gray-200 rounded-full w-12 h-12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray">
+                    <circle cx="12" cy="8" r="4"/>
+                    <path d="M12 14c-4 0-6 2-6 4v2h12v-2c0-2-2-4-6-4z"/>
+                  </svg>
+               <% end %>
+             </button>
+
+              <!-- ドロップダウンメニュー -->
+              <div id="account-menu" class="absolute right-0 hidden bg-white shadow-md rounded mt-2 w-40 z-50">
+                <%= link_to "アカウント設定", edit_user_registration_path, class: "block px-4 py-2 hover:bg-gray-100" %>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "block px-4 py-2 hover:bg-gray-100" %>
+              </div>
+            </div>
           </div>
         </div>
       <% end %>
-    </header>
-   
     <!-- フラッシュ表示用 -->
-    <div id="flash-messages">
-      <%= render "shared/flash" %>
-    </div>
+      <div id="flash-messages">
+        <%= render "shared/flash" %>
+      </div>
+    </header>
 
     <!-- サイドバー -->
     <div class="sidebar-overlay" id="sidebar-overlay"></div>
     <%= render "layouts/sidebar" %>
+
+    <!-- モーダル枠 -->
+    <turbo-frame id="modal"></turbo-frame>
 
     <!-- 通常ページのコンテンツ -->
     <div class="main-content">

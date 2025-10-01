@@ -21,3 +21,14 @@ document.addEventListener("turbo:load", () => {
     });
   }
 });
+
+document.addEventListener("turbo:load", () => {
+  const toggleBtn = document.getElementById("toggle-record-list");
+  const menu = document.getElementById("record-list-menu");
+
+  if (toggleBtn && menu) {
+    toggleBtn.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+    });
+  }
+});

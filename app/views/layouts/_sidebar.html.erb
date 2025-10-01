@@ -5,6 +5,20 @@
     <li><%= link_to "子ども一覧", children_path %></li>
     <li><%= link_to "スケジュール", schedules_path %></li>
     <li>
+      <button id="toggle-record-list" class="nav-btn">記録一覧</button>
+      <ul id="record-list-menu" class="hidden ml-4 space-y-1">
+        <li><%= link_to "授乳一覧", child_feeds_path(current_child) %></li>
+        <li><%= link_to "おむつ一覧", child_diapers_path(current_child) %></li>
+        <li><%= link_to "ミルク一覧", child_bottles_path(current_child) %></li>
+        <li><%= link_to "水分一覧", child_hydrations_path(current_child) %></li>
+        <li><%= link_to "離乳食一覧", child_baby_foods_path(current_child) %></li>
+        <li><%= link_to "睡眠一覧", child_sleep_records_path(current_child) %></li>
+        <li><%= link_to "お風呂一覧", child_baths_path(current_child) %></li>
+        <li><%= link_to "体温一覧", child_temperatures_path(current_child) %></li>
+        <li><%= link_to "予防接種一覧", child_vaccinations_path(current_child) %></li>
+      </ul>
+    </li>
+    <li>
       <button id="toggle-notification-settings" class="nav-btn">通知設定</button>
     </li>
   </ul>

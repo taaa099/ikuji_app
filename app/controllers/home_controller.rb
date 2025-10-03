@@ -4,6 +4,7 @@ class HomeController < ApplicationController
 
   def index
     records = []
+
     # モデルごとに基準日時カラム名を定義
     date_columns = {
       Feed => :fed_at,
@@ -23,11 +24,11 @@ class HomeController < ApplicationController
       records += current_child.send(model.name.underscore.pluralize)
     end
 
-    # ソートはカラム名を動的に参照
+    # ソートはカラム名を動的に参照し、新しい順に並べる
     @records = records.sort_by do |record|
       col = date_columns[record.class]
-      record.send(col) || Time.at(0)  # nilなら最古扱いに
-    end.reverse # 新しい順
+      record.send(col) || Time.at(0)  # nilなら最古扱い
+    end.reverse
 
     # スケジュール一覧を取得（直近5件）
     @schedules = current_child&.schedules&.order(start_time: :desc)&.limit(5) || []
@@ -36,6 +37,7 @@ class HomeController < ApplicationController
     if current_child
       @growths = current_child.growths.order(:recorded_at)
       @growths_for_chart = @growths.map do |g|
+        # 誕生日からの月齢計算
         months = (g.recorded_at.year * 12 + g.recorded_at.month) -
                  (current_child.birth_date.year * 12 + current_child.birth_date.month)
         months -= 1 if g.recorded_at.day < current_child.birth_date.day
@@ -53,15 +55,24 @@ class HomeController < ApplicationController
         last = @growths.last
         prev = @growths[-2]
 
+        # 最新身長・体重
         @latest_height = last.height
         @latest_weight = last.weight
 
+        # 前回との差分
         @height_diff = prev ? last.height - prev.height : 0
         @weight_diff = prev ? last.weight - prev.weight : 0
 
+        # 平均身長・体重
         @avg_height = @growths.average(:height).to_f.round(1)
         @avg_weight = @growths.average(:weight).to_f.round(1)
       end
+    end
+
+    # Turbo Stream リクエストに対応
+    respond_to do |format|
+      format.html
+      format.turbo_stream
     end
   end
 end

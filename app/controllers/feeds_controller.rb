@@ -20,34 +20,47 @@ class FeedsController < ApplicationController
   end
 
   def new
-   # インスタンス生成＋現在時刻取得（授乳日時）
-   @feed = current_child.feeds.new(fed_at: Time.current)
+    # インスタンス生成＋現在時刻取得（授乳日時）
+    @feed = current_child.feeds.new(fed_at: Time.current)
   end
 
   def create
+    # 現在の子どもに紐づく授乳記録インスタンスを生成＋フォームパラメータ結合
     @feed = current_child.feeds.new(feed_params.merge(user: current_user))
+
+    # 左右の授乳時間を秒数に変換してセット
     @feed.left_time  = params[:left_minutes].to_i * 60 + params[:left_seconds].to_i
     @feed.right_time = params[:right_minutes].to_i * 60 + params[:right_seconds].to_i
 
     respond_to do |format|
       if @feed.save
+        # セッションの一時的な授乳日時を削除
         session.delete(:feed_fed_at)
+
+        # HTML形式の場合のリダイレクト
         format.html { redirect_to child_feeds_path(current_child), notice: "授乳記録を保存しました" }
 
+        # Turbo Stream形式の場合の非同期更新
         format.turbo_stream do
           render turbo_stream: [
-            # 作成したレコードをリストに追加
+            # 作成したレコードを育児記録一覧に先頭追加
             turbo_stream.prepend("feeds-list", partial: "feeds/feed_row", locals: { feed: @feed }),
 
             # フラッシュ通知を追加
             turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "授乳記録を保存しました" } }),
+
+            # ダッシュボードの育児記録一覧にも追加
+            turbo_stream.prepend("dashboard-records", partial: "home/record_row", locals: { record: @feed }),
 
             # モーダルを閉じる
             turbo_stream.update("modal") { "" }
           ]
         end
       else
+        # 保存に失敗した場合のHTML表示
         format.html { render :new, status: :unprocessable_entity }
+
+        # 保存に失敗した場合のTurbo Streamでモーダルを再表示
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace(
             "modal",
@@ -86,6 +99,7 @@ class FeedsController < ApplicationController
 
   def update
     @feed = current_child.feeds.find(params[:id])
+    # 左右の授乳時間を秒数に変換してセット
     @feed.left_time  = params[:left_minutes].to_i * 60 + params[:left_seconds].to_i
     @feed.right_time = params[:right_minutes].to_i * 60 + params[:right_seconds].to_i
     @feed.memo       = params[:feed][:memo]
@@ -93,22 +107,23 @@ class FeedsController < ApplicationController
 
     respond_to do |format|
       if @feed.save
+        # HTML形式の場合のリダイレクト
         format.html { redirect_to child_feeds_path(current_child), notice: "授乳記録を更新しました" }
 
-        # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
+        # Turbo Stream形式で一覧置換＋フラッシュ追加＋モーダル閉じる
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.replace("feed_#{@feed.id}", partial: "feeds/feed_row", locals: { feed: @feed }),
-            turbo_stream.prepend(
-              "flash-messages",
-              partial: "shared/flash",
-              locals: { flash: { notice: "授乳記録を更新しました" } }
-            ),
+            turbo_stream.replace("dashboard_record_#{@feed.id}", partial: "home/record_row", locals: { record: @feed }),
+            turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "授乳記録を更新しました" } }),
             turbo_stream.update("modal") { "" }
           ]
         end
       else
+        # 更新失敗時のHTML表示
         format.html { render :edit, status: :unprocessable_entity }
+
+        # 更新失敗時のTurbo Streamでモーダル再表示
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace(
             "modal",
@@ -131,17 +146,15 @@ class FeedsController < ApplicationController
     @feed.destroy
 
     respond_to do |format|
+      # HTML形式の場合のリダイレクト
       format.html { redirect_to child_feeds_path(current_child), notice: "授乳記録を削除しました" }
 
-      # Turbo Streamで一覧削除＋フラッシュ追加＋モーダル閉じる
+      # Turbo Stream形式で一覧削除＋フラッシュ追加＋モーダル閉じる
       format.turbo_stream do
         render turbo_stream: [
           turbo_stream.remove("feed_#{@feed.id}"),
-          turbo_stream.prepend(
-            "flash-messages",
-            partial: "shared/flash",
-            locals: { flash: { notice: "授乳記録を削除しました" } }
-          ),
+          turbo_stream.remove("dashboard_record_#{@feed.id}"),
+          turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "授乳記録を削除しました" } }),
           turbo_stream.update("modal") { "" }
         ]
       end
@@ -151,6 +164,6 @@ class FeedsController < ApplicationController
 private
   # フォームから送信されたパラメータのうち、許可するキーを指定
   def feed_params
-   params.require(:feed).permit(:left_time, :right_time, :memo, :fed_at)
+    params.require(:feed).permit(:left_time, :right_time, :memo, :fed_at)
   end
 end

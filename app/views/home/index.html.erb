@@ -27,23 +27,19 @@
   <tbody>
     <% @schedules.each do |schedule| %>
       <tr>
-       <td class="dashboard-schedule-col-date">
-         <%= schedule.start_time.strftime("%m/%d") %>
-         <% if schedule.all_day %>
-           終日
-         <% else %>
-           <%= schedule.start_time.strftime(" %H:%M") %>
-           <% if schedule.end_time %>
-             〜<%= schedule.end_time.strftime("%H:%M") %>
-           <% end %>
-         <% end %>
+        <td class="dashboard-schedule-col-date">
+          <%= schedule.start_time.strftime("%m/%d") %>
+          <% if schedule.all_day %>
+            終日
+          <% else %>
+            <%= schedule.start_time.strftime(" %H:%M") %>
+            <% if schedule.end_time %>
+              〜<%= schedule.end_time.strftime("%H:%M") %>
+            <% end %>
+          <% end %>
         </td>
-        <td class="dashboard-schedule-col-title">
-          <%= schedule.title %>
-        </td>
-        <td class="dashboard-schedule-col-detail">
-          <%= schedule.memo %>
-        </td>
+        <td class="dashboard-schedule-col-title"><%= schedule.title %></td>
+        <td class="dashboard-schedule-col-detail"><%= schedule.memo %></td>
       </tr>
     <% end %>
     <% if @schedules.empty? %>
@@ -66,123 +62,8 @@
       <th class="dashboard-col-memo">メモ</th>
     </tr>
   </thead>
-  <tbody>
-    <% model_names = {
-      "Feed" => "授乳",
-      "Diaper" => "おむつ",
-      "Bottle" => "ミルク",
-      "Hydration" => "水分補給",
-      "BabyFood" => "離乳食",
-      "SleepRecord" => "睡眠",
-      "Temperature" => "体温",
-      "Bath" => "お風呂",
-      "Vaccination" => "予防接種"
-    } %>
 
-    <% @records.each do |record| %>
-      <tr>
-        <td class="dashboard-col-item"><%= model_names[record.class.name] || record.class.name %></td>
-        <td class="dashboard-col-date">
-          <% 
-            date_columns = {
-              "Feed" => :fed_at,
-              "Diaper" => :changed_at,
-              "Bottle" => :given_at,
-              "Hydration" => :fed_at,
-              "BabyFood" => :fed_at,
-              "SleepRecord" => :start_time,
-              "Temperature" => :measured_at,
-              "Bath" => :bathed_at,
-              "Vaccination" => :vaccinated_at
-            }
-            date_col = date_columns[record.class.name]
-            datetime = record.send(date_col)
-          %>
-          <%= datetime ? datetime.strftime("%Y-%m-%d %H:%M") : "日時なし" %>
-        </td>
-
-        <% case record.class.name %>
-        <% when "Feed" %>
-          <td class="dashboard-col-detail">
-            <% left_min = record.left_time / 60 %>
-            <% left_sec = record.left_time % 60 %>
-            左：<%= "#{left_min}分#{left_sec}秒" %>
-          </td>
-          <td class="dashboard-col-detail">
-            <% right_min = record.right_time / 60 %>
-            <% right_sec = record.right_time % 60 %>
-            右：<%= "#{right_min}分#{right_sec}秒" %>
-          </td>
-          <td class="dashboard-col-memo"><%= record.memo %></td>
-        
-        <% when "Diaper" %>
-          <td class="dashboard-col-detail">
-            <% pee = record.pee? %>
-            <% poop = record.poop? %>
-            <% if pee && poop %>
-              両方
-            <% elsif pee %>
-              おしっこあり
-            <% elsif poop %>
-              うんちあり
-            <% else %>
-              なし
-            <% end %>
-          </td>
-          <td class="dashboard-col-detail"></td>
-          <td class="dashboard-col-memo"><%= record.memo %></td>
-        
-        <% when "Bottle" %>
-          <td class="dashboard-col-detail"><%= record.amount %>ml</td>
-          <td class="dashboard-col-detail"></td>
-          <td class="dashboard-col-memo"><%= record.memo %></td>
-        
-        <% when "Hydration" %>
-          <td class="dashboard-col-detail"><%= record.drink_type %></td>
-          <td class="dashboard-col-detail"><%= record.amount %>ml</td>
-          <td class="dashboard-col-memo"><%= record.memo %></td>
-        
-        <% when "BabyFood" %>
-          <td class="dashboard-col-detail"><%= record.amount %>ml</td>
-          <td class="dashboard-col-detail"></td>
-          <td class="dashboard-col-memo"><%= record.memo %></td>
-        
-        <% when "SleepRecord" %>
-          <td class="dashboard-col-detail">
-            <%= record.start_time.strftime("%H:%M") if record.start_time %>〜<%= record.end_time.strftime("%H:%M") if record.end_time %>
-          </td>
-          <td class="dashboard-col-detail">
-            <% if record.start_time && record.end_time %>
-              <% duration_in_seconds = record.end_time - record.start_time %>
-              <% hours = (duration_in_seconds / 3600).floor %>
-              <% minutes = ((duration_in_seconds % 3600) / 60).round %>
-              <%= "#{hours}時間#{minutes}分" %>
-            <% else %>
-              記録なし
-            <% end %>
-          </td>
-          <td class="dashboard-col-memo"><%= record.memo %></td>
-        
-        <% when "Temperature" %>
-          <td class="dashboard-col-detail"><%= sprintf("%.1f", record.temperature) %>(℃)</td>
-          <td class="dashboard-col-detail"></td>
-          <td class="dashboard-col-memo"><%= record.memo %></td>
-        
-        <% when "Bath" %>
-          <td class="dashboard-col-detail"><%= record.bath_type %></td>
-          <td class="dashboard-col-detail"></td>
-          <td class="dashboard-col-memo"><%= record.memo %></td>
-        
-        <% when "Vaccination" %>
-          <td class="dashboard-col-detail"><%= record.vaccine_name %></td>
-          <td class="dashboard-col-detail"></td>
-          <td class="dashboard-col-memo"></td>
-        
-        <% else %>
-          <td class="dashboard-col-detail" colspan="2"><%= record.respond_to?(:memo) ? record.memo : "-" %></td>
-          <td class="dashboard-col-memo"></td>
-        <% end %>
-      </tr>
-    <% end %>
+  <tbody id="dashboard-records">
+    <%= render partial: "home/record_row", collection: @records, as: :record %>
   </tbody>
 </table>

@@ -38,6 +38,9 @@ class BottlesController < ApplicationController
             # 作成したレコードをリストに追加
             turbo_stream.prepend("bottles-list", partial: "bottles/bottle_row", locals: { bottle: @bottle }),
 
+            # ダッシュボードの育児記録一覧にも追加
+            turbo_stream.prepend("dashboard-records", partial: "home/record_row", locals: { record: @bottle }),
+
             # フラッシュ通知を追加
             turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "ミルク記録を保存しました" } }),
 
@@ -85,6 +88,7 @@ class BottlesController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.replace("bottle_#{@bottle.id}", partial: "bottles/bottle_row", locals: { bottle: @bottle }),
+            turbo_stream.replace("dashboard_record_#{@bottle.id}", partial: "home/record_row", locals: { record: @bottle }),
             turbo_stream.prepend(
               "flash-messages",
               partial: "shared/flash",
@@ -117,6 +121,7 @@ class BottlesController < ApplicationController
       format.turbo_stream do
         render turbo_stream: [
           turbo_stream.remove("bottle_#{@bottle.id}"),
+          turbo_stream.remove("dashboard_record_#{@bottle.id}"),
           turbo_stream.prepend(
             "flash-messages",
             partial: "shared/flash",

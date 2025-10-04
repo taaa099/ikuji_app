@@ -36,6 +36,9 @@ class SleepRecordsController < ApplicationController
             # 作成したレコードをリストに追加
             turbo_stream.prepend("sleep-records-list", partial: "sleep_records/sleep_record_row", locals: { sleep_record: @sleep_record }),
 
+            # ダッシュボードの育児記録一覧にも追加
+            turbo_stream.prepend("dashboard-records", partial: "home/record_row", locals: { record: @sleep_record }),
+
             # フラッシュ通知を追加
             turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "睡眠の記録を保存しました" } }),
 
@@ -82,6 +85,7 @@ class SleepRecordsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.replace("sleep_record_#{@sleep_record.id}", partial: "sleep_records/sleep_record_row", locals: { sleep_record: @sleep_record }),
+            turbo_stream.replace("dashboard_record_#{@sleep_record.id}", partial: "home/record_row", locals: { record: @sleep_record }),
             turbo_stream.prepend(
               "flash-messages",
               partial: "shared/flash",
@@ -114,6 +118,7 @@ class SleepRecordsController < ApplicationController
       format.turbo_stream do
         render turbo_stream: [
           turbo_stream.remove("sleep_record_#{@sleep_record.id}"),
+          turbo_stream.remove("dashboard_record_#{@sleep_record.id}"),
           turbo_stream.prepend(
             "flash-messages",
             partial: "shared/flash",

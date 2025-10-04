@@ -1,26 +1,18 @@
 /* ==============================
-   子供切り替えページ専用スタイル
+   switch_child_page 専用スタイル
    ============================== */
 
-/* ページ全体（背景グレー） */
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  background-color: #f3f4f6;
-}
-
-/* 全体コンテナ */
-.container {
+/* ページ全体背景グレー */
+.switch-child-page-wrapper {
   min-height: 100vh;
-  width: 100%;
+  background-color: #f3f4f6;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* 白背景コンテナ */
-.white-box {
+/* 白背景ボックス */
+.switch-child-page-box {
   background-color: #fff;
   width: 100%;
   max-width: 500px;
@@ -35,25 +27,25 @@ html, body {
 }
 
 /* 上余白 */
-.top-space {
+.switch-child-page-top-space {
   height: 3%;
 }
 
 /* ロゴ */
-.logo span {
+.switch-child-page-logo span {
   font-size: 2.5rem;
   font-weight: bold;
   color: #111827;
   letter-spacing: 0.05em;
 }
 
-/* ロゴとタイトルの間隔 */
-.logo-title-space {
+/* ロゴとタイトル間隔 */
+.switch-child-page-logo-title-space {
   margin-top: 2rem;
 }
 
 /* タイトル */
-.title {
+.switch-child-page-title {
   font-size: 1.25rem;
   font-weight: 600;
   color: #111827;
@@ -62,20 +54,20 @@ html, body {
 }
 
 /* 子どもリスト */
-.children-list {
+.switch-child-page-children-list {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
 
 /* 子ども1人分（form） */
-.children-list form {
+.switch-child-page-children-list form {
   width: 100%;
   margin: 0;
 }
 
 /* 子どもボタン */
-.child-item {
+.switch-child-page-child-item {
   width: 100%;
   display: flex;
   align-items: center;
@@ -88,12 +80,12 @@ html, body {
   border-bottom: 1px solid #e5e7eb;
 }
 
-.child-item:hover {
+.switch-child-page-child-item:hover {
   background-color: #f3f4f6;
 }
 
 /* 子どもアイコン */
-.child-icon {
+.switch-child-page-child-icon {
   flex-shrink: 0;
   width: 2rem;
   height: 2rem;
@@ -102,9 +94,9 @@ html, body {
   padding: 0.3rem;
 }
 
-/* 追加ボタンのアイコンだけサイズと色を変更 */
-.add-child-item .child-icon {
-  background-color: #000; /* 背景は黒 */
+/* 追加ボタンのアイコンだけ変更 */
+.switch-child-page-add-child-item .switch-child-page-child-icon {
+  background-color: #000;
   border-radius: 50%;
   padding: 0.3rem;
   display: flex;
@@ -113,46 +105,46 @@ html, body {
 }
 
 /* 子ども情報 */
-.child-info {
+.switch-child-page-child-info {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* 中央揃え */
+  justify-content: center;
   text-align: left;
-  min-height: 2rem;        /* 必要に応じて高さを揃える */
+  min-height: 2rem;
 }
 
 /* 名前（太字） */
-.child-name {
+.switch-child-page-child-name {
   font-weight: 700;
   font-size: 1rem;
   color: #111827;
 }
 
 /* 年齢 */
-.child-age {
+.switch-child-page-child-age {
   font-size: 0.875rem;
   color: #6b7280;
 }
 
-/* 追加ボタン全体の高さを広げる */
-.add-child-item {
-  padding-top: 1.5rem;   /* 上余白を増やす */
-  padding-bottom: 1.5rem; /* 下余白を増やす */
+/* 追加ボタン全体の高さ */
+.switch-child-page-add-child-item {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 
 /* 「別の子供を追加」の名前だけ通常フォント */
-.add-child-item .child-name {
+.switch-child-page-add-child-item .switch-child-page-child-name {
   font-weight: 400;
 }
 
 /* 子ども未登録時 */
-.no-child {
+.switch-child-page-no-child {
   color: #6b7280;
   text-align: center;
   margin-top: 0.5rem;
 }
 
 /* 下余白 */
-.bottom-space {
+.switch-child-page-bottom-space {
   margin-top: auto;
 }

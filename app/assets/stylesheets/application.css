@@ -251,6 +251,21 @@ select {
   display: none !important;
 }
 
+/* デザインテーマのドロップダウン */
+#theme-menu {
+  position: absolute;
+  top: 0;           /* ボタンの上端に揃える */
+  right: 0;       /* ボタンの右横に配置 */
+  transform: translateX(-150px); /* 微調整：右に4pxずらす */
+  background-color: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0;
+  min-width: 120px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  z-index: 100;
+}
+
 /* ==============================
    PC: 1025px以上
    ============================== */

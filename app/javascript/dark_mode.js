@@ -1,24 +1,59 @@
 document.addEventListener("turbo:load", () => {
-  const toggle = document.getElementById("dark-mode-toggle");
+  const toggle = document.getElementById("theme-toggle");
+  const menu = document.getElementById("theme-menu");
+  const lightCheckbox = document.getElementById("theme-light");
+  const darkCheckbox = document.getElementById("theme-dark");
 
-  const isDark = localStorage.getItem("darkMode") === "true";
-  document.documentElement.classList.toggle("dark", isDark);
+  // 保存されているテーマを反映
+  let savedTheme = localStorage.getItem("theme") || "light";
+  if (savedTheme === "dark") {
+    document.documentElement.classList.add("dark");
+    darkCheckbox.checked = true;
+    lightCheckbox.checked = false;
+  } else {
+    document.documentElement.classList.remove("dark");
+    lightCheckbox.checked = true;
+    darkCheckbox.checked = false;
+  }
 
-  if (typeof createHeightChart === "function") createHeightChart(isDark);
-  if (typeof createWeightChart === "function") createWeightChart(isDark);
-  if (typeof createDashboardChart === "function") createDashboardChart(isDark);
-  if (typeof createSleepChart === "function") createSleepChart(isDark);
+  // ドロップダウン開閉
+  if (toggle && menu) {
+    toggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      menu.classList.toggle("hidden");
+    });
 
-  if (toggle) {
-    toggle.addEventListener("click", () => {
-      const isDarkNow = !document.documentElement.classList.contains("dark");
-      document.documentElement.classList.toggle("dark");
-      localStorage.setItem("darkMode", isDarkNow);
+    document.addEventListener("click", (e) => {
+      if (!toggle.contains(e.target) && !menu.contains(e.target)) {
+        menu.classList.add("hidden");
+      }
+    });
 
-      if (typeof createHeightChart === "function") createHeightChart(isDarkNow);
-      if (typeof createWeightChart === "function") createWeightChart(isDarkNow);
-      if (typeof createDashboardChart === "function") createDashboardChart(isDarkNow);
-      if (typeof createSleepChart === "function") createSleepChart(isDarkNow);
+    // テーマリンククリック時
+    menu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const theme = link.dataset.theme;
+
+        if (theme === "dark") {
+          document.documentElement.classList.add("dark");
+          darkCheckbox.checked = true;
+          lightCheckbox.checked = false;
+        } else {
+          document.documentElement.classList.remove("dark");
+          lightCheckbox.checked = true;
+          darkCheckbox.checked = false;
+        }
+
+        localStorage.setItem("theme", theme);
+
+        // チャート再描画
+        const isDark = theme === "dark";
+        if (typeof createHeightChart === "function") createHeightChart(isDark);
+        if (typeof createWeightChart === "function") createWeightChart(isDark);
+        if (typeof createDashboardChart === "function") createDashboardChart(isDark);
+        if (typeof createSleepChart === "function") createSleepChart(isDark);
+      });
     });
   }
 });

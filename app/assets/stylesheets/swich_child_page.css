@@ -1,0 +1,158 @@
+/* ==============================
+   子供切り替えページ専用スタイル
+   ============================== */
+
+/* ページ全体（背景グレー） */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #f3f4f6;
+}
+
+/* 全体コンテナ */
+.container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 白背景コンテナ */
+.white-box {
+  background-color: #fff;
+  width: 100%;
+  max-width: 500px;
+  height: 60vh;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* 上余白 */
+.top-space {
+  height: 3%;
+}
+
+/* ロゴ */
+.logo span {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #111827;
+  letter-spacing: 0.05em;
+}
+
+/* ロゴとタイトルの間隔 */
+.logo-title-space {
+  margin-top: 2rem;
+}
+
+/* タイトル */
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* 子どもリスト */
+.children-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 子ども1人分（form） */
+.children-list form {
+  width: 100%;
+  margin: 0;
+}
+
+/* 子どもボタン */
+.child-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  gap: 0.75rem;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.child-item:hover {
+  background-color: #f3f4f6;
+}
+
+/* 子どもアイコン */
+.child-icon {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  background-color: #e5e7eb;
+  border-radius: 50%;
+  padding: 0.3rem;
+}
+
+/* 追加ボタンのアイコンだけサイズと色を変更 */
+.add-child-item .child-icon {
+  background-color: #000; /* 背景は黒 */
+  border-radius: 50%;
+  padding: 0.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 子ども情報 */
+.child-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 中央揃え */
+  text-align: left;
+  min-height: 2rem;        /* 必要に応じて高さを揃える */
+}
+
+/* 名前（太字） */
+.child-name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #111827;
+}
+
+/* 年齢 */
+.child-age {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* 追加ボタン全体の高さを広げる */
+.add-child-item {
+  padding-top: 1.5rem;   /* 上余白を増やす */
+  padding-bottom: 1.5rem; /* 下余白を増やす */
+}
+
+/* 「別の子供を追加」の名前だけ通常フォント */
+.add-child-item .child-name {
+  font-weight: 400;
+}
+
+/* 子ども未登録時 */
+.no-child {
+  color: #6b7280;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+/* 下余白 */
+.bottom-space {
+  margin-top: auto;
+}

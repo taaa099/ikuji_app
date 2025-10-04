@@ -1,0 +1,61 @@
+<div class="container">
+
+  <div class="white-box">
+
+    <div class="top-space"></div>
+
+    <div class="logo">
+      <span>IkujiApp</span>
+    </div>
+
+    <div class="logo-title-space"></div>
+
+    <h1 class="title">別の子供を選択または追加</h1>
+
+    <div class="children-list">
+
+      <% current_user.children.each do |child| %>
+        <%= form_with url: switch_child_path, method: :post, local: true do %>
+          <%= hidden_field_tag :id, child.id %>
+          <button type="submit" class="child-item">
+
+            <!-- 子どもアイコン -->
+            <svg class="child-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray">
+              <circle cx="12" cy="8" r="4"/>
+              <path d="M12 14c-4 0-6 2-6 4v2h12v-2c0-2-2-4-6-4z"/>
+            </svg>
+
+            <!-- 子ども情報 -->
+            <div class="child-info">
+              <span class="child-name"><%= child.name %></span>
+              <span class="child-age"><%= child.birth_date ? "#{((Time.zone.today - child.birth_date)/365).floor}歳" : "" %></span>
+            </div>
+
+          </button>
+        <% end %>
+      <% end %>
+
+      <!-- 別の子どもを追加ボタン（アイコンは既存子どもと同じ、テキストのみ通常フォント） -->
+      <%= form_with url: new_child_path, method: :get, local: true do %>
+        <button type="submit" class="child-item add-child-item">
+
+          <!-- アイコンは既存の子どもアイコンと同じ -->
+          <svg class="child-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M12 14c-4 0-6 2-6 4v2h12v-2c0-2-2-4-6-4z"/>
+          </svg>
+
+          <!-- 名前だけ通常フォント -->
+          <div class="child-info">
+            <span class="child-name">別の子供を追加</span>
+          </div>
+
+        </button>
+      <% end %>
+
+    </div>
+
+    <div class="bottom-space"></div>
+
+  </div>
+</div>

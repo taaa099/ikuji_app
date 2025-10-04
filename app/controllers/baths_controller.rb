@@ -46,6 +46,9 @@ class BathsController < ApplicationController
             # 作成したレコードをリストに追加
             turbo_stream.prepend("baths-list", partial: "baths/bath_row", locals: { bath: @bath }),
 
+            # ダッシュボードの育児記録一覧にも追加
+            turbo_stream.prepend("dashboard-records", partial: "home/record_row", locals: { record: @bath }),
+
             # フラッシュ通知を追加
             turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "お風呂記録を保存しました" } }),
 
@@ -92,6 +95,7 @@ class BathsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.replace("bath_#{@bath.id}", partial: "baths/bath_row", locals: { bath: @bath }),
+            turbo_stream.replace("dashboard_record_#{@bath.id}", partial: "home/record_row", locals: { record: @bath }),
             turbo_stream.prepend(
               "flash-messages",
               partial: "shared/flash",
@@ -124,6 +128,7 @@ class BathsController < ApplicationController
       format.turbo_stream do
         render turbo_stream: [
           turbo_stream.remove("bath_#{@bath.id}"),
+          turbo_stream.remove("dashboard_record_#{@bath.id}"),
           turbo_stream.prepend(
             "flash-messages",
             partial: "shared/flash",

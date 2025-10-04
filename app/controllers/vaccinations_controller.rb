@@ -47,6 +47,9 @@ class VaccinationsController < ApplicationController
             # 作成したレコードをリストに追加
             turbo_stream.prepend("vaccinations-list", partial: "vaccinations/vaccination_row", locals: { vaccination: @vaccination }),
 
+            # ダッシュボードの育児記録一覧にも追加
+            turbo_stream.prepend("dashboard-records", partial: "home/record_row", locals: { record: @vaccination }),
+
             # フラッシュ通知を追加
             turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "予防接種記録を保存しました" } }),
 
@@ -93,6 +96,7 @@ class VaccinationsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.replace("vaccination_#{@vaccination.id}", partial: "vaccinations/vaccination_row", locals: { vaccination: @vaccination }),
+            turbo_stream.replace("dashboard_record_#{@vaccination.id}", partial: "home/record_row", locals: { record: @vaccination }),
             turbo_stream.prepend(
               "flash-messages",
               partial: "shared/flash",
@@ -125,6 +129,7 @@ class VaccinationsController < ApplicationController
       format.turbo_stream do
         render turbo_stream: [
           turbo_stream.remove("vaccination_#{@vaccination.id}"),
+          turbo_stream.remove("dashboard_record_#{@vaccination.id}"),
           turbo_stream.prepend(
             "flash-messages",
             partial: "shared/flash",

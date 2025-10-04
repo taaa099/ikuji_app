@@ -36,8 +36,13 @@ class TemperaturesController < ApplicationController
           render turbo_stream: [
             # 作成したレコードをリストに追加
             turbo_stream.prepend("temperatures-list", partial: "temperatures/temperature_row", locals: { temperature: @temperature }),
+
+            # ダッシュボードの育児記録一覧にも追加
+            turbo_stream.prepend("dashboard-records", partial: "home/record_row", locals: { record: @temperature }),
+
             # フラッシュ通知を追加
             turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "体温記録を保存しました" } }),
+
             # モーダルを閉じる
             turbo_stream.update("modal") { "" }
           ]
@@ -80,6 +85,7 @@ class TemperaturesController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.replace("temperature_#{@temperature.id}", partial: "temperatures/temperature_row", locals: { temperature: @temperature }),
+            turbo_stream.replace("dashboard_record_#{@temperature.id}", partial: "home/record_row", locals: { record: @temperature }),
             turbo_stream.prepend(
               "flash-messages",
               partial: "shared/flash",
@@ -111,6 +117,7 @@ class TemperaturesController < ApplicationController
       format.turbo_stream do
         render turbo_stream: [
           turbo_stream.remove("temperature_#{@temperature.id}"),
+          turbo_stream.remove("dashboard_record_#{@temperature.id}"),
           turbo_stream.prepend(
             "flash-messages",
             partial: "shared/flash",

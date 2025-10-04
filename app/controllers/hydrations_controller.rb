@@ -37,6 +37,9 @@ class HydrationsController < ApplicationController
             # 作成したレコードをリストに追加
             turbo_stream.prepend("hydrations-list", partial: "hydrations/hydration_row", locals: { hydration: @hydration }),
 
+            # ダッシュボードの育児記録一覧にも追加
+            turbo_stream.prepend("dashboard-records", partial: "home/record_row", locals: { record: @hydration }),
+
             # フラッシュ通知を追加
             turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "水分補給記録を保存しました" } }),
 
@@ -84,6 +87,7 @@ class HydrationsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.replace("hydration_#{@hydration.id}", partial: "hydrations/hydration_row", locals: { hydration: @hydration }),
+            turbo_stream.replace("dashboard_record_#{@hydration.id}", partial: "home/record_row", locals: { record: @hydration }),
             turbo_stream.prepend(
               "flash-messages",
               partial: "shared/flash",
@@ -116,6 +120,7 @@ class HydrationsController < ApplicationController
       format.turbo_stream do
         render turbo_stream: [
           turbo_stream.remove("hydration_#{@hydration.id}"),
+          turbo_stream.remove("dashboard_record_#{@hydration.id}"),
           turbo_stream.prepend(
             "flash-messages",
             partial: "shared/flash",

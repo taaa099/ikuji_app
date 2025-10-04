@@ -36,6 +36,9 @@ class DiapersController < ApplicationController
             # 作成したレコードをリストに追加
             turbo_stream.prepend("diapers-list", partial: "diapers/diaper_row", locals: { diaper: @diaper }),
 
+            # ダッシュボードの育児記録一覧にも追加
+            turbo_stream.prepend("dashboard-records", partial: "home/record_row", locals: { record: @diaper }),
+
             # フラッシュ通知を追加
             turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "おむつ記録を保存しました" } }),
 
@@ -84,6 +87,7 @@ class DiapersController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.replace("diaper_#{@diaper.id}", partial: "diapers/diaper_row", locals: { diaper: @diaper }),
+            turbo_stream.replace("dashboard_record_#{@diaper.id}", partial: "home/record_row", locals: { record: @diaper }),
             turbo_stream.prepend(
               "flash-messages",
               partial: "shared/flash",
@@ -116,6 +120,7 @@ class DiapersController < ApplicationController
       format.turbo_stream do
         render turbo_stream: [
           turbo_stream.remove("diaper_#{@diaper.id}"),
+          turbo_stream.remove("dashboard_record_#{@diaper.id}"),
           turbo_stream.prepend(
             "flash-messages",
             partial: "shared/flash",

@@ -36,6 +36,9 @@ class BabyFoodsController < ApplicationController
             # 作成したレコードをリストに追加
             turbo_stream.prepend("baby_foods-list", partial: "baby_foods/baby_food_row", locals: { baby_food: @baby_food }),
 
+            # ダッシュボードの育児記録一覧にも追加
+            turbo_stream.prepend("dashboard-records", partial: "home/record_row", locals: { record: @baby_food }),
+
             # フラッシュ通知を追加
             turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "離乳食の記録を保存しました" } }),
 
@@ -83,6 +86,7 @@ class BabyFoodsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.replace("baby_food_#{@baby_food.id}", partial: "baby_foods/baby_food_row", locals: { baby_food: @baby_food }),
+            turbo_stream.replace("dashboard_record_#{@baby_food.id}", partial: "home/record_row", locals: { record: @baby_food }),
             turbo_stream.prepend(
               "flash-messages",
               partial: "shared/flash",
@@ -115,6 +119,7 @@ class BabyFoodsController < ApplicationController
       format.turbo_stream do
         render turbo_stream: [
           turbo_stream.remove("baby_food_#{@baby_food.id}"),
+          turbo_stream.remove("dashboard_record_#{@baby_food.id}"),
           turbo_stream.prepend(
             "flash-messages",
             partial: "shared/flash",

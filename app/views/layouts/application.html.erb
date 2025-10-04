@@ -15,7 +15,7 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "application", "sidebar", "records", "schedule", "dashboard", "growth", "sleep_analysis", "diary", "user_settings/profile", "user_settings/darkmode", "modals", "notification", "tips", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "sidebar", "records", "schedule", "dashboard", "growth", "sleep_analysis", "diary", "user_settings/profile", "user_settings/darkmode", "modals", "notification", "tips", "swich_child_page", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <%= javascript_importmap_tags %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
@@ -78,29 +78,7 @@
                 <% end %>
               </div>          
             </div>
-            <!-- 現在の子ども切替 -->
-            <div class="child-selector relative inline-block">
-             <% if current_child.present? %>
-                <!-- 選択中はフォームだけ表示 -->
-                <%= form_with(url: switch_child_path, method: :post, local: true, data: {turbo: false}, class: "inline-block") do %>
-                 <%= select_tag :id, options_from_collection_for_select(current_user.children, :id, :name, session[:current_child_id]), class: "border rounded px-2 py-1" %>
-                  <%= submit_tag "切り替え", class: "ml-2 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600" %>
-                <% end %>
-              <% else %>
-               <!-- 未選択時はテキスト+矢印、クリックでフォーム表示 -->
-                <button type="button" class="px-3 py-1 border rounded bg-gray-100 hover:bg-gray-200 inline-flex items-center" id="child-toggle">
-                 子どもが選択されていません <span class="ml-1"></span>
-                </button>
-
-                <div id="child-menu" class="absolute hidden mt-1 bg-white border rounded shadow-md w-48 z-50">
-                 <%= form_with(url: switch_child_path, method: :post, local: true, data: {turbo: false}, class: "p-2") do %>
-                    <%= select_tag :id, options_from_collection_for_select(current_user.children, :id, :name, session[:current_child_id]), class: "w-full border rounded px-2 py-1 mb-2" %>
-                    <%= submit_tag "切り替え", class: "w-full px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600" %>
-                 <% end %>
-                </div>
-             <% end %>
-            </div>
-
+            
             <!-- 通知ベル -->
             <div class="notification">
               <% if current_child.present? %>
@@ -132,6 +110,7 @@
               <div id="account-menu" class="absolute right-0 hidden bg-white shadow-md rounded mt-2 w-40 z-50">
                 <%= link_to "アカウント設定", edit_user_registration_path, class: "block px-4 py-2 hover:bg-gray-100" %>
                 <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "block px-4 py-2 hover:bg-gray-100" %>
+                <%= link_to "子供を切り替える", switch_child_page_path, class: "block px-4 py-2 hover:bg-gray-100" %>
               </div>
             </div>
           </div>

@@ -56,6 +56,10 @@ class ChildrenController < ApplicationController
     redirect_to children_path, notice: "子どもを切り替えました"
   end
 
+  def switch_page
+    @children = current_user.children
+  end
+
   # PATCH /children/:id/update_daily_goal
   def update_daily_goal
     # 更新できるカラムを許可

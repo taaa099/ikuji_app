@@ -37,9 +37,11 @@ document.addEventListener("turbo:load", () => {
   }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("turbo:load", () => {
   const newRecordButton = document.getElementById("new-record-button");
   const recordIcons = document.getElementById("record-icons");
+
+  if (!newRecordButton || !recordIcons) return;
 
   // 作成ボタン押したらトグル
   newRecordButton.addEventListener("click", () => {
@@ -53,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // 画面クリックでドロップダウン閉じる（オプション）
+  // 画面クリックでドロップダウン閉じる
   document.addEventListener("click", (e) => {
     if (!recordIcons.contains(e.target) && e.target !== newRecordButton) {
       recordIcons.classList.add("hidden");

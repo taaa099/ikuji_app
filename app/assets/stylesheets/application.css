@@ -201,6 +201,7 @@ select {
   color: #333;
   text-decoration: none;
   cursor: pointer;
+  font-size: 14px;
 }
 
 #account-menu a:hover,
@@ -251,6 +252,7 @@ select {
   padding: 8px;
   min-width: 120px;
   z-index: 1200;
+  font-size: 14px;
 }
 
 /* ドロップダウン内リンク */

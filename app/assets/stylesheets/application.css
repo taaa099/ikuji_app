@@ -285,7 +285,7 @@ select {
   padding: 8px;
   min-width: 120px;
   z-index: 1200;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 /* ドロップダウン内リンク */
@@ -296,6 +296,14 @@ select {
   text-decoration: none;
   border-radius: 4px;
   transition: background-color 0.2s;
+}
+
+#record-icons a i {
+  flex-shrink: 0;          /* アイコンの幅を縮めない */
+  width: 24px;             /* アイコンの横幅を固定 */
+  text-align: center;      /* アイコン内部も中央揃え */
+  font-size: 20px;
+  margin-right: 8px;       /* ここでテキストとの間隔を指定 */
 }
 
 #record-icons a:hover {

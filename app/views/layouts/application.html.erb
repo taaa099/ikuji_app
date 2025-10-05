@@ -80,21 +80,22 @@
             </div>
             
             <!-- 通知ベル -->
-            <div class="notification">
+            <div class="notification tooltip">
               <% if current_child.present? %>
                 <%= link_to notifications_path(current_child), class: "notification-link" do %>
                   <i class="fa fa-bell"></i>
+                  <span class="tooltip-text">通知</span>
                   <% if current_child.notifications.where(read: false).exists? %>
                     <span class="notification-count">
                       <%= current_child.notifications.where(read: false).count %>
-                    </span>
+                  </span>
                   <% end %>
                 <% end %>
               <% end %>
             </div>
 
             <!-- アカウントアイコン -->
-            <div class="account relative">
+            <div class="account relative tooltip">
              <button id="account-toggle" class="flex items-center bg-transparent border-none p-0 focus:outline-none cursor-pointer">
                 <% if current_user.avatar.attached? %>
                   <%= image_tag url_for(current_user.avatar), class: "rounded-full w-12 h-12" %>
@@ -105,6 +106,7 @@
                   </svg>
                <% end %>
              </button>
+             <span class="tooltip-text">アカウント</span>
 
               <!-- ドロップダウンメニュー -->
               <div id="account-menu" class="absolute right-0 hidden bg-white shadow-md rounded mt-2 w-40 z-50">

@@ -266,6 +266,11 @@ select {
   transition: background-color 0.2s;
 }
 
+#new-record-button i {
+  display: inline-block;
+  pointer-events: none;  /* アイコン自身をクリック判定から外す */
+}
+
 #new-record-button:hover {
   background-color: #2563eb;
 }

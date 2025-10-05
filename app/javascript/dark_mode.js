@@ -6,7 +6,9 @@ document.addEventListener("turbo:load", () => {
 
   // 保存されているテーマを反映
   let savedTheme = localStorage.getItem("theme") || "light";
-  if (savedTheme === "dark") {
+  let isDark = savedTheme === "dark";
+
+  if (isDark) {
     document.documentElement.classList.add("dark");
     darkCheckbox.checked = true;
     lightCheckbox.checked = false;
@@ -15,6 +17,12 @@ document.addEventListener("turbo:load", () => {
     lightCheckbox.checked = true;
     darkCheckbox.checked = false;
   }
+
+  // ページロード時にチャート再描画
+  if (typeof createHeightChart === "function") createHeightChart(isDark);
+  if (typeof createWeightChart === "function") createWeightChart(isDark);
+  if (typeof createDashboardChart === "function") createDashboardChart(isDark);
+  if (typeof createSleepChart === "function") createSleepChart(isDark);
 
   // ドロップダウン開閉
   if (toggle && menu) {
@@ -35,7 +43,8 @@ document.addEventListener("turbo:load", () => {
         e.preventDefault();
         const theme = link.dataset.theme;
 
-        if (theme === "dark") {
+        const isDark = theme === "dark";
+        if (isDark) {
           document.documentElement.classList.add("dark");
           darkCheckbox.checked = true;
           lightCheckbox.checked = false;
@@ -48,7 +57,6 @@ document.addEventListener("turbo:load", () => {
         localStorage.setItem("theme", theme);
 
         // チャート再描画
-        const isDark = theme === "dark";
         if (typeof createHeightChart === "function") createHeightChart(isDark);
         if (typeof createWeightChart === "function") createWeightChart(isDark);
         if (typeof createDashboardChart === "function") createDashboardChart(isDark);

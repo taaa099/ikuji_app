@@ -177,6 +177,39 @@ select {
 }
 
 /* ==============================
+   tooltip部分
+   ============================== */
+/* tooltip 親要素 */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+/* tooltip テキスト部分 */
+.tooltip .tooltip-text {
+  visibility: hidden;
+  opacity: 0;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 8px;
+  position: absolute;
+  z-index: 1000;
+  bottom: -35px; /* ベルの下に表示 */
+  left: -18px;
+  white-space: nowrap;
+  transition: opacity 0.1s ease-in-out;
+  font-size: 12px;
+}
+
+/* hoverで即時表示 */
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* ==============================
    ユーザーメニュー
    ============================== */
 #user-menu {

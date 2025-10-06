@@ -1,29 +1,132 @@
 <div class="sidebar">
   <ul>
-    <li><%= link_to "ダッシュボード", root_path %></li>
-    <li><%= link_to "子ども一覧", children_path %></li>
     <li>
-      <button id="toggle-record-list" class="nav-btn">記録一覧</button>
+      <%= link_to root_path, class: "flex items-center gap-2" do %>
+        <i class="fa-solid fa-chess-board text-gray-600 text-xl"></i>
+        <span>ダッシュボード</span>
+      <% end %>
+    </li>
+    
+    <li><%= link_to children_path, class: "flex items-center gap-2" do  %>
+      <i class="fa-solid fa-child text-gray-600 text-xl"></i>
+      <span>子供一覧</span>
+      <% end %>
+    </li>
+
+    <li>
+      <button id="toggle-record-list" class="nav-btn">
+      <i class="fa-solid fa-record-vinyl text-gray-600 text-xl"></i>
+      <span>記録一覧</span>
+      <i class="fa-solid fa-chevron-down text-gray-600 text-sm chevron" style="font-size:13px"></i>
+      </button>
+
       <ul id="record-list-menu" class="hidden ml-4 space-y-1">
-        <li><%= link_to "授乳一覧", child_feeds_path(current_child) %></li>
-        <li><%= link_to "おむつ一覧", child_diapers_path(current_child) %></li>
-        <li><%= link_to "ミルク一覧", child_bottles_path(current_child) %></li>
-        <li><%= link_to "水分一覧", child_hydrations_path(current_child) %></li>
-        <li><%= link_to "離乳食一覧", child_baby_foods_path(current_child) %></li>
-        <li><%= link_to "睡眠一覧", child_sleep_records_path(current_child) %></li>
-        <li><%= link_to "お風呂一覧", child_baths_path(current_child) %></li>
-        <li><%= link_to "体温一覧", child_temperatures_path(current_child) %></li>
-        <li><%= link_to "予防接種一覧", child_vaccinations_path(current_child) %></li>
+        <li>
+          <%= link_to child_feeds_path(current_child), class: "flex items-center gap-2" do %>
+            <i class="fa-solid fa-person-breastfeeding text-gray-600"></i> 
+            <span>授乳一覧</span>
+          <% end %>
+        </li>
+
+        <li>
+          <%= link_to child_diapers_path(current_child), class: "flex items-center gap-2" do %>
+            <i class="fa-solid fa-baby text-gray-600"></i>
+            <span>おむつ一覧</span>
+          <% end %>
+        </li>
+
+        <li>
+          <%= link_to child_bottles_path(current_child), class: "flex items-center gap-2" do %>
+            <i class="fa-solid fa-bottle-droplet text-gray-600"></i> 
+            <span>ミルク一覧</span>
+          <% end %>
+        </li>
+
+        <li>
+          <%= link_to child_hydrations_path(current_child), class: "flex items-center gap-2" do %>
+            <i class="fa-solid fa-bottle-water text-gray-600"></i> 
+            <span>水分補給一覧</span>
+          <% end %>
+        </li>
+        
+        <li>
+          <%= link_to child_baby_foods_path(current_child), class: "flex items-center gap-2" do %>
+            <i class="fa-solid fa-utensils text-gray-600"></i> 
+            <span>離乳食一覧</span>
+          <% end %>
+        </li>
+
+        <li>
+          <%= link_to child_sleep_records_path(current_child), class: "flex items-center gap-2" do %>
+            <i class="fa-solid fa-moon text-gray-600"></i>  
+            <span>睡眠一覧</span>
+          <% end %>
+        </li>
+
+        <li>
+          <%= link_to child_baths_path(current_child), class: "flex items-center gap-2" do %>
+            <i class="fa-solid fa-bath text-gray-600"></i>  
+            <span>お風呂一覧</span>
+          <% end %>
+        </li>
+
+        <li>
+          <%= link_to child_temperatures_path(current_child), class: "flex items-center gap-2" do %>
+            <i class="fa-solid fa-temperature-three-quarters text-gray-600"></i>   
+            <span>体温一覧</span>
+          <% end %>
+        </li>
+
+        <li>
+          <%= link_to child_vaccinations_path(current_child), class: "flex items-center gap-2" do %>
+            <i class="fa-solid fa-syringe text-gray-600"></i> 
+            <span>予防接種一覧</span>
+          <% end %>
+        </li>
       </ul>
     </li>
 
-    <li><%= link_to "スケジュール", schedules_path %></li>
-    <li><%= link_to "睡眠分析", analysis_child_sleep_records_path(current_child) %></li>
-    <li><%= link_to "成長記録", child_growths_path(current_child) %></li>
-    <li><%= link_to "日記", diaries_path(current_child) %></li>
-    <li><%= link_to "育児のヒント", tips_path %></li>
     <li>
-      <button id="toggle-notification-settings" class="nav-btn">通知設定</button>
+      <%= link_to schedules_path, class: "flex items-center gap-2" do %>
+        <i class="fa-solid fa-calendar text-gray-600 text-xl"></i> 
+        <span>スケジュール一覧</span>
+      <% end %>
+    </li>
+
+    <li>
+      <%= link_to analysis_child_sleep_records_path(current_child), class: "flex items-center gap-2" do %>
+        <i class="fa-solid fa-chart-simple text-gray-600 text-xl"></i> 
+        <span>睡眠分析</span>
+      <% end %>
+    </li>
+
+    <li>
+      <%= link_to child_growths_path(current_child), class: "flex items-center gap-2" do %>
+        <i class="fa-solid fa-arrow-up-right-dots text-gray-600 text-xl"></i>
+        <span>成長記録</span>
+      <% end %>
+    </li>
+
+    <li>
+      <%= link_to diaries_path, class: "flex items-center gap-2" do %>
+        <i class="fa-solid fa-book text-gray-600 text-xl"></i> 
+        <span>日記</span>
+      <% end %>
+    </li>
+
+    <li>
+      <%= link_to tips_path, class: "flex items-center gap-2" do %>
+        <i class="fa-solid fa-lightbulb text-gray-600 text-xl"></i> 
+        <span>育児のヒント</span>
+      <% end %>
+    </li>
+    
+    <li>
+      <button id="toggle-notification-settings" class="nav-btn">
+      <i class="fa-solid fa-bolt text-gray-600 text-xl"></i>
+      <span>通知設定</span>
+      <i class="fa-solid fa-chevron-down text-gray-600 text-sm chevron" style="font-size:13px"></i>
+      </button>
     </li>
   </ul>
 

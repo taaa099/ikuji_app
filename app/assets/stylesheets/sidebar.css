@@ -11,10 +11,38 @@
   width: 240px;
   height: calc(100% - 60px);
   padding: 16px;
-  font-size: 14px;
+  font-size: 16px;
   overflow-y: auto;
   transition: left 0.3s ease;
   z-index: 1000;
+}
+
+.sidebar a i,
+.sidebar button i {
+  lex-shrink: 0;          /* アイコンの幅を縮めない */
+  width: 24px;             /* アイコンの横幅を固定 */
+  text-align: center;      /* アイコン内部も中央揃え */
+  margin-right: 8px;       /* ここでテキストとの間隔を指定 */
+}
+
+.sidebar a,
+.sidebar button.nav-btn {
+  font-size: 16px;     /* 親要素のフォントサイズを統一 */
+}
+
+#record-list-menu a i {
+  lex-shrink: 0;          /* アイコンの幅を縮めない */
+  width: 10px;             /* アイコンの横幅を固定 */
+  text-align: center;      /* アイコン内部も中央揃え */
+  margin-left: 35px;
+}
+
+#record-list-menu > li:first-child {
+  margin-top: 8px; /* 「記録一覧」と「授乳一覧」の間だけスペース */
+}
+
+.chevron {
+  margin-left: 50px;
 }
 
 /* 表示状態 */

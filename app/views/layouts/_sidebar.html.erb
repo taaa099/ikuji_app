@@ -2,7 +2,6 @@
   <ul>
     <li><%= link_to "ダッシュボード", root_path %></li>
     <li><%= link_to "子ども一覧", children_path %></li>
-    <li><%= link_to "スケジュール", schedules_path %></li>
     <li>
       <button id="toggle-record-list" class="nav-btn">記録一覧</button>
       <ul id="record-list-menu" class="hidden ml-4 space-y-1">
@@ -17,13 +16,18 @@
         <li><%= link_to "予防接種一覧", child_vaccinations_path(current_child) %></li>
       </ul>
     </li>
+
+    <li><%= link_to "スケジュール", schedules_path %></li>
+    <li><%= link_to "睡眠分析", analysis_child_sleep_records_path(current_child) %></li>
+    <li><%= link_to "成長記録", child_growths_path(current_child) %></li>
+    <li><%= link_to "日記", diaries_path(current_child) %></li>
+    <li><%= link_to "育児のヒント", tips_path %></li>
     <li>
       <button id="toggle-notification-settings" class="nav-btn">通知設定</button>
     </li>
   </ul>
 
   <div id="notification-settings-block" style="display:none;">
-    <h4>通知設定</h4>
     <% if current_user.present? %>
       <% current_user.notification_settings.each do |setting| %>
         <div class="notification-setting">

@@ -136,10 +136,29 @@
 /* ==============================
    レスポンシブ対応
    ============================== */
-@media screen and (max-width: 1024px) {
+@media screen and (min-width: 1024px) {
   .sidebar {
-    width: 200px;
-    padding: 12px;
+    left: 0;
+    width: 240px;        /* 完全表示 */
+    transition: width 0.3s;
+  }
+
+  /* アイコンだけ表示 */
+  .sidebar.collapsed {
+    width: 60px;         /* アイコンだけの幅 */
+  }
+
+  .main-content {
+    margin-left: 240px;
+    transition: margin-left 0.3s;
+  }
+
+  .sidebar.collapsed ~ .main-content {
+    margin-left: 60px;
+  }
+
+  .sidebar-overlay {
+    display: none !important; /* オーバーレイはPCでは不要 */
   }
 }
 
@@ -158,24 +177,5 @@
 
   .notification-setting {
     padding: 8px;
-  }
-}
-
-/* ==============================
-   PC常時表示
-   ============================== */
-@media screen and (min-width: 1025px) {
-  .sidebar {
-    left: 0;          /* 常時表示 */
-    transition: none; /* アニメーション不要 */
-  }
-
-  .sidebar-overlay {
-    display: none !important;
-  }
-
-  .main-content {
-    margin-left: 240px; /* サイドバー分ずらす */
-    margin-top: 60px;   /* ヘッダー分の余白を確保 */
   }
 }

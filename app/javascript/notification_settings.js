@@ -51,13 +51,12 @@ document.addEventListener("turbo:load", () => {
   const notificationBlock = document.getElementById("notification-settings-block");
 
   if (toggleNotificationBtn && notificationBlock) {
-    // ボタンを一度クローンしてイベント重複を防止
-    toggleNotificationBtn.replaceWith(toggleNotificationBtn.cloneNode(true));
-    const newToggleBtn = document.getElementById("toggle-notification-settings");
-
-    newToggleBtn.addEventListener("click", () => {
-      notificationBlock.style.display =
-        notificationBlock.style.display === "none" ? "block" : "none";
-    });
+    // ✅ イベント重複を防止しつつ、置換しないよう修正
+    if (!toggleNotificationBtn.dataset.initialized) {
+      toggleNotificationBtn.addEventListener("click", () => {
+        notificationBlock.classList.toggle("hidden");
+      });
+      toggleNotificationBtn.dataset.initialized = "true";
+    }
   }
 });

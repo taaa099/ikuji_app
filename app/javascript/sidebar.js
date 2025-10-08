@@ -13,7 +13,6 @@ document.addEventListener("turbo:load", () => {
 
   // === ドロップダウン要素の参照 ===
   const recordListMenu = document.getElementById("record-list-menu");
-  const notificationBlock = document.getElementById("notification-settings-block");
 
   // === トグルボタンで状態を切り替え ===
   toggleBtn.addEventListener("click", () => {
@@ -24,7 +23,6 @@ document.addEventListener("turbo:load", () => {
 
       // 折りたたみ時・解除時どちらでもドロップダウンを閉じる
       if (recordListMenu) recordListMenu.classList.add("hidden");
-      if (notificationBlock) notificationBlock.style.display = "none";
 
       // 状態を保存
       localStorage.setItem(
@@ -37,7 +35,6 @@ document.addEventListener("turbo:load", () => {
 
       // モバイル時も開閉のたびにドロップダウンを閉じる
       if (recordListMenu) recordListMenu.classList.add("hidden");
-      if (notificationBlock) notificationBlock.style.display = "none";
     }
   });
 
@@ -57,14 +54,33 @@ document.addEventListener("turbo:load", () => {
     });
   }
 
-  // === 通知設定ドロップダウン ===
+  // === 通知設定モーダル表示 ===
   const notificationToggleBtn = document.getElementById("toggle-notification-settings");
-  if (notificationToggleBtn && notificationBlock) {
+  const modal = document.getElementById("notification-modal");
+  const closeBtn = document.getElementById("close-notification-modal");
+  const contentBlock = document.getElementById("notification-settings-block");
+
+  if (notificationToggleBtn && modal && closeBtn) {
     notificationToggleBtn.addEventListener("click", () => {
-      notificationBlock.style.display =
-        notificationBlock.style.display === "none" || notificationBlock.style.display === ""
-          ? "block"
-          : "none";
+      modal.classList.remove("hidden");
+
+      // モーダル中身も必ず表示
+      if (contentBlock) contentBlock.classList.remove("hidden");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      modal.classList.add("hidden");
+
+      // モーダル閉じるときに中身も hidden に戻す
+      if (contentBlock) contentBlock.classList.add("hidden");
+    });
+
+    // モーダル外クリックでも閉じる
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+        if (contentBlock) contentBlock.classList.add("hidden");
+      }
     });
   }
 });

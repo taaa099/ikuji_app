@@ -31,6 +31,29 @@
   font-size: 16px;     /* 親要素のフォントサイズを統一 */
 }
 
+/* 折り畳み時はアイコンだけ表示 */
+.sidebar.collapsed span,
+.sidebar.collapsed h3,
+.sidebar.collapsed h4,
+.sidebar.collapsed h5,
+.sidebar.collapsed .chevron {
+  display: none;
+}
+
+/* 折り畳み時のリンク中央寄せ */
+.sidebar.collapsed a,
+.sidebar.collapsed button.nav-btn {
+  justify-content: center;
+  padding: 8px 0;
+}
+
+
+/* アイコン中央寄せ */
+.sidebar.collapsed i {
+  margin-right: 0;
+  text-align: center;
+}
+
 #record-list-menu a i {
   lex-shrink: 0;          /* アイコンの幅を縮めない */
   width: 10px;             /* アイコンの横幅を固定 */

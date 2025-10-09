@@ -249,6 +249,25 @@
   top: 15px;        /* サイドバー内の上からの距離を調整 */
 }
 
+/* 折りたたみ時：ドロップダウンの各子リンクにtooltipを表示 */
+.sidebar.collapsed #record-list-menu a::after {
+  content: attr(data-tooltip);
+  display: none;
+  position: absolute;
+  left: 60px;
+  white-space: nowrap;
+  background-color: #333;
+  color: #fff;
+  font-size: 11px;
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+
+/* ホバーで表示 */
+.sidebar.collapsed #record-list-menu a:hover::after {
+  display: block;
+}
+
 /* ==============================
    レスポンシブ対応
    ============================== */

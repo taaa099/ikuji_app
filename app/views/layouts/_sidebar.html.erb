@@ -16,73 +16,75 @@
       <% end %>
     </li>
 
-    <li class="tooltip">
-      <button id="toggle-record-list" class="nav-btn">
-        <i class="fa-solid fa-record-vinyl text-gray-600 text-xl"></i>
-        <span>記録一覧</span>
-        <i class="fa-solid fa-chevron-down text-gray-600 text-sm chevron" style="font-size:13px"></i>
+    <li>
+      <div class="tooltip">
+        <button id="toggle-record-list" class="nav-btn">
+          <i class="fa-solid fa-record-vinyl text-gray-600 text-xl"></i>
+          <span>記録一覧</span>
+          <i class="fa-solid fa-chevron-down text-gray-600 text-sm chevron" style="font-size:13px"></i>
+        </button>
         <span class="tooltip-text">記録一覧 &#x25BC;</span>
-      </button>
+      </div>
 
       <ul id="record-list-menu" class="hidden ml-4 space-y-1">
         <li>
-          <%= link_to child_feeds_path(current_child), class: "flex items-center gap-2" do %>
+          <%= link_to child_feeds_path(current_child), class: "flex items-center gap-2", data: { tooltip: "授乳一覧" } do %>
             <i class="fa-solid fa-person-breastfeeding text-gray-600"></i>
             <span>授乳一覧</span>
           <% end %>
         </li>
 
         <li>
-          <%= link_to child_diapers_path(current_child), class: "flex items-center gap-2" do %>
+          <%= link_to child_diapers_path(current_child), class: "flex items-center gap-2", data: { tooltip: "おむつ一覧" } do %>
             <i class="fa-solid fa-baby text-gray-600"></i>
             <span>おむつ一覧</span>
           <% end %>
         </li>
 
         <li>
-          <%= link_to child_bottles_path(current_child), class: "flex items-center gap-2" do %>
+          <%= link_to child_bottles_path(current_child), class: "flex items-center gap-2", data: { tooltip: "ミルク一覧" } do %>
             <i class="fa-solid fa-bottle-droplet text-gray-600"></i>
             <span>ミルク一覧</span>
           <% end %>
         </li>
 
         <li>
-          <%= link_to child_hydrations_path(current_child), class: "flex items-center gap-2" do %>
+          <%= link_to child_hydrations_path(current_child), class: "flex items-center gap-2", data: { tooltip: "水分補給一覧" } do %>
             <i class="fa-solid fa-bottle-water text-gray-600"></i>
             <span>水分補給一覧</span>
           <% end %>
         </li>
 
         <li>
-          <%= link_to child_baby_foods_path(current_child), class: "flex items-center gap-2" do %>
+          <%= link_to child_baby_foods_path(current_child), class: "flex items-center gap-2", data: { tooltip: "離乳食一覧" } do %>
             <i class="fa-solid fa-utensils text-gray-600"></i>
             <span>離乳食一覧</span>
           <% end %>
         </li>
 
         <li>
-          <%= link_to child_sleep_records_path(current_child), class: "flex items-center gap-2" do %>
+          <%= link_to child_sleep_records_path(current_child), class: "flex items-center gap-2", data: { tooltip: "睡眠一覧" } do %>
             <i class="fa-solid fa-moon text-gray-600"></i>
             <span>睡眠一覧</span>
           <% end %>
         </li>
 
         <li>
-          <%= link_to child_baths_path(current_child), class: "flex items-center gap-2" do %>
+          <%= link_to child_baths_path(current_child), class: "flex items-center gap-2", data: { tooltip: "お風呂一覧" } do %>
             <i class="fa-solid fa-bath text-gray-600"></i>
             <span>お風呂一覧</span>
           <% end %>
         </li>
 
         <li>
-          <%= link_to child_temperatures_path(current_child), class: "flex items-center gap-2" do %>
+          <%= link_to child_temperatures_path(current_child), class: "flex items-center gap-2", data: { tooltip: "体温一覧" } do %>
             <i class="fa-solid fa-temperature-three-quarters text-gray-600"></i>
             <span>体温一覧</span>
           <% end %>
         </li>
 
         <li>
-          <%= link_to child_vaccinations_path(current_child), class: "flex items-center gap-2" do %>
+          <%= link_to child_vaccinations_path(current_child), class: "flex items-center gap-2", data: { tooltip: "予防接種一覧" } do %>
             <i class="fa-solid fa-syringe text-gray-600"></i>
             <span>予防接種一覧</span>
           <% end %>

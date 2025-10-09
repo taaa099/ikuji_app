@@ -1,24 +1,27 @@
 <div class="sidebar">
   <ul>
-    <li>
+    <li class="tooltip">
       <%= link_to root_path, class: "flex items-center gap-2" do %>
         <i class="fa-solid fa-chess-board text-gray-600 text-xl"></i>
         <span>ダッシュボード</span>
+        <span class="tooltip-text">ダッシュボード</span>
       <% end %>
     </li>
 
-    <li>
+    <li class="tooltip">
       <%= link_to children_path, class: "flex items-center gap-2" do %>
         <i class="fa-solid fa-child text-gray-600 text-xl"></i>
         <span>子供一覧</span>
+        <span class="tooltip-text">子供一覧</span>
       <% end %>
     </li>
 
-    <li>
+    <li class="tooltip">
       <button id="toggle-record-list" class="nav-btn">
         <i class="fa-solid fa-record-vinyl text-gray-600 text-xl"></i>
         <span>記録一覧</span>
         <i class="fa-solid fa-chevron-down text-gray-600 text-sm chevron" style="font-size:13px"></i>
+        <span class="tooltip-text">記録一覧</span>
       </button>
 
       <ul id="record-list-menu" class="hidden ml-4 space-y-1">
@@ -87,45 +90,51 @@
       </ul>
     </li>
 
-    <li>
+    <li class="tooltip">
       <%= link_to schedules_path, class: "flex items-center gap-2" do %>
         <i class="fa-solid fa-calendar text-gray-600 text-xl"></i>
         <span>スケジュール一覧</span>
+        <span class="tooltip-text">スケジュール一覧</span>
       <% end %>
     </li>
 
-    <li>
+    <li class="tooltip">
       <%= link_to analysis_child_sleep_records_path(current_child), class: "flex items-center gap-2" do %>
         <i class="fa-solid fa-chart-simple text-gray-600 text-xl"></i>
         <span>睡眠分析</span>
+        <span class="tooltip-text">睡眠分析</span>
       <% end %>
     </li>
 
-    <li>
+    <li class="tooltip">
       <%= link_to child_growths_path(current_child), class: "flex items-center gap-2" do %>
         <i class="fa-solid fa-arrow-up-right-dots text-gray-600 text-xl"></i>
         <span>成長記録</span>
+        <span class="tooltip-text">成長記録</span>
       <% end %>
     </li>
 
-    <li>
+    <li class="tooltip">
       <%= link_to diaries_path, class: "flex items-center gap-2" do %>
         <i class="fa-solid fa-book text-gray-600 text-xl"></i>
         <span>日記</span>
+        <span class="tooltip-text">日記一覧</span>
       <% end %>
     </li>
 
-    <li>
+    <li class="tooltip">
       <%= link_to tips_path, class: "flex items-center gap-2" do %>
         <i class="fa-solid fa-lightbulb text-gray-600 text-xl"></i>
         <span>育児のヒント</span>
+        <span class="tooltip-text">育児のヒント</span>
       <% end %>
     </li>
 
-    <li>
+    <li class="tooltip">
       <button id="toggle-notification-settings" class="nav-btn">
         <i class="fa-solid fa-bolt text-gray-600 text-xl"></i>
         <span>通知設定</span>
+        <span class="tooltip-text">通知設定</span>
       </button>
     </li>
   </ul>

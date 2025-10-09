@@ -230,7 +230,7 @@
 
 /* 折りたたみ時：アイコンの位置 */
 .sidebar.collapsed #record-list-menu a i {
-  margin-left: 5px !important;
+  margin-left: 1px !important;
   flex-shrink: 0;          /* アイコンの幅を縮めない */
   width: 24px;             /* アイコンの横幅を固定 */
   text-align: center;      /* アイコン内部も中央揃え */

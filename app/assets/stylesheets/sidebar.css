@@ -222,6 +222,33 @@
   display: none;
 }
 
+/* 折りたたみ時：ドロップダウン子要素の位置調整 */
+.sidebar.collapsed #record-list-menu a {
+  justify-content: flex-start; /* 左寄せにして自由に調整 */
+  margin-left: 5px !important; /* 少し右に寄せて“階層感”を出す */
+}
+
+/* 折りたたみ時：アイコンの位置 */
+.sidebar.collapsed #record-list-menu a i {
+  margin-left: 5px !important;
+  flex-shrink: 0;          /* アイコンの幅を縮めない */
+  width: 24px;             /* アイコンの横幅を固定 */
+  text-align: center;      /* アイコン内部も中央揃え */
+}
+
+/* 折りたたみ時 chevron 固定表示 */
+.sidebar.collapsed #toggle-record-list .chevron {
+  position: absolute;
+  left: -30px;       /* サイドバー内でアイコンの隣に固定 */
+  top: 15px;        /* サイドバー内の上からの距離を調整 */
+}
+
+.sidebar.collapsed .chevron {
+  position: absolute;
+  left: -30px;       /* サイドバー内でアイコンの隣に固定 */
+  top: 15px;        /* サイドバー内の上からの距離を調整 */
+}
+
 /* ==============================
    レスポンシブ対応
    ============================== */

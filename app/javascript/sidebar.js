@@ -49,8 +49,17 @@ document.addEventListener("turbo:load", () => {
   // === 育児記録一覧ドロップダウン ===
   const recordToggleBtn = document.getElementById("toggle-record-list");
   if (recordToggleBtn && recordListMenu) {
+    // 🔹 ページ読み込み時：保存状態を復元
+    const savedDropdownState = localStorage.getItem("record-list-open");
+    if (savedDropdownState === "true") {
+      recordListMenu.classList.remove("hidden");
+    }
+
+    // 🔹 クリック時に開閉＋保存
     recordToggleBtn.addEventListener("click", () => {
       recordListMenu.classList.toggle("hidden");
+      const isOpen = !recordListMenu.classList.contains("hidden");
+      localStorage.setItem("record-list-open", isOpen);
     });
   }
 

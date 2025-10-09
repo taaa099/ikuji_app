@@ -1,9 +1,7 @@
 /* ==============================
    サイドバー専用スタイル
    ============================== */
-
-
-/* デフォルト非表示で左に隠す */
+   
 .sidebar {
   position: fixed;
   top: 60px; /* ヘッダーの高さ分ずらす */
@@ -13,6 +11,7 @@
   padding: 16px;
   font-size: 16px;
   overflow-y: auto;
+  overflow: visible;
   transition: left 0.3s ease;
   border-right: 1px solid #ddd; /* サイドバー右側に区切り線を追加 */
   z-index: 1000;
@@ -32,7 +31,7 @@
 }
 
 /* 折り畳み時はアイコンだけ表示 */
-.sidebar.collapsed span,
+.sidebar.collapsed span:not(.tooltip-text),
 .sidebar.collapsed h3,
 .sidebar.collapsed h4,
 .sidebar.collapsed h5,
@@ -46,7 +45,6 @@
   justify-content: center;
   padding: 8px 0;
 }
-
 
 /* アイコン中央寄せ */
 .sidebar.collapsed i {
@@ -211,6 +209,17 @@
   right: 14px;
   font-size: 24px;
   cursor: pointer;
+}
+
+.sidebar.collapsed .tooltip:hover .tooltip-text {
+  display: block;
+  position: absolute;
+  font-size: 11px;
+}
+
+/* 折りたたみ解除時（= 通常表示時）はツールチップを非表示 */
+.sidebar:not(.collapsed) .tooltip-text {
+  display: none;
 }
 
 /* ==============================

@@ -54,7 +54,9 @@
 
             <div class="absolute left-1/2 transform -translate-x-1/2 text-center leading-tight">
               <div class="text-sm sm:text-base font-semibold text-gray-700 dark:text-gray-300">
-                <%= raw "#{name} #{gender_icon} #{months}ヶ月#{days}日" %>
+                <%= name %>
+                <%= @current_child.gender == "男" ? '<i class="fa-solid fa-mars text-blue-500"></i>'.html_safe : '<i class="fa-solid fa-venus text-pink-500"></i>'.html_safe %>
+                <%= "#{months}ヶ月#{days}日" %>
               </div>
               <div class="text-lg sm:text-2xl font-bold text-gray-900 dark:text-gray-100">
                 <%= Time.current.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[Time.current.wday]})") %>

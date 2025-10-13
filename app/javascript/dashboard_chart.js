@@ -45,3 +45,22 @@ function createDashboardChart(isDarkMode) {
 }
 
 window.createDashboardChart = createDashboardChart; // ダークモード切替から呼べるようにグローバル化
+
+  document.addEventListener("turbo:load", () => {
+    const button = document.getElementById("calendar-button");
+    const input = document.getElementById("calendar-input");
+
+    if (button && input) {
+      button.addEventListener("click", () => {
+        input.showPicker(); // ✅ ボタンクリックで直接カレンダーを開く
+      });
+
+      input.addEventListener("change", () => {
+        const selectedDate = input.value;
+        if (selectedDate) {
+          // ✅ 選択された日付にリダイレクト
+          window.location.href = `/?date=${selectedDate}`;
+        }
+      });
+    }
+  });

@@ -35,6 +35,15 @@
   display: none;
 }
 
+/* ==============================
+   レコード行のホバー効果
+   ============================== */
+.dashboard-table tr:hover {
+  background-color: #f3f4f6; /* グレー（Tailwindのgray-100相当） */
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
 .dashboard-col-item { width: 15%; }
 .dashboard-col-date { width: 20%; }
 .dashboard-col-detail { width: 20%; }

@@ -56,9 +56,12 @@
 <div class="flex justify-center items-center mb-4">
   <div class="flex items-center gap-4">
     <!-- 前日へ -->
-    <%= link_to root_path(date: (@selected_date - 1.day).to_s), class: "text-gray-600 hover:text-gray-800" do %>
-      <i class="fa-solid fa-chevron-left text-lg"></i>
-    <% end %>
+    <div class="tooltip">
+      <%= link_to root_path(date: (@selected_date - 1.day).to_s), class: "text-gray-600 hover:text-gray-800" do %>
+        <i class="fa-solid fa-chevron-left text-lg"></i>
+        <span class="tooltip-text">前日へ</span>
+      <% end %>
+    </div>
 
     <!-- 日付表示 -->
     <span class="text-lg font-semibold text-gray-800">
@@ -66,11 +69,14 @@
     </span>
 
     <!-- 翌日へ（本日より未来の場合は非表示） -->
-    <% if @selected_date < Date.current %>
-      <%= link_to root_path(date: (@selected_date + 1.day).to_s), class: "text-gray-600 hover:text-gray-800" do %>
-        <i class="fa-solid fa-chevron-right text-lg"></i>
+    <div class="tooltip">
+      <% if @selected_date < Date.current %>
+        <%= link_to root_path(date: (@selected_date + 1.day).to_s), class: "text-gray-600 hover:text-gray-800" do %>
+          <i class="fa-solid fa-chevron-right text-lg"></i>
+          <span class="tooltip-text">翌日へ</span>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
 
     <!-- 🟢 本日へ（過去・未来の日付時のみ表示） -->
 <% if @selected_date != Date.current %>

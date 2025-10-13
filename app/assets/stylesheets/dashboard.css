@@ -24,16 +24,58 @@
 
 .dashboard-table th,
 .dashboard-table td {
-  border: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
   padding: 8px;
   text-align: left;
   word-break: break-word;
+}
+
+.dashboard-table th {
+  display: none;
 }
 
 .dashboard-col-item { width: 15%; }
 .dashboard-col-date { width: 20%; }
 .dashboard-col-detail { width: 20%; }
 .dashboard-col-memo { width: 25%; }
+
+.dashboard-col-item i {
+  flex-shrink: 0;          /* アイコンの幅を縮めない */
+  width: 24px;             /* アイコンの横幅を固定 */
+  text-align: center;      /* 中央揃え */
+}
+
+.dashboard-col-memo {
+  max-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 矢印ボタン */
+.dashboard-edit-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #f3f4f6; /* グレー系背景 */
+  color: #4b5563;           /* アイコン色 */
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.dashboard-edit-btn:hover {
+  background-color: #e5e7eb;
+  color: #111827;
+  transform: scale(1.05);
+}
+
+.dashboard-edit-btn i {
+  font-size: 14px;
+}
 
 /* ==============================
    ダッシュボード：スケジュール専用

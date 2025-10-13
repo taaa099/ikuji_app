@@ -5,6 +5,11 @@ class HomeController < ApplicationController
   def index
     records = []
 
+    # ① 現在の日付（またはURLパラメータ）
+    @selected_date = params[:date] ? Date.parse(params[:date]) : Date.current
+    start_time = @selected_date.beginning_of_day
+    end_time   = @selected_date.end_of_day
+
     # モデルごとに基準日時カラム名を定義
     date_columns = {
       Feed => :fed_at,
@@ -18,10 +23,12 @@ class HomeController < ApplicationController
       Vaccination => :vaccinated_at
     }
 
-    # 全モデルのレコードを取得し配列に追加
+    # 各モデルの日付範囲内レコードを取得
     date_columns.each do |model, date_col|
       next unless current_child
-      records += current_child.send(model.name.underscore.pluralize)
+      model_records = current_child.send(model.name.underscore.pluralize)
+                          .where(date_col => start_time..end_time)
+      records.concat(model_records)
     end
 
     # ソートはカラム名を動的に参照し、新しい順に並べる

@@ -22,25 +22,10 @@
       <th class="dashboard-schedule-col-detail">詳細</th>
     </tr>
   </thead>
-  <tbody>
-    <% @schedules.each do |schedule| %>
-      <tr>
-        <td class="dashboard-schedule-col-date">
-          <%= schedule.start_time.strftime("%m/%d") %>
-          <% if schedule.all_day %>
-            終日
-          <% else %>
-            <%= schedule.start_time.strftime(" %H:%M") %>
-            <% if schedule.end_time %>
-              〜<%= schedule.end_time.strftime("%H:%M") %>
-            <% end %>
-          <% end %>
-        </td>
-        <td class="dashboard-schedule-col-title"><%= schedule.title %></td>
-        <td class="dashboard-schedule-col-detail"><%= schedule.memo %></td>
-      </tr>
-    <% end %>
-    <% if @schedules.empty? %>
+  <tbody id="dashboard-schedules">
+    <% if @schedules.any? %>
+      <%= render partial: "home/schedule_row", collection: @schedules, as: :schedule %>
+    <% else %>
       <tr>
         <td colspan="3">スケジュールはありません</td>
       </tr>

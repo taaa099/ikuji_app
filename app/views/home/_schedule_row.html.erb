@@ -1,0 +1,26 @@
+<tr id="dashboard_schedule_<%= schedule.id %>">
+  <td class="dashboard-schedule-col-date">
+    <%= schedule.start_time.strftime("%m/%d") %>
+    <% if schedule.all_day %>
+      終日
+    <% else %>
+      <%= schedule.start_time.strftime(" %H:%M") %>
+      <% if schedule.end_time %>
+        〜<%= schedule.end_time.strftime("%H:%M") %>
+      <% end %>
+    <% end %>
+  </td>
+  <td class="dashboard-schedule-col-title"><%= schedule.title %></td>
+  <td class="dashboard-schedule-col-detail"><%= schedule.memo %></td>
+
+  <!-- 右端の矢印（編集ボタン） -->
+  <td class="dashboard-col-chevron text-right pr-2">
+    <%= link_to(
+      edit_schedule_path(schedule),
+      data: { turbo_frame: "modal" },
+      class: "dashboard-edit-btn"
+    ) do %>
+      <i class="fa-solid fa-chevron-right"></i>
+    <% end %>
+  </td>
+</tr>

@@ -154,8 +154,8 @@ class SleepRecordsController < ApplicationController
       end
 
       nighttime_minutes = day_records.sum do |r|
-        if !r.start_time.hour.between?(9, 16)
-          ((r.end_time - r.start_time)/60).to_i
+        if r.start_time.present? && r.end_time.present? && !r.start_time.hour.between?(9, 16)
+          ((r.end_time - r.start_time) / 60).to_i
         else
           0
         end

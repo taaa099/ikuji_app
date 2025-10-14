@@ -34,7 +34,7 @@ function createDashboardChart(isDarkMode) {
       responsive: true,
       plugins: { 
         legend: { position: 'top', labels: { color: textColor } }, 
-        title: { display: true, text: '成長ダッシュボード', color: textColor } 
+        title: { display: true, text: '成長グラフ', color: textColor } 
       },
       scales: { 
         y: { title: { display: true, text: "数値", color: textColor }, ticks: { color: textColor }, grid: { color: gridColor }, beginAtZero: false },

@@ -38,7 +38,8 @@ class HomeController < ApplicationController
     end.reverse
 
     # スケジュール一覧を取得（直近5件）
-    @schedules = current_child&.schedules&.order(start_time: :desc)&.limit(5) || []
+    @latest_schedules = current_user.schedules.order(start_time: :desc).limit(5)
+
 
     # ----- 成長記録（グラフ用） -----
     if current_child

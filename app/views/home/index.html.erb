@@ -23,8 +23,8 @@
     </tr>
   </thead>
   <tbody id="dashboard-schedules">
-    <% if @schedules.any? %>
-      <%= render partial: "home/schedule_row", collection: @schedules, as: :schedule %>
+    <% if @latest_schedules.present? && @latest_schedules.any? %>
+      <%= render partial: "home/schedule_row", collection: @latest_schedules, as: :schedule %>
     <% else %>
       <tr>
         <td colspan="3">スケジュールはありません</td>

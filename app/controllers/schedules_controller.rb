@@ -60,23 +60,17 @@ class SchedulesController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             # カレンダーを更新
-            turbo_stream.replace(
-              "calendar",
-              partial: "schedules/calendar",
-              locals: { month: @month, schedules: @schedules }
-            ),
+            turbo_stream.replace("calendar", partial: "schedules/calendar", locals: { month: @month, schedules: @schedules }),
+
             # 一覧に新しいレコードを追加
-            turbo_stream.prepend(
-              "schedules-list",
-              partial: "schedules/schedule_row",
-              locals: { schedule: @schedule }
-            ),
+            turbo_stream.prepend("schedules-list", partial: "schedules/schedule_row", locals: { schedule: @schedule }),
+
             # フラッシュ通知を追加
-            turbo_stream.prepend(
-              "flash-messages",
-              partial: "shared/flash",
-              locals: { flash: { notice: "予定を登録しました" } }
-            ),
+            turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "予定を登録しました" } }),
+
+            # ダッシュボードの育児記録一覧にも追加
+            turbo_stream.prepend("dashboard-schedules", partial: "home/schedule_row", locals: { schedule: @schedule }),
+
             # モーダルを閉じる
             turbo_stream.update("modal") { "" }
           ]
@@ -126,18 +120,16 @@ class SchedulesController < ApplicationController
           render turbo_stream: [
             # 一覧のレコードを置換
             turbo_stream.replace("schedule_#{@schedule.id}", partial: "schedules/schedule_row", locals: { schedule: @schedule }),
+
             # カレンダーを更新
-            turbo_stream.replace(
-              "calendar",
-              partial: "schedules/calendar",
-              locals: { month: @month, schedules: @schedules }
-            ),
+            turbo_stream.replace("calendar", partial: "schedules/calendar", locals: { month: @month, schedules: @schedules }),
+
             # フラッシュ通知を追加
-            turbo_stream.prepend(
-              "flash-messages",
-              partial: "shared/flash",
-              locals: { flash: { notice: "予定を更新しました" } }
-            ),
+            turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "予定を更新しました" } }),
+
+            # ダッシュボードの育児記録一覧にも追加
+            turbo_stream.replace("dashboard_schedule_#{@schedule.id}", partial: "home/schedule_row", locals: { schedule: @schedule }),
+
             # モーダルを閉じる
             turbo_stream.update("modal") { "" }
           ]
@@ -184,6 +176,9 @@ class SchedulesController < ApplicationController
             partial: "shared/flash",
             locals: { flash: { notice: "予定を削除しました" } }
           ),
+
+          turbo_stream.remove("dashboard_schedule_#{@schedule.id}"),
+
           # モーダルを閉じる
           turbo_stream.update("modal") { "" }
         ]

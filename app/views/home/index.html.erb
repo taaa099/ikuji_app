@@ -39,24 +39,25 @@
 
 <%# ----- スケジュール一覧（直近5件） ----- %>
 <h2 class="dashboard-title">スケジュール（直近）</h2>
-<table class="dashboard-table dashboard-schedule-table">
-  <thead>
-    <tr>
-      <th class="dashboard-schedule-col-date">日時</th>
-      <th class="dashboard-schedule-col-title">タイトル</th>
-      <th class="dashboard-schedule-col-detail">詳細</th>
-    </tr>
-  </thead>
-  <tbody id="dashboard-schedules">
-    <% if @latest_schedules.present? && @latest_schedules.any? %>
-      <%= render partial: "home/schedule_row", collection: @latest_schedules, as: :schedule %>
-    <% else %>
+
+<% if @latest_schedules.present? && @latest_schedules.any? %>
+  <table class="dashboard-table dashboard-schedule-table">
+    <thead>
       <tr>
-        <td colspan="3">スケジュールはありません</td>
+        <th class="dashboard-schedule-col-date">日時</th>
+        <th class="dashboard-schedule-col-title">タイトル</th>
+        <th class="dashboard-schedule-col-detail">詳細</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody id="dashboard-schedules">
+      <%= render partial: "home/schedule_row", collection: @latest_schedules, as: :schedule %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="no-record-card">
+    <p>直近のスケジュールはありません。</p>
+  </div>
+<% end %>
 
 <%# ----- 育児記録一覧 ----- %>
 <h2 class="dashboard-title">育児記録一覧</h2>
@@ -87,58 +88,55 @@
     </div>
 
     <!-- 📅 カレンダー選択 -->
-<div class="relative">
-  <!-- 隠しinput -->
-  <input type="date" id="calendar-input"
-    class="absolute opacity-0 pointer-events-none"
-    value="<%= @selected_date %>"
-    max="<%= Date.current %>">
-    
+    <div class="relative">
+      <!-- 隠しinput -->
+      <input type="date" id="calendar-input"
+        class="absolute opacity-0 pointer-events-none"
+        value="<%= @selected_date %>"
+        max="<%= Date.current %>">
 
-  <!-- ボタン（クリックでinputを呼び出す） -->
-  <button
-    id="calendar-button"
-    class="ml-2 px-3 py-1.5 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg border border-gray-300 hover:bg-gray-200 transition duration-200 flex items-center gap-1">
-    <i class="fa-solid fa-calendar-days"></i> 日付選択
-  </button>
-</div>
+      <!-- ボタン（クリックでinputを呼び出す） -->
+      <button
+        id="calendar-button"
+        class="ml-2 px-3 py-1.5 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg border border-gray-300 hover:bg-gray-200 transition duration-200 flex items-center gap-1">
+        <i class="fa-solid fa-calendar-days"></i> 日付選択
+      </button>
+    </div>
 
     <!-- 🟢 本日へ（過去・未来の日付時のみ表示） -->
-<% if @selected_date != Date.current %>
-  <%= link_to "本日へ", root_path,
-    class: "ml-4 px-3 py-1.5 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg border border-gray-300 hover:bg-gray-200 transition duration-200 no-underline hover:no-underline" %>
-<% end %>
+    <% if @selected_date != Date.current %>
+      <%= link_to "本日へ", root_path,
+        class: "ml-4 px-3 py-1.5 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg border border-gray-300 hover:bg-gray-200 transition duration-200 no-underline hover:no-underline" %>
+    <% end %>
   </div>
 </div>
 
-<table class="dashboard-table">
-  <thead>
-    <tr>
-      <th class="dashboard-col-item">項目</th>
-      <th class="dashboard-col-date">日時</th>
-      <th class="dashboard-col-detail">詳細1</th>
-      <th class="dashboard-col-detail">詳細2</th>
-      <th class="dashboard-col-memo">メモ</th>
-      <th class="dashboard-col-chevron"></th>
-    </tr>
-  </thead>
-
-  <tbody id="dashboard-records">
-    <% if @records.any? %>
-      <%= render partial: "home/record_row", collection: @records, as: :record %>
-    <% else %>
+<% if @records.any? %>
+  <table class="dashboard-table">
+    <thead>
       <tr>
-        <td colspan="6" class="text-center text-gray-500 py-4">
-          <% if @selected_date == Date.current %>
-            本日の記録がまだありません。
-          <% else %>
-            記録がありません。
-          <% end %>
-        </td>
+        <th class="dashboard-col-item">項目</th>
+        <th class="dashboard-col-date">日時</th>
+        <th class="dashboard-col-detail">詳細1</th>
+        <th class="dashboard-col-detail">詳細2</th>
+        <th class="dashboard-col-memo">メモ</th>
+        <th class="dashboard-col-chevron"></th>
       </tr>
+    </thead>
+
+    <tbody id="dashboard-records">
+      <%= render partial: "home/record_row", collection: @records, as: :record %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="no-record-card text-center py-6 bg-white rounded-lg shadow-md">
+    <% if @selected_date == Date.current %>
+      <p>本日の記録がまだありません。</p>
+    <% else %>
+      <p>記録がありません。</p>
     <% end %>
-  </tbody>
-</table>
+  </div>
+<% end %>
 
 <%# ----- 成長記録(グラフ) ----- %>
 <h2 class="dashboard-title">成長グラフ(身長・体重統合)</h2>

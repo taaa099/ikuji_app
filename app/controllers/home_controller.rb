@@ -37,9 +37,8 @@ class HomeController < ApplicationController
       record.send(col) || Time.at(0)  # nilなら最古扱い
     end.reverse
 
-    # スケジュール一覧を取得（直近5件）
-    @latest_schedules = current_user.schedules.order(start_time: :desc).limit(5)
-
+    # スケジュール一覧を取得（直近の予定が過ぎていない最大5件）
+    @latest_schedules = current_user.schedules.where("start_time >= ?", Time.current).order(start_time: :desc).limit(5)
 
     # ----- 成長記録（グラフ用） -----
     if current_child

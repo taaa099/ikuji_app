@@ -34,6 +34,9 @@ class FeedsController < ApplicationController
 
     respond_to do |format|
       if @feed.save
+        # fed_at を基準に selected_date をセット
+        @selected_date = @feed.fed_at.to_date
+
         # セッションの一時的な授乳日時を削除
         session.delete(:feed_fed_at)
 
@@ -50,7 +53,7 @@ class FeedsController < ApplicationController
             turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "授乳記録を保存しました" } }),
 
             # ダッシュボードの育児記録一覧にも追加
-            turbo_stream.prepend("dashboard-records", partial: "home/record_row", locals: { record: @feed }),
+            turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
 
             # モーダルを閉じる
             turbo_stream.update("modal") { "" }
@@ -107,6 +110,9 @@ class FeedsController < ApplicationController
 
     respond_to do |format|
       if @feed.save
+        # fed_at を基準に selected_date をセット
+        @selected_date = @feed.fed_at.to_date
+
         # HTML形式の場合のリダイレクト
         format.html { redirect_to child_feeds_path(current_child), notice: "授乳記録を更新しました" }
 
@@ -114,7 +120,7 @@ class FeedsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.replace("feed_#{@feed.id}", partial: "feeds/feed_row", locals: { feed: @feed }),
-            turbo_stream.replace("dashboard_record_#{@feed.id}", partial: "home/record_row", locals: { record: @feed }),
+            turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
             turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "授乳記録を更新しました" } }),
             turbo_stream.update("modal") { "" }
           ]
@@ -144,6 +150,8 @@ class FeedsController < ApplicationController
   def destroy
     @feed = current_child.feeds.find(params[:id])
     @feed.destroy
+    # fed_at を基準に selected_date をセット
+    @selected_date = @feed.fed_at.to_date
 
     respond_to do |format|
       # HTML形式の場合のリダイレクト
@@ -153,7 +161,7 @@ class FeedsController < ApplicationController
       format.turbo_stream do
         render turbo_stream: [
           turbo_stream.remove("feed_#{@feed.id}"),
-          turbo_stream.remove("dashboard_record_#{@feed.id}"),
+          turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
           turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "授乳記録を削除しました" } }),
           turbo_stream.update("modal") { "" }
         ]

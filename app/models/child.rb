@@ -28,4 +28,30 @@ class Child < ApplicationRecord
   # 子どもの名前と誕生日は必須項目(名前は30文字まで)
   validates :name, presence: true, length: { maximum: 30 }
   validates :birth_date, presence: true
+
+  # 指定した日付の全育児記録（授乳・おむつ・睡眠など）をまとめて取得し、日時の降順で返す(ダッシュボードの「home#index」で使用)
+  def records_for_date(date)
+    start_time = date.beginning_of_day
+    end_time   = date.end_of_day
+
+    records = []
+    date_columns = {
+      Feed => :fed_at,
+      Diaper => :changed_at,
+      Bottle => :given_at,
+      Hydration => :fed_at,
+      BabyFood => :fed_at,
+      SleepRecord => :start_time,
+      Temperature => :measured_at,
+      Bath => :bathed_at,
+      Vaccination => :vaccinated_at
+    }
+
+    date_columns.each do |model, col|
+      records.concat(send(model.name.underscore.pluralize).where(col => start_time..end_time))
+    end
+
+    # 日時降順
+    records.sort_by { |r| date_columns[r.class] ? r.send(date_columns[r.class]) : Time.at(0) }.reverse
+  end
 end

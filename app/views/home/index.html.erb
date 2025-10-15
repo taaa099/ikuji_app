@@ -111,32 +111,8 @@
   </div>
 </div>
 
-<% if @records.any? %>
-  <table class="dashboard-table">
-    <thead>
-      <tr>
-        <th class="dashboard-col-item">項目</th>
-        <th class="dashboard-col-date">日時</th>
-        <th class="dashboard-col-detail">詳細1</th>
-        <th class="dashboard-col-detail">詳細2</th>
-        <th class="dashboard-col-memo">メモ</th>
-        <th class="dashboard-col-chevron"></th>
-      </tr>
-    </thead>
-
-    <tbody id="dashboard-records">
-      <%= render partial: "home/record_row", collection: @records, as: :record %>
-    </tbody>
-  </table>
-<% else %>
-  <div class="no-record-card text-center py-6 bg-white rounded-lg shadow-md">
-    <% if @selected_date == Date.current %>
-      <p>本日の記録がまだありません。</p>
-    <% else %>
-      <p>記録がありません。</p>
-    <% end %>
-  </div>
-<% end %>
+<%# 育児記録一覧部分を置き換え %>
+<%= render partial: "home/records_table_or_empty", locals: { records: @records, selected_date: @selected_date } %>
 
 <%# ----- 成長記録(グラフ) ----- %>
 <h2 class="dashboard-title">成長グラフ(身長・体重統合)</h2>

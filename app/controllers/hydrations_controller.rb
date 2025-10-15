@@ -29,6 +29,9 @@ class HydrationsController < ApplicationController
 
     respond_to do |format|
       if @hydration.save
+        # fed_at を基準に selected_date をセット
+        @selected_date = @hydration.fed_at.to_date
+
         session.delete(:hydration_fed_at)
         format.html { redirect_to child_hydrations_path(current_child), notice: "水分補給記録を保存しました" }
 
@@ -38,7 +41,7 @@ class HydrationsController < ApplicationController
             turbo_stream.prepend("hydrations-list", partial: "hydrations/hydration_row", locals: { hydration: @hydration }),
 
             # ダッシュボードの育児記録一覧にも追加
-            turbo_stream.prepend("dashboard-records", partial: "home/record_row", locals: { record: @hydration }),
+            turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
 
             # フラッシュ通知を追加
             turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "水分補給記録を保存しました" } }),
@@ -81,13 +84,16 @@ class HydrationsController < ApplicationController
 
     respond_to do |format|
       if @hydration.update(hydration_params)
+        # fed_at を基準に selected_date をセット
+        @selected_date = @hydration.fed_at.to_date
+
         format.html { redirect_to child_hydrations_path(current_child), notice: "水分補給記録を更新しました" }
 
         # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.replace("hydration_#{@hydration.id}", partial: "hydrations/hydration_row", locals: { hydration: @hydration }),
-            turbo_stream.replace("dashboard_record_#{@hydration.id}", partial: "home/record_row", locals: { record: @hydration }),
+            turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
             turbo_stream.prepend(
               "flash-messages",
               partial: "shared/flash",
@@ -112,6 +118,8 @@ class HydrationsController < ApplicationController
   def destroy
     @hydration = current_child.hydrations.find(params[:id])
     @hydration.destroy
+    # fed_at を基準に selected_date をセット
+    @selected_date = @hydration.fed_at.to_date
 
     respond_to do |format|
       format.html { redirect_to child_hydrations_path(current_child), notice: "水分補給記録を削除しました" }
@@ -120,7 +128,7 @@ class HydrationsController < ApplicationController
       format.turbo_stream do
         render turbo_stream: [
           turbo_stream.remove("hydration_#{@hydration.id}"),
-          turbo_stream.remove("dashboard_record_#{@hydration.id}"),
+          turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
           turbo_stream.prepend(
             "flash-messages",
             partial: "shared/flash",

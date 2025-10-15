@@ -39,6 +39,12 @@ class BathsController < ApplicationController
 
     respond_to do |format|
       if @bath.save
+         # bathed_at を基準に selected_date をセット
+         @selected_date = @bath.bathed_at.to_date
+
+         # セッションの一時的な授乳日時を削除
+         session.delete(:diaper_bathed_at)
+
         format.html { redirect_to child_baths_path(current_child), notice: "お風呂記録を保存しました" }
 
         format.turbo_stream do
@@ -47,8 +53,7 @@ class BathsController < ApplicationController
             turbo_stream.prepend("baths-list", partial: "baths/bath_row", locals: { bath: @bath }),
 
             # ダッシュボードの育児記録一覧にも追加
-            turbo_stream.prepend("dashboard-records", partial: "home/record_row", locals: { record: @bath }),
-
+            turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
             # フラッシュ通知を追加
             turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "お風呂記録を保存しました" } }),
 
@@ -89,13 +94,16 @@ class BathsController < ApplicationController
 
     respond_to do |format|
       if @bath.update(baths_params)
+         # bathed_at を基準に selected_date をセット
+         @selected_date = @bath.bathed_at.to_date
+
         format.html { redirect_to child_baths_path(current_child), notice: "記録を更新しました" }
 
         # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.replace("bath_#{@bath.id}", partial: "baths/bath_row", locals: { bath: @bath }),
-            turbo_stream.replace("dashboard_record_#{@bath.id}", partial: "home/record_row", locals: { record: @bath }),
+            turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
             turbo_stream.prepend(
               "flash-messages",
               partial: "shared/flash",
@@ -120,6 +128,8 @@ class BathsController < ApplicationController
   def destroy
     @bath = current_child.baths.find(params[:id])
     @bath.destroy
+    # bathed_at を基準に selected_date をセット
+    @selected_date = @bath.bathed_at.to_date
 
     respond_to do |format|
       format.html { redirect_to child_baths_path(current_child), notice: "お風呂記録を削除しました" }
@@ -128,7 +138,7 @@ class BathsController < ApplicationController
       format.turbo_stream do
         render turbo_stream: [
           turbo_stream.remove("bath_#{@bath.id}"),
-          turbo_stream.remove("dashboard_record_#{@bath.id}"),
+          turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
           turbo_stream.prepend(
             "flash-messages",
             partial: "shared/flash",

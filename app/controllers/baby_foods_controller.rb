@@ -28,6 +28,9 @@ class BabyFoodsController < ApplicationController
 
     respond_to do |format|
       if @baby_food.save
+        # fed_at を基準に selected_date をセット
+        @selected_date = @baby_food.fed_at.to_date
+
         session.delete(:baby_food_fed_at) # セッションから削除
         format.html { redirect_to child_baby_foods_path(current_child), notice: "離乳食の記録を保存しました" }
 
@@ -37,7 +40,7 @@ class BabyFoodsController < ApplicationController
             turbo_stream.prepend("baby_foods-list", partial: "baby_foods/baby_food_row", locals: { baby_food: @baby_food }),
 
             # ダッシュボードの育児記録一覧にも追加
-            turbo_stream.prepend("dashboard-records", partial: "home/record_row", locals: { record: @baby_food }),
+            turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
 
             # フラッシュ通知を追加
             turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "離乳食の記録を保存しました" } }),
@@ -80,13 +83,16 @@ class BabyFoodsController < ApplicationController
 
     respond_to do |format|
       if @baby_food.update(baby_food_params)
+        # fed_at を基準に selected_date をセット
+        @selected_date = @baby_food.fed_at.to_date
+
         format.html { redirect_to child_baby_foods_path(current_child), notice: "記録を更新しました" }
 
         # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.replace("baby_food_#{@baby_food.id}", partial: "baby_foods/baby_food_row", locals: { baby_food: @baby_food }),
-            turbo_stream.replace("dashboard_record_#{@baby_food.id}", partial: "home/record_row", locals: { record: @baby_food }),
+            turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
             turbo_stream.prepend(
               "flash-messages",
               partial: "shared/flash",
@@ -111,6 +117,8 @@ class BabyFoodsController < ApplicationController
   def destroy
     @baby_food = current_child.baby_foods.find(params[:id])
     @baby_food.destroy
+    # fed_at を基準に selected_date をセット
+    @selected_date = @baby_food.fed_at.to_date
 
     respond_to do |format|
       format.html { redirect_to child_baby_foods_path(current_child), notice: "記録を削除しました" }
@@ -119,7 +127,7 @@ class BabyFoodsController < ApplicationController
       format.turbo_stream do
         render turbo_stream: [
           turbo_stream.remove("baby_food_#{@baby_food.id}"),
-          turbo_stream.remove("dashboard_record_#{@baby_food.id}"),
+          turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
           turbo_stream.prepend(
             "flash-messages",
             partial: "shared/flash",

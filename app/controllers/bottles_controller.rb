@@ -29,6 +29,9 @@ class BottlesController < ApplicationController
 
     respond_to do |format|
       if @bottle.save
+        # given_at を基準に selected_date をセット
+        @selected_date = @bottle.given_at.to_date
+
         session.delete(:bottle_given_at)
 
         format.html { redirect_to child_bottles_path(current_child), notice: "ミルク記録を保存しました" }
@@ -39,7 +42,7 @@ class BottlesController < ApplicationController
             turbo_stream.prepend("bottles-list", partial: "bottles/bottle_row", locals: { bottle: @bottle }),
 
             # ダッシュボードの育児記録一覧にも追加
-            turbo_stream.prepend("dashboard-records", partial: "home/record_row", locals: { record: @bottle }),
+            turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
 
             # フラッシュ通知を追加
             turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "ミルク記録を保存しました" } }),
@@ -82,6 +85,9 @@ class BottlesController < ApplicationController
 
     respond_to do |format|
       if @bottle.update(bottle_params)
+        # given_at を基準に selected_date をセット
+        @selected_date = @bottle.given_at.to_date
+
         format.html { redirect_to child_bottles_path(current_child), notice: "ミルク記録を更新しました" }
 
         # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
@@ -113,6 +119,8 @@ class BottlesController < ApplicationController
   def destroy
     @bottle = current_child.bottles.find(params[:id])
     @bottle.destroy
+    # given_at を基準に selected_date をセット
+    @selected_date = @bottle.given_at.to_date
 
     respond_to do |format|
       format.html { redirect_to child_bottles_path(current_child), notice: "ミルク記録を削除しました" }
@@ -121,7 +129,7 @@ class BottlesController < ApplicationController
       format.turbo_stream do
         render turbo_stream: [
           turbo_stream.remove("bottle_#{@bottle.id}"),
-          turbo_stream.remove("dashboard_record_#{@bottle.id}"),
+          turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
           turbo_stream.prepend(
             "flash-messages",
             partial: "shared/flash",

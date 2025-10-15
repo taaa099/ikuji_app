@@ -39,6 +39,9 @@ class VaccinationsController < ApplicationController
 
     respond_to do |format|
       if @vaccination.save
+         # vaccinated_at を基準に selected_date をセット
+         @selected_date = @vaccination.vaccinated_at.to_date
+
         session.delete(:vaccination_vaccinated_at) # セッションから削除
         format.html { redirect_to child_vaccinations_path(current_child), notice: "予防接種記録を保存しました" }
 
@@ -48,7 +51,7 @@ class VaccinationsController < ApplicationController
             turbo_stream.prepend("vaccinations-list", partial: "vaccinations/vaccination_row", locals: { vaccination: @vaccination }),
 
             # ダッシュボードの育児記録一覧にも追加
-            turbo_stream.prepend("dashboard-records", partial: "home/record_row", locals: { record: @vaccination }),
+            turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
 
             # フラッシュ通知を追加
             turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "予防接種記録を保存しました" } }),
@@ -90,13 +93,16 @@ class VaccinationsController < ApplicationController
 
     respond_to do |format|
       if @vaccination.update(vaccinations_params)
+         # vaccinated_at を基準に selected_date をセット
+         @selected_date = @vaccination.vaccinated_at.to_date
+
         format.html { redirect_to child_vaccinations_path(current_child), notice: "記録を更新しました" }
 
         # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.replace("vaccination_#{@vaccination.id}", partial: "vaccinations/vaccination_row", locals: { vaccination: @vaccination }),
-            turbo_stream.replace("dashboard_record_#{@vaccination.id}", partial: "home/record_row", locals: { record: @vaccination }),
+            turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
             turbo_stream.prepend(
               "flash-messages",
               partial: "shared/flash",
@@ -121,6 +127,8 @@ class VaccinationsController < ApplicationController
   def destroy
     @vaccination = current_child.vaccinations.find(params[:id])
     @vaccination.destroy
+    # vaccinated_at を基準に selected_date をセット
+    @selected_date = @vaccination.vaccinated_at.to_date
 
     respond_to do |format|
       format.html { redirect_to child_vaccinations_path(current_child), notice: "予防接種記録を削除しました" }
@@ -129,7 +137,7 @@ class VaccinationsController < ApplicationController
       format.turbo_stream do
         render turbo_stream: [
           turbo_stream.remove("vaccination_#{@vaccination.id}"),
-          turbo_stream.remove("dashboard_record_#{@vaccination.id}"),
+          turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
           turbo_stream.prepend(
             "flash-messages",
             partial: "shared/flash",

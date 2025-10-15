@@ -40,6 +40,51 @@ class HomeController < ApplicationController
     # スケジュール一覧を取得（直近の予定が過ぎていない最大5件）
     @latest_schedules = current_user.schedules.where("start_time >= ?", Time.current).order(start_time: :desc).limit(5)
 
+    # ----- 今週の記録数（育児記録） -----
+    if current_child
+      start_of_week = Date.current.beginning_of_week(:sunday)
+      end_of_week   = Date.current.end_of_week(:saturday)
+
+      start_of_last_week = start_of_week - 7.days
+      end_of_last_week   = end_of_week - 7.days
+
+      # 集計対象モデルと日時カラム
+      date_columns = {
+        Feed => :fed_at,
+        Diaper => :changed_at,
+        Bottle => :given_at,
+        Hydration => :fed_at,
+        BabyFood => :fed_at,
+        SleepRecord => :start_time,
+        Temperature => :measured_at,
+        Bath => :bathed_at,
+        Vaccination => :vaccinated_at
+      }
+
+      # 今週の件数
+      this_week_records = []
+      date_columns.each do |model, col|
+        this_week_records.concat(current_child.send(model.name.underscore.pluralize)
+                                           .where(col => start_of_week..end_of_week))
+      end
+      @weekly_records_count = this_week_records.size
+
+      # 先週の件数
+      last_week_records = []
+      date_columns.each do |model, col|
+        last_week_records.concat(current_child.send(model.name.underscore.pluralize)
+                                            .where(col => start_of_last_week..end_of_last_week))
+      end
+      last_week_count = last_week_records.size
+
+      # 先週比（%）
+      @weekly_change = if last_week_count > 0
+                         ((@weekly_records_count - last_week_count) / last_week_count.to_f * 100).round(1)
+      else
+                         0
+      end
+    end
+
     # ----- 成長記録（グラフ用） -----
     if current_child
       @growths = current_child.growths.order(:recorded_at)

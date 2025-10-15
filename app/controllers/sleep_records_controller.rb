@@ -28,6 +28,9 @@ class SleepRecordsController < ApplicationController
 
     respond_to do |format|
       if @sleep_record.save
+         # start_time を基準に selected_date をセット
+         @selected_date = @sleep_record.start_time.to_date
+
         session.delete(:sleep_record_start_time) # セッションから削除
         format.html { redirect_to child_sleep_records_path(current_child), notice: "睡眠の記録を保存しました" }
 
@@ -37,7 +40,7 @@ class SleepRecordsController < ApplicationController
             turbo_stream.prepend("sleep-records-list", partial: "sleep_records/sleep_record_row", locals: { sleep_record: @sleep_record }),
 
             # ダッシュボードの育児記録一覧にも追加
-            turbo_stream.prepend("dashboard-records", partial: "home/record_row", locals: { record: @sleep_record }),
+            turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
 
             # フラッシュ通知を追加
             turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "睡眠の記録を保存しました" } }),
@@ -79,13 +82,16 @@ class SleepRecordsController < ApplicationController
 
     respond_to do |format|
       if @sleep_record.update(sleep_record_params.merge(user: current_user))
+         # start_time を基準に selected_date をセット
+         @selected_date = @sleep_record.start_time.to_date
+
         format.html { redirect_to child_sleep_records_path(current_child), notice: "記録を更新しました" }
 
         # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.replace("sleep_record_#{@sleep_record.id}", partial: "sleep_records/sleep_record_row", locals: { sleep_record: @sleep_record }),
-            turbo_stream.replace("dashboard_record_#{@sleep_record.id}", partial: "home/record_row", locals: { record: @sleep_record }),
+            turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
             turbo_stream.prepend(
               "flash-messages",
               partial: "shared/flash",
@@ -110,6 +116,8 @@ class SleepRecordsController < ApplicationController
   def destroy
     @sleep_record = current_child.sleep_records.find(params[:id])
     @sleep_record.destroy
+    # start_time を基準に selected_date をセット
+    @selected_date = @sleep_record.start_time.to_date
 
     respond_to do |format|
       format.html { redirect_to child_sleep_records_path(current_child), notice: "記録を削除しました" }
@@ -118,7 +126,7 @@ class SleepRecordsController < ApplicationController
       format.turbo_stream do
         render turbo_stream: [
           turbo_stream.remove("sleep_record_#{@sleep_record.id}"),
-          turbo_stream.remove("dashboard_record_#{@sleep_record.id}"),
+          turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
           turbo_stream.prepend(
             "flash-messages",
             partial: "shared/flash",

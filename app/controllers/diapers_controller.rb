@@ -28,6 +28,9 @@ class DiapersController < ApplicationController
 
     respond_to do |format|
       if @diaper.save
+        # changed_at を基準に selected_date をセット
+        @selected_date = @diaper.changed_at.to_date
+
         session.delete(:diaper_changed_at)
         format.html { redirect_to child_diapers_path(current_child), notice: "おむつ記録を保存しました" }
 
@@ -37,7 +40,7 @@ class DiapersController < ApplicationController
             turbo_stream.prepend("diapers-list", partial: "diapers/diaper_row", locals: { diaper: @diaper }),
 
             # ダッシュボードの育児記録一覧にも追加
-            turbo_stream.prepend("dashboard-records", partial: "home/record_row", locals: { record: @diaper }),
+            turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
 
             # フラッシュ通知を追加
             turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "おむつ記録を保存しました" } }),
@@ -81,13 +84,16 @@ class DiapersController < ApplicationController
 
     respond_to do |format|
       if @diaper.save
+        # changed_at を基準に selected_date をセット
+        @selected_date = @diaper.changed_at.to_date
+
         format.html { redirect_to child_diapers_path(current_child), notice: "おむつ記録を更新しました" }
 
         # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.replace("diaper_#{@diaper.id}", partial: "diapers/diaper_row", locals: { diaper: @diaper }),
-            turbo_stream.replace("dashboard_record_#{@diaper.id}", partial: "home/record_row", locals: { record: @diaper }),
+            turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
             turbo_stream.prepend(
               "flash-messages",
               partial: "shared/flash",
@@ -112,6 +118,8 @@ class DiapersController < ApplicationController
   def destroy
     @diaper = current_child.diapers.find(params[:id])
     @diaper.destroy
+    # changed_at を基準に selected_date をセット
+    @selected_date = @diaper.changed_at.to_date
 
     respond_to do |format|
       format.html { redirect_to child_diapers_path(current_child), notice: "おむつ記録を削除しました" }
@@ -120,7 +128,7 @@ class DiapersController < ApplicationController
       format.turbo_stream do
         render turbo_stream: [
           turbo_stream.remove("diaper_#{@diaper.id}"),
-          turbo_stream.remove("dashboard_record_#{@diaper.id}"),
+          turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
           turbo_stream.prepend(
             "flash-messages",
             partial: "shared/flash",

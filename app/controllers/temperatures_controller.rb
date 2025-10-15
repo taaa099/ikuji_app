@@ -29,6 +29,9 @@ class TemperaturesController < ApplicationController
 
     respond_to do |format|
       if @temperature.save
+         # measured_at を基準に selected_date をセット
+         @selected_date = @temperature.measured_at.to_date
+
         session.delete(:temperature_measured_at)
         format.html { redirect_to child_temperatures_path(current_child), notice: "体温記録を保存しました" }
 
@@ -38,7 +41,7 @@ class TemperaturesController < ApplicationController
             turbo_stream.prepend("temperatures-list", partial: "temperatures/temperature_row", locals: { temperature: @temperature }),
 
             # ダッシュボードの育児記録一覧にも追加
-            turbo_stream.prepend("dashboard-records", partial: "home/record_row", locals: { record: @temperature }),
+            turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
 
             # フラッシュ通知を追加
             turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "体温記録を保存しました" } }),
@@ -80,12 +83,15 @@ class TemperaturesController < ApplicationController
 
     respond_to do |format|
       if @temperature.update(temperature_params)
+         # measured_at を基準に selected_date をセット
+         @selected_date = @temperature.measured_at.to_date
+
         format.html { redirect_to child_temperatures_path(current_child), notice: "体温記録を更新しました" }
         # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.replace("temperature_#{@temperature.id}", partial: "temperatures/temperature_row", locals: { temperature: @temperature }),
-            turbo_stream.replace("dashboard_record_#{@temperature.id}", partial: "home/record_row", locals: { record: @temperature }),
+            turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
             turbo_stream.prepend(
               "flash-messages",
               partial: "shared/flash",
@@ -110,6 +116,8 @@ class TemperaturesController < ApplicationController
   def destroy
     @temperature = current_child.temperatures.find(params[:id])
     @temperature.destroy
+    # measured_at を基準に selected_date をセット
+    @selected_date = @temperature.measured_at.to_date
 
     respond_to do |format|
       format.html { redirect_to child_temperatures_path(current_child), notice: "体温記録を削除しました" }
@@ -117,7 +125,7 @@ class TemperaturesController < ApplicationController
       format.turbo_stream do
         render turbo_stream: [
           turbo_stream.remove("temperature_#{@temperature.id}"),
-          turbo_stream.remove("dashboard_record_#{@temperature.id}"),
+          turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
           turbo_stream.prepend(
             "flash-messages",
             partial: "shared/flash",

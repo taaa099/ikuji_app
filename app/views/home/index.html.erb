@@ -1,16 +1,41 @@
 <h1 class="dashboard-title">ダッシュボード</h1>
 
 <%# ----- 成長記録(ステータス) ----- %>
-<div class="stats">
-  <% if @latest_height && @latest_weight %>
-    <p>最新身長: <strong><%= @latest_height %> cm</strong> (<%= @height_diff >= 0 ? "+" : "" %><%= @height_diff %>)</p>
-    <p>最新体重: <strong><%= @latest_weight %> kg</strong> (<%= @weight_diff >= 0 ? "+" : "" %><%= @weight_diff %>)</p>
-    <p>平均身長: <strong><%= @avg_height %> cm</strong></p>
-    <p>平均体重: <strong><%= @avg_weight %> kg</strong></p>
-  <% else %>
-    <p>成長記録はまだ登録されていません。</p>
-  <% end %>
-</div>
+<% if @latest_height && @latest_weight %>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <h3>最新身長</h3>
+      <p class="stat-value"><%= @latest_height %> cm</p>
+      <span class="stat-diff <%= @height_diff >= 0 ? 'up' : 'down' %>">
+        <%= @height_diff >= 0 ? "+" : "" %><%= @height_diff %> cm
+      </span>
+    </div>
+
+    <div class="stat-card">
+      <h3>最新体重</h3>
+      <p class="stat-value"><%= @latest_weight %> kg</p>
+      <span class="stat-diff <%= @weight_diff >= 0 ? 'up' : 'down' %>">
+        <%= @weight_diff >= 0 ? "+" : "" %><%= sprintf("%.1f", @weight_diff) %> kg
+      </span>
+    </div>
+
+    <div class="stat-card">
+      <h3>平均睡眠時間</h3>
+      <p class="stat-value">
+        <%= @avg_daytime_sleep %> 時間（昼） / <%= @avg_nighttime_sleep %> 時間（夜）
+      </p>
+    </div>
+
+    <div class="stat-card">
+      <h3>今週の記録数</h3>
+        <p class="stat-value">
+          <%= @weekly_records_count %> 件
+        </p>
+    </div>
+  </div>
+<% else %>
+  <p class="no-data-message">成長記録はまだ登録されていません。</p>
+<% end %>
 
 <%# ----- スケジュール一覧（直近5件） ----- %>
 <h2 class="dashboard-title">スケジュール（直近）</h2>

@@ -49,6 +49,9 @@ class SchedulesController < ApplicationController
 
     respond_to do |format|
       if @schedule.save
+         # start_time を基準に selected_date をセット
+         @selected_date = @schedule.start_time.to_date
+
         # 月とスケジュール一覧を再取得（子供・ユーザー予定含む）
         @month = @schedule.start_time.beginning_of_month
         @schedules = current_user.schedules.includes(:children)
@@ -68,8 +71,8 @@ class SchedulesController < ApplicationController
             # フラッシュ通知を追加
             turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "予定を登録しました" } }),
 
-            # ダッシュボードの育児記録一覧にも追加
-            turbo_stream.prepend("dashboard-schedules", partial: "home/schedule_row", locals: { schedule: @schedule }),
+            # ダッシュボードのスケジュール一覧にも追加
+            turbo_stream.replace("dashboard-schedules-container", partial: "home/schedules_table_or_empty", locals: { latest_schedules: current_user.schedules.where("start_time >= ?", Time.current).order(start_time: :desc).limit(5) }),
 
             # モーダルを閉じる
             turbo_stream.update("modal") { "" }
@@ -108,6 +111,9 @@ class SchedulesController < ApplicationController
 
     respond_to do |format|
       if @schedule.update(schedule_params)
+         # start_time を基準に selected_date をセット
+         @selected_date = @schedule.start_time.to_date
+
         # 月とスケジュール一覧を再取得（子供・ユーザー予定含む）
         @month = @schedule.start_time.beginning_of_month
         @schedules = current_user.schedules.includes(:children)
@@ -128,7 +134,7 @@ class SchedulesController < ApplicationController
             turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "予定を更新しました" } }),
 
             # ダッシュボードの育児記録一覧にも追加
-            turbo_stream.replace("dashboard_schedule_#{@schedule.id}", partial: "home/schedule_row", locals: { schedule: @schedule }),
+            turbo_stream.replace("dashboard-schedules-container", partial: "home/schedules_table_or_empty", locals: { latest_schedules: current_user.schedules.where("start_time >= ?", Time.current).order(start_time: :desc).limit(5) }),
 
             # モーダルを閉じる
             turbo_stream.update("modal") { "" }
@@ -150,6 +156,8 @@ class SchedulesController < ApplicationController
   def destroy
     @schedule = current_user.schedules.find(params[:id])
     @schedule.destroy
+    # start_time を基準に selected_date をセット
+    @selected_date = @schedule.start_time.to_date
 
     # 月とスケジュール一覧を再取得（子供・ユーザー予定含む）
     @month = Date.current.beginning_of_month
@@ -177,7 +185,8 @@ class SchedulesController < ApplicationController
             locals: { flash: { notice: "予定を削除しました" } }
           ),
 
-          turbo_stream.remove("dashboard_schedule_#{@schedule.id}"),
+          # ダッシュボードの育児記録一覧にも追加
+          turbo_stream.replace("dashboard-schedules-container", partial: "home/schedules_table_or_empty", locals: { latest_schedules: current_user.schedules.where("start_time >= ?", Time.current).order(start_time: :desc).limit(5) }),
 
           # モーダルを閉じる
           turbo_stream.update("modal") { "" }

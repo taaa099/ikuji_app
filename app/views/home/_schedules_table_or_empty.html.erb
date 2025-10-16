@@ -1,0 +1,22 @@
+<div id="dashboard-schedules-container">
+  <h2 class="dashboard-title">スケジュール（直近）</h2>
+
+  <% if latest_schedules.any? %>
+    <table class="dashboard-table dashboard-schedule-table">
+      <thead>
+        <tr>
+          <th class="dashboard-schedule-col-date">日時</th>
+          <th class="dashboard-schedule-col-title">タイトル</th>
+          <th class="dashboard-schedule-col-detail">詳細</th>
+        </tr>
+      </thead>
+      <tbody id="dashboard-schedules">
+        <%= render partial: "home/schedule_row", collection: latest_schedules, as: :schedule %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="no-record-card text-center py-6 bg-white rounded-lg shadow-md">
+      <p>直近のスケジュールはありません。</p>
+    </div>
+  <% end %>
+</div>

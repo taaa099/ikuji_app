@@ -37,27 +37,8 @@
   <p class="no-data-message">成長記録はまだ登録されていません。</p>
 <% end %>
 
-<%# ----- スケジュール一覧（直近5件） ----- %>
-<h2 class="dashboard-title">スケジュール（直近）</h2>
-
-<% if @latest_schedules.present? && @latest_schedules.any? %>
-  <table class="dashboard-table dashboard-schedule-table">
-    <thead>
-      <tr>
-        <th class="dashboard-schedule-col-date">日時</th>
-        <th class="dashboard-schedule-col-title">タイトル</th>
-        <th class="dashboard-schedule-col-detail">詳細</th>
-      </tr>
-    </thead>
-    <tbody id="dashboard-schedules">
-      <%= render partial: "home/schedule_row", collection: @latest_schedules, as: :schedule %>
-    </tbody>
-  </table>
-<% else %>
-  <div class="no-record-card">
-    <p>直近のスケジュールはありません。</p>
-  </div>
-<% end %>
+<%# スケジュール一覧部分を置き換え %>
+<%= render partial: "home/schedules_table_or_empty", locals: { latest_schedules: @latest_schedules } %>
 
 <%# ----- 育児記録一覧 ----- %>
 <h2 class="dashboard-title">育児記録一覧</h2>

@@ -2,23 +2,10 @@
 
 <h2 class="responsive-title"><%= current_child.name %> の授乳記録一覧</h2>
 
-<table class="responsive-table">
-  <thead>
-    <tr>
-      <th class="col-date">授乳日時</th>
-      <th class="col-item">左</th>
-      <th class="col-item">右</th>
-      <th class="col-memo">メモ</th>
-      <th class="col-detail">操作</th>
-    </tr>
-  </thead>
-
-  <tbody id="feeds-list">
-    <%= render partial: "feeds/feed_row", collection: @feeds, as: :feed %>
-  </tbody>
-</table>
-
-<%= link_to "新規追加", new_child_feed_path(current_child), class: "index-btn", data: { turbo_frame: "modal" } %>
+<% @feed_all_dates.each do |date| %>
+  <% feeds_by_date = @grouped_feeds[date] || [] %>
+  <%= render partial: "feeds/date_section", locals: { date: date, feeds_by_date: feeds_by_date } %>
+<% end %>
 
 <!-- モーダル枠 -->
 <turbo-frame id="modal"></turbo-frame>

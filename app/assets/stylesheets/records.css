@@ -28,15 +28,19 @@
   word-break: break-word;
 }
 
+.responsive-table th {
+  display: none;
+}
+
 .responsive-table tr:hover {
   background-color: #f3f4f6; /* グレー（Tailwindのgray-100相当） */
   transition: background-color 0.2s ease;
   cursor: pointer;
 }
 
-.col-item { width: 15%; }
-.col-date { width: 20%; }
-.col-detail { width: 20%; }
+.col-date { width: 25%; }
+.col-item1 { width: 25%; }
+.col-item2 { width: 25%; }
 .col-memo { width: 25%; }
 
 .index-btn {
@@ -57,17 +61,47 @@
   background-color: #ddd;
 }
 
-.col-detail a {
-  padding: 6px 12px;
-  background-color: #eee; /* 通常 */
-  color: #333;
-  border-radius: 4px;
+.record-edit-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  color: #4b5563;           /* アイコン色 */
   text-decoration: none;
-  display: inline-block;
 }
 
-.col-detail a:hover {
-  background-color: #ddd;
+.record-edit-btn i {
+  font-size: 14px;
+}
+
+/* ==============================
+   日ごとの区切り・見出し
+   ============================== */
+.date-section {
+  margin-bottom: 2rem;
+  border-top: 2px solid #e5e7eb; /* Tailwind gray-200 */
+  padding-top: 1rem;
+}
+
+.date-heading {
+  font-size: 18px;
+  font-weight: 600;
+  color: #374151; /* Tailwind gray-700 */
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.date-heading::before {
+  content: "🗓️";
+  font-size: 18px;
+  opacity: 0.8;
+}
+
+.no-record {
+  color: #777;
 }
 
 /* ==============================
@@ -185,11 +219,6 @@
 .profile-btn:hover {
   background-color: #45a049;
 }
-
-/* ==============================
-   PC,タブレット,スマホのメディアクエリ
-   ============================== */
-/* ...既存のメディアクエリはそのまま残します ... */
 
 /* ==============================
    PC: 1025px以上

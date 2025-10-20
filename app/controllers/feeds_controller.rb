@@ -14,6 +14,18 @@ class FeedsController < ApplicationController
     else
                @feeds.order(fed_at: :desc)
     end
+
+    # ==== 全日程取得 ====
+    if @feeds.any?
+      feed_start_date = @feeds.minimum(:fed_at).in_time_zone("Tokyo").to_date
+      feed_end_date   = [ @feeds.maximum(:fed_at).in_time_zone("Tokyo").to_date, Date.current ].max
+      @feed_all_dates = (feed_start_date..feed_end_date).to_a.reverse # 新しい日付が上
+    else
+      @all_dates = [ Date.current ]
+    end
+
+    # 日付ごとにグループ化（JST基準）
+    @grouped_feeds = @feeds.group_by { |f| f.fed_at.in_time_zone("Tokyo").to_date }
   end
 
   def show
@@ -47,7 +59,7 @@ class FeedsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             # 作成したレコードを育児記録一覧に先頭追加
-            turbo_stream.prepend("feeds-list", partial: "feeds/feed_row", locals: { feed: @feed }),
+            turbo_stream.replace("feeds-date-#{@feed.fed_at.strftime('%Y%m%d')}", partial: "feeds/date_section", locals: { date: @feed.fed_at.to_date, feeds_by_date: current_child.feeds.where(fed_at: @feed.fed_at.all_day).order(fed_at: :desc) }),
 
             # フラッシュ通知を追加
             turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "授乳記録を保存しました" } }),
@@ -119,7 +131,7 @@ class FeedsController < ApplicationController
         # Turbo Stream形式で一覧置換＋フラッシュ追加＋モーダル閉じる
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace("feed_#{@feed.id}", partial: "feeds/feed_row", locals: { feed: @feed }),
+            turbo_stream.replace("feeds-date-#{@feed.fed_at.strftime('%Y%m%d')}", partial: "feeds/date_section", locals: { date: @feed.fed_at.to_date, feeds_by_date: current_child.feeds.where(fed_at: @feed.fed_at.all_day).order(fed_at: :desc) }),
             turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
             turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "授乳記録を更新しました" } }),
             turbo_stream.update("modal") { "" }
@@ -160,7 +172,7 @@ class FeedsController < ApplicationController
       # Turbo Stream形式で一覧削除＋フラッシュ追加＋モーダル閉じる
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.remove("feed_#{@feed.id}"),
+          turbo_stream.replace("feeds-date-#{@feed.fed_at.strftime('%Y%m%d')}", partial: "feeds/date_section", locals: { date: @feed.fed_at.to_date, feeds_by_date: current_child.feeds.where(fed_at: @feed.fed_at.all_day).order(fed_at: :desc) }),
           turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
           turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "授乳記録を削除しました" } }),
           turbo_stream.update("modal") { "" }

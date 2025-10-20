@@ -2,22 +2,10 @@
 
 <h2 class="responsive-title"><%= current_child.name %> のおむつ記録</h2>
 
-<table class="responsive-table">
-  <thead>
-    <tr>
-      <th class="col-date">交換時間</th>
-      <th class="col-item">内容</th>
-      <th class="col-memo">メモ</th>
-      <th class="col-detail">操作</th>
-    </tr>
-  </thead>
-
-  <tbody id="diapers-list">
-    <%= render partial: "diapers/diaper_row", collection: @diapers, as: :diaper %>
-  </tbody>
-</table>
-
-<%= link_to "新規追加", new_child_diaper_path(current_child), class: "index-btn", data: { turbo_frame: "modal" } %>
+<% @diaper_all_dates.each do |date| %>
+  <% diapers_by_date = @grouped_diapers[date] || [] %>
+  <%= render partial: "diapers/date_section", locals: { date: date, diapers_by_date: diapers_by_date } %>
+<% end %>
 
 <!-- モーダル枠 -->
 <turbo-frame id="modal"></turbo-frame>

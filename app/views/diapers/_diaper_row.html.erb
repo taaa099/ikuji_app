@@ -1,15 +1,34 @@
 <tr id="diaper_<%= diaper.id %>">
-  <td class="col-date"><%= diaper.changed_at.strftime("%Y-%m-%d %H:%M") %></td>
-  <td class="col-item">
+  <td class="col-date">
+    <span class="font-semibold text-gray-600">時間：</span>
+    <%= diaper.changed_at.strftime("%H:%M") %>
+  </td>
+
+  <td class="col-item1">
+    <span class="font-semibold text-gray-600">種類：</span>
     <% contents = [] %>
     <% contents << "おしっこ" if diaper.pee %>
     <% contents << "うんち" if diaper.poop %>
     <%= contents.join(" + ") %>
   </td>
-  <td class="col-memo"><%= diaper.memo.presence || "-" %></td>
-  <td class="col-detail">
-    <%= link_to "編集", edit_child_diaper_path(current_child, diaper),
-          class: "edit-link",
-          data: { turbo_frame: "modal" } %>
+  
+  <td class="col-memo">
+    <% if diaper.memo.present? %>
+      <span class="font-semibold text-gray-600">メモ：</span>
+      <%= diaper.memo %>
+    <% end %>
+  </td>
+
+  <td class="col-item2">
+  </td>
+
+  <td class="record-col-chevron text-right pr-2">
+    <%= link_to(
+      edit_child_diaper_path(current_child, diaper),
+      data: { turbo_frame: "modal" },
+      class: "record-edit-btn"
+    ) do %>
+      <i class="fa-solid fa-chevron-right"></i>
+    <% end %>
   </td>
 </tr>

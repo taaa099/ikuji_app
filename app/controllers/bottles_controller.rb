@@ -21,7 +21,7 @@ class BottlesController < ApplicationController
       bottle_end_date   = [ @bottles.maximum(:given_at).in_time_zone("Tokyo").to_date, Date.current ].max
       @bottle_all_dates = (bottle_start_date..bottle_end_date).to_a.reverse # 新しい日付が上
     else
-      @all_dates = [ Date.current ]
+      @bottle_all_dates = [ Date.current ]
     end
 
     # 日付ごとにグループ化（JST基準）

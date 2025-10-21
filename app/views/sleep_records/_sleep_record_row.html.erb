@@ -1,8 +1,17 @@
 <tr id="sleep_record_<%= sleep_record.id %>">
-  <td class="col-date"><%= sleep_record.start_time.strftime("%Y-%m-%d %H:%M") if sleep_record.start_time %></td>
-  <td class="col-date"><%= sleep_record.end_time.strftime("%Y-%m-%d %H:%M") if sleep_record.end_time %></td>
-  <td class="col-item">
+  <td class="col-date">
+    <span class="font-semibold text-gray-600">開始時間：</span>
+    <%= sleep_record.start_time.strftime("%H:%M") if sleep_record.start_time %>
+    </td>
+
+  <td class="col-item1">
+    <span class="font-semibold text-gray-600">終了時間：</span>
+    <%= sleep_record.end_time.strftime("%H:%M") if sleep_record.end_time %>
+    </td>
+
+  <td class="col-item2">
     <% if sleep_record.start_time && sleep_record.end_time %>
+      <span class="font-semibold text-gray-600">睡眠時間：</span>
       <% hours = ((sleep_record.end_time - sleep_record.start_time) / 3600).floor %>
       <% minutes = (((sleep_record.end_time - sleep_record.start_time) % 3600) / 60).round %>
       <%= "#{hours}時間#{minutes}分" %>
@@ -10,10 +19,21 @@
       記録なし
     <% end %>
   </td>
-  <td class="col-memo"><%= sleep_record.memo %></td>
-  <td class="col-detail">
-    <%= link_to "編集", edit_child_sleep_record_path(current_child, sleep_record),
-          class: "edit-link",
-          data: { turbo_frame: "modal" } %>
+
+  <td class="col-memo">
+    <% if sleep_record.memo.present? %>
+      <span class="font-semibold text-gray-600">メモ：</span>
+      <%= sleep_record.memo %>
+    <% end %>
+  </td>
+
+  <td class="record-col-chevron text-right pr-2">
+    <%= link_to(
+      edit_child_sleep_record_path(current_child, sleep_record),
+      data: { turbo_frame: "modal" },
+      class: "record-edit-btn"
+    ) do %>
+      <i class="fa-solid fa-chevron-right"></i>
+    <% end %>
   </td>
 </tr>

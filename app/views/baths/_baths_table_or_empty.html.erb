@@ -1,0 +1,25 @@
+<div id="baths-container"> 
+  <table class="responsive-table">
+    <thead>
+      <tr>
+        <th class="col-date">時間</th>
+        <th class="col-item1">内容</th>
+        <th class="col-item2">内容</th>
+        <th class="col-memo">メモ</th>
+        <th class="record-col-chevron"></th>
+      </tr>
+    </thead>
+
+    <tbody id="baths-list">
+      <% if baths.any? %>
+        <%= render partial: "baths/bath_row", collection: baths, as: :bath %>
+      <% else %>
+        <tr>
+          <td colspan="5" class="no-record text-center py-6">
+            記録がありません。
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

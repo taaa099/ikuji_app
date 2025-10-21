@@ -21,7 +21,7 @@ class BabyFoodsController < ApplicationController
       baby_food_end_date   = [ @baby_foods.maximum(:fed_at).in_time_zone("Tokyo").to_date, Date.current ].max
       @baby_food_all_dates = (baby_food_start_date..baby_food_end_date).to_a.reverse # 新しい日付が上
     else
-      @all_dates = [ Date.current ]
+      @baby_food_all_dates = [ Date.current ]
     end
 
     # 日付ごとにグループ化（JST基準）

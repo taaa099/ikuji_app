@@ -21,7 +21,7 @@ class SleepRecordsController < ApplicationController
       sleep_record_end_date   = [ @sleep_records.maximum(:start_time).in_time_zone("Tokyo").to_date, Date.current ].max
       @sleep_record_all_dates = (sleep_record_start_date..sleep_record_end_date).to_a.reverse # 新しい日付が上
     else
-      @all_dates = [ Date.current ]
+      @sleep_record_all_dates = [ Date.current ]
     end
 
     # 日付ごとにグループ化（JST基準）

@@ -21,7 +21,7 @@ class DiapersController < ApplicationController
       diaper_end_date   = [ @diapers.maximum(:changed_at).in_time_zone("Tokyo").to_date, Date.current ].max
       @diaper_all_dates = (diaper_start_date..diaper_end_date).to_a.reverse # 新しい日付が上
     else
-      @all_dates = [ Date.current ]
+      @diaper_all_dates = [ Date.current ]
     end
 
     # 日付ごとにグループ化（JST基準）

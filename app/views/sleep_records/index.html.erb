@@ -2,24 +2,10 @@
 
 <h2 class="responsive-title"><%= current_child.name %> の睡眠記録一覧</h2>
 
-<table class="responsive-table">
-  <thead>
-    <tr>
-      <th class="col-date">開始時間</th>
-      <th class="col-date">終了時間</th>
-      <th class="col-item">睡眠時間</th>
-      <th class="col-memo">メモ</th>
-      <th class="col-detail">操作</th>
-    </tr>
-  </thead>
-
-  <tbody id="sleep-records-list">
-    <%= render partial: "sleep_records/sleep_record_row", collection: @sleep_records, as: :sleep_record %>
-  </tbody>
-</table>
-
-<%= link_to "新規追加", new_child_sleep_record_path(current_child), class: "index-btn", data: { turbo_frame: "modal" } %>
-<%= link_to "睡眠分析を見る", analysis_child_sleep_records_path(current_child), class: "index-btn" %>
+<% @sleep_record_all_dates.each do |date| %>
+  <% sleep_records_by_date = @grouped_sleep_records[date] || [] %>
+  <%= render partial: "sleep_records/date_section", locals: { date: date, sleep_records_by_date: sleep_records_by_date } %>
+<% end %>
 
 <!-- モーダル枠 -->
 <turbo-frame id="modal"></turbo-frame>

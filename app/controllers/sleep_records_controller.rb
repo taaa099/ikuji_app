@@ -14,6 +14,18 @@ class SleepRecordsController < ApplicationController
     else
       @sleep_records.order(start_time: :desc)
     end
+
+    # ==== 全日程取得 ====
+    if @sleep_records.any?
+      sleep_record_start_date = @sleep_records.minimum(:start_time).in_time_zone("Tokyo").to_date
+      sleep_record_end_date   = [ @sleep_records.maximum(:start_time).in_time_zone("Tokyo").to_date, Date.current ].max
+      @sleep_record_all_dates = (sleep_record_start_date..sleep_record_end_date).to_a.reverse # 新しい日付が上
+    else
+      @all_dates = [ Date.current ]
+    end
+
+    # 日付ごとにグループ化（JST基準）
+    @grouped_sleep_records = @sleep_records.group_by { |f| f.start_time.in_time_zone("Tokyo").to_date }
   end
 
   def show
@@ -37,7 +49,7 @@ class SleepRecordsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             # 作成したレコードをリストに追加
-            turbo_stream.prepend("sleep-records-list", partial: "sleep_records/sleep_record_row", locals: { sleep_record: @sleep_record }),
+            turbo_stream.replace("sleep_records-date-#{@sleep_record.start_time.strftime('%Y%m%d')}", partial: "sleep_records/date_section", locals: { date: @sleep_record.start_time.to_date, sleep_records_by_date: current_child.sleep_records.where(start_time: @sleep_record.start_time.all_day).order(start_time: :desc) }),
 
             # ダッシュボードの育児記録一覧にも追加
             turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
@@ -90,7 +102,7 @@ class SleepRecordsController < ApplicationController
         # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace("sleep_record_#{@sleep_record.id}", partial: "sleep_records/sleep_record_row", locals: { sleep_record: @sleep_record }),
+            turbo_stream.replace("sleep_records-date-#{@sleep_record.start_time.strftime('%Y%m%d')}", partial: "sleep_records/date_section", locals: { date: @sleep_record.start_time.to_date, sleep_records_by_date: current_child.sleep_records.where(start_time: @sleep_record.start_time.all_day).order(start_time: :desc) }),
             turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
             turbo_stream.prepend(
               "flash-messages",
@@ -125,7 +137,7 @@ class SleepRecordsController < ApplicationController
       # Turbo Streamで一覧削除＋フラッシュ追加＋モーダル閉じる
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.remove("sleep_record_#{@sleep_record.id}"),
+          turbo_stream.replace("sleep_records-date-#{@sleep_record.start_time.strftime('%Y%m%d')}", partial: "sleep_records/date_section", locals: { date: @sleep_record.start_time.to_date, sleep_records_by_date: current_child.sleep_records.where(start_time: @sleep_record.start_time.all_day).order(start_time: :desc) }),
           turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
           turbo_stream.prepend(
             "flash-messages",

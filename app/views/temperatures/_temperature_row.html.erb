@@ -1,10 +1,31 @@
 <tr id="temperature_<%= temperature.id %>">
-  <td class="col-date"><%= temperature.measured_at.strftime("%Y-%m-%d %H:%M") if temperature.measured_at %></td>
-  <td class="col-item"><%= sprintf("%.1f", temperature.temperature) if temperature.temperature %></td>
-  <td class="col-memo"><%= temperature.memo %></td>
-  <td class="col-detail">
-    <%= link_to "編集", edit_child_temperature_path(current_child, temperature),
-          class: "edit-link",
-          data: { turbo_frame: "modal" } %>
+  <td class="col-date">
+    <span class="font-semibold text-gray-600">時間：</span>
+    <%= temperature.measured_at.strftime("%H:%M") %>
+  </td>
+
+  <td class="col-item1">
+    <span class="font-semibold text-gray-600">体温：</span>
+    <%= sprintf("%.1f", temperature.temperature) %>
+  </td>
+
+  <td class="col-memo">
+    <% if temperature.memo.present? %>
+      <span class="font-semibold text-gray-600">メモ：</span>
+      <%= temperature.memo %>
+    <% end %>
+  </td>
+
+  <td class="col-item2">
+  </td>
+
+  <td class="record-col-chevron text-right pr-2">
+    <%= link_to(
+      edit_child_temperature_path(current_child, temperature),
+      data: { turbo_frame: "modal" },
+      class: "record-edit-btn"
+    ) do %>
+      <i class="fa-solid fa-chevron-right"></i>
+    <% end %>
   </td>
 </tr>

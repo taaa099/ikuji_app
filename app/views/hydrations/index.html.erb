@@ -2,23 +2,10 @@
 
 <h1 class="responsive-title"><%= current_child.name %> の水分補給記録一覧</h1>
 
-<table class="responsive-table">
-  <thead>
-    <tr>
-      <th class="col-item">内容</th>
-      <th class="col-item">量（ml）</th>
-      <th class="col-date">時間</th>
-      <th class="col-memo">メモ</th>
-      <th class="col-detail">操作</th>
-    </tr>
-  </thead>
-
-  <tbody id="hydrations-list">
-    <%= render partial: "hydrations/hydration_row", collection: @hydrations, as: :hydration %>
-  </tbody>
-</table>
-
-<%= link_to "新規追加", new_child_hydration_path(current_child), class: "index-btn", data: { turbo_frame: "modal" } %>
+<% @hydration_all_dates.each do |date| %>
+  <% hydrations_by_date = @grouped_hydrations[date] || [] %>
+  <%= render partial: "hydrations/date_section", locals: { date: date, hydrations_by_date: hydrations_by_date } %>
+<% end %>
 
 <!-- モーダル枠 -->
 <turbo-frame id="modal"></turbo-frame>

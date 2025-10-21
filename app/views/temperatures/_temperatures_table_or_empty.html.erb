@@ -1,0 +1,25 @@
+<div id="temperatures-container"> 
+  <table class="responsive-table">
+    <thead>
+      <tr>
+        <th class="col-date">時間</th>
+        <th class="col-item1">体温 (℃)</th>
+        <th class="col-item2">内容</th>
+        <th class="col-memo">メモ</th>
+        <th class="record-col-chevron"></th>
+      </tr>
+    </thead>
+    
+    <tbody id="temperatures-list">
+      <% if temperatures.any? %>
+        <%= render partial: "temperatures/temperature_row", collection: temperatures, as: :temperature %>
+      <% else %>
+        <tr>
+          <td colspan="5" class="no-record text-center py-6">
+            記録がありません。
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

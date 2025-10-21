@@ -2,21 +2,10 @@
 
 <h2 class="responsive-title"><%= current_child.name %> の体温記録一覧</h2>
 
-<table class="responsive-table">
-  <thead>
-    <tr>
-      <th class="col-date">測定日時</th>
-      <th class="col-item">体温 (℃)</th>
-      <th class="col-memo">メモ</th>
-      <th class="col-detail">操作</th>
-    </tr>
-  </thead>
-  <tbody id="temperatures-list">
-    <%= render partial: "temperatures/temperature_row", collection: @temperatures, as: :temperature %>
-  </tbody>
-</table>
-
-<%= link_to "新規追加", new_child_temperature_path(current_child), class: "index-btn", data: { turbo_frame: "modal" } %>
+<% @temperature_all_dates.each do |date| %>
+  <% temperatures_by_date = @grouped_temperatures[date] || [] %>
+  <%= render partial: "temperatures/date_section", locals: { date: date, temperatures_by_date: temperatures_by_date } %>
+<% end %>
 
 <!-- モーダル枠 -->
 <turbo-frame id="modal"></turbo-frame>

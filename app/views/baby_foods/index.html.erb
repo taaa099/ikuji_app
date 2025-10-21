@@ -2,22 +2,10 @@
 
 <h2 class="responsive-title"><%= current_child.name %> の離乳食一覧</h2>
 
-<table class="responsive-table">
-  <thead>
-    <tr>
-      <th class="col-date">時間</th>
-      <th class="col-item">量（ml）</th>
-      <th class="col-memo">メモ</th>
-      <th class="col-detail">操作</th>
-    </tr>
-  </thead>
-
-  <tbody id="baby_foods-list">
-    <%= render partial: "baby_foods/baby_food_row", collection: @baby_foods, as: :baby_food %>
-  </tbody>
-</table>
-
-<%= link_to "新規追加", new_child_baby_food_path(current_child), class: "index-btn", data: { turbo_frame: "modal" } %>
+<% @baby_food_all_dates.each do |date| %>
+  <% baby_foods_by_date = @grouped_baby_foods[date] || [] %>
+  <%= render partial: "baby_foods/date_section", locals: { date: date, baby_foods_by_date: baby_foods_by_date } %>
+<% end %>
 
 <!-- モーダル枠 -->
 <turbo-frame id="modal"></turbo-frame>

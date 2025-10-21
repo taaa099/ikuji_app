@@ -14,6 +14,18 @@ class BabyFoodsController < ApplicationController
     else
       @baby_foods.order(fed_at: :desc)
     end
+
+    # ==== 全日程取得 ====
+    if @baby_foods.any?
+      baby_food_start_date = @baby_foods.minimum(:fed_at).in_time_zone("Tokyo").to_date
+      baby_food_end_date   = [ @baby_foods.maximum(:fed_at).in_time_zone("Tokyo").to_date, Date.current ].max
+      @baby_food_all_dates = (baby_food_start_date..baby_food_end_date).to_a.reverse # 新しい日付が上
+    else
+      @all_dates = [ Date.current ]
+    end
+
+    # 日付ごとにグループ化（JST基準）
+    @grouped_baby_foods = @baby_foods.group_by { |f| f.fed_at.in_time_zone("Tokyo").to_date }
   end
 
   def show
@@ -37,7 +49,7 @@ class BabyFoodsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             # 作成したレコードをリストに追加
-            turbo_stream.prepend("baby_foods-list", partial: "baby_foods/baby_food_row", locals: { baby_food: @baby_food }),
+            turbo_stream.replace("baby_foods-date-#{@baby_food.fed_at.strftime('%Y%m%d')}", partial: "baby_foods/date_section", locals: { date: @baby_food.fed_at.to_date, baby_foods_by_date: current_child.baby_foods.where(fed_at: @baby_food.fed_at.all_day).order(fed_at: :desc) }),
 
             # ダッシュボードの育児記録一覧にも追加
             turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
@@ -91,7 +103,7 @@ class BabyFoodsController < ApplicationController
         # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace("baby_food_#{@baby_food.id}", partial: "baby_foods/baby_food_row", locals: { baby_food: @baby_food }),
+            turbo_stream.replace("baby_foods-date-#{@baby_food.fed_at.strftime('%Y%m%d')}", partial: "baby_foods/date_section", locals: { date: @baby_food.fed_at.to_date, baby_foods_by_date: current_child.baby_foods.where(fed_at: @baby_food.fed_at.all_day).order(fed_at: :desc) }),
             turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
             turbo_stream.prepend(
               "flash-messages",
@@ -126,7 +138,7 @@ class BabyFoodsController < ApplicationController
       # Turbo Streamで一覧削除＋フラッシュ追加＋モーダル閉じる
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.remove("baby_food_#{@baby_food.id}"),
+          turbo_stream.replace("baby_foods-date-#{@baby_food.fed_at.strftime('%Y%m%d')}", partial: "baby_foods/date_section", locals: { date: @baby_food.fed_at.to_date, baby_foods_by_date: current_child.baby_foods.where(fed_at: @baby_food.fed_at.all_day).order(fed_at: :desc) }),
           turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
           turbo_stream.prepend(
             "flash-messages",

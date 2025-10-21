@@ -2,22 +2,10 @@
 
 <h2 class="responsive-title"><%= current_child.name %> の予防接種一覧</h2>
 
-<table class="responsive-table">
-  <thead>
-    <tr>
-      <th class="col-date">時間</th>
-      <th class="col-item">種類</th>
-      <th class="col-memo">メモ</th>
-      <th class="col-detail">操作</th>
-    </tr>
-  </thead>
-
-  <tbody id="vaccinations-list">
-    <%= render partial: "vaccinations/vaccination_row", collection: @vaccinations, as: :vaccination %>
-  </tbody>
-</table>
-
-<%= link_to "新規追加", new_child_vaccination_path(current_child), class: "index-btn", data: { turbo_frame: "modal" } %>
+<% @vaccination_all_dates.each do |date| %>
+  <% vaccinations_by_date = @grouped_vaccinations[date] || [] %>
+  <%= render partial: "vaccinations/date_section", locals: { date: date, vaccinations_by_date: vaccinations_by_date } %>
+<% end %>
 
 <!-- モーダル枠 -->
 <turbo-frame id="modal"></turbo-frame>

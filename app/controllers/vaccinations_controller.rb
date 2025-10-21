@@ -14,6 +14,18 @@ class VaccinationsController < ApplicationController
     else
       @vaccinations.order(vaccinated_at: :desc)
     end
+
+    # ==== 全日程取得 ====
+    if @vaccinations.any?
+      vaccination_start_date = @vaccinations.minimum(:vaccinated_at).in_time_zone("Tokyo").to_date
+      vaccination_end_date   = [ @vaccinations.maximum(:vaccinated_at).in_time_zone("Tokyo").to_date, Date.current ].max
+      @vaccination_all_dates = (vaccination_start_date..vaccination_end_date).to_a.reverse # 新しい日付が上
+    else
+      @vaccination_all_dates = [ Date.current ]
+    end
+
+    # 日付ごとにグループ化（JST基準）
+    @grouped_vaccinations = @vaccinations.group_by { |f| f.vaccinated_at.in_time_zone("Tokyo").to_date }
   end
 
   def show
@@ -48,7 +60,7 @@ class VaccinationsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             # 作成したレコードをリストに追加
-            turbo_stream.prepend("vaccinations-list", partial: "vaccinations/vaccination_row", locals: { vaccination: @vaccination }),
+            turbo_stream.replace("vaccinations-date-#{@vaccination.vaccinated_at.strftime('%Y%m%d')}", partial: "vaccinations/date_section", locals: { date: @vaccination.vaccinated_at.to_date, vaccinations_by_date: current_child.vaccinations.where(vaccinated_at: @vaccination.vaccinated_at.all_day).order(vaccinated_at: :desc) }),
 
             # ダッシュボードの育児記録一覧にも追加
             turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
@@ -101,7 +113,7 @@ class VaccinationsController < ApplicationController
         # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace("vaccination_#{@vaccination.id}", partial: "vaccinations/vaccination_row", locals: { vaccination: @vaccination }),
+            turbo_stream.replace("vaccinations-date-#{@vaccination.vaccinated_at.strftime('%Y%m%d')}", partial: "vaccinations/date_section", locals: { date: @vaccination.vaccinated_at.to_date, vaccinations_by_date: current_child.vaccinations.where(vaccinated_at: @vaccination.vaccinated_at.all_day).order(vaccinated_at: :desc) }),
             turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
             turbo_stream.prepend(
               "flash-messages",
@@ -136,7 +148,7 @@ class VaccinationsController < ApplicationController
       # Turbo Streamで一覧削除＋フラッシュ追加＋モーダル閉じる
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.remove("vaccination_#{@vaccination.id}"),
+          turbo_stream.replace("vaccinations-date-#{@vaccination.vaccinated_at.strftime('%Y%m%d')}", partial: "vaccinations/date_section", locals: { date: @vaccination.vaccinated_at.to_date, vaccinations_by_date: current_child.vaccinations.where(vaccinated_at: @vaccination.vaccinated_at.all_day).order(vaccinated_at: :desc) }),
           turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
           turbo_stream.prepend(
             "flash-messages",

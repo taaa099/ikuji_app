@@ -1,11 +1,31 @@
 <tr id="vaccination_<%= vaccination.id %>">
-  <td class="col-date"><%= vaccination.vaccinated_at.strftime("%Y-%m-%d %H:%M") if vaccination.vaccinated_at %></td>
-  <td class="col-item"><%= vaccination.vaccine_name %></td>
-  <td class="col-memo"><%= vaccination.memo.presence || "-" %></td>
-  <td class="col-detail">
-    <%= link_to "編集",
-                edit_child_vaccination_path(current_child, vaccination),
-                class: "edit-link",
-                data: { turbo_frame: "modal" } %>
+  <td class="col-date">
+    <span class="font-semibold text-gray-600">時間：</span>
+    <%= vaccination.vaccinated_at.strftime("%H:%M") %>
+  </td>
+
+  <td class="col-item1">
+    <span class="font-semibold text-gray-600">種類：</span>
+    <%= vaccination.vaccine_name %>
+    </td>
+
+  <td class="col-memo">
+    <% if vaccination.memo.present? %>
+      <span class="font-semibold text-gray-600">メモ：</span>
+      <%= vaccination.memo %>
+    <% end %>
+  </td>
+
+  <td class="col-item2">
+  </td>
+
+  <td class="record-col-chevron text-right pr-2">
+    <%= link_to(
+      edit_child_vaccination_path(current_child, vaccination),
+      data: { turbo_frame: "modal" },
+      class: "record-edit-btn"
+    ) do %>
+      <i class="fa-solid fa-chevron-right"></i>
+    <% end %>
   </td>
 </tr>

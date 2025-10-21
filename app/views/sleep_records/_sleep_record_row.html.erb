@@ -1,17 +1,22 @@
 <tr id="sleep_record_<%= sleep_record.id %>">
   <td class="col-date">
     <span class="font-semibold text-gray-600">開始時間：</span>
-    <%= sleep_record.start_time.strftime("%H:%M") if sleep_record.start_time %>
+    <%= sleep_record.start_time.strftime("%H:%M") %>
     </td>
 
   <td class="col-item1">
+    
     <span class="font-semibold text-gray-600">終了時間：</span>
-    <%= sleep_record.end_time.strftime("%H:%M") if sleep_record.end_time %>
+    <% if sleep_record.end_time.present? %>
+      <%= sleep_record.end_time.strftime("%H:%M") %>
+    <% else %>
+      未入力
+    <% end %>
     </td>
 
   <td class="col-item2">
-    <% if sleep_record.start_time && sleep_record.end_time %>
-      <span class="font-semibold text-gray-600">睡眠時間：</span>
+    <span class="font-semibold text-gray-600">睡眠時間：</span>
+    <% if sleep_record.start_time && sleep_record.end_time %>  
       <% hours = ((sleep_record.end_time - sleep_record.start_time) / 3600).floor %>
       <% minutes = (((sleep_record.end_time - sleep_record.start_time) % 3600) / 60).round %>
       <%= "#{hours}時間#{minutes}分" %>

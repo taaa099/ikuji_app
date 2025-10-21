@@ -14,6 +14,18 @@ class BottlesController < ApplicationController
     else
       @bottles.order(given_at: :desc)
     end
+
+    # ==== 全日程取得 ====
+    if @bottles.any?
+      bottle_start_date = @bottles.minimum(:given_at).in_time_zone("Tokyo").to_date
+      bottle_end_date   = [ @bottles.maximum(:given_at).in_time_zone("Tokyo").to_date, Date.current ].max
+      @bottle_all_dates = (bottle_start_date..bottle_end_date).to_a.reverse # 新しい日付が上
+    else
+      @all_dates = [ Date.current ]
+    end
+
+    # 日付ごとにグループ化（JST基準）
+    @grouped_bottles = @bottles.group_by { |f| f.given_at.in_time_zone("Tokyo").to_date }
   end
 
   def show
@@ -39,7 +51,7 @@ class BottlesController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             # 作成したレコードをリストに追加
-            turbo_stream.prepend("bottles-list", partial: "bottles/bottle_row", locals: { bottle: @bottle }),
+            turbo_stream.replace("bottles-date-#{@bottle.given_at.strftime('%Y%m%d')}", partial: "bottles/date_section", locals: { date: @bottle.given_at.to_date, bottles_by_date: current_child.bottles.where(given_at: @bottle.given_at.all_day).order(given_at: :desc) }),
 
             # ダッシュボードの育児記録一覧にも追加
             turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
@@ -93,7 +105,7 @@ class BottlesController < ApplicationController
         # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace("bottle_#{@bottle.id}", partial: "bottles/bottle_row", locals: { bottle: @bottle }),
+            turbo_stream.replace("bottles-date-#{@bottle.given_at.strftime('%Y%m%d')}", partial: "bottles/date_section", locals: { date: @bottle.given_at.to_date, bottles_by_date: current_child.bottles.where(given_at: @bottle.given_at.all_day).order(given_at: :desc) }),
             turbo_stream.replace("dashboard_record_#{@bottle.id}", partial: "home/record_row", locals: { record: @bottle }),
             turbo_stream.prepend(
               "flash-messages",
@@ -128,7 +140,7 @@ class BottlesController < ApplicationController
       # Turbo Streamで一覧削除＋フラッシュ追加＋モーダル閉じる
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.remove("bottle_#{@bottle.id}"),
+          turbo_stream.replace("bottles-date-#{@bottle.given_at.strftime('%Y%m%d')}", partial: "bottles/date_section", locals: { date: @bottle.given_at.to_date, bottles_by_date: current_child.bottles.where(given_at: @bottle.given_at.all_day).order(given_at: :desc) }),
           turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
           turbo_stream.prepend(
             "flash-messages",

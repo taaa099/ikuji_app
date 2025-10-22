@@ -2,9 +2,16 @@
 
 <h2 class="responsive-title"><%= current_child.name %> のお風呂記録一覧</h2>
 
-<% @bath_all_dates.each do |date| %>
-  <% baths_by_date = @grouped_baths[date] || [] %>
-  <%= render partial: "baths/date_section", locals: { date: date, baths_by_date: baths_by_date } %>
+<% if @baths.any? %>
+  <% @bath_all_dates.each do |date| %>
+    <% baths_by_date = @grouped_baths[date] || [] %>
+    <%= render partial: "baths/date_section", locals: { date: date, baths_by_date: baths_by_date } %>
+  <% end %>
+<% else %>
+  <div class="empty-feeds text-center py-12">
+    <p class="text-gray-500 mb-4 text-lg">赤ちゃんの入浴時間を記録してみましょう！</p>
+      <%= link_to "新規作成", new_child_bath_path(current_child), data: { turbo_frame: "modal" }, class: "record-create-btn" %>
+  </div>
 <% end %>
 
 <!-- モーダル枠 -->

@@ -93,9 +93,11 @@ class HydrationsController < ApplicationController
 
   def update
     @hydration = current_child.hydrations.find(params[:id])
+    hydration_old_date = @hydration.fed_at.to_date
 
     respond_to do |format|
       if @hydration.update(hydration_params)
+        hydration_new_date = @hydration.fed_at.to_date
         # fed_at を基準に selected_date をセット
         @selected_date = @hydration.fed_at.to_date
 
@@ -104,7 +106,12 @@ class HydrationsController < ApplicationController
         # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace("hydrations-date-#{@hydration.fed_at.strftime('%Y%m%d')}", partial: "hydrations/date_section", locals: { date: @hydration.fed_at.to_date, hydrations_by_date: current_child.hydrations.where(fed_at: @hydration.fed_at.all_day).order(fed_at: :desc) }),
+            # === 古い日付セクションを再描画（削除されたレコードを反映） ===
+            turbo_stream.replace("hydrations-date-#{hydration_old_date.strftime('%Y%m%d')}", partial: "hydrations/date_section", locals: { date: hydration_old_date, hydrations_by_date: current_child.hydrations.where(fed_at: hydration_old_date.all_day).order(fed_at: :desc) }),
+
+            # === 新しい日付セクションを再描画（追加されたレコードを反映） ===
+            turbo_stream.replace("hydrations-date-#{hydration_new_date.strftime('%Y%m%d')}", partial: "hydrations/date_section", locals: { date: hydration_new_date, hydrations_by_date: current_child.hydrations.where(fed_at: hydration_new_date.all_day).order(fed_at: :desc) }),
+
             turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
             turbo_stream.prepend(
               "flash-messages",

@@ -102,9 +102,11 @@ class VaccinationsController < ApplicationController
 
   def update
     @vaccination = current_child.vaccinations.find(params[:id])
+    vaccination_old_date = @vaccination.vaccinated_at.to_date
 
     respond_to do |format|
       if @vaccination.update(vaccinations_params)
+        vaccination_new_date = @vaccination.vaccinated_at.to_date
          # vaccinated_at を基準に selected_date をセット
          @selected_date = @vaccination.vaccinated_at.to_date
 
@@ -113,7 +115,13 @@ class VaccinationsController < ApplicationController
         # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace("vaccinations-date-#{@vaccination.vaccinated_at.strftime('%Y%m%d')}", partial: "vaccinations/date_section", locals: { date: @vaccination.vaccinated_at.to_date, vaccinations_by_date: current_child.vaccinations.where(vaccinated_at: @vaccination.vaccinated_at.all_day).order(vaccinated_at: :desc) }),
+            # === 古い日付セクションを再描画（削除されたレコードを反映） ===
+            turbo_stream.replace("vaccinations-date-#{vaccination_old_date.strftime('%Y%m%d')}", partial: "vaccinations/date_section", locals: { date: vaccination_old_date, vaccinations_by_date: current_child.vaccinations.where(vaccinated_at: vaccination_old_date.all_day).order(vaccinated_at: :desc) }),
+
+            # === 新しい日付セクションを再描画（追加されたレコードを反映） ===
+            turbo_stream.replace("vaccinations-date-#{vaccination_new_date.strftime('%Y%m%d')}", partial: "vaccinations/date_section", locals: { date: vaccination_new_date, vaccinations_by_date: current_child.vaccinations.where(vaccinated_at: vaccination_new_date.all_day).order(vaccinated_at: :desc) }),
+
+
             turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
             turbo_stream.prepend(
               "flash-messages",

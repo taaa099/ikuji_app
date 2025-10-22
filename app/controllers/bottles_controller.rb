@@ -94,9 +94,11 @@ class BottlesController < ApplicationController
 
   def update
     @bottle = current_child.bottles.find(params[:id])
+    bottle_old_date = @bottle.given_at.to_date
 
     respond_to do |format|
       if @bottle.update(bottle_params)
+        bottle_new_date = @bottle.given_at.to_date
         # given_at を基準に selected_date をセット
         @selected_date = @bottle.given_at.to_date
 
@@ -105,7 +107,12 @@ class BottlesController < ApplicationController
         # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace("bottles-date-#{@bottle.given_at.strftime('%Y%m%d')}", partial: "bottles/date_section", locals: { date: @bottle.given_at.to_date, bottles_by_date: current_child.bottles.where(given_at: @bottle.given_at.all_day).order(given_at: :desc) }),
+            # === 古い日付セクションを再描画（削除されたレコードを反映） ===
+            turbo_stream.replace("bottles-date-#{bottle_old_date.strftime('%Y%m%d')}", partial: "bottles/date_section", locals: { date: bottle_old_date, bottles_by_date: current_child.bottles.where(given_at: bottle_old_date.all_day).order(given_at: :desc) }),
+
+            # === 新しい日付セクションを再描画（追加されたレコードを反映） ===
+            turbo_stream.replace("bottles-date-#{bottle_new_date.strftime('%Y%m%d')}", partial: "bottles/date_section", locals: { date: bottle_new_date, bottles_by_date: current_child.bottles.where(given_at: bottle_new_date.all_day).order(given_at: :desc) }),
+
             turbo_stream.replace("dashboard_record_#{@bottle.id}", partial: "home/record_row", locals: { record: @bottle }),
             turbo_stream.prepend(
               "flash-messages",

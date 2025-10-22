@@ -92,9 +92,11 @@ class BabyFoodsController < ApplicationController
 
   def update
     @baby_food = current_child.baby_foods.find(params[:id])
+    baby_food_old_date = @baby_food.fed_at.to_date
 
     respond_to do |format|
       if @baby_food.update(baby_food_params)
+        baby_food_new_date = @baby_food.fed_at.to_date
         # fed_at を基準に selected_date をセット
         @selected_date = @baby_food.fed_at.to_date
 
@@ -103,7 +105,12 @@ class BabyFoodsController < ApplicationController
         # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace("baby_foods-date-#{@baby_food.fed_at.strftime('%Y%m%d')}", partial: "baby_foods/date_section", locals: { date: @baby_food.fed_at.to_date, baby_foods_by_date: current_child.baby_foods.where(fed_at: @baby_food.fed_at.all_day).order(fed_at: :desc) }),
+            # === 古い日付セクションを再描画（削除されたレコードを反映） ===
+            turbo_stream.replace("baby_foods-date-#{baby_food_old_date.strftime('%Y%m%d')}", partial: "baby_foods/date_section", locals: { date: baby_food_old_date, baby_foods_by_date: current_child.baby_foods.where(fed_at: baby_food_old_date.all_day).order(fed_at: :desc) }),
+
+            # === 新しい日付セクションを再描画（追加されたレコードを反映） ===
+            turbo_stream.replace("baby_foods-date-#{baby_food_new_date.strftime('%Y%m%d')}", partial: "baby_foods/date_section", locals: { date: baby_food_new_date, baby_foods_by_date: current_child.baby_foods.where(fed_at: baby_food_new_date.all_day).order(fed_at: :desc) }),
+
             turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
             turbo_stream.prepend(
               "flash-messages",

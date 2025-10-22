@@ -91,9 +91,11 @@ class TemperaturesController < ApplicationController
 
   def update
     @temperature = current_child.temperatures.find(params[:id])
+    temperature_old_date = @temperature.measured_at.to_date
 
     respond_to do |format|
       if @temperature.update(temperature_params)
+        temperature_new_date = @temperature.measured_at.to_date
          # measured_at を基準に selected_date をセット
          @selected_date = @temperature.measured_at.to_date
 
@@ -101,7 +103,12 @@ class TemperaturesController < ApplicationController
         # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace("temperatures-date-#{@temperature.measured_at.strftime('%Y%m%d')}", partial: "temperatures/date_section", locals: { date: @temperature.measured_at.to_date, temperatures_by_date: current_child.temperatures.where(measured_at: @temperature.measured_at.all_day).order(measured_at: :desc) }),
+            # === 古い日付セクションを再描画（削除されたレコードを反映） ===
+            turbo_stream.replace("temperatures-date-#{temperature_old_date.strftime('%Y%m%d')}", partial: "temperatures/date_section", locals: { date: temperature_old_date, temperatures_by_date: current_child.temperatures.where(measured_at: temperature_old_date.all_day).order(measured_at: :desc) }),
+
+            # === 新しい日付セクションを再描画（追加されたレコードを反映） ===
+            turbo_stream.replace("temperatures-date-#{temperature_new_date.strftime('%Y%m%d')}", partial: "temperatures/date_section", locals: { date: temperature_new_date, temperatures_by_date: current_child.temperatures.where(measured_at: temperature_new_date.all_day).order(measured_at: :desc) }),
+
             turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
             turbo_stream.prepend(
               "flash-messages",

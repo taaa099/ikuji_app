@@ -114,6 +114,7 @@ class FeedsController < ApplicationController
 
   def update
     @feed = current_child.feeds.find(params[:id])
+    feed_old_date = @feed.fed_at.to_date
     # 左右の授乳時間を秒数に変換してセット
     @feed.left_time  = params[:left_minutes].to_i * 60 + params[:left_seconds].to_i
     @feed.right_time = params[:right_minutes].to_i * 60 + params[:right_seconds].to_i
@@ -122,6 +123,7 @@ class FeedsController < ApplicationController
 
     respond_to do |format|
       if @feed.save
+        feed_new_date = @feed.fed_at.to_date
         # fed_at を基準に selected_date をセット
         @selected_date = @feed.fed_at.to_date
 
@@ -131,7 +133,12 @@ class FeedsController < ApplicationController
         # Turbo Stream形式で一覧置換＋フラッシュ追加＋モーダル閉じる
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace("feeds-date-#{@feed.fed_at.strftime('%Y%m%d')}", partial: "feeds/date_section", locals: { date: @feed.fed_at.to_date, feeds_by_date: current_child.feeds.where(fed_at: @feed.fed_at.all_day).order(fed_at: :desc) }),
+            # === 古い日付セクションを再描画（削除されたレコードを反映） ===
+            turbo_stream.replace("feeds-date-#{feed_old_date.strftime('%Y%m%d')}", partial: "feeds/date_section", locals: { date: feed_old_date, feeds_by_date: current_child.feeds.where(fed_at: feed_old_date.all_day).order(fed_at: :desc) }),
+
+            # === 新しい日付セクションを再描画（追加されたレコードを反映） ===
+            turbo_stream.replace("feeds-date-#{feed_new_date.strftime('%Y%m%d')}", partial: "feeds/date_section", locals: { date: feed_new_date, feeds_by_date: current_child.feeds.where(fed_at: feed_new_date.all_day).order(fed_at: :desc) }),
+
             turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
             turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "授乳記録を更新しました" } }),
             turbo_stream.update("modal") { "" }

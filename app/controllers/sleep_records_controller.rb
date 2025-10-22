@@ -91,9 +91,11 @@ class SleepRecordsController < ApplicationController
 
   def update
     @sleep_record = current_child.sleep_records.find(params[:id])
+    sleep_record_old_date = @sleep_record.start_time.to_date
 
     respond_to do |format|
       if @sleep_record.update(sleep_record_params.merge(user: current_user))
+        sleep_record_new_date = @sleep_record.start_time.to_date
          # start_time を基準に selected_date をセット
          @selected_date = @sleep_record.start_time.to_date
 
@@ -102,7 +104,12 @@ class SleepRecordsController < ApplicationController
         # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace("sleep_records-date-#{@sleep_record.start_time.strftime('%Y%m%d')}", partial: "sleep_records/date_section", locals: { date: @sleep_record.start_time.to_date, sleep_records_by_date: current_child.sleep_records.where(start_time: @sleep_record.start_time.all_day).order(start_time: :desc) }),
+            # === 古い日付セクションを再描画（削除されたレコードを反映） ===
+            turbo_stream.replace("sleep_records-date-#{sleep_record_old_date.strftime('%Y%m%d')}", partial: "sleep_records/date_section", locals: { date: sleep_record_old_date, sleep_records_by_date: current_child.sleep_records.where(start_time: sleep_record_old_date.all_day).order(start_time: :desc) }),
+
+            # === 新しい日付セクションを再描画（追加されたレコードを反映） ===
+            turbo_stream.replace("sleep_records-date-#{sleep_record_new_date.strftime('%Y%m%d')}", partial: "sleep_records/date_section", locals: { date: sleep_record_new_date, sleep_records_by_date: current_child.sleep_records.where(start_time: sleep_record_new_date.all_day).order(start_time: :desc) }),
+
             turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
             turbo_stream.prepend(
               "flash-messages",

@@ -92,10 +92,12 @@ class DiapersController < ApplicationController
 
   def update
     @diaper = current_child.diapers.find(params[:id])
+    diaper_old_date = @diaper.changed_at.to_date
     @diaper.assign_attributes(diaper_params)
 
     respond_to do |format|
       if @diaper.save
+        diaper_new_date = @diaper.changed_at.to_date
         # changed_at を基準に selected_date をセット
         @selected_date = @diaper.changed_at.to_date
 
@@ -104,7 +106,12 @@ class DiapersController < ApplicationController
         # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace("diapers-date-#{@diaper.changed_at.strftime('%Y%m%d')}", partial: "diapers/date_section", locals: { date: @diaper.changed_at.to_date, diapers_by_date: current_child.diapers.where(changed_at: @diaper.changed_at.all_day).order(changed_at: :desc) }),
+            # === 古い日付セクションを再描画（削除されたレコードを反映） ===
+            turbo_stream.replace("diapers-date-#{diaper_old_date.strftime('%Y%m%d')}", partial: "diapers/date_section", locals: { date: diaper_old_date, diapers_by_date: current_child.diapers.where(changed_at: diaper_old_date.all_day).order(changed_at: :desc) }),
+
+            # === 新しい日付セクションを再描画（追加されたレコードを反映） ===
+            turbo_stream.replace("diapers-date-#{diaper_new_date.strftime('%Y%m%d')}", partial: "diapers/date_section", locals: { date: diaper_new_date, diapers_by_date: current_child.diapers.where(changed_at: diaper_new_date.all_day).order(changed_at: :desc) }),
+
             turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
             turbo_stream.prepend(
               "flash-messages",

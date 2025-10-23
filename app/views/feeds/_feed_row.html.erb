@@ -1,7 +1,7 @@
-<tr id="feed_<%= feed.id %>">
+<tr>
   <td class="col-date">
     <span class="font-semibold text-gray-600">時間：</span>
-    <%= feed.fed_at.strftime("%H:%M") %>
+    <%= feed.fed_at.in_time_zone('Tokyo').strftime("%H:%M") %>
   </td>
 
   <td class="col-item1">

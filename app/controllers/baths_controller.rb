@@ -62,7 +62,7 @@ class BathsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             # 作成したレコードをリストに追加
-            turbo_stream.replace("baths-date-#{@bath.bathed_at.strftime('%Y%m%d')}", partial: "baths/date_section", locals: { date: @bath.bathed_at.to_date, baths_by_date: current_child.baths.where(bathed_at: @bath.bathed_at.all_day).order(bathed_at: :desc) }),
+            turbo_stream.replace("baths-container", partial: "baths/index", locals: { baths: current_child.baths.order(bathed_at: :desc), grouped_baths: current_child.baths.group_by { |f| f.bathed_at.to_date }, bath_all_dates: (current_child.baths.any? ? (current_child.baths.minimum(:bathed_at).to_date..[ current_child.baths.maximum(:bathed_at).to_date, Date.current ].max).to_a.reverse : [ Date.current ]), current_child: current_child }),
 
             # ダッシュボードの育児記録一覧にも追加
             turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
@@ -117,13 +117,7 @@ class BathsController < ApplicationController
         # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
         format.turbo_stream do
           render turbo_stream: [
-            # === 古い日付セクションを再描画（削除されたレコードを反映） ===
-            turbo_stream.replace("baths-date-#{bath_old_date.strftime('%Y%m%d')}", partial: "baths/date_section", locals: { date: bath_old_date, baths_by_date: current_child.baths.where(bathed_at: bath_old_date.all_day).order(bathed_at: :desc) }),
-
-            # === 新しい日付セクションを再描画（追加されたレコードを反映） ===
-            turbo_stream.replace("baths-date-#{bath_new_date.strftime('%Y%m%d')}", partial: "baths/date_section", locals: { date: bath_new_date, baths_by_date: current_child.baths.where(bathed_at: bath_new_date.all_day).order(bathed_at: :desc) }),
-
-
+            turbo_stream.replace("baths-container", partial: "baths/index", locals: { baths: current_child.baths.order(bathed_at: :desc), grouped_baths: current_child.baths.group_by { |f| f.bathed_at.to_date }, bath_all_dates: (current_child.baths.any? ? (current_child.baths.minimum(:bathed_at).to_date..[ current_child.baths.maximum(:bathed_at).to_date, Date.current ].max).to_a.reverse : [ Date.current ]), current_child: current_child }),
             turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
             turbo_stream.prepend(
               "flash-messages",
@@ -158,7 +152,7 @@ class BathsController < ApplicationController
       # Turbo Streamで一覧削除＋フラッシュ追加＋モーダル閉じる
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.replace("baths-date-#{@bath.bathed_at.strftime('%Y%m%d')}", partial: "baths/date_section", locals: { date: @bath.bathed_at.to_date, baths_by_date: current_child.baths.where(bathed_at: @bath.bathed_at.all_day).order(bathed_at: :desc) }),
+          turbo_stream.replace("baths-container", partial: "baths/index", locals: { baths: current_child.baths.order(bathed_at: :desc), grouped_baths: current_child.baths.group_by { |f| f.bathed_at.to_date }, bath_all_dates: (current_child.baths.any? ? (current_child.baths.minimum(:bathed_at).to_date..[ current_child.baths.maximum(:bathed_at).to_date, Date.current ].max).to_a.reverse : [ Date.current ]), current_child: current_child }),
           turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
           turbo_stream.prepend(
             "flash-messages",

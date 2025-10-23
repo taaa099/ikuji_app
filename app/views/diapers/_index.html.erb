@@ -1,0 +1,13 @@
+<div id="diapers-container">
+  <% if diapers.any? %>
+    <% diaper_all_dates.each do |date| %>
+      <% diapers_by_date = grouped_diapers[date] || [] %>
+      <%= render partial: "diapers/date_section", locals: { date: date, diapers_by_date: diapers_by_date } %>
+    <% end %>
+  <% else %>
+    <div class="text-center py-12">
+      <p class="text-gray-500 mb-4 text-lg">赤ちゃんのおむつを記録してみましょう！</p>
+      <%= link_to "新規作成", new_child_diaper_path(current_child), data: { turbo_frame: "modal" }, class: "record-create-btn" %>
+    </div>
+  <% end %>
+</div>

@@ -2,10 +2,7 @@
 
 <h2 class="responsive-title"><%= current_child.name %> のおむつ記録</h2>
 
-<% @diaper_all_dates.each do |date| %>
-  <% diapers_by_date = @grouped_diapers[date] || [] %>
-  <%= render partial: "diapers/date_section", locals: { date: date, diapers_by_date: diapers_by_date } %>
-<% end %>
+<%= render partial: "diapers/index", locals: { diapers: @diapers, grouped_diapers: @grouped_diapers, diaper_all_dates: @diaper_all_dates, current_child: current_child } %>
 
 <!-- モーダル枠 -->
 <turbo-frame id="modal"></turbo-frame>

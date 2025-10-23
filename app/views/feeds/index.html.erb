@@ -2,10 +2,7 @@
 
 <h2 class="responsive-title"><%= current_child.name %> の授乳記録一覧</h2>
 
-<% @feed_all_dates.each do |date| %>
-  <% feeds_by_date = @grouped_feeds[date] || [] %>
-  <%= render partial: "feeds/date_section", locals: { date: date, feeds_by_date: feeds_by_date } %>
-<% end %>
+<%= render partial: "feeds/index", locals: { feeds: @feeds, grouped_feeds: @grouped_feeds, feed_all_dates: @feed_all_dates, current_child: current_child } %>
 
 <!-- モーダル枠 -->
 <turbo-frame id="modal"></turbo-frame>

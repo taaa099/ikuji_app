@@ -50,7 +50,7 @@ class HydrationsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             # 作成したレコードをリストに追加
-            turbo_stream.replace("hydrations-date-#{@hydration.fed_at.strftime('%Y%m%d')}", partial: "hydrations/date_section", locals: { date: @hydration.fed_at.to_date, hydrations_by_date: current_child.hydrations.where(fed_at: @hydration.fed_at.all_day).order(fed_at: :desc) }),
+            turbo_stream.replace("hydrations-container", partial: "hydrations/index", locals: { hydrations: current_child.hydrations.order(fed_at: :desc), grouped_hydrations: current_child.hydrations.group_by { |f| f.fed_at.to_date }, hydration_all_dates: (current_child.hydrations.any? ? (current_child.hydrations.minimum(:fed_at).to_date..[ current_child.hydrations.maximum(:fed_at).to_date, Date.current ].max).to_a.reverse : [ Date.current ]), current_child: current_child }),
 
             # ダッシュボードの育児記録一覧にも追加
             turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
@@ -106,11 +106,7 @@ class HydrationsController < ApplicationController
         # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
         format.turbo_stream do
           render turbo_stream: [
-            # === 古い日付セクションを再描画（削除されたレコードを反映） ===
-            turbo_stream.replace("hydrations-date-#{hydration_old_date.strftime('%Y%m%d')}", partial: "hydrations/date_section", locals: { date: hydration_old_date, hydrations_by_date: current_child.hydrations.where(fed_at: hydration_old_date.all_day).order(fed_at: :desc) }),
-
-            # === 新しい日付セクションを再描画（追加されたレコードを反映） ===
-            turbo_stream.replace("hydrations-date-#{hydration_new_date.strftime('%Y%m%d')}", partial: "hydrations/date_section", locals: { date: hydration_new_date, hydrations_by_date: current_child.hydrations.where(fed_at: hydration_new_date.all_day).order(fed_at: :desc) }),
+            turbo_stream.replace("hydrations-container", partial: "hydrations/index", locals: { hydrations: current_child.hydrations.order(fed_at: :desc), grouped_hydrations: current_child.hydrations.group_by { |f| f.fed_at.to_date }, hydration_all_dates: (current_child.hydrations.any? ? (current_child.hydrations.minimum(:fed_at).to_date..[ current_child.hydrations.maximum(:fed_at).to_date, Date.current ].max).to_a.reverse : [ Date.current ]), current_child: current_child }),
 
             turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
             turbo_stream.prepend(
@@ -146,7 +142,7 @@ class HydrationsController < ApplicationController
       # Turbo Streamで一覧削除＋フラッシュ追加＋モーダル閉じる
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.replace("hydrations-date-#{@hydration.fed_at.strftime('%Y%m%d')}", partial: "hydrations/date_section", locals: { date: @hydration.fed_at.to_date, hydrations_by_date: current_child.hydrations.where(fed_at: @hydration.fed_at.all_day).order(fed_at: :desc) }),
+          turbo_stream.replace("hydrations-container", partial: "hydrations/index", locals: { hydrations: current_child.hydrations.order(fed_at: :desc), grouped_hydrations: current_child.hydrations.group_by { |f| f.fed_at.to_date }, hydration_all_dates: (current_child.hydrations.any? ? (current_child.hydrations.minimum(:fed_at).to_date..[ current_child.hydrations.maximum(:fed_at).to_date, Date.current ].max).to_a.reverse : [ Date.current ]), current_child: current_child }),
           turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
           turbo_stream.prepend(
             "flash-messages",

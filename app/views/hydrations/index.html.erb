@@ -2,10 +2,7 @@
 
 <h1 class="responsive-title"><%= current_child.name %> の水分補給記録一覧</h1>
 
-<% @hydration_all_dates.each do |date| %>
-  <% hydrations_by_date = @grouped_hydrations[date] || [] %>
-  <%= render partial: "hydrations/date_section", locals: { date: date, hydrations_by_date: hydrations_by_date } %>
-<% end %>
+<%= render partial: "hydrations/index", locals: { hydrations: @hydrations, grouped_hydrations: @grouped_hydrations, hydration_all_dates: @hydration_all_dates, current_child: current_child } %>
 
 <!-- モーダル枠 -->
 <turbo-frame id="modal"></turbo-frame>

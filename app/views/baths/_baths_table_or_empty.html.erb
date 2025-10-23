@@ -1,4 +1,4 @@
-<div id="baths-container"> 
+<div> 
   <table class="responsive-table">
     <thead>
       <tr>
@@ -10,7 +10,7 @@
       </tr>
     </thead>
 
-    <tbody id="baths-list">
+    <tbody>
       <% if baths.any? %>
         <%= render partial: "baths/bath_row", collection: baths, as: :bath %>
       <% else %>

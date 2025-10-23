@@ -2,10 +2,7 @@
 
 <h1 class="responsive-title"><%= current_child.name %> のミルク記録</h1>
 
-<% @bottle_all_dates.each do |date| %>
-  <% bottles_by_date = @grouped_bottles[date] || [] %>
-  <%= render partial: "bottles/date_section", locals: { date: date, bottles_by_date: bottles_by_date } %>
-<% end %>
+<%= render partial: "bottles/index", locals: { bottles: @bottles, grouped_bottles: @grouped_bottles, bottle_all_dates: @bottle_all_dates, current_child: current_child } %>
 
 <!-- モーダル枠 -->
 <turbo-frame id="modal"></turbo-frame>

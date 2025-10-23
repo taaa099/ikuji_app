@@ -2,10 +2,7 @@
 
 <h2 class="responsive-title"><%= current_child.name %> の離乳食一覧</h2>
 
-<% @baby_food_all_dates.each do |date| %>
-  <% baby_foods_by_date = @grouped_baby_foods[date] || [] %>
-  <%= render partial: "baby_foods/date_section", locals: { date: date, baby_foods_by_date: baby_foods_by_date } %>
-<% end %>
+<%= render partial: "baby_foods/index", locals: { baby_foods: @baby_foods, grouped_baby_foods: @grouped_baby_foods, baby_food_all_dates: @baby_food_all_dates, current_child: current_child } %>
 
 <!-- モーダル枠 -->
 <turbo-frame id="modal"></turbo-frame>

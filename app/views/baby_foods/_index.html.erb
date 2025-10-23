@@ -1,0 +1,13 @@
+<div id="baby_foods-container">
+  <% if baby_foods.any? %>
+    <% baby_food_all_dates.each do |date| %>
+      <% baby_foods_by_date = grouped_baby_foods[date] || [] %>
+      <%= render partial: "baby_foods/date_section", locals: { date: date, baby_foods_by_date: baby_foods_by_date } %>
+    <% end %>
+  <% else %>
+    <div class="text-center py-12">
+      <p class="text-gray-500 mb-4 text-lg">赤ちゃんの離乳食時間を記録してみましょう！</p>
+      <%= link_to "新規作成", new_child_baby_food_path(current_child), data: { turbo_frame: "modal" }, class: "record-create-btn" %>
+    </div>
+  <% end %>
+</div>

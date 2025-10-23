@@ -1,4 +1,4 @@
-<div id="sleep_records-container">
+<div>
   <table class="responsive-table">
     <thead>
       <tr>
@@ -10,7 +10,7 @@
       </tr>
     </thead>
 
-    <tbody id="sleep-records-list">
+    <tbody>
       <% if sleep_records.any? %>
         <%= render partial: "sleep_records/sleep_record_row", collection: sleep_records, as: :sleep_record %>
       <% else %>

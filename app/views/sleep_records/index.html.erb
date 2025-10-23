@@ -2,10 +2,7 @@
 
 <h2 class="responsive-title"><%= current_child.name %> の睡眠記録一覧</h2>
 
-<% @sleep_record_all_dates.each do |date| %>
-  <% sleep_records_by_date = @grouped_sleep_records[date] || [] %>
-  <%= render partial: "sleep_records/date_section", locals: { date: date, sleep_records_by_date: sleep_records_by_date } %>
-<% end %>
+<%= render partial: "sleep_records/index", locals: { sleep_records: @sleep_records, grouped_sleep_records: @grouped_sleep_records, sleep_record_all_dates: @sleep_record_all_dates, current_child: current_child } %>
 
 <!-- モーダル枠 -->
 <turbo-frame id="modal"></turbo-frame>

@@ -1,0 +1,13 @@
+<div id="sleep_records-container">
+  <% if sleep_records.any? %>
+    <% sleep_record_all_dates.each do |date| %>
+      <% sleep_records_by_date = grouped_sleep_records[date] || [] %>
+      <%= render partial: "sleep_records/date_section", locals: { date: date, sleep_records_by_date: sleep_records_by_date } %>
+    <% end %>
+  <% else %>
+    <div class="text-center py-12">
+      <p class="text-gray-500 mb-4 text-lg">赤ちゃんの睡眠時間を記録してみましょう！</p>
+      <%= link_to "新規作成", new_child_sleep_record_path(current_child), data: { turbo_frame: "modal" }, class: "record-create-btn" %>
+    </div>
+  <% end %>
+</div>

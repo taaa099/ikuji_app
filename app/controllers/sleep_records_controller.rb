@@ -49,7 +49,7 @@ class SleepRecordsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             # 作成したレコードをリストに追加
-            turbo_stream.replace("sleep_records-date-#{@sleep_record.start_time.strftime('%Y%m%d')}", partial: "sleep_records/date_section", locals: { date: @sleep_record.start_time.to_date, sleep_records_by_date: current_child.sleep_records.where(start_time: @sleep_record.start_time.all_day).order(start_time: :desc) }),
+            turbo_stream.replace("sleep_records-container", partial: "sleep_records/index", locals: { sleep_records: current_child.sleep_records.order(start_time: :desc), grouped_sleep_records: current_child.sleep_records.group_by { |f| f.start_time.to_date }, sleep_record_all_dates: (current_child.sleep_records.any? ? (current_child.sleep_records.minimum(:start_time).to_date..[ current_child.sleep_records.maximum(:start_time).to_date, Date.current ].max).to_a.reverse : [ Date.current ]), current_child: current_child }),
 
             # ダッシュボードの育児記録一覧にも追加
             turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
@@ -104,11 +104,7 @@ class SleepRecordsController < ApplicationController
         # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
         format.turbo_stream do
           render turbo_stream: [
-            # === 古い日付セクションを再描画（削除されたレコードを反映） ===
-            turbo_stream.replace("sleep_records-date-#{sleep_record_old_date.strftime('%Y%m%d')}", partial: "sleep_records/date_section", locals: { date: sleep_record_old_date, sleep_records_by_date: current_child.sleep_records.where(start_time: sleep_record_old_date.all_day).order(start_time: :desc) }),
-
-            # === 新しい日付セクションを再描画（追加されたレコードを反映） ===
-            turbo_stream.replace("sleep_records-date-#{sleep_record_new_date.strftime('%Y%m%d')}", partial: "sleep_records/date_section", locals: { date: sleep_record_new_date, sleep_records_by_date: current_child.sleep_records.where(start_time: sleep_record_new_date.all_day).order(start_time: :desc) }),
+            turbo_stream.replace("sleep_records-container", partial: "sleep_records/index", locals: { sleep_records: current_child.sleep_records.order(start_time: :desc), grouped_sleep_records: current_child.sleep_records.group_by { |f| f.start_time.to_date }, sleep_record_all_dates: (current_child.sleep_records.any? ? (current_child.sleep_records.minimum(:start_time).to_date..[ current_child.sleep_records.maximum(:start_time).to_date, Date.current ].max).to_a.reverse : [ Date.current ]), current_child: current_child }),
 
             turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
             turbo_stream.prepend(
@@ -144,7 +140,7 @@ class SleepRecordsController < ApplicationController
       # Turbo Streamで一覧削除＋フラッシュ追加＋モーダル閉じる
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.replace("sleep_records-date-#{@sleep_record.start_time.strftime('%Y%m%d')}", partial: "sleep_records/date_section", locals: { date: @sleep_record.start_time.to_date, sleep_records_by_date: current_child.sleep_records.where(start_time: @sleep_record.start_time.all_day).order(start_time: :desc) }),
+          turbo_stream.replace("sleep_records-container", partial: "sleep_records/index", locals: { sleep_records: current_child.sleep_records.order(start_time: :desc), grouped_sleep_records: current_child.sleep_records.group_by { |f| f.start_time.to_date }, sleep_record_all_dates: (current_child.sleep_records.any? ? (current_child.sleep_records.minimum(:start_time).to_date..[ current_child.sleep_records.maximum(:start_time).to_date, Date.current ].max).to_a.reverse : [ Date.current ]), current_child: current_child }),
           turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
           turbo_stream.prepend(
             "flash-messages",

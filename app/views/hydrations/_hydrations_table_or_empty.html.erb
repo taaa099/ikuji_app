@@ -1,4 +1,4 @@
-<div id="hydrations-container">
+<div>
   <table class="responsive-table">
     <thead>
       <tr>
@@ -10,7 +10,7 @@
       </tr>
     </thead>
 
-    <tbody id="hydrations-list">
+    <tbody>
       <% if hydrations.any? %>
         <%= render partial: "hydrations/hydration_row", collection: hydrations, as: :hydration %>
       <% else %>

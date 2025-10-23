@@ -1,0 +1,13 @@
+<div id="hydrations-container">
+  <% if hydrations.any? %>
+    <% hydration_all_dates.each do |date| %>
+      <% hydrations_by_date = grouped_hydrations[date] || [] %>
+      <%= render partial: "hydrations/date_section", locals: { date: date, hydrations_by_date: hydrations_by_date } %>
+    <% end %>
+  <% else %>
+    <div class="text-center py-12">
+      <p class="text-gray-500 mb-4 text-lg">赤ちゃんの水分補給時間を記録してみましょう！</p>
+      <%= link_to "新規作成", new_child_hydration_path(current_child), data: { turbo_frame: "modal" }, class: "record-create-btn" %>
+    </div>
+  <% end %>
+</div>

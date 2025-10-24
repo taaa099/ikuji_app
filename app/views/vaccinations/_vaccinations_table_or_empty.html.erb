@@ -1,25 +1,23 @@
-<div> 
-  <table class="responsive-table">
-    <thead>
-      <tr>
-        <th class="col-date">時間</th>
-        <th class="col-item1">種類</th>
-        <th class="col-item2">内容</th>
-        <th class="col-memo">メモ</th>
-        <th class="record-col-chevron"></th>
-      </tr>
-    </thead>
+ <table class="responsive-table">
+  <thead>
+    <tr>
+      <th class="col-date">時間</th>
+      <th class="col-item1">種類</th>
+      <th class="col-item2">内容</th>
+      <th class="col-memo">メモ</th>
+      <th class="record-col-chevron"></th>
+    </tr>
+  </thead>
 
-    <tbody id="vaccinations-list">
-      <% if vaccinations.any? %>
-        <%= render partial: "vaccinations/vaccination_row", collection: vaccinations, as: :vaccination %>
-      <% else %>
-        <tr>
-          <td colspan="5" class="no-record text-center py-6">
-            記録がありません。
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+  <tbody id="vaccinations-list">
+    <% if vaccinations.any? %>
+      <%= render partial: "vaccinations/vaccination_row", collection: vaccinations, as: :vaccination %>
+    <% else %>
+      <tr>
+        <td colspan="5" class="no-record text-center py-6">
+          記録がありません。
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,25 +1,23 @@
-<div>
-  <table class="responsive-table">
-    <thead>
-      <tr>
-        <th class="col-date">時間</th>
-        <th class="col-item1">量 (ml)</th>
-        <th class="col-memo">メモ</th>
-        <th class="col-item2">内容</th>
-        <th class="record-col-chevron"></th>
-      </tr>
-    </thead>
+<table class="responsive-table">
+  <thead>
+    <tr>
+      <th class="col-date">時間</th>
+      <th class="col-item1">量 (ml)</th>
+      <th class="col-memo">メモ</th>
+      <th class="col-item2">内容</th>
+      <th class="record-col-chevron"></th>
+    </tr>
+  </thead>
 
-    <tbody>
-      <% if bottles.any? %>
-        <%= render partial: "bottles/bottle_row", collection: bottles, as: :bottle %>
-      <% else %>
-        <tr>
-          <td colspan="5" class="no-record text-center py-6">
-            記録がありません。
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+  <tbody>
+    <% if bottles.any? %>
+      <%= render partial: "bottles/bottle_row", collection: bottles, as: :bottle %>
+    <% else %>
+      <tr>
+        <td colspan="5" class="no-record text-center py-6">
+          記録がありません。
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

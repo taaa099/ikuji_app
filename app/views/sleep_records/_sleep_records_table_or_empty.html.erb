@@ -1,25 +1,23 @@
-<div>
-  <table class="responsive-table">
-    <thead>
-      <tr>
-        <th class="col-date">開始時間</th>
-        <th class="col-item1">終了時間</th>
-        <th class="col-item2">睡眠時間</th>
-        <th class="col-memo">メモ</th>
-        <th class="record-col-chevron"></th>
-      </tr>
-    </thead>
+<table class="responsive-table">
+  <thead>
+    <tr>
+      <th class="col-date">開始時間</th>
+      <th class="col-item1">終了時間</th>
+      <th class="col-item2">睡眠時間</th>
+      <th class="col-memo">メモ</th>
+      <th class="record-col-chevron"></th>
+    </tr>
+  </thead>
 
-    <tbody>
-      <% if sleep_records.any? %>
-        <%= render partial: "sleep_records/sleep_record_row", collection: sleep_records, as: :sleep_record %>
-      <% else %>
-        <tr>
-          <td colspan="5" class="no-record text-center py-6">
-            記録がありません。
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+  <tbody>
+    <% if sleep_records.any? %>
+      <%= render partial: "sleep_records/sleep_record_row", collection: sleep_records, as: :sleep_record %>
+    <% else %>
+      <tr>
+        <td colspan="5" class="no-record text-center py-6">
+          記録がありません。
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

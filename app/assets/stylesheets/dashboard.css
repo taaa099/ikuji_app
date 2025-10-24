@@ -70,16 +70,9 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background-color: #f3f4f6; /* グレー系背景 */
   color: #4b5563;           /* アイコン色 */
   transition: all 0.2s ease;
   text-decoration: none;
-}
-
-.dashboard-edit-btn:hover {
-  background-color: #e5e7eb;
-  color: #111827;
-  transform: scale(1.05);
 }
 
 .dashboard-edit-btn i {

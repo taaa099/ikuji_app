@@ -2,10 +2,7 @@
 
 <h2 class="responsive-title"><%= current_child.name %> の体温記録一覧</h2>
 
-<% @temperature_all_dates.each do |date| %>
-  <% temperatures_by_date = @grouped_temperatures[date] || [] %>
-  <%= render partial: "temperatures/date_section", locals: { date: date, temperatures_by_date: temperatures_by_date } %>
-<% end %>
+<%= render partial: "temperatures/index", locals: { temperatures: @temperatures, grouped_temperatures: @grouped_temperatures, temperature_all_dates: @temperature_all_dates, current_child: current_child } %>
 
 <!-- モーダル枠 -->
 <turbo-frame id="modal"></turbo-frame>

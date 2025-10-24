@@ -1,6 +1,6 @@
 <% wday = ["日", "月", "火", "水", "木", "金", "土"][date.wday] %>
 
-<div id="temperatures-date-<%= date.strftime('%Y%m%d') %>" class="date-section">
+<div class="date-section">
   <h3 class="date-heading">
     <%= date.strftime("%Y年%m月%d日（#{wday}）") %> の記録
   </h3>

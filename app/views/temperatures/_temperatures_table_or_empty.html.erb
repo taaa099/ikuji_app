@@ -1,4 +1,4 @@
-<div id="temperatures-container"> 
+<div> 
   <table class="responsive-table">
     <thead>
       <tr>
@@ -10,7 +10,7 @@
       </tr>
     </thead>
     
-    <tbody id="temperatures-list">
+    <tbody>
       <% if temperatures.any? %>
         <%= render partial: "temperatures/temperature_row", collection: temperatures, as: :temperature %>
       <% else %>

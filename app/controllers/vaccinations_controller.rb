@@ -60,7 +60,7 @@ class VaccinationsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             # 作成したレコードをリストに追加
-            turbo_stream.replace("vaccinations-date-#{@vaccination.vaccinated_at.strftime('%Y%m%d')}", partial: "vaccinations/date_section", locals: { date: @vaccination.vaccinated_at.to_date, vaccinations_by_date: current_child.vaccinations.where(vaccinated_at: @vaccination.vaccinated_at.all_day).order(vaccinated_at: :desc) }),
+            turbo_stream.replace("vaccinations-container", partial: "vaccinations/index", locals: { vaccinations: current_child.vaccinations.order(vaccinated_at: :desc), grouped_vaccinations: current_child.vaccinations.group_by { |f| f.vaccinated_at.to_date }, vaccination_all_dates: (current_child.vaccinations.any? ? (current_child.vaccinations.minimum(:vaccinated_at).to_date..[ current_child.vaccinations.maximum(:vaccinated_at).to_date, Date.current ].max).to_a.reverse : [ Date.current ]), current_child: current_child }),
 
             # ダッシュボードの育児記録一覧にも追加
             turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
@@ -115,12 +115,7 @@ class VaccinationsController < ApplicationController
         # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
         format.turbo_stream do
           render turbo_stream: [
-            # === 古い日付セクションを再描画（削除されたレコードを反映） ===
-            turbo_stream.replace("vaccinations-date-#{vaccination_old_date.strftime('%Y%m%d')}", partial: "vaccinations/date_section", locals: { date: vaccination_old_date, vaccinations_by_date: current_child.vaccinations.where(vaccinated_at: vaccination_old_date.all_day).order(vaccinated_at: :desc) }),
-
-            # === 新しい日付セクションを再描画（追加されたレコードを反映） ===
-            turbo_stream.replace("vaccinations-date-#{vaccination_new_date.strftime('%Y%m%d')}", partial: "vaccinations/date_section", locals: { date: vaccination_new_date, vaccinations_by_date: current_child.vaccinations.where(vaccinated_at: vaccination_new_date.all_day).order(vaccinated_at: :desc) }),
-
+            turbo_stream.replace("vaccinations-container", partial: "vaccinations/index", locals: { vaccinations: current_child.vaccinations.order(vaccinated_at: :desc), grouped_vaccinations: current_child.vaccinations.group_by { |f| f.vaccinated_at.to_date }, vaccination_all_dates: (current_child.vaccinations.any? ? (current_child.vaccinations.minimum(:vaccinated_at).to_date..[ current_child.vaccinations.maximum(:vaccinated_at).to_date, Date.current ].max).to_a.reverse : [ Date.current ]), current_child: current_child }),
 
             turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
             turbo_stream.prepend(
@@ -156,7 +151,7 @@ class VaccinationsController < ApplicationController
       # Turbo Streamで一覧削除＋フラッシュ追加＋モーダル閉じる
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.replace("vaccinations-date-#{@vaccination.vaccinated_at.strftime('%Y%m%d')}", partial: "vaccinations/date_section", locals: { date: @vaccination.vaccinated_at.to_date, vaccinations_by_date: current_child.vaccinations.where(vaccinated_at: @vaccination.vaccinated_at.all_day).order(vaccinated_at: :desc) }),
+          turbo_stream.replace("vaccinations-container", partial: "vaccinations/index", locals: { vaccinations: current_child.vaccinations.order(vaccinated_at: :desc), grouped_vaccinations: current_child.vaccinations.group_by { |f| f.vaccinated_at.to_date }, vaccination_all_dates: (current_child.vaccinations.any? ? (current_child.vaccinations.minimum(:vaccinated_at).to_date..[ current_child.vaccinations.maximum(:vaccinated_at).to_date, Date.current ].max).to_a.reverse : [ Date.current ]), current_child: current_child }),
           turbo_stream.replace("dashboard-records-container", partial: "home/records_table_or_empty", locals: { records: current_child.records_for_date(@selected_date), selected_date: @selected_date }),
           turbo_stream.prepend(
             "flash-messages",

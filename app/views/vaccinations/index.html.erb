@@ -2,10 +2,7 @@
 
 <h2 class="responsive-title"><%= current_child.name %> の予防接種一覧</h2>
 
-<% @vaccination_all_dates.each do |date| %>
-  <% vaccinations_by_date = @grouped_vaccinations[date] || [] %>
-  <%= render partial: "vaccinations/date_section", locals: { date: date, vaccinations_by_date: vaccinations_by_date } %>
-<% end %>
+<%= render partial: "vaccinations/index", locals: { vaccinations: @vaccinations, grouped_vaccinations: @grouped_vaccinations, vaccination_all_dates: @vaccination_all_dates, current_child: current_child } %>
 
 <!-- モーダル枠 -->
 <turbo-frame id="modal"></turbo-frame>

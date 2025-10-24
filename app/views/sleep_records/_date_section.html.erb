@@ -5,5 +5,5 @@
     <%= date.strftime("%Y年%m月%d日（#{wday}）") %> の記録
   </h3>
 
-  <%= render partial: "sleep_records/sleep_records_table_or_empty", locals: { sleep_records: sleep_records_by_date } %>
+  <%= render partial: "sleep_records/sleep_records_table_or_empty", locals: { sleep_records: sleep_records_by_date.sort_by(&:start_time).reverse } %>
 </div>

@@ -5,5 +5,5 @@
     <%= date.strftime("%Y年%m月%d日（#{wday}）") %> の記録
   </h3>
 
-  <%= render partial: "baths/baths_table_or_empty", locals: { baths: baths_by_date } %>
+  <%= render partial: "baths/baths_table_or_empty", locals: { baths: baths_by_date.sort_by(&:bathed_at).reverse } %>
 </div>

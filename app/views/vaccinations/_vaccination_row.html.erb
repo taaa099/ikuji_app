@@ -1,4 +1,4 @@
-<tr>
+<tr class="clickable-row" data-href="<%= edit_child_vaccination_path(current_child, vaccination) %>" data-turbo-frame="modal">
   <td class="col-date">
     <span class="font-semibold text-gray-600">時間：</span>
     <%= vaccination.vaccinated_at.strftime("%H:%M") %>
@@ -20,12 +20,8 @@
   </td>
 
   <td class="record-col-chevron text-right pr-2">
-    <%= link_to(
-      edit_child_vaccination_path(current_child, vaccination),
-      data: { turbo_frame: "modal" },
-      class: "record-edit-btn"
-    ) do %>
+    <div class="record-edit-btn">
       <i class="fa-solid fa-chevron-right"></i>
-    <% end %>
+    <div>
   </td>
 </tr>

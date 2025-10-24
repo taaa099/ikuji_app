@@ -1,4 +1,4 @@
-<tr>
+<tr class="clickable-row" data-href="<%= edit_child_sleep_record_path(current_child, sleep_record) %>" data-turbo-frame="modal">
   <td class="col-date">
     <span class="font-semibold text-gray-600">開始時間：</span>
     <%= sleep_record.start_time.strftime("%H:%M") %>
@@ -33,12 +33,8 @@
   </td>
 
   <td class="record-col-chevron text-right pr-2">
-    <%= link_to(
-      edit_child_sleep_record_path(current_child, sleep_record),
-      data: { turbo_frame: "modal" },
-      class: "record-edit-btn"
-    ) do %>
+    <div class="record-edit-btn">
       <i class="fa-solid fa-chevron-right"></i>
-    <% end %>
+    </div>
   </td>
 </tr>

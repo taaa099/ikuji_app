@@ -5,5 +5,5 @@
     <%= date.strftime("%Y年%m月%d日（#{wday}）") %> の記録
   </h3>
 
-  <%= render partial: "bottles/bottles_table_or_empty", locals: { bottles: bottles_by_date } %>
+  <%= render partial: "bottles/bottles_table_or_empty", locals: { bottles: bottles_by_date.sort_by(&:given_at).reverse } %>
 </div>

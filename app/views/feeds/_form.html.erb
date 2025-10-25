@@ -1,7 +1,8 @@
 <div class="form-container">
   <%= form_with(model: [current_child, feed], data: { turbo_frame: "modal" }) do |form| %>
     <% if feed.errors.any? %>
-      <div class="error_explanation">
+      <div id="error_explanation">
+        <h3><%= pluralize(feed.errors.count, "件のエラー") %>があります：</h3>
         <ul>
           <% feed.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>

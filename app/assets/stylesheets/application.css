@@ -134,12 +134,6 @@ select {
   gap:16px;
 }
 
-.header-actions > div:hover {
-  background-color: #f3f4f6; /* hoverで薄いグレー */
-  border-radius: 50%;        /* 丸く */
-  transition: background-color 0.2s;
-}
-
 .child-status {
   font-size: 14px;
   color: #333;
@@ -160,7 +154,7 @@ select {
 }
 
 .notification:hover i.fa-bell {
-  color: #1d4ed8; /* ホバーで青く */
+  color: #4caf50;
 }
 
 /* 通知カウントバッジ */
@@ -243,6 +237,29 @@ select {
   background-color: #f0f0f0; /* ホバーで少し色を変えるだけ */
 }
 
+#account-toggle {
+  position: relative; /* ::before を相対配置 */
+  overflow: hidden;
+}
+
+#account-toggle::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255,255,255,0); /* 初期は透明 */
+  transition: background-color 0.2s;
+  border-radius: 50%; /* アイコン丸に合わせる */
+  pointer-events: none; /* ボタン操作は妨げない */
+  z-index: 1; /* 画像より前面に */
+}
+
+#account-toggle:hover::before {
+  background-color: rgba(255,255,255,0.2); /* 薄い白モヤ */
+}
+
 /* ==============================
    アカウントメニューの区切り線
    ============================== */
@@ -256,23 +273,32 @@ select {
    作成ボタン・ドロップダウン共通
    ============================== */
 #new-record-button {
+  position: relative;
   padding: 6px 12px;
   font-size: 16px;
-  background-color: #1d4ed8;  /* ブルー */
+  background-color: #4caf50;
   color: #fff;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  overflow: hidden; /* ::beforeをボタン内に制限 */
+}
+
+#new-record-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255,255,255,0); /* 初期は透明 */
   transition: background-color 0.2s;
+  border-radius: 6px;
+  pointer-events: none; /* ボタン操作を妨げない */
 }
 
-#new-record-button i {
-  display: inline-block;
-  pointer-events: none;  /* アイコン自身をクリック判定から外す */
-}
-
-#new-record-button:hover {
-  background-color: #2563eb;
+#new-record-button:hover::before {
+  background-color: rgba(255,255,255,0.2); /* 薄い白のモヤ */
 }
 
 /* ドロップダウンメニュー */

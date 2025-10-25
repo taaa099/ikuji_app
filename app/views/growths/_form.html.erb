@@ -12,28 +12,28 @@
     <% end %>
 
     <div class="growth-form-group">
+      <%= form.label :recorded_at, "計測日", class: "growth-form-label" %>
+      <%= form.date_field :recorded_at, class: "growth-form-input" %>
+    </div>
+
+    <div class="growth-form-group">
       <%= form.label :height, "身長(cm)", class: "growth-form-label" %>
-      <%= form.number_field :height, step: 0.1, class: "growth-form-input" %>
+      <%= form.number_field :height, min: 0, step: 0.1, class: "growth-form-input" %>
     </div>
 
     <div class="growth-form-group">
       <%= form.label :weight, "体重(kg)", class: "growth-form-label" %>
-      <%= form.number_field :weight, step: 0.1, class: "growth-form-input" %>
+      <%= form.number_field :weight, min: 0, step: 0.1, class: "growth-form-input" %>
     </div>
 
     <div class="growth-form-group">
       <%= form.label :head_circumference, "頭囲(cm)", class: "growth-form-label" %>
-      <%= form.number_field :head_circumference, step: 0.1, class: "growth-form-input" %>
+      <%= form.number_field :head_circumference, min: 0, step: 0.1, class: "growth-form-input" %>
     </div>
 
     <div class="growth-form-group">
       <%= form.label :chest_circumference, "胸囲(cm)", class: "growth-form-label" %>
-      <%= form.number_field :chest_circumference, step: 0.1, class: "growth-form-input" %>
-    </div>
-
-    <div class="growth-form-group">
-      <%= form.label :recorded_at, "計測日", class: "growth-form-label" %>
-      <%= form.date_field :recorded_at, class: "growth-form-input" %>
+      <%= form.number_field :chest_circumference, min: 0, step: 0.1, class: "growth-form-input" %>
     </div>
 
     <div class="growth-form-actions">

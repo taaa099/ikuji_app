@@ -12,7 +12,7 @@
     <% end %>
 
     <div class="form-group">
-      <%= form.label :bathed_at, "お風呂時間", class: "form-label" %>
+      <%= form.label :bathed_at, "時間", class: "form-label" %>
       <%= form.datetime_field :bathed_at, include_seconds: false, default: bath.bathed_at || Time.current, class: "form-input" %>
     </div>
 

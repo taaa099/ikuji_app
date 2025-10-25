@@ -13,7 +13,7 @@
     <% end %>
 
     <div class="form-group">
-      <%= form.label :measured_at, "測定時間", class: "form-label" %>
+      <%= form.label :measured_at, "時間", class: "form-label" %>
       <%= form.datetime_field :measured_at, include_seconds: false, default: temperature.measured_at || Time.current, class: "form-input" %>
     </div>
 

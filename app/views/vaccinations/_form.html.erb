@@ -12,7 +12,7 @@
     <% end %>
 
     <div class="form-group">
-      <%= form.label :vaccinated_at, "接種時間", class: "form-label" %>
+      <%= form.label :vaccinated_at, "時間", class: "form-label" %>
       <%= form.datetime_field :vaccinated_at, include_seconds: false, default: vaccination.vaccinated_at || Time.current, class: "form-input" %>
     </div>
 

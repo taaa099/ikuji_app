@@ -12,8 +12,8 @@
     <% end %>
 
     <div class="form-group">
-      <%= form.label :given_at, "ミルクを与えた時間", class: "form-label" %>
-      <%= form.text_field :given_at, class: "form-input" %>
+      <%= form.label :given_at, "時間", class: "form-label" %>
+      <%= form.datetime_field :given_at, include_seconds: false, default: bottle.given_at || Time.current, class: "form-input" %>
     </div>
 
     <div class="form-group">

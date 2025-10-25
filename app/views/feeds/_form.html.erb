@@ -19,7 +19,9 @@
     <div class="form-group">
       <%= form.label :left_minutes, "左授乳（分）", class: "form-label" %>
       <%= number_field_tag :left_minutes, @left_minutes || "", min: 0, class: "form-input" %> 
+    </div>
 
+    <div class="form-group">
       <%= form.label :left_seconds, "左授乳（秒）", class: "form-label" %>
       <%= number_field_tag :left_seconds, @left_seconds || "", min: 0, max: 59, class: "form-input" %> 
     </div>
@@ -27,7 +29,9 @@
     <div class="form-group">
       <%= form.label :right_minutes, "右授乳（分）", class: "form-label" %>
       <%= number_field_tag :right_minutes, @right_minutes || "", min: 0, class: "form-input" %> 
+    </div>
 
+    <div class="form-group">
       <%= form.label :right_seconds, "右授乳（秒）", class: "form-label" %>
       <%= number_field_tag :right_seconds, @right_seconds || "", min: 0, max: 59, class: "form-input" %> 
     </div>

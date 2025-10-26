@@ -13,12 +13,18 @@
     <% end %>
 
     <div class="form-group">
-      <%= form.label :measured_at, "時間", class: "form-label" %>
+      <%= form.label :measured_at, class: "form-label" do %>
+        時間
+        <span class="required-badge">必須</span>
+      <% end %>
       <%= form.datetime_field :measured_at, include_seconds: false, default: temperature.measured_at || Time.current, class: "form-input" %>
     </div>
 
     <div class="form-group">
-      <%= form.label :temperature, "体温(℃)", class: "form-label" %>
+      <%= form.label :temperature, class: "form-label" do %>
+        体温(℃)
+        <span class="required-badge">必須</span>
+      <% end %>
       <%= form.number_field :temperature, step: 0.1, min: 35.0, max: 42.0, class: "form-input" %>
     </div>
 

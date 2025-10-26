@@ -19,27 +19,27 @@
       <%= form.datetime_field :fed_at, include_seconds: false, default: feed.fed_at || Time.current, class: "form-input" %>
     </div>
 
-<div class="form-group">
-  <label class="form-label mb-1 flex items-center gap-2 font-semibold">
-    左/右授乳
-    <span class="required-badge">※いずれかを入力</span>
-  </label>
+    <div class="form-group">
+      <label class="form-label mb-1 flex items-center gap-2 font-semibold">
+        左/右授乳
+        <span class="required-badge">いずれかを入力</span>
+      </label>
 
-  <div class="grid grid-cols-4 gap-2 p-3 bg-white">
-    <div>
-      <%= number_field_tag :left_minutes, (@left_minutes == 0 ? "" : @left_minutes), min: 0, class: "form-input", placeholder: "左（分）" %>
+      <div class="grid grid-cols-4 gap-2 p-3 bg-white">
+        <div>
+          <%= number_field_tag :left_minutes, (@left_minutes == 0 ? "" : @left_minutes), min: 0, class: "form-input", placeholder: "左（分）" %>
+        </div>
+        <div>
+          <%= number_field_tag :left_seconds, (@left_seconds == 0 ? "" : @left_seconds), min: 0, max: 59, class: "form-input", placeholder: "左（秒）" %>
+        </div>
+        <div>
+          <%= number_field_tag :right_minutes, (@right_minutes == 0 ? "" : @right_minutes), min: 0, class: "form-input", placeholder: "右（分）" %>
+        </div>
+        <div>
+          <%= number_field_tag :right_seconds, (@right_seconds == 0 ? "" : @right_seconds), min: 0, max: 59, class: "form-input", placeholder: "右（秒）" %>
+        </div>
+      </div>
     </div>
-    <div>
-      <%= number_field_tag :left_seconds, (@left_seconds == 0 ? "" : @left_seconds), min: 0, max: 59, class: "form-input", placeholder: "左（秒）" %>
-    </div>
-    <div>
-      <%= number_field_tag :right_minutes, (@right_minutes == 0 ? "" : @right_minutes), min: 0, class: "form-input", placeholder: "右（分）" %>
-    </div>
-    <div>
-      <%= number_field_tag :right_seconds, (@right_seconds == 0 ? "" : @right_seconds), min: 0, max: 59, class: "form-input", placeholder: "右（秒）" %>
-    </div>
-  </div>
-</div>
 
     <div class="form-group">
       <%= form.label :memo, "メモ", class: "form-label" %>

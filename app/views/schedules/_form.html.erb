@@ -12,35 +12,47 @@
 
   <div class="schedule-form-container">
     <div class="schedule-form-group">
-      <%= form.label :title, "タイトル", class: "schedule-form-label" %>
+      <%= form.label :title, class: "schedule-form-label" do %>
+        タイトル
+        <span class="required-badge">必須</span>
+      <% end %>
       <%= form.text_field :title, class: "schedule-form-input" %>
     </div>
 
   <div class="schedule-form-group">
-    <%= form.label :child_ids, "対象の子供", class: "schedule-form-label" %>
+    <%= form.label :child_ids, class: "schedule-form-label" do %>
+      対象の子供
+      <span class="required-badge">必須</span>
+    <% end %>
 
     <!-- ユーザー予定 -->
-    <div>
-      <%= form.check_box :child_ids, { multiple: true }, "", nil %>
+    <label class="schedule-checkbox-wrapper">
+      <%= form.check_box :child_ids, { multiple: true, class: "schedule-form-checkbox" }, "", nil %>
       <%= "#{current_user.name.presence || 'ユーザー'} 予定として登録" %>
-    </div>
+    </label>
 
     <!-- 子供たち -->
     <%= form.collection_check_boxes :child_ids, current_user.children, :id, :name do |b| %>
-      <div>
-        <%= b.check_box %>
+      <label class="schedule-checkbox-wrapper">
+        <%= b.check_box(class: "schedule-form-checkbox") %>
         <%= b.text %>
-      </div>
+      </label>
     <% end %>
   </div>
 
     <div class="schedule-form-group">
-      <%= form.label :start_time, "開始日時", class: "schedule-form-label" %>
+      <%= form.label :start_time, class: "schedule-form-label" do %>
+        開始日時
+        <span class="required-badge">必須</span>
+      <% end %>
       <%= form.datetime_field :start_time, class: "schedule-form-input" %>
     </div>
 
     <div class="schedule-form-group">
-      <%= form.label :end_time, "終了日時", class: "schedule-form-label" %>
+      <%= form.label :end_time, class: "schedule-form-label" do %>
+        終了日時
+        <span class="required-badge">必須</span>
+      <% end %>
       <%= form.datetime_field :end_time, class: "schedule-form-input" %>
     </div>
 

@@ -12,7 +12,10 @@
     <% end %>
 
     <div class="form-group">
-      <%= form.label :start_time, "開始時間", class: "form-label" %>
+      <%= form.label :start_time, class: "form-label" do %>
+        開始時間
+        <span class="required-badge">必須</span>
+      <% end %>
       <%= form.datetime_field :start_time, include_seconds: false, default: sleep_record.start_time || Time.current, class: "form-input" %>
     </div>
 

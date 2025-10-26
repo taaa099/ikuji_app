@@ -101,6 +101,37 @@
   background: #45a049;
 }
 
+/* 縦並び用のチェックボックスラッパー */
+.schedule-checkbox-wrapper {
+  display: flex; 
+  align-items: center
+  gap: 8px;
+  margin-bottom: 6px;
+  width: fit-content;
+}
+
+/* カスタムチェックボックス */
+.schedule-form-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s;
+
+}
+
+/* チェック時 */
+.schedule-form-checkbox:checked {
+  background-color: #4caf50;
+  border-color: #4caf50;
+}
+
+/* フォーカス時 */
+.schedule-form-checkbox:focus {
+  box-shadow: 0 0 0 2px #4caf50;
+}
+
 /* showビュー（予定詳細） */
 .schedule-show-container {
   max-width: 600px;

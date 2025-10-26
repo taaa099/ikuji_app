@@ -173,7 +173,7 @@
 }
 
 /* カスタムチェックボックス */
-.record-checkbox {
+.record-form-checkbox {
   width: 20px;
   height: 20px;
   border: 2px solid #ccc;
@@ -184,13 +184,13 @@
 }
 
 /* チェック時 */
-.record-checkbox:checked {
+.record-form-checkbox:checked {
   background-color: #4caf50;
   border-color: #4caf50;
 }
 
 /* フォーカス時 */
-.record-checkbox:focus {
+.record-form-checkbox:focus {
   box-shadow: 0 0 0 2px #4caf50;
 }
 

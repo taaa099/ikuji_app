@@ -12,17 +12,26 @@
     <% end %>
 
     <div class="form-group">
-      <%= f.label :title, "タイトル", class: "form-label" %>
+      <%= f.label :title, class: "form-label" do %>
+        タイトル
+        <span class="required-badge">必須</span>
+      <% end %>
       <%= f.text_field :title, class: "form-input" %>
     </div>
 
     <div class="form-group">
-      <%= f.label :content, "内容", class: "form-label" %>
+      <%= f.label :content, class: "form-label" do %>
+        本文
+        <span class="required-badge">必須</span>
+      <% end %>
       <%= f.text_area :content, class: "form-input" %>
     </div>
 
     <div class="form-group">
-      <%= f.label :date, "日付", class: "form-label" %>
+      <%= f.label :date, class: "form-label" do %>
+        日付
+        <span class="required-badge">必須</span>
+      <% end %>
       <%= f.date_field :date, class: "form-input" %>
     </div>
 

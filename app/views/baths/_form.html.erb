@@ -12,12 +12,18 @@
     <% end %>
 
     <div class="form-group">
-      <%= form.label :bathed_at, "時間", class: "form-label" %>
+      <%= form.label :bathed_at, class: "form-label" do %>
+        時間
+        <span class="required-badge">必須</span>
+      <% end %>
       <%= form.datetime_field :bathed_at, include_seconds: false, default: bath.bathed_at || Time.current, class: "form-input" %>
     </div>
 
     <div class="form-group">
-      <%= form.label :bath_type, "種類", class: "form-label" %>
+      <%= form.label :bath_type, class: "form-label" do %>
+        種類
+        <span class="required-badge">該当するものを選択</span>
+      <% end %>
       <%= form.select :bath_type, options_for_select(["お風呂", "シャワー", "その他"], form.object.bath_type), {}, class: "form-input" %>
     </div>
 

@@ -22,17 +22,17 @@
     <div class="form-group">
       <label class="form-label mb-1 flex items-center gap-2 font-semibold">
         種類
-        <span class="required-badge">※該当するものを選択</span>
+        <span class="required-badge">該当するものを選択</span>
       </label>
 
       <div class="flex gap-3">
         <label class="checkbox-wrapper">
-          <%= form.check_box :pee, class: "record-checkbox" %>
+          <%= form.check_box :pee, class: "record-form-checkbox" %>
           おしっこ
         </label>
 
         <label class="checkbox-wrapper">
-          <%= form.check_box :poop, class: "record-checkbox" %>
+          <%= form.check_box :poop, class: "record-form-checkbox" %>
           うんち
         </label>
       </div>

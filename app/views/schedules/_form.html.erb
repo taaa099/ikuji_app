@@ -74,7 +74,17 @@
     </div>
 
     <div class="schedule-form-actions">
+      <% if schedule.persisted? %>
+        <%= button_to "削除", schedule_path(schedule),
+          method: :delete,
+          data: { turbo_confirm: '本当に削除しますか？' },
+          class: "schedule-form-submit" %>
+      <% end %>
+
+    
       <%= form.submit schedule.persisted? ? "更新する" : "登録する", class: "schedule-form-submit" %>
+
+      <a href="#" class="modal-close">閉じる</a>
     </div>
   </div>
 <% end %>

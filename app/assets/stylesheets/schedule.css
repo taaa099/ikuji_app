@@ -41,13 +41,13 @@
 }
 
 /* new, editフォーム（予定登録・編集） */
-.schedule-form-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 1.5rem;
-  background: #fdfdfd;
-  border: 1px solid #ccd;
-  border-radius: 8px;
+/* モーダル内フォーム用調整 */
+.schedule-modal-container .schedule-form-container {
+  max-width: none; /* 600px制限を解除 */
+  width: 100%;     /* モーダルの横幅に合わせる */
+  border: none;    /* 二重枠を避ける */
+  background: transparent; /* モーダル背景と統一 */
+  padding: 0;      /* モーダル側の余白を活かす */
 }
 
 .schedule-form-group {
@@ -81,8 +81,7 @@
 
 /* 通常のボタン・リンク */
 .schedule-form-actions a,
-.schedule-form-actions input[type="submit"],
-.schedule-form-actions button {
+.schedule-form-actions input[type="submit"] {
   padding: 8px 16px;
   font-size: 14px;
   border: none;
@@ -94,17 +93,32 @@
   display: inline-block;
 }
 
+.schedule-form-actions button {
+  padding: 8px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  background: #e53935; /* 赤系 */
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
 /* hover */
 .schedule-form-actions a:hover,
-.schedule-form-actions input[type="submit"]:hover,
-.schedule-form-actions button:hover {
+.schedule-form-actions input[type="submit"]:hover {
   background: #45a049;
+}
+
+.schedule-form-actions button:hover {
+  background: #c62828; /* 濃い赤 */
 }
 
 /* 縦並び用のチェックボックスラッパー */
 .schedule-checkbox-wrapper {
   display: flex; 
-  align-items: center
+  align-items: center;
   gap: 8px;
   margin-bottom: 6px;
   width: fit-content;

@@ -6,6 +6,14 @@
       </h2>
 
       <%= render "form", schedule: schedule %>
+        <div class="schedule-form-actions">
+          <% if schedule.persisted? %>
+            <%= button_to "削除", schedule_path(schedule),
+              method: :delete,
+              data: { turbo_confirm: '本当に削除しますか？' },
+              class: "schedule-form-submit" %>
+          <% end %>
+        </div>
     </div>
   </div>
 </turbo-frame>

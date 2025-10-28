@@ -5,26 +5,9 @@
   <%= render partial: "schedules/calendar", locals: { month: @month, schedules: @schedules } %>
 </turbo-frame>
 
-<h2 class="responsive-title">予定一覧</h2>
+<h2 class="schedule-title">予定一覧</h2>
 
-<table class="schedule-table">
-  <thead>
-    <tr>
-      <th class="schedule-col-item">開始</th>
-      <th class="schedule-col-date">終了</th>
-      <th class="schedule-col-detail">タイトル</th>
-      <th class="schedule-col-detail">繰り返し</th>
-      <th class="schedule-col-detail">対象の子供</th>
-      <th class="schedule-col-memo">メモ</th>
-      <th class="schedule-col-item">操作</th>
-    </tr>
-  </thead>
-  <tbody id="schedules-list">
-    <%= render partial: "schedules/schedule_row", collection: @all_schedules, as: :schedule %>
-  </tbody>
-</table>
-
-<%= link_to "新規追加", new_schedule_path, class: "schedule-index-btn", data: { turbo_frame: "modal" } %>
+<%= render partial: "schedules/index", locals: { grouped_schedules: @grouped_schedules, schedule_all_dates: @schedule_all_dates } %>
 
 <!-- モーダル枠 -->
 <turbo-frame id="modal"></turbo-frame>

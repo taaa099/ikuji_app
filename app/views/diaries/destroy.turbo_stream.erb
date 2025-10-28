@@ -1,5 +1,0 @@
-<%= turbo_stream.remove "diary_#{@diary.id}" %>
-<%= turbo_stream.update "modal" do %>
-  <turbo-frame id="modal"></turbo-frame>
-<% end %>
-<%= turbo_stream.replace "flash-messages", partial: "shared/flash", locals: { flash: { notice: "日記を削除しました" } } %>

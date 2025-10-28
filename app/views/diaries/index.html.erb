@@ -2,21 +2,6 @@
 
 <h2>日記一覧</h2>
 
-<%= link_to "新しい日記を投稿", new_diary_path, class: "nav-btn", data: { turbo_frame: "modal" } %>
+<%= render partial: "index", locals: { diaries: @diaries } %>
 
-<table class="responsive-table">
-  <thead>
-    <tr>
-      <th>日付</th>
-      <th>タイトル</th>
-      <th>内容</th>
-      <th>操作</th>
-    </tr>
-  </thead>
-  <tbody id="diaries-list">
-    <%= render partial: "diary_row", collection: @diaries, as: :diary %>
-  </tbody>
-</table>
-
-<!-- モーダル枠 -->
 <turbo-frame id="modal"></turbo-frame>

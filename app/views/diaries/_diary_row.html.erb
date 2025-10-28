@@ -1,8 +1,0 @@
-<tr id="diary_<%= diary.id %>">
-  <td><%= diary.date.strftime("%Y-%m-%d") %></td>
-  <td><%= diary.title %></td>
-  <td><%= truncate(diary.content, length: 50) %></td>
-  <td class="col-detail">
-    <%= link_to "編集", edit_diary_path(diary), class: "edit-link", data: { turbo_frame: "modal" } %>
-  </td>
-</tr>

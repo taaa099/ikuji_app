@@ -1,0 +1,44 @@
+<div id="diaries-container">
+  <% if diaries.any? %>
+    <div class="diary-index-list">
+      <% diaries.each do |diary| %>
+        <div class="diary-index-item-wrapper" id="diary-<%= diary.id %>">
+          <!-- ゴミ箱アイコン（カード右上に絶対配置） -->
+          <%= button_to diary_path(diary),
+                        method: :delete,
+                        form: { data: { turbo_frame: "diaries-container" } },
+                        data: { turbo_confirm: "本当に削除しますか？" },
+                        class: "diary-delete-btn" do %>
+            <i class="fa fa-trash"></i>
+          <% end %>
+
+          <!-- 日記詳細へのリンク -->
+          <%= link_to diary_path(diary), class: "diary-index-item-link" do %>
+            <div class="diary-index-item">
+              <h3 class="diary-index-title">
+                <%= diary.title %>
+                <span class="diary-index-date">（<%= l diary.date, format: :short %>）</span>
+              </h3>
+
+              <p class="diary-index-content">
+                <%= truncate(diary.content, length: 40) %>
+              </p>
+
+              <% if diary.images.attached? %>
+                <div class="diary-index-images">
+                  <% diary.images.each do |image| %>
+                    <%= image_tag image.variant(resize_to_limit: [150, 150]) %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>まだ日記はありません。</p>
+  <% end %>
+</div>
+
+<turbo-frame id="modal"></turbo-frame>

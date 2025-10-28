@@ -1,8 +1,0 @@
-<%= turbo_stream.remove "vaccination_#{@vaccination.id}" %>
-
-<%= turbo_stream.replace "flash-messages", partial: "shared/flash",
-      locals: { flash: { notice: "予防接種の記録を削除しました" } } %>
-
-<%= turbo_stream.update "modal" do %>
-  <turbo-frame id="modal"></turbo-frame>
-<% end %>

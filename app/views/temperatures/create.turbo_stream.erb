@@ -1,5 +1,0 @@
-<%= turbo_stream.prepend "temperatures-list", partial: "temperatures/temperature_row", locals: { temperature: @temperature } %>
-<%= turbo_stream.update "modal" do %>
-  <turbo-frame id="modal"></turbo-frame>
-<% end %>
-<%= turbo_stream.replace "flash-messages", partial: "shared/flash", locals: { flash: { notice: "体温記録を保存しました" } } %>

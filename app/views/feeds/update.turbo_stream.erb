@@ -1,7 +1,0 @@
-<%= turbo_stream.replace "feed_#{@feed.id}", partial: "feeds/feed_row", locals: { feed: @feed } %>
-
-<%= turbo_stream.update "modal" do %>
-  <turbo-frame id="modal"></turbo-frame>
-<% end %>
-
-<%= turbo_stream.replace "flash-messages", partial: "shared/flash", locals: { flash: { notice: "授乳記録を更新しました" } } %>

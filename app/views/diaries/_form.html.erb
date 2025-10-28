@@ -36,13 +36,8 @@
     </div>
 
     <div class="form-group">
-      <%= f.label :images, "写真", class: "form-label" %>
-      <%= f.file_field :images, multiple: true, class: "form-input" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :videos, "動画", class: "form-label" %>
-      <%= f.file_field :videos, multiple: true, class: "form-input" %>
+      <%= f.label :media, "メディア（画像・動画）", class: "form-label" %>
+      <%= f.file_field :media, multiple: true, accept: "image/*,video/*", class: "form-input" %>
     </div>
 
     <div class="form-actions">    

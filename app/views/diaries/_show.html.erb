@@ -8,20 +8,14 @@
     <%= simple_format(@diary.content) %>
   </div>
 
-  <% if @diary.images.attached? %>
-    <div class="diary-show-media diary-show-images">
-      <% @diary.images.each do |image| %>
-        <%= image_tag image.variant(resize_to_limit: [400, 400]), class: "diary-show-img" %>
-      <% end %>
-    </div>
-  <% end %>
-
-  <% if @diary.videos.attached? %>
-    <div class="diary-show-media diary-show-videos">
-      <% @diary.videos.each do |video| %>
-        <video controls class="diary-show-video">
-          <source src="<%= url_for(video) %>" type="<%= video.content_type %>">
-        </video>
+  <% if @diary.media.attached? %>
+    <div class="diary-show-media">
+      <% @diary.media.each do |file| %>
+        <% if file.image? %>
+          <%= image_tag file.variant(resize_to_limit: [400, 400]), class: "diary-show-img" %>
+        <% elsif file.video? %>
+          <%= video_tag file, controls: true, size: "400x300", class: "diary-show-video" %>
+        <% end %>
       <% end %>
     </div>
   <% end %>

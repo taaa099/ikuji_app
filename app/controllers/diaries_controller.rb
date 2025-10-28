@@ -71,6 +71,14 @@ class DiariesController < ApplicationController
   def update
     @diary = current_user.diaries.find(params[:id])
 
+  # 1. 削除対象のメディアを purge
+  if params[:diary][:remove_media_ids].present?
+    params[:diary][:remove_media_ids].each do |file_id|
+      media = @diary.media.find(file_id)
+      media.purge
+    end
+  end
+
     respond_to do |format|
       if @diary.update(diary_params)
         format.html { redirect_to diaries_path, notice: "日記を更新しました" }
@@ -126,6 +134,6 @@ class DiariesController < ApplicationController
 
   # フォームから送信されたパラメータのうち、許可するキーを指定
   def diary_params
-    params.require(:diary).permit(:title, :content, :date, images: [], videos: [])
+    params.require(:diary).permit(:title, :content, :date, media: [])
   end
 end

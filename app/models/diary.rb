@@ -2,8 +2,7 @@ class Diary < ApplicationRecord
   belongs_to :user
 
   # ActiveStorage
-  has_many_attached :images
-  has_many_attached :videos
+  has_many_attached :media
 
   # バリデーション
   validates :title, presence: true

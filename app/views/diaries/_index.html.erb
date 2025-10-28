@@ -3,7 +3,7 @@
     <div class="diary-index-list">
       <% diaries.each do |diary| %>
         <div class="diary-index-item-wrapper" id="diary-<%= diary.id %>">
-          <!-- ゴミ箱アイコン（カード右上に絶対配置） -->
+          <!-- ゴミ箱アイコン -->
           <%= button_to diary_path(diary),
                         method: :delete,
                         form: { data: { turbo_frame: "diaries-container" } },
@@ -12,7 +12,7 @@
             <i class="fa fa-trash"></i>
           <% end %>
 
-          <!-- 日記詳細へのリンク -->
+          <!-- 日記詳細リンク -->
           <%= link_to diary_path(diary), class: "diary-index-item-link" do %>
             <div class="diary-index-item">
               <h3 class="diary-index-title">
@@ -24,13 +24,17 @@
                 <%= truncate(diary.content, length: 40) %>
               </p>
 
-              <% if diary.images.attached? %>
-                <div class="diary-index-images">
-                  <% diary.images.each do |image| %>
-                    <%= image_tag image.variant(resize_to_limit: [150, 150]) %>
+              <!-- メディアアイコン表示 -->
+              <div class="diary-index-media-icons">
+                <% if diary.media.attached? %>
+                  <% if diary.media.any?(&:image?) %>
+                    <i class="fa fa-image" title="写真あり"></i>
                   <% end %>
-                </div>
-              <% end %>
+                  <% if diary.media.any?(&:video?) %>
+                    <i class="fa fa-video" title="動画あり"></i>
+                  <% end %>
+                <% end %>
+              </div>
             </div>
           <% end %>
         </div>

@@ -1,4 +1,4 @@
-<div class="form-container">
+<div class="diary-form-container">
   <%= form_with(model: diary, data: { turbo_frame: "modal" }) do |f| %>
     <% if diary.errors.any? %>
       <div id="error_explanation">
@@ -24,7 +24,7 @@
         本文
         <span class="required-badge">必須</span>
       <% end %>
-      <%= f.text_area :content, class: "form-input" %>
+      <%= f.text_area :content, rows: 14, class: "form-input" %>
     </div>
 
     <div class="form-group">
@@ -46,7 +46,13 @@
     </div>
 
     <div class="form-actions">
+      <% if diary.persisted? %>
+        <%= button_to "削除", diary_path(diary), method: :delete, class: "form-submit-btn", data: { turbo_confirm: '本当に削除しますか？' } %>
+      <% end %>
+        
       <%= f.submit diary.persisted? ? "更新する" : "保存", class: "form-submit-btn" %>
+
+      <a href="#" class="modal-close">閉じる</a>
     </div>
   <% end %>
 </div>

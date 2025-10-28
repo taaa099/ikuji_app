@@ -2,6 +2,15 @@
    日記投稿機能専用スタイル
    ============================== */
 
+/* モーダル内フォーム用調整 */
+.no-record-modal-container .diary-form-container {
+  max-width: none; /* 600px制限を解除 */
+  width: 100%;     /* モーダルの横幅に合わせる */
+  border: none;    /* 二重枠を避ける */
+  background: transparent; /* モーダル背景と統一 */
+  padding: 0;      /* モーダル側の余白を活かす */
+}
+
 .diary-list {
   display: flex;
   flex-direction: column;

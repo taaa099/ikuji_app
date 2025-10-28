@@ -1,0 +1,23 @@
+<table class="schedule-table">
+  <thead>
+    <tr>
+      <th class="schedule-col-item">開始</th>
+      <th class="schedule-col-date">終了</th>
+      <th class="schedule-col-detail">タイトル</th>
+      <th class="schedule-col-detail">繰り返し</th>
+      <th class="schedule-col-detail">対象の子供</th>
+      <th class="schedule-col-memo">メモ</th>
+      <th class="schedule-col-item">操作</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if schedules.any? %>
+      <%= render partial: "schedules/schedule_row", collection: schedules, as: :schedule %>
+    <% else %>
+      <tr>
+        <td class="no-record text-center py-6">予定がありません。</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -4,22 +4,18 @@ class SchedulesController < ApplicationController
 
   def index
     @month = params[:start_date] ? Date.parse(params[:start_date]) : Date.current.beginning_of_month
-    # 月のスケジュール（子供・ユーザー予定含む）
-    @schedules = current_user.schedules.includes(:children)
-                             .where(start_time: @month.all_month)
-                             .order(start_time: :asc)
-    @all_schedules = current_user.schedules.includes(:children).order(start_time: :desc)
 
-    respond_to do |format|
-      format.html
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.replace(
-          "calendar",
-          partial: "schedules/calendar",
-          locals: { month: @month, schedules: @schedules }
-        )
-      end
-    end
+    # 月のスケジュール（終日→時間順）
+    @schedules = current_user.schedules
+                             .includes(:children)
+                             .where(start_time: @month.all_month)
+                             .order(Arel.sql("all_day DESC, start_time ASC"))
+
+    # 日付ごとにグループ化（JST基準）
+    @grouped_schedules = @schedules.group_by { |s| s.start_time.in_time_zone("Tokyo").to_date }
+
+    # スケジュールが存在する日だけ抽出（降順表示）
+    @schedule_all_dates = @grouped_schedules.keys.sort.reverse
   end
 
   def show
@@ -62,11 +58,11 @@ class SchedulesController < ApplicationController
 
         format.turbo_stream do
           render turbo_stream: [
+            # 一覧のレコードを置換
+            turbo_stream.replace("schedules-container", partial: "schedules/index", locals: { grouped_schedules: current_user.schedules.includes(:children).order(Arel.sql("all_day DESC, start_time ASC")).group_by { |s| s.start_time.in_time_zone("Tokyo").to_date }, schedule_all_dates: current_user.schedules.includes(:children).order(Arel.sql("all_day DESC, start_time ASC")).group_by { |s| s.start_time.in_time_zone("Tokyo").to_date }.keys.sort.reverse }),
+
             # カレンダーを更新
             turbo_stream.replace("calendar", partial: "schedules/calendar", locals: { month: @month, schedules: @schedules }),
-
-            # 一覧に新しいレコードを追加
-            turbo_stream.prepend("schedules-list", partial: "schedules/schedule_row", locals: { schedule: @schedule }),
 
             # フラッシュ通知を追加
             turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "予定を登録しました" } }),
@@ -125,7 +121,7 @@ class SchedulesController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             # 一覧のレコードを置換
-            turbo_stream.replace("schedule_#{@schedule.id}", partial: "schedules/schedule_row", locals: { schedule: @schedule }),
+            turbo_stream.replace("schedules-container", partial: "schedules/index", locals: { grouped_schedules: current_user.schedules.includes(:children).order(Arel.sql("all_day DESC, start_time ASC")).group_by { |s| s.start_time.in_time_zone("Tokyo").to_date }, schedule_all_dates: current_user.schedules.includes(:children).order(Arel.sql("all_day DESC, start_time ASC")).group_by { |s| s.start_time.in_time_zone("Tokyo").to_date }.keys.sort.reverse }),
 
             # カレンダーを更新
             turbo_stream.replace("calendar", partial: "schedules/calendar", locals: { month: @month, schedules: @schedules }),
@@ -170,8 +166,9 @@ class SchedulesController < ApplicationController
 
       format.turbo_stream do
         render turbo_stream: [
-          # 一覧のレコードを削除
-          turbo_stream.remove("schedule_#{@schedule.id}"),
+          # 一覧のレコードを置換
+          turbo_stream.replace("schedules-container", partial: "schedules/index", locals: { grouped_schedules: current_user.schedules.includes(:children).order(Arel.sql("all_day DESC, start_time ASC")).group_by { |s| s.start_time.in_time_zone("Tokyo").to_date }, schedule_all_dates: current_user.schedules.includes(:children).order(Arel.sql("all_day DESC, start_time ASC")).group_by { |s| s.start_time.in_time_zone("Tokyo").to_date }.keys.sort.reverse }),
+
           # カレンダーを更新
           turbo_stream.replace(
             "calendar",

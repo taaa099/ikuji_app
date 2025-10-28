@@ -3,6 +3,11 @@
    ============================== */
 
 /* indexビュー（予定一覧） */
+.schedule-title {
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
 .schedule-table {
   width: 100%;
   border-collapse: collapse;
@@ -11,16 +16,26 @@
 
 .schedule-table th,
 .schedule-table td {
-  border: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
   padding: 8px;
   text-align: left;
   word-break: break-word;
 }
 
-.schedule-col-item { width: 15%; }
+.schedule-table th {
+  display: none;
+}
+
+.schedule-table tr:hover {
+  background-color: #f3f4f6; /* グレー（Tailwindのgray-100相当） */
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
 .schedule-col-date { width: 20%; }
-.schedule-col-detail { width: 25%; }
-.schedule-col-memo { width: 25%; }
+.schedule-col-item { width: 35%; }
+.schedule-col-memo { width: 45%; }
 
 .schedule-index-btn {
   display: inline-block;
@@ -117,9 +132,9 @@
 
 /* 縦並び用のチェックボックスラッパー */
 .schedule-checkbox-wrapper {
-  display: flex; 
+  display: inline-flex; 
   align-items: center;
-  gap: 8px;
+  gap: 5px;
   margin-bottom: 6px;
   width: fit-content;
 }

@@ -1,18 +1,11 @@
 <turbo-frame id="modal">
   <div class="modal-background">
-    <div class="modal-container">
+    <div class="no-record-modal-container">
       <h2 class="responsive-title">
         <%= diary.persisted? ? "編集" : "新規作成" %> 日記
       </h2>
 
       <%= render "form", diary: diary %>
-
-      <div class="form-actions">
-        <% if diary.persisted? %>
-          <%= button_to "削除", diary_path(diary), method: :delete, class: "form-submit-btn", data: { turbo_confirm: '本当に削除しますか？' } %>
-        <% end %>
-        <a href="#" class="modal-close">閉じる</a>
-      </div>
     </div>
   </div>
 </turbo-frame>

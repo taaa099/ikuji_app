@@ -42,7 +42,7 @@
 
 /* new, editフォーム（予定登録・編集） */
 /* モーダル内フォーム用調整 */
-.schedule-modal-container .schedule-form-container {
+.no-record-modal-container .schedule-form-container {
   max-width: none; /* 600px制限を解除 */
   width: 100%;     /* モーダルの横幅に合わせる */
   border: none;    /* 二重枠を避ける */

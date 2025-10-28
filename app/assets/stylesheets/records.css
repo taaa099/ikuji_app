@@ -145,8 +145,7 @@
 
 /* 通常のボタン・リンク */
 .form-actions a,
-.form-actions input[type="submit"],
-.form-actions button {
+.form-actions input[type="submit"] {
   padding: 8px 16px;
   font-size: 14px;
   border: none;
@@ -158,11 +157,26 @@
   display: inline-block;
 }
 
+.form-actions button {
+  padding: 8px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  background: #e53935; /* 赤系 */
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none; /* aタグの下線を消す */
+  display: inline-block;
+}
+
 /* hover */
 .form-actions a:hover,
-.form-actions input[type="submit"]:hover,
-.form-actions button:hover {
+.form-actions input[type="submit"]:hover {
   background: #45a049;
+}
+
+.form-actions button:hover {
+  background: #c62828; /* 濃い赤 */
 }
 
 /* チェックボックス＋テキストを揃えるラベル */

@@ -23,8 +23,8 @@
   max-width: 500px;
 }
 
-/* スケジュール専用スタイル */
-.schedule-modal-container {
+/* recordモデル以外専用スタイル */
+.no-record-modal-container {
   background: #fff;
   padding: 1.5rem;
   border-radius: 8px;

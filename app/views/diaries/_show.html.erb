@@ -1,0 +1,33 @@
+<div id="diary-<%= @diary.id %>" class="diary-show-card">
+  <div class="diary-show-header">
+    <h2 class="diary-show-title"><%= @diary.title %></h2>
+    <span class="diary-show-date"><%= l @diary.date, format: :short %></span>
+  </div>
+
+  <div class="diary-show-content">
+    <%= simple_format(@diary.content) %>
+  </div>
+
+  <% if @diary.images.attached? %>
+    <div class="diary-show-media diary-show-images">
+      <% @diary.images.each do |image| %>
+        <%= image_tag image.variant(resize_to_limit: [400, 400]), class: "diary-show-img" %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @diary.videos.attached? %>
+    <div class="diary-show-media diary-show-videos">
+      <% @diary.videos.each do |video| %>
+        <video controls class="diary-show-video">
+          <source src="<%= url_for(video) %>" type="<%= video.content_type %>">
+        </video>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="diary-show-actions">
+    <%= link_to "編集", edit_diary_path(@diary), data: { turbo_frame: "modal" }, class: "btn btn-edit" %>
+    <%= link_to "一覧に戻る", diaries_path, class: "btn btn-back" %>
+  </div>
+</div>

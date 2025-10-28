@@ -1,5 +1,0 @@
-<%= turbo_stream.prepend "diaries-list", partial: "diaries/diary_row", locals: { diary: @diary } %>
-<%= turbo_stream.update "modal" do %>
-  <turbo-frame id="modal"></turbo-frame>
-<% end %>
-<%= turbo_stream.replace "flash-messages", partial: "shared/flash", locals: { flash: { notice: "日記を保存しました" } } %>

@@ -2,8 +2,6 @@ class DiariesController < ApplicationController
   # 未ログインユーザーをログイン画面へリダイレクトさせる
   before_action :authenticate_user!
 
-  before_action :set_diary, only: [ :show, :edit, :update, :destroy ]
-
   def index
     @diaries = current_user.diaries
 
@@ -14,8 +12,12 @@ class DiariesController < ApplicationController
     when "date_asc"
       @diaries.order(date: :asc)
     else
-      @diaries.order(created_at: :desc)
+      @diaries.order(date: :desc)
     end
+  end
+
+  def show
+    @diary = current_user.diaries.find(params[:id])
   end
 
   def new
@@ -31,7 +33,7 @@ class DiariesController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             # 作成したレコードをリストに追加
-            turbo_stream.prepend("diaries-list", partial: "diaries/diary_row", locals: { diary: @diary }),
+            turbo_stream.replace("diaries-container", partial: "diaries/index", locals: { diaries: current_user.diaries.order(date: :desc) }),
             # フラッシュ通知を追加
             turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "日記を作成しました" } }),
             # モーダルを閉じる
@@ -52,6 +54,8 @@ class DiariesController < ApplicationController
   end
 
   def edit
+    @diary = current_user.diaries.find(params[:id])
+
     respond_to do |format|
       format.html
       format.turbo_stream do
@@ -65,13 +69,16 @@ class DiariesController < ApplicationController
   end
 
   def update
+    @diary = current_user.diaries.find(params[:id])
+
     respond_to do |format|
       if @diary.update(diary_params)
         format.html { redirect_to diaries_path, notice: "日記を更新しました" }
         # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace("diary_#{@diary.id}", partial: "diaries/diary_row", locals: { diary: @diary }),
+            turbo_stream.replace("diaries-container", partial: "diaries/index", locals: { diaries: current_user.diaries.order(date: :desc) }),
+            turbo_stream.replace("diary-#{@diary.id}", partial: "diaries/show", locals: { diary: @diary }),
             turbo_stream.prepend(
               "flash-messages",
               partial: "shared/flash",
@@ -94,6 +101,7 @@ class DiariesController < ApplicationController
   end
 
   def destroy
+    @diary = current_user.diaries.find(params[:id])
     @diary.destroy
 
     respond_to do |format|
@@ -101,7 +109,8 @@ class DiariesController < ApplicationController
       # Turbo Streamで一覧削除＋フラッシュ追加＋モーダル閉じる
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.remove("diary_#{@diary.id}"),
+          turbo_stream.replace("diaries-container", partial: "diaries/index", locals: { diaries: current_user.diaries.order(date: :desc) }),
+          turbo_stream.replace("diary-#{@diary.id}", partial: "diaries/show", locals: { diary: @diary }),
           turbo_stream.prepend(
             "flash-messages",
             partial: "shared/flash",
@@ -114,10 +123,6 @@ class DiariesController < ApplicationController
   end
 
   private
-
-  def set_diary
-    @diary = current_user.diaries.find(params[:id])
-  end
 
   # フォームから送信されたパラメータのうち、許可するキーを指定
   def diary_params

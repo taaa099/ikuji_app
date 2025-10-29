@@ -1,18 +1,27 @@
 <turbo-frame id="modal">
   <div class="modal-background">
-    <div class="modal-container">
-      <h2 class="responsive-title">予定詳細</h2>
+    <div class="schedule-show-modern">
+      <h2 class="schedule-show-title">予定の詳細</h2>
 
-      <p><strong>タイトル:</strong> <%= schedule.title %></p>
-      <p><strong>開始日時:</strong> <%= schedule.all_day? ? schedule.start_time.strftime("%Y-%m-%d") + " (終日)" : schedule.start_time.strftime("%Y-%m-%d %H:%M") %></p>
-      <p><strong>終了日時:</strong> <%= schedule.all_day? ? schedule.end_time.strftime("%Y-%m-%d") + " (終日)" : schedule.end_time.strftime("%Y-%m-%d %H:%M") %></p>
-      <p><strong>繰り返し:</strong> <%= schedule.repeat %></p>
-      <p><strong>メモ:</strong> <%= schedule.memo %></p>
+      <div class="schedule-show-detail">
+        <p><i class="fa fa-bookmark icon"></i><strong>タイトル</strong><span><%= schedule.title %></span></p>
+        <p><i class="fa fa-calendar-day icon"></i><strong>開始日時</strong><span><%= schedule.all_day? ? schedule.start_time.strftime("%Y-%m-%d") + " (終日)" : schedule.start_time.strftime("%Y-%m-%d %H:%M") %></span></p>
+        <p><i class="fa fa-calendar-check icon"></i><strong>終了日時</strong><span><%= schedule.all_day? ? schedule.end_time.strftime("%Y-%m-%d") + " (終日)" : schedule.end_time.strftime("%Y-%m-%d %H:%M") %></span></p>
+        <p><i class="fa fa-child icon"></i><strong>対象の子供</strong>
+          <span>
+            <% if schedule.children.any? %>
+              <%= schedule.children.map(&:name).join("、") %>
+            <% else %>
+              <%= current_user.name %>
+            <% end %>
+          </span>
+        </p>
+        <p><i class="fa fa-sticky-note icon"></i><strong>メモ</strong><span><%= schedule.memo.presence || "—" %></span></p>
+      </div>
 
-      <div class="form-actions">
-        <%= link_to "編集", edit_schedule_path(schedule), data: { turbo_frame: "modal" }, class: "schedule-show-btn" %>
-        <%= link_to "削除", schedule_path(schedule), method: :delete, data: { turbo_confirm: '本当に削除しますか？' }, class: "schedule-show-btn" %>
-        <a href="#" class="modal-close">閉じる</a>
+      <div class="schedule-show-action">
+        <%= link_to "編集", edit_schedule_path(schedule), data: { turbo_frame: "modal" }, class: "schedule-action-btn edit" %>
+        <a href="#" class="schedule-action-btn close modal-close">閉じる</a>
       </div>
     </div>
   </div>

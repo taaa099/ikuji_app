@@ -207,6 +207,87 @@
   background-color: #5577aa;
 }
 
+.schedule-show-modern {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 24px;
+  max-width: 600px;
+  margin: 0 auto;
+  animation: fadeIn 0.25s ease;
+}
+
+.schedule-show-title {
+  font-size: 1.6rem;
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.schedule-show-detail p {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  font-size: 15px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 6px;
+}
+
+.schedule-show-detail .icon {
+  color: #4caf50;
+  margin-right: 10px;
+  font-size: 1.1rem;
+  width: 20px;
+  text-align: center;
+}
+
+.schedule-show-detail strong {
+  width: 90px;
+  color: #555;
+  font-weight: 600;
+}
+
+.schedule-show-detail span {
+  color: #222;
+  flex: 1;
+}
+
+.schedule-show-action {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.schedule-action-btn {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 14px;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.schedule-action-btn.edit {
+  background-color: #4caf50;
+}
+
+.schedule-action-btn.close {
+  background-color: #9e9e9e;
+}
+
+.schedule-action-btn:hover {
+  opacity: 0.9;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+
 /* ==============================
    スケジュール共通：新規作成ボタン
    ============================== */

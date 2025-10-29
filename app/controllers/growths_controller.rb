@@ -14,6 +14,15 @@ class GrowthsController < ApplicationController
         weight: g.weight,
         month_age: months }
     end
+
+    # 一覧用（全件取得・id順）
+    growths_for_list = current_child.growths.order(recorded_at: :desc, id: :desc)
+
+    # 日付ごとにグループ化（JST基準）
+    @grouped_growths = growths_for_list.group_by { |g| g.recorded_at.in_time_zone("Tokyo").to_date }
+
+    # 成長記録がある日だけ抽出（降順表示）
+    @growth_all_dates = @grouped_growths.keys.sort.reverse
   end
 
   def new
@@ -28,7 +37,7 @@ class GrowthsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             # 作成したレコードをリストに追加
-            turbo_stream.prepend("growths-list", partial: "growths/growth_row", locals: { growth: @growth }),
+            turbo_stream.replace("growths-container", partial: "growths/index", locals: { grouped_growths: current_child.growths.order(recorded_at: :desc, id: :desc).group_by { |g| g.recorded_at.in_time_zone("Tokyo").to_date }, growth_all_dates: current_child.growths.order(recorded_at: :desc, id: :desc).group_by { |g| g.recorded_at.in_time_zone("Tokyo").to_date }.keys.sort.reverse }),
             # フラッシュ通知を追加
             turbo_stream.prepend("flash-messages", partial: "shared/flash", locals: { flash: { notice: "成長記録を保存しました" } }),
             # モーダルを閉じる
@@ -70,7 +79,7 @@ class GrowthsController < ApplicationController
         # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace("growth_#{@growth.id}", partial: "growths/growth_row", locals: { growth: @growth }),
+            turbo_stream.replace("growths-container", partial: "growths/index", locals: { grouped_growths: current_child.growths.order(recorded_at: :desc, id: :desc).group_by { |g| g.recorded_at.in_time_zone("Tokyo").to_date }, growth_all_dates: current_child.growths.order(recorded_at: :desc, id: :desc).group_by { |g| g.recorded_at.in_time_zone("Tokyo").to_date }.keys.sort.reverse }),
             turbo_stream.prepend(
               "flash-messages",
               partial: "shared/flash",
@@ -100,7 +109,7 @@ class GrowthsController < ApplicationController
       # Turbo Streamで一覧削除＋フラッシュ追加＋モーダル閉じる
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.remove("growth_#{@growth.id}"),
+          turbo_stream.replace("growths-container", partial: "growths/index", locals: { grouped_growths: current_child.growths.order(recorded_at: :desc, id: :desc).group_by { |g| g.recorded_at.in_time_zone("Tokyo").to_date }, growth_all_dates: current_child.growths.order(recorded_at: :desc, id: :desc).group_by { |g| g.recorded_at.in_time_zone("Tokyo").to_date }.keys.sort.reverse }),
           turbo_stream.prepend(
             "flash-messages",
             partial: "shared/flash",

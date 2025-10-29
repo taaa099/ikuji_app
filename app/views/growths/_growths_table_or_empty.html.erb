@@ -1,0 +1,23 @@
+<table class="growth-table">
+  <thead>
+    <tr>
+      <th class="growth-col-item1">身長(cm)</th>
+      <th class="growth-col-item2">体重(kg)</th>
+      <th class="growth-col-item3">頭囲(cm)</th>
+      <th class="growth-col-item4">胸囲(cm)</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if growths.any? %>
+      <%= render partial: "growths/growth_row", collection: growths, as: :growth %>
+    <% else %>
+      <tr>
+        <td colspan="6" class="text-center py-6 text-gray-500">
+          成長記録がありません
+          <%= link_to "新規追加", new_child_growth_path(current_child), data: { turbo_frame: "modal" }, class: "index-btn ml-2" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

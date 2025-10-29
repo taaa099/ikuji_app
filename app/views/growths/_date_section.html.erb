@@ -1,0 +1,9 @@
+<% wday = ["日", "月", "火", "水", "木", "金", "土"][date.wday] %>
+
+<div class="date-section">
+  <h3 class="date-heading">
+    <%= date.strftime("%Y年%m月%d日（#{wday}）") %> の成長記録
+  </h3>
+
+  <%= render partial: "growths/growths_table_or_empty", locals: { growths: growths_by_date } %>
+</div>

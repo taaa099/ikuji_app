@@ -8,7 +8,11 @@ function createHeightChart(isDarkMode) {
   if (!ctx) return;
 
   const growths = JSON.parse(ctx.dataset.growths || "[]");
-  if (!growths.length) return;
+  if (!growths.length) {
+    const parent = ctx.closest("div");
+    if (parent) parent.remove();
+    return;
+  }
 
   const minMonth = Math.min(...growths.map(g => g.month_age));
   const labels = growths.map(g => g.month_age - minMonth);

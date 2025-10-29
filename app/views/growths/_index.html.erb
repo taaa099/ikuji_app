@@ -1,0 +1,13 @@
+<div id="growths-container">
+  <% if growth_all_dates.any? %>
+    <% growth_all_dates.each do |date| %>
+      <% growths_by_date = grouped_growths[date] || [] %>
+      <%= render partial: "growths/date_section", locals: { date: date, growths_by_date: growths_by_date } %>
+    <% end %>
+  <% else %>
+    <div class="text-center py-12">
+      <p class="text-gray-500 mb-4 text-lg">成長記録を入れてみましょう！</p>
+      <%= link_to "新規追加", new_child_growth_path(current_child), data: { turbo_frame: "modal" }, class: "growth-create-btn" %>
+    </div>
+  <% end %>
+</div>

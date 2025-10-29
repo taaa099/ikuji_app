@@ -7,25 +7,7 @@
   <canvas id="weightChart" class="growth-chart" data-growths='<%= raw @growths_for_chart.to_json %>'></canvas>
 </div>
 
-<table class="responsive-table">
-  <thead>
-    <tr>
-      <th class="col-date">計測日</th>
-      <th class="col-item">身長(cm)</th>
-      <th class="col-item">体重(kg)</th>
-      <th class="col-item">頭囲(cm)</th>
-      <th class="col-item">胸囲(cm)</th>
-      <th class="col-detail">操作</th>
-    </tr>
-  </thead>
-
-  <tbody id="growths-list">
-    <%= render partial: "growth_row", collection: @growths, as: :growth %>
-  </tbody>
-</table>
-
-<%= link_to "新規成長記録を追加", new_child_growth_path(current_child),
-            class: "index-btn", data: { turbo_frame: "modal" } %>
+<%= render partial: "growths/index", locals: { grouped_growths: @grouped_growths, growth_all_dates: @growth_all_dates } %>
 
 <!-- モーダル枠 -->
 <turbo-frame id="modal"></turbo-frame>

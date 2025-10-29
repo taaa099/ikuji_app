@@ -207,6 +207,34 @@
   background-color: #5577aa;
 }
 
+/* ==============================
+   スケジュール共通：新規作成ボタン
+   ============================== */
+.schedule-create-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: 1px solid #6fcf97; ;   /* やさしい緑 */
+  border-radius: 6px;
+  background-color: #fff;      /* 通常は白背景 */
+  color: #4caf50; ;              /* 緑の文字 */
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.schedule-create-btn:hover {
+  background-color: #6fcf97;   /* 緑背景 */
+  color: #fff;                 /* 白文字 */
+}
+
+/* クリック時の押し感 */
+.schedule-create-btn:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 /* カレンダー */
 .day {
   border: 1px solid #ccc;

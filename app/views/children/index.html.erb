@@ -1,31 +1,27 @@
-<h1 class="responsive-title">子供一覧</h1>
+<h1 class="children-index-title">子供一覧</h1>
 
-<table class="responsive-table">
-  <thead>
-    <tr>
-      <th class="col-item">ID</th>
-      <th class="col-item">名前</th>
-      <th class="col-date">誕生日</th>
-      <th class="col-detail">年齢</th>
-      <th class="col-memo">操作</th>
-    </tr>
-  </thead>
+<div class="children-list">
+  <% @children.each do |child| %>
+    <div class="child-card">
+      <div class="child-info">
+        <p class="child-name"><%= child.name %></p>
+        <p class="child-detail">
+          <span>誕生日：</span><%= child.birth_date %><br>
+          <span>年齢：</span><%= age_in_years(child.birth_date) %>歳
+        </p>
+      </div>
 
-  <tbody>
-    <% @children.each do |child| %>
-      <tr>
-        <td class="col-item"><%= child.id %></td>
-        <td class="col-item"><%= child.name %></td>
-        <td class="col-date"><%= child.birth_date %></td>
-        <td class="col-detail"><%= age_in_years(child.birth_date) %>歳</td>
-        <td class="col-detail">
-          <%= link_to '表示', child_path(child) %> |
-          <%= link_to '編集', edit_child_path(child) %> |
-          <%= link_to '削除', child_path(child), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' } %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <div class="child-actions">
+        <%= link_to '表示', child_path(child), class: 'child-btn view-btn' %>
+        <%= link_to '編集', edit_child_path(child), class: 'child-btn edit-btn' %>
+        <%= link_to '削除', child_path(child),
+            data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' },
+            class: 'child-btn delete-btn' %>
+      </div>
+    </div>
+  <% end %>
+</div>
 
-<%= link_to '新規作成', new_child_path, class: 'index-btn' %>
+<div class="new-child-area">
+  <%= link_to '＋ 新規作成', new_child_path, class: 'new-child-btn' %>
+</div>

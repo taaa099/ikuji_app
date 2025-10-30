@@ -39,9 +39,9 @@ class FeedNotificationService
 
     message = case kind
     when :reminder
-                "リマインダー: 前回の授乳から#{hours_since_last_feed}時間経過しました"
+                "前回の授乳から#{hours_since_last_feed}時間経過しました"
     when :alert
-                "アラート: 授乳間隔が通常より長すぎます！（#{hours_since_last_feed}時間）"
+                "授乳間隔が通常より長すぎます！（#{hours_since_last_feed}時間）"
     end
 
     Notification.create!(
@@ -49,7 +49,7 @@ class FeedNotificationService
       child: child,
       target: latest_feed,
       notification_kind: kind,
-      title: "🍼 授乳（feed）",
+      title: "🍼 授乳",
       message: message,
       delivered_at: Time.current
     )

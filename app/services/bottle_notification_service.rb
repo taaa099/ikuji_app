@@ -75,8 +75,8 @@ class BottleNotificationService
       child: child,
       target: latest_bottle,
       notification_kind: :reminder,
-      title: "🍼 ミルク補給",
-      message: "リマインダー: 前回のミルクから#{hours_since_last_bottle}時間経過しました",
+      title: "🍼 ミルク",
+      message: "前回のミルクから#{hours_since_last_bottle}時間経過しました",
       delivered_at: Time.current
     )
     Rails.logger.info("Created reminder notification for child_id=#{child.id}, user_id=#{user.id}")
@@ -97,8 +97,8 @@ class BottleNotificationService
       child: child,
       target: latest_bottle,
       notification_kind: :alert,
-      title: "🍼 ミルク不足アラート",
-      message: "アラート: 今日のミルク摂取量が不足しています（現在 #{today_total}ml / #{today_count}回 / 目標 #{daily_goal}ml）",
+      title: "🍼 ミルク",
+      message: "今日のミルク摂取量が不足しています（現在 #{today_total}ml / #{today_count}回 / 目標 #{daily_goal}ml）",
       delivered_at: Time.current
     )
     Rails.logger.info("Created alert notification for child_id=#{child.id}, user_id=#{user.id}, latest_bottle_id=#{latest_bottle.id}")

@@ -30,7 +30,7 @@ class ScheduleNotificationService
               target_type: "Schedule",
               notification_kind: :reminder,
               title: "📅 スケジュール",
-              message: "リマインダー: #{target_date.strftime("%m/%d")}に予定があります（#{titles}）",
+              message: "#{target_date.strftime("%m/%d")}に予定があります（#{titles}）",
               delivered_at: now
             )
             Rails.logger.info("Created schedule reminder for child_id=#{child.id}, user_id=#{user.id}, schedules=#{schedules.pluck(:id).join(',')}")
@@ -70,7 +70,7 @@ class ScheduleNotificationService
               target_type: "Schedule",
               notification_kind: :alert,
               title: "📅 スケジュール",
-              message: "アラート: 本日の予定があります（#{titles}）",
+              message: "本日の予定があります（#{titles}）",
               delivered_at: now
             )
             Rails.logger.info("Created schedule alert for child_id=#{child.id}, user_id=#{user.id}, schedules=#{schedules.pluck(:id).join(',')}")

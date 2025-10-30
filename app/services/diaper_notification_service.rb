@@ -39,9 +39,9 @@ class DiaperNotificationService
 
     message = case kind
     when :reminder
-                "リマインダー: 前回のオムツ交換から#{hours_since_last_change}時間経過しました"
+                "前回のオムツ交換から#{hours_since_last_change}時間経過しました"
     when :alert
-                "アラート: 前回のオムツ交換から#{hours_since_last_change}時間以上経過しています"
+                "前回のオムツ交換から#{hours_since_last_change}時間以上経過しています"
     end
 
     Notification.create!(

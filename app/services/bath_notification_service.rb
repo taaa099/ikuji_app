@@ -35,7 +35,7 @@ class BathNotificationService
               target_type: "Bath",
               notification_kind: :reminder,
               title: "🛁 お風呂",
-              message: "リマインダー: 本日の入浴記録がまだありません",
+              message: "本日の入浴記録がまだありません",
               delivered_at: Time.current
             )
             Rails.logger.info("Created reminder notification for user_id=#{user.id}")
@@ -67,7 +67,7 @@ class BathNotificationService
               target_type: "Bath",
               notification_kind: :alert,
               title: "🛁 お風呂",
-              message: "アラート: 最後の入浴から#{days_since_last_bath}日以上経過しました",
+              message: "最後の入浴から#{days_since_last_bath}日以上経過しました",
               delivered_at: Time.current
             )
             Rails.logger.info("Created alert notification for user_id=#{user.id}")

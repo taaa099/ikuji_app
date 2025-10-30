@@ -1,0 +1,19 @@
+<% if notifications.any? %>
+  <ul class="notifications-list">
+    <% notifications.each do |notification| %>
+      <%= link_to notification_target_path(notification), class: "notification-item block" do %>
+        <div class="notification-header">
+          <strong class="notification-title"><%= notification.title %></strong>
+          <span class="notification-kind <%= notification.notification_kind %>">
+            <%= notification.notification_kind.capitalize %>
+          </span>
+        </div>
+
+        <p class="notification-message"><%= notification.message %></p>
+        <span class="notification-time"><%= time_ago_in_words(notification.created_at) %> 前</span>
+      <% end %>
+    <% end %>
+  </ul>
+<% else %>
+  <p class="no-notifications">通知はありません。</p>
+<% end %>

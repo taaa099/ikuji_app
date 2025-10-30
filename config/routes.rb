@@ -45,13 +45,10 @@ Rails.application.routes.draw do
   resources :tips, only: [ :index, :show ]
 
   resources :notifications, only: [ :index ] do
-  collection do
-    get :latest
+    collection do
+      post :mark_all_as_read # ドロップダウン開いたらまとめて既読
+    end
   end
-  member do
-    patch :mark_as_read
-  end
-end
 
   # Defines the root path route ("/")
   root "home#index"

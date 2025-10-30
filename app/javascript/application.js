@@ -5,6 +5,7 @@ import Rails from "@rails/ujs"
 Rails.start();
 
 // 通知機能用
+import "./notification"
 import { showNotification } from "./notification_popup";
 import "./channels"
 import "./notification_settings"

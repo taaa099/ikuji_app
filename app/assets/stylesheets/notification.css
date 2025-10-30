@@ -67,3 +67,131 @@
 .notification-message {
   font-size: 14px;
 }
+
+/* ==============================
+   通知ベル用ドロップダウン
+   ============================== */
+.notification {
+  position: relative; /* ドロップダウンの基準 */
+  display: inline-block;
+}
+
+.notification-dropdown-header {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  color: #333;
+  padding: 10px 12px;
+  border-bottom: 1px solid #ddd;
+  z-index: 10; /* 通知項目より前面に */
+}
+
+.notification-link {
+  cursor: pointer;
+  position: relative;
+}
+
+.notification-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #ff4d4f; /* 赤色 */
+  color: #fff;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.notification-dropdown {
+  position: absolute;
+  top: 100%; /* ベルアイコンの真下に表示 */
+  right: 0;
+  width: 300px; /* 好きな幅に調整 */
+  max-height: 400px; /* 高さ制限、スクロール可能 */
+  overflow-y: auto;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* 他要素より前面に表示 */
+  margin-top: 10px;
+}
+
+.notification-dropdown.hidden {
+  display: none;
+}
+
+.notifications-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.notification-item {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: background-color 0.2s ease;
+  text-decoration: none;
+}
+
+.notification-item:hover {
+  background-color: #f5f5f5;
+}
+
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.notification-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #222;
+}
+
+.notification-kind.reminder {
+  font-size: 11px;
+  font-weight: 600;
+  color: #666;
+  background-color: #ccffcc;
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+
+.notification-kind.alert {
+  font-size: 11px;
+  font-weight: 600;
+  color: #666;
+  background-color: #ffcccc;
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+
+.notification-message {
+  font-size: 13px;
+  color: #444;
+  margin: 4px 0;
+  line-height: 1.4;
+}
+
+.notification-time {
+  font-size: 11px;
+  color: #999;
+}
+
+.notification.dropdown-open .tooltip-text {
+  display: none; /* ドロップダウン開いてる間は tooltip を非表示 */
+}
+
+/* ドロップダウン開いているときはベルのホバー色を無効化 */
+.notification.dropdown-open:hover i.fa-bell {
+  color: #333; /* 通常色に戻す */
+}

@@ -127,17 +127,24 @@
             </div>
             
             <!-- 通知ベル -->
-            <div class="notification tooltip">
+            <div class="notification">
               <% if current_child.present? %>
-                <%= link_to notifications_path(current_child), class: "notification-link" do %>
+                <a href="javascript:void(0);" class="notification-link tooltip" id="notification-bell" data-mark-all-as-read-url="<%= mark_all_as_read_notifications_path %>">
                   <i class="fa fa-bell"></i>
                   <span class="tooltip-text">通知</span>
-                  <% if current_child.notifications.where(read: false).exists? %>
-                    <span class="notification-count">
-                      <%= current_child.notifications.where(read: false).count %>
-                  </span>
+                  <% unread_count = current_child.notifications.where(read: false).count %>
+                  <% if unread_count > 0 %>
+                    <span class="notification-count"><%= unread_count %></span>
                   <% end %>
-                <% end %>
+                </a>
+
+                <!-- ドロップダウン用枠 -->
+                <div class="notification-dropdown hidden" id="notification-dropdown">
+                  <div class="notification-dropdown-header">
+                    通知
+                  </div>
+                  <%= render "notifications/index", notifications: current_child.notifications.order(delivered_at: :desc) %>
+                </div>
               <% end %>
             </div>
 

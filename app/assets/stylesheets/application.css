@@ -153,7 +153,7 @@ select {
   left: -9px; /* ← 左に9pxずらす */
 }
 
-.notification:hover i.fa-bell {
+.notification-link:hover i.fa-bell {
   color: #4caf50;
 }
 

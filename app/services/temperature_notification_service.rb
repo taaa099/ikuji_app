@@ -36,7 +36,7 @@ class TemperatureNotificationService
           target_type: "Temperature",
           notification_kind: :alert,
           title: "🌡️ 体温",
-          message: "アラート: 発熱注意（#{latest_temp.temperature}℃）",
+          message: "発熱注意（#{latest_temp.temperature}℃）",
           delivered_at: Time.current
         )
         Rails.logger.info("Created temperature alert for child_id=#{child.id}, user_id=#{user.id}")

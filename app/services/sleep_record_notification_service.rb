@@ -50,7 +50,7 @@ class SleepRecordNotificationService
             target_type: "SleepRecord",
             notification_kind: :reminder,
             title: "🛌 睡眠",
-            message: "リマインダー: 昼寝の前回の睡眠から#{hours_since_last_sleep}時間起きています",
+            message: "昼寝の前回の睡眠から#{hours_since_last_sleep}時間起きています",
             delivered_at: Time.current
           )
           Rails.logger.info("Created reminder notification for child_id=#{child.id}, user_id=#{user.id}")
@@ -85,9 +85,9 @@ class SleepRecordNotificationService
       end_str   = sleep.end_time.strftime("%H:%M")
 
       if duration_minutes < SHORT_SLEEP_MINUTES
-        alert_message = "アラート: 本日の昼寝（#{start_str}〜#{end_str}）は#{duration_str}で、やや短めです"
+        alert_message = "本日の昼寝（#{start_str}〜#{end_str}）は#{duration_str}で、やや短めです"
       elsif duration_minutes >= LONG_SLEEP_HOURS * 60
-        alert_message = "アラート: 本日の昼寝（#{start_str}〜#{end_str}）は#{duration_str}で、やや長めです"
+        alert_message = "本日の昼寝（#{start_str}〜#{end_str}）は#{duration_str}で、やや長めです"
       else
         Rails.logger.info("Sleep id=#{sleep.id} duration normal (#{duration_minutes}分)")
         next

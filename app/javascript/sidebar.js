@@ -75,6 +75,10 @@ document.addEventListener("turbo:load", () => {
 
       // モーダル中身も必ず表示
       if (contentBlock) contentBlock.classList.remove("hidden");
+
+      // 開いた直後にスクロール位置を先頭に戻す
+      const container = modal.querySelector(".sidebar-modal-content");
+      if (container) container.scrollTop = 0;
     });
 
     closeBtn.addEventListener("click", () => {

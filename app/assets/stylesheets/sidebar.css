@@ -184,6 +184,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 60px;
 }
 
 .sidebar-modal.hidden {
@@ -191,24 +192,176 @@
 }
 
 .sidebar-modal-content {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
+  background-color: #f9fafb;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
   max-height: 90%;
   overflow-y: auto;
   width: 90%;
-  max-width: 600px;
+  max-width: 500px;
+  height: 90%;
+  max-height: 950px;
   position: relative;
+  font-family: 'Inter', 'Noto Sans JP', sans-serif;
 }
 
-.sidebar-modal-close {
-  position: absolute;
-  top: 10px;
-  right: 14px;
+.notification-modal-header {
+  display: flex;
+  justify-content: space-between; /* 左にタイトル、右にボタン */
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  font-weight: 700;
+  font-size: 20px;
+  color: #333;
+  padding: 10px 12px;
+  border-bottom: 1px solid #ddd;
+  z-index: 10;
+}
+
+.header-close-btn {
+  background: none;
+  border: none;
   font-size: 24px;
+  cursor: pointer;
+  color: #6b7280;
+  transition: color 0.2s;
+}
+
+.header-close-btn:hover {
+  color: #111827;
+}
+
+/* ==============================
+   通知設定モーダル
+   ============================== */
+.notification-setting {
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background-color: #fff;
+  transition: box-shadow 0.2s;
+}
+
+.notification-setting:hover {
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.notification-setting h5 {
+  font-size: 15px;
+  margin-bottom: 10px;
+  color: #111827;
+  font-weight: 600;
+}
+
+/* ラベル共通 */
+.notification-setting label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 6px 0;
+  font-size: 13px;
+  color: #374151;
+}
+
+/* 数値・時間入力 */
+.notification-number,
+.notification-time,
+.child-goal {
+  width: 120px;
+  padding: 6px 8px;
+  font-size: 13px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  transition: border-color 0.2s;
+}
+
+.notification-number:focus,
+.notification-time:focus,
+.child-goal:focus {
+  border-color: #3b82f6;
+  outline: none;
+}
+
+.notification-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.notification-option:hover {
+  background-color: #f3f4f6; /* 薄いグレー */
   cursor: pointer;
 }
 
+/* ==============================
+   トグルスイッチスタイル
+   ============================== */
+/* 入力自体を非表示 */
+.notification-switch {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* スイッチ本体 */
+.switch-slider {
+  display: inline-block;
+  width: 42px;
+  height: 22px;
+  background-color: #d1d5db;
+  border-radius: 9999px;
+  position: relative;
+  vertical-align: middle;
+  transition: background-color 0.2s;
+  margin-left: 6px;
+  cursor: pointer;
+}
+
+/* スイッチの丸 */
+.switch-slider::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #fff;
+  transition: transform 0.2s;
+}
+
+/* チェック時 */
+.notification-switch:checked + .switch-slider {
+  background-color: #4caf50;
+}
+
+.notification-switch:checked + .switch-slider::before {
+  transform: translateX(20px);
+}
+
+/* モーダルの閉じるボタン */
+.sidebar-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #6b7280;
+  transition: color 0.2s;
+}
+
+.sidebar-modal-close:hover {
+  color: #111827;
+}
+
+/* 折りたたみ時のツールチップ調整 */
 .sidebar.collapsed .tooltip:hover .tooltip-text {
   display: block;
   position: absolute;
@@ -222,29 +375,24 @@
 
 /* 折りたたみ時：ドロップダウン子要素の位置調整 */
 .sidebar.collapsed #record-list-menu a {
-  justify-content: flex-start; /* 左寄せにして自由に調整 */
-  margin-left: 5px !important; /* 少し右に寄せて“階層感”を出す */
+  justify-content: flex-start;
+  margin-left: 5px !important;
 }
 
 /* 折りたたみ時：アイコンの位置 */
 .sidebar.collapsed #record-list-menu a i {
   margin-left: 1px !important;
-  flex-shrink: 0;          /* アイコンの幅を縮めない */
-  width: 24px;             /* アイコンの横幅を固定 */
-  text-align: center;      /* アイコン内部も中央揃え */
+  flex-shrink: 0;
+  width: 24px;
+  text-align: center;
 }
 
 /* 折りたたみ時 chevron 固定表示 */
-.sidebar.collapsed #toggle-record-list .chevron {
-  position: absolute;
-  left: -30px;       /* サイドバー内でアイコンの隣に固定 */
-  top: 15px;        /* サイドバー内の上からの距離を調整 */
-}
-
+.sidebar.collapsed #toggle-record-list .chevron,
 .sidebar.collapsed .chevron {
   position: absolute;
-  left: -30px;       /* サイドバー内でアイコンの隣に固定 */
-  top: 15px;        /* サイドバー内の上からの距離を調整 */
+  left: -30px;
+  top: 15px;
 }
 
 /* 折りたたみ時：ドロップダウンの各子リンクにtooltipを表示 */

@@ -147,9 +147,11 @@
        ======================= -->
   <div id="notification-modal" class="sidebar-modal hidden">
     <div class="sidebar-modal-content">
-      <span id="close-notification-modal" class="sidebar-modal-close">&times;</span>
-      <div id="notification-settings-container">
         <div id="notification-settings-block" class="hidden">
+          <div class="notification-modal-header">
+            <span>通知設定</span>
+            <button id="close-notification-modal" class="header-close-btn">&times;</button>
+          </div>
           <% if current_user.present? %>
             <% current_user.notification_settings.each do |setting| %>
               <div class="notification-setting">
@@ -159,14 +161,13 @@
                     when "feed" then "授乳"
                     when "diaper" then "おむつ"
                     when "bottle" then "ミルク"
-                    when "hydration" then "水分"
+                    when "hydration" then "水分補給"
                     when "baby_food" then "離乳食"
                     when "sleep_record" then "睡眠"
                     when "temperature" then "体温"
                     when "bath" then "お風呂"
                     when "vaccination" then "予防接種"
                     when "schedule" then "スケジュール"
-                    when "growth" then "成長記録"
                     else setting.target_type.humanize
                     end
                   %>
@@ -176,18 +177,19 @@
                 <!-- リマインダー関連は temperature の場合表示しない -->
                 <% unless setting.target_type == "temperature" %>
                   <!-- リマインダーオンオフ -->
-                  <label>
+                  <label class="notification-option">
                     リマインダーON
                     <%= check_box_tag "reminder_switch_#{setting.id}",
                                       1,
                                       setting.reminder_on,
                                       data: { id: setting.id, field: "reminder_on" },
                                       class: "notification-switch" %>
+                    <span class="switch-slider"></span>
                   </label>
 
                   <!-- リマインダー時間（1〜12時間） -->
                   <% if setting.reminder_after.present? %>
-                    <label>
+                    <label class="notification-option">
                       リマインダー通知時間（時間）
                       <%= number_field_tag "reminder_after_#{setting.id}",
                                            setting.reminder_after,
@@ -200,18 +202,19 @@
                 <% end %>
 
                 <!-- アラートオンオフ -->
-                <label>
+                <label class="notification-option">
                   アラートON
                   <%= check_box_tag "alert_switch_#{setting.id}",
                                     1,
                                     setting.alert_on,
                                     data: { id: setting.id, field: "alert_on" },
                                     class: "notification-switch" %>
+                  <span class="switch-slider"></span>
                 </label>
 
                 <!-- アラート時間・閾値（bottle と hydration は除外） -->
                 <% if setting.alert_after.present? && !["bottle", "hydration"].include?(setting.target_type) %>
-                  <label>
+                  <label class="notification-option">
                     アラート通知時間（時間）
                     <%= number_field_tag "alert_after_#{setting.id}",
                                          setting.alert_after,
@@ -223,7 +226,7 @@
                 <% end %>
 
                 <% if setting.alert_threshold.present? %>
-                  <label>
+                  <label class="notification-option">
                     アラート閾値
                     <%= number_field_tag "alert_threshold_#{setting.id}",
                                          setting.alert_threshold,
@@ -236,7 +239,7 @@
                 <% end %>
 
                 <% if setting.alert_time.present? %>
-                  <label>
+                  <label class="notification-option">
                     アラート時間
                     <%= select_tag "alert_time_#{setting.id}",
                                    options_for_select(
@@ -252,7 +255,7 @@
                 <% if current_child.present? %>
                   <% case setting.target_type %>
                   <% when "bottle" %>
-                    <label>
+                    <label class="notification-option">
                       1日あたりのボトル目標 (ml)
                       <%= number_field_tag "daily_bottle_goal_#{current_child.id}",
                                            current_child.daily_bottle_goal,
@@ -262,7 +265,7 @@
                                            class: "child-goal" %>
                     </label>
                   <% when "hydration" %>
-                    <label>
+                    <label class="notification-option">
                       1日あたりの水分目標 (ml)
                       <%= number_field_tag "daily_hydration_goal_#{current_child.id}",
                                            current_child.daily_hydration_goal,
@@ -272,7 +275,7 @@
                                            class: "child-goal" %>
                     </label>
                   <% when "baby_food" %>
-                    <label>
+                    <label class="notification-option">
                       1日あたりの離乳食目標 (g)
                       <%= number_field_tag "daily_baby_food_goal_#{current_child.id}",
                                            current_child.daily_baby_food_goal,
@@ -287,7 +290,6 @@
             <% end %>
           <% end %>
         </div>
-      </div>
     </div>
   </div>
 </div>

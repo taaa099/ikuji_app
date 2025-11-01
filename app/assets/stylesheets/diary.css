@@ -115,7 +115,7 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  z-index: 10;
+  z-index: 5;
   padding: 0.25rem;
   font-size: 1.1rem;
   color: #e53935;

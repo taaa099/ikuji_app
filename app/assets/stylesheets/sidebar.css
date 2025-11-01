@@ -14,6 +14,7 @@
   overflow: visible;
   transition: left 0.3s ease;
   border-right: 1px solid #ddd; /* サイドバー右側に区切り線を追加 */
+  z-index: 10;
 }
 
 .sidebar a i,
@@ -27,14 +28,14 @@
 .sidebar a,
 .sidebar button.nav-btn {
   font-size: 16px;     /* 親要素のフォントサイズを統一 */
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
 }
 
 /* 折り畳み時はアイコンだけ表示 */
-.sidebar.collapsed span:not(.tooltip-text),
-.sidebar.collapsed h3,
-.sidebar.collapsed h4,
-.sidebar.collapsed h5,
-.sidebar.collapsed .chevron {
+.sidebar.collapsed > ul span:not(.tooltip-text),
+.sidebar.collapsed > ul h3,
+.sidebar.collapsed > ul h4,
+.sidebar.collapsed > ul .chevron {
   display: none;
 }
 
@@ -140,7 +141,6 @@
 }
 
 .notification-number,
-.notification-time,
 .child-goal {
   width: 100%;
   padding: 4px 6px;
@@ -200,7 +200,7 @@
   width: 90%;
   max-width: 500px;
   height: 90%;
-  max-height: 950px;
+  max-height: 850px;
   position: relative;
   font-family: 'Inter', 'Noto Sans JP', sans-serif;
 }
@@ -250,7 +250,7 @@
 }
 
 .notification-setting h5 {
-  font-size: 15px;
+  font-size: 19px;
   margin-bottom: 10px;
   color: #111827;
   font-weight: 600;
@@ -268,21 +268,13 @@
 
 /* 数値・時間入力 */
 .notification-number,
-.notification-time,
 .child-goal {
   width: 120px;
   padding: 6px 8px;
-  font-size: 13px;
+  font-size: 15px;
   border: 1px solid #d1d5db;
   border-radius: 6px;
   transition: border-color 0.2s;
-}
-
-.notification-number:focus,
-.notification-time:focus,
-.child-goal:focus {
-  border-color: #3b82f6;
-  outline: none;
 }
 
 .notification-option {
@@ -292,6 +284,15 @@
   padding: 6px 10px;
   border-radius: 6px;
   transition: background-color 0.2s ease;
+}
+
+.notification-option span,
+.notification-option label-text {
+  font-size: 17px;
+}
+
+.notification-option select {
+  font-size: 15px;
 }
 
 .notification-option:hover {

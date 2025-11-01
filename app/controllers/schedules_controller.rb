@@ -6,10 +6,7 @@ class SchedulesController < ApplicationController
     @month = params[:start_date] ? Date.parse(params[:start_date]) : Date.current.beginning_of_month
 
     # 月のスケジュール（終日→時間順）
-    @schedules = current_user.schedules
-                             .includes(:children)
-                             .where(start_time: @month.all_month)
-                             .order(Arel.sql("all_day DESC, start_time ASC"))
+    @schedules = current_user.schedules.includes(:children).order(Arel.sql("all_day DESC, start_time ASC"))
 
     # 日付ごとにグループ化（JST基準）
     @grouped_schedules = @schedules.group_by { |s| s.start_time.in_time_zone("Tokyo").to_date }

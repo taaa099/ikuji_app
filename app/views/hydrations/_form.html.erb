@@ -1,22 +1,16 @@
 <div class="form-container">
   <%= form_with(model: [current_child, hydration], data: { turbo_frame: "modal" }) do |form| %>
-    <% if hydration.errors.any? %>
-      <div id="error_explanation">
-        <h3><%= pluralize(hydration.errors.count, "件のエラー") %>があります：</h3>
-        <ul>
-          <% hydration.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
     <div class="form-group">
       <%= form.label :fed_at, class: "form-label" do %>
-        時間
+        水分補給日時
         <span class="required-badge">必須</span>
       <% end %>
-      <%= form.datetime_field :fed_at, include_seconds: false, default: hydration.fed_at || Time.current, class: "form-input" %>
+      <%= form.datetime_field :fed_at, include_seconds: false, default: hydration.fed_at || Time.current, class: "form-input #{'input-error' if hydration.errors[:fed_at].any?}" %>
+      <% if hydration.errors[:fed_at].any? %>
+        <div class="error-message">
+          <%= hydration.errors.full_messages_for(:fed_at).join(", ") %>
+        </div>
+      <% end %>
     </div>
 
     <div class="form-group">
@@ -24,12 +18,22 @@
         種類
         <span class="required-badge">該当するものを選択</span>
       <% end %>
-      <%= form.select :drink_type, options_for_select(["お水", "お茶", "その他"], hydration.drink_type), {}, class: "form-input" %>
+      <%= form.select :drink_type, options_for_select(["お水", "お茶", "その他"], hydration.drink_type), {}, class: "form-input #{'input-error' if hydration.errors[:drink_type].any?}" %>
+      <% if hydration.errors[:drink_type].any? %>
+        <div class="error-message">
+          <%= hydration.errors.full_messages_for(:drink_type).join(", ") %>
+        </div>
+      <% end %>
     </div>
 
     <div class="form-group">
       <%= form.label :amount, "量(ml)", class: "form-label" %>
-      <%= form.number_field :amount, min: 0, step: 10, class: "form-input" %>
+      <%= form.number_field :amount, min: 0, step: 10, class: "form-input #{'input-error' if hydration.errors[:amount].any?}" %>
+      <% if hydration.errors[:amount].any? %>
+        <div class="error-message">
+          <%= hydration.errors.full_messages_for(:amount).join(", ") %>
+        </div>
+      <% end %>
     </div>
 
     <div class="form-group">

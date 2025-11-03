@@ -60,6 +60,7 @@ ja:
         start_time: 開始日時
         end_time: 終了日時
         title: タイトル
+        child_ids: 対象の子供
       growth:
         height: 身長
         weight: 体重

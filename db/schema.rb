@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_20_045240) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_03_045805) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -94,7 +94,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_20_045240) do
     t.bigint "child_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.index ["child_id"], name: "index_diapers_on_child_id"
     t.index ["user_id"], name: "index_diapers_on_user_id"
   end
@@ -192,14 +192,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_20_045240) do
 
   create_table "schedules", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.datetime "start_time", null: false
-    t.datetime "end_time"
+    t.datetime "end_time", null: false
     t.string "title"
     t.boolean "all_day", default: false, null: false
     t.string "repeat", default: "none"
     t.text "memo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
+    t.boolean "user_only", default: false, null: false
     t.index ["user_id"], name: "index_schedules_on_user_id"
   end
 
@@ -255,7 +256,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_20_045240) do
     t.datetime "updated_at", null: false
     t.string "name", default: "ユーザー"
     t.text "bio"
-    t.string "otp_secret"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -281,10 +281,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_20_045240) do
   add_foreign_key "bottles", "children"
   add_foreign_key "bottles", "users"
   add_foreign_key "diapers", "children"
-  add_foreign_key "diapers", "users"
   add_foreign_key "diaries", "users"
   add_foreign_key "feeds", "children"
-  add_foreign_key "feeds", "users"
   add_foreign_key "growths", "children"
   add_foreign_key "hydrations", "children"
   add_foreign_key "hydrations", "users"
@@ -293,7 +291,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_20_045240) do
   add_foreign_key "notifications", "users"
   add_foreign_key "schedule_children", "children"
   add_foreign_key "schedule_children", "schedules"
-  add_foreign_key "schedules", "users"
   add_foreign_key "sleep_records", "children"
   add_foreign_key "sleep_records", "users"
   add_foreign_key "temperatures", "children"

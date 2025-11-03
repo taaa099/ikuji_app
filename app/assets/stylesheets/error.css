@@ -1,0 +1,17 @@
+/* ==============================
+   エラーメッセージ
+   ============================== */
+.error-message {
+  color: #E53E3E;
+}
+
+.input-error {
+  border: 1px solid #E53E3E; /* 落ち着いた赤系 */
+  background-color: #FFF5F5;   /* 任意で薄い赤背景にして目立たせる */
+}
+
+/* フォーカス時のデフォルトアウトラインを消す */
+.input-error:focus {
+  box-shadow: none;
+  border-color: #f56565;
+}

@@ -11,10 +11,46 @@
   text-align: center;
 }
 
-.sleep-summary p {
-  font-size: 16px;
-  margin: 4px 0;
+/* ------------------------------
+   睡眠分析カード専用
+   ------------------------------ */
+.sleep-summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.sleep-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sleep-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.sleep-card h3 {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.sleep-card .stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 0.5rem;
+}
+
+.sleep-card .stat-sub {
+  font-size: 14px;
+  color: #6b7280; /* グレー系 */
 }
 
 /* ==============================

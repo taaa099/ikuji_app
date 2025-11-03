@@ -153,61 +153,63 @@ class SleepRecordsController < ApplicationController
     end
   end
 
-  def analysis
-    # 直近1週間（日曜日始まり）
-    @start_date = Date.today.beginning_of_week(:sunday)
-    @end_date   = Date.today.end_of_week(:saturday).end_of_day
+def analysis
+  # 直近1週間（日曜〜土曜）
+  @start_date = Date.today.beginning_of_week(:sunday)
+  @end_date   = Date.today.end_of_week(:saturday)
 
-    # 対象期間のレコード取得
-    records = current_child.sleep_records
-                           .where.not(start_time: nil, end_time: nil)
-                           .where(start_time: @start_date..@end_date)
+  records = current_child.sleep_records
+                         .where.not(start_time: nil, end_time: nil)
+                         .where(start_time: @start_date.beginning_of_day..@end_date.end_of_day)
 
-    # 日別の睡眠時間集計
-    @daily_sleep = (0..6).map do |i|
-      day = @start_date + i
-      day_records = records.select { |r| r.start_time.to_date == day }
+  @daily_sleep = (0..6).map do |i|
+    day = @start_date + i
+    day_records = records.select { |r| r.start_time.to_date == day }
 
-      daytime_minutes = day_records.sum do |r|
-        if r.start_time.hour.between?(9, 16)
-          ((r.end_time - r.start_time)/60).to_i
-        else
-          0
-        end
+    daytime_minutes = day_records.sum do |r|
+      if r.start_time.hour.between?(9, 16)
+        ((r.end_time - r.start_time) / 60).to_i
+      else
+        0
       end
+    end
 
-      nighttime_minutes = day_records.sum do |r|
-        if r.start_time.present? && r.end_time.present? && !r.start_time.hour.between?(9, 16)
-          ((r.end_time - r.start_time) / 60).to_i
-        else
-          0
-        end
+    nighttime_minutes = day_records.sum do |r|
+      unless r.start_time.hour.between?(9, 16)
+        ((r.end_time - r.start_time) / 60).to_i
+      else
+        0
       end
-
-      {
-        date: day.strftime("%m/%d"),
-        daytime: daytime_minutes,
-        nighttime: nighttime_minutes,
-        naps: day_records.count { |r| r.start_time.hour.between?(9, 16) }
-      }
     end
 
-    # 平均睡眠時間（日中・夜）
-    daytime_durations = @daily_sleep.map { |d| d[:daytime] }
-    nighttime_durations = @daily_sleep.map { |d| d[:nighttime] }
-
-    @average_daytime_sleep = if daytime_durations.any?
-                               (daytime_durations.sum / daytime_durations.size.to_f).round(1)
-    else
-                               0
-    end
-
-    @average_nighttime_sleep = if nighttime_durations.any?
-                                 (nighttime_durations.sum / nighttime_durations.size.to_f).round(1)
-    else
-                                 0
-    end
+    {
+      date: day.strftime("%m/%d"),
+      daytime: daytime_minutes,
+      nighttime: nighttime_minutes,
+      naps: day_records.count { |r| r.start_time.hour.between?(9, 16) }
+    }
   end
+
+  # 平均睡眠時間（日中・夜）※記録がある日のみで平均を出す
+  daytime_durations = @daily_sleep.map { |d| d[:daytime] }.reject(&:zero?)
+  nighttime_durations = @daily_sleep.map { |d| d[:nighttime] }.reject(&:zero?)
+
+  @average_daytime_sleep = if daytime_durations.any?
+                             daytime_durations.sum.to_f / daytime_durations.size
+  else
+                             0
+  end
+
+  @average_nighttime_sleep = if nighttime_durations.any?
+                               nighttime_durations.sum.to_f / nighttime_durations.size
+  else
+                               0
+  end
+
+  # ✅ 昼・夜それぞれの記録日数
+  @daytime_record_days = daytime_durations.size
+  @nighttime_record_days = nighttime_durations.size
+end
 
   private
 

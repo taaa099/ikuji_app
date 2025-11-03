@@ -1,22 +1,16 @@
 <div class="growth-form-container">
   <%= form_with(model: [current_child, growth], data: { turbo_frame: "modal" }) do |form| %>
-    <% if growth.errors.any? %>
-      <div class="error_explanation">
-        <h3><%= pluralize(growth.errors.count, "件のエラー") %>があります：</h3>
-        <ul>
-          <% growth.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
     <div class="growth-form-group">
       <%= form.label :recorded_at, class: "growth-form-label" do %>
         計測日
         <span class="required-badge">必須</span>
       <% end %>
-      <%= form.date_field :recorded_at, class: "growth-form-input" %>
+      <%= form.date_field :recorded_at, class: "growth-form-input #{'input-error' if growth.errors[:recorded_at].any?}" %>
+      <% if growth.errors[:recorded_at].any? %>
+        <div class="error-message">
+          <%= growth.errors.full_messages_for(:recorded_at).join(", ") %>
+        </div>
+      <% end %>
     </div>
 
     <div class="growth-form-group">
@@ -24,7 +18,12 @@
         身長(cm)
         <span class="required-badge">必須</span>
       <% end %>
-      <%= form.number_field :height, min: 0, step: 0.1, class: "growth-form-input" %>
+      <%= form.number_field :height, min: 0, step: 0.1, class: "growth-form-input #{'input-error' if growth.errors[:height].any?}" %>
+      <% if growth.errors[:height].any? %>
+        <div class="error-message">
+          <%= growth.errors.full_messages_for(:height).join(", ") %>
+        </div>
+      <% end %>
     </div>
 
     <div class="growth-form-group">
@@ -32,7 +31,12 @@
         体重(kg)
         <span class="required-badge">必須</span>
       <% end %>
-      <%= form.number_field :weight, min: 0, step: 0.1, class: "growth-form-input" %>
+      <%= form.number_field :weight, min: 0, step: 0.1, class: "growth-form-input #{'input-error' if growth.errors[:weight].any?}" %>
+      <% if growth.errors[:weight].any? %>
+        <div class="error-message">
+          <%= growth.errors.full_messages_for(:weight).join(", ") %>
+        </div>
+      <% end %>
     </div>
 
     <div class="growth-form-group">

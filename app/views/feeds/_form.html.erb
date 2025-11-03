@@ -1,22 +1,17 @@
 <div class="form-container">
   <%= form_with(model: [current_child, feed], data: { turbo_frame: "modal" }) do |form| %>
-    <% if feed.errors.any? %>
-      <div id="error_explanation">
-        <h3><%= pluralize(feed.errors.count, "件のエラー") %>があります：</h3>
-        <ul>
-          <% feed.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
     <div class="form-group">
       <%= form.label :fed_at, class: "form-label" do %>
-        時間
+        授乳日時
         <span class="required-badge">必須</span>
       <% end %>
-      <%= form.datetime_field :fed_at, include_seconds: false, default: feed.fed_at || Time.current, class: "form-input" %>
+
+      <%= form.datetime_field :fed_at, include_seconds: false, default: feed.fed_at || Time.current, class: "form-input #{'input-error' if feed.errors[:fed_at].any?}" %>
+      <% if feed.errors[:fed_at].any? %>
+        <div class="error-message">
+          <%= feed.errors.full_messages_for(:fed_at).join(", ") %>
+        </div>
+      <% end %>
     </div>
 
     <div class="form-group">
@@ -27,18 +22,24 @@
 
       <div class="grid grid-cols-4 gap-2 p-3 bg-white">
         <div>
-          <%= number_field_tag :left_minutes, (@left_minutes == 0 ? "" : @left_minutes), min: 0, class: "form-input", placeholder: "左（分）" %>
+          <%= number_field_tag :left_minutes, (@left_minutes == 0 ? "" : @left_minutes), min: 0, class: "form-input #{'input-error' if feed.errors[:base].any?}", placeholder: "左（分）" %>
         </div>
         <div>
-          <%= number_field_tag :left_seconds, (@left_seconds == 0 ? "" : @left_seconds), min: 0, max: 59, class: "form-input", placeholder: "左（秒）" %>
+          <%= number_field_tag :left_seconds, (@left_seconds == 0 ? "" : @left_seconds), min: 0, max: 59, class: "form-input #{'input-error' if feed.errors[:base].any?}", placeholder: "左（秒）" %>
         </div>
         <div>
-          <%= number_field_tag :right_minutes, (@right_minutes == 0 ? "" : @right_minutes), min: 0, class: "form-input", placeholder: "右（分）" %>
+          <%= number_field_tag :right_minutes, (@right_minutes == 0 ? "" : @right_minutes), min: 0, class: "form-input #{'input-error' if feed.errors[:base].any?}", placeholder: "右（分）" %>
         </div>
         <div>
-          <%= number_field_tag :right_seconds, (@right_seconds == 0 ? "" : @right_seconds), min: 0, max: 59, class: "form-input", placeholder: "右（秒）" %>
+          <%= number_field_tag :right_seconds, (@right_seconds == 0 ? "" : @right_seconds), min: 0, max: 59, class: "form-input #{'input-error' if feed.errors[:base].any?}", placeholder: "右（秒）" %>
         </div>
       </div>
+
+      <% if feed.errors[:base].any? %>
+        <div class="error-message">
+          <%= feed.errors[:base].join(", ") %>
+        </div>
+      <% end %>
     </div>
 
     <div class="form-group">

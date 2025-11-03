@@ -1,22 +1,16 @@
 <div class="form-container">
   <%= form_with(model: [current_child, vaccination], data: { turbo_frame: "modal" }) do |form| %>
-    <% if vaccination.errors.any? %>
-      <div id="error_explanation">
-        <h3><%= pluralize(vaccination.errors.count, "件のエラー") %>があります：</h3>
-        <ul>
-          <% vaccination.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
     <div class="form-group">
       <%= form.label :vaccinated_at, class: "form-label" do %>
-        時間
+        接種時間
         <span class="required-badge">必須</span>
       <% end %>
-      <%= form.datetime_field :vaccinated_at, include_seconds: false, default: vaccination.vaccinated_at || Time.current, class: "form-input" %>
+      <%= form.datetime_field :vaccinated_at, include_seconds: false, default: vaccination.vaccinated_at || Time.current, class: "form-input #{'input-error' if vaccination.errors[:vaccinated_at].any?}" %>
+      <% if vaccination.errors[:vaccinated_at].any? %>
+        <div class="error-message">
+          <%= vaccination.errors.full_messages_for(:vaccinated_at).join(", ") %>
+        </div>
+      <% end %>
     </div>
 
     <div class="form-group">
@@ -24,7 +18,12 @@
         種類
         <span class="required-badge">該当するものを選択</span>
       <% end %>
-      <%= form.select :vaccine_name, options_for_select(["B型肝炎", "ロタウイルス", "ヒブ", "肺炎球菌", "四種混合", "BCG", "MR", "水痘", "日本脳炎", "二種混合", "インフルエンザ", "おたふくかぜ", "その他"], form.object.vaccine_name), {}, class: "form-input" %>
+      <%= form.select :vaccine_name, options_for_select(["B型肝炎", "ロタウイルス", "ヒブ", "肺炎球菌", "四種混合", "BCG", "MR", "水痘", "日本脳炎", "二種混合", "インフルエンザ", "おたふくかぜ", "その他"], form.object.vaccine_name), {}, class: "form-input #{'input-error' if vaccination.errors[:vaccine_name].any?}" %>
+      <% if vaccination.errors[:vaccine_name].any? %>
+        <div class="error-message">
+          <%= vaccination.errors.full_messages_for(:vaccine_name).join(", ") %>
+        </div>
+      <% end %>
     </div>
 
     <div class="form-group">

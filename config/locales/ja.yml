@@ -42,7 +42,7 @@ ja:
         fed_at: 水分補給日時
         amount: 量(ml)
       baby_food:
-        fed_at: 日時
+        fed_at: 離乳食の時間
         amount: 量(ml)
       sleep_record:
         start_time: 開始日時
@@ -51,7 +51,7 @@ ja:
         measured_at: 測定時間
         temperature: 体温
       bath:
-        bathed_at: 時間
+        bathed_at: 入浴時間
         bath_type: 種類
       vaccination:
         vaccinated_at: 接種時間
@@ -187,7 +187,7 @@ ja:
       not_found: は見つかりませんでした。
       not_locked: はロックされていません。
       not_a_number: 数値で入力してください
-      greater_than: "は1以上の値を入力してください"
+      greater_than: "は1以上で入力してください"
       not_saved:
         one: エラーが発生したため %{resource} は保存されませんでした。
         other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした。"

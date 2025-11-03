@@ -130,13 +130,14 @@
   background: #c62828; /* 濃い赤 */
 }
 
-/* 縦並び用のチェックボックスラッパー */
 .schedule-checkbox-wrapper {
-  display: inline-flex; 
-  align-items: center;
-  gap: 5px;
-  margin-bottom: 6px;
-  width: fit-content;
+ display: inline-flex;
+ vertical-align: middle;
+ line-height: 1;
+ align-items: center;
+ gap: 5px;
+ margin-bottom: 6px;
+ width: fit-content;
 }
 
 /* カスタムチェックボックス */

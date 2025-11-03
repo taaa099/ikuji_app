@@ -66,6 +66,7 @@ ja:
         weight: 体重
         head_circumference: 頭囲
         chest_circumference: 胸囲
+        recorded_at: 計測日
       diary:
         title: タイトル
         content: 本文

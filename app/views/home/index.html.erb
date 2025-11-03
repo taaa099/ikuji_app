@@ -19,11 +19,30 @@
       </span>
     </div>
 
-    <div class="stat-card">
+    <div class="stat-card sleep-card">
       <h3>平均睡眠時間</h3>
+      <% avg_day = @average_daytime_sleep.to_i %>
+      <% avg_day_hours = avg_day / 60 %>
+      <% avg_day_minutes = avg_day % 60 %>
+      <% avg_night = @average_nighttime_sleep.to_i %>
+      <% avg_night_hours = avg_night / 60 %>
+      <% avg_night_minutes = avg_night % 60 %>
       <p class="stat-value">
-        <%= @avg_daytime_sleep %> 時間（昼） / <%= @avg_nighttime_sleep %> 時間（夜）
+        昼: <%= avg_day_hours %>時間<%= avg_day_minutes %>分 /
+        夜: <%= avg_night_hours %>時間<%= avg_night_minutes %>分
       </p>
+
+      <div class="stat-diff-container">
+        <div class="stat-diff-group">
+          <span class="stat-diff <%= @daytime_change >= 0 ? 'up' : 'down' %>">
+            昼: <%= @daytime_change >= 0 ? '+' : '' %><%= @daytime_change %>分
+          </span>
+          <span class="stat-diff <%= @nighttime_change >= 0 ? 'up' : 'down' %>">
+            夜: <%= @nighttime_change >= 0 ? '+' : '' %><%= @nighttime_change %>分
+          </span>
+        </div>
+        <span class="stat-diff-label">（先週比）</span>
+      </div>
     </div>
 
     <div class="stat-card">

@@ -121,6 +121,20 @@ class HomeController < ApplicationController
       end
     end
 
+    # ----- 平均睡眠時間（簡易版） -----
+    if current_child
+      sleep_stats = SleepRecord.weekly_summary_for(current_child)
+      @start_date = sleep_stats[:start_date]
+      @end_date = sleep_stats[:end_date]
+      @daily_sleep = sleep_stats[:daily_sleep]
+      @average_daytime_sleep = sleep_stats[:average_daytime_sleep]
+      @average_nighttime_sleep = sleep_stats[:average_nighttime_sleep]
+      @daytime_record_days = sleep_stats[:daytime_record_days]
+      @nighttime_record_days = sleep_stats[:nighttime_record_days]
+      @daytime_change = sleep_stats[:daytime_change]
+      @nighttime_change = sleep_stats[:nighttime_change]
+    end
+
     # Turbo Stream リクエストに対応
     respond_to do |format|
       format.html

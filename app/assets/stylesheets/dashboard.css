@@ -138,6 +138,19 @@
   color: #111;
 }
 
+.stat-diff-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-top: 0.5rem;
+}
+
+.stat-diff-group {
+  display: flex;
+  gap: 0.8rem; /* 昼夜の間隔 */
+}
+
 .stat-diff {
   font-size: 14px;
   font-weight: 600;
@@ -145,6 +158,13 @@
 
 .stat-diff.up { color: #16a34a; }    /* 緑 */
 .stat-diff.down { color: #dc2626; }  /* 赤 */
+
+.stat-diff-label {
+  position: absolute;
+  right: 0;
+  font-size: 14px;
+  color: #777;
+}
 
 /* ==============================
    ダッシュボード：空データ用カード

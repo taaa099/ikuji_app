@@ -153,63 +153,16 @@ class SleepRecordsController < ApplicationController
     end
   end
 
-def analysis
-  # 直近1週間（日曜〜土曜）
-  @start_date = Date.today.beginning_of_week(:sunday)
-  @end_date   = Date.today.end_of_week(:saturday)
-
-  records = current_child.sleep_records
-                         .where.not(start_time: nil, end_time: nil)
-                         .where(start_time: @start_date.beginning_of_day..@end_date.end_of_day)
-
-  @daily_sleep = (0..6).map do |i|
-    day = @start_date + i
-    day_records = records.select { |r| r.start_time.to_date == day }
-
-    daytime_minutes = day_records.sum do |r|
-      if r.start_time.hour.between?(9, 16)
-        ((r.end_time - r.start_time) / 60).to_i
-      else
-        0
-      end
-    end
-
-    nighttime_minutes = day_records.sum do |r|
-      unless r.start_time.hour.between?(9, 16)
-        ((r.end_time - r.start_time) / 60).to_i
-      else
-        0
-      end
-    end
-
-    {
-      date: day.strftime("%m/%d"),
-      daytime: daytime_minutes,
-      nighttime: nighttime_minutes,
-      naps: day_records.count { |r| r.start_time.hour.between?(9, 16) }
-    }
+  def analysis
+    sleep_stats = SleepRecord.weekly_summary_for(current_child)
+    @start_date = sleep_stats[:start_date]
+    @end_date = sleep_stats[:end_date]
+    @daily_sleep = sleep_stats[:daily_sleep]
+    @average_daytime_sleep = sleep_stats[:average_daytime_sleep]
+    @average_nighttime_sleep = sleep_stats[:average_nighttime_sleep]
+    @daytime_record_days = sleep_stats[:daytime_record_days]
+    @nighttime_record_days = sleep_stats[:nighttime_record_days]
   end
-
-  # 平均睡眠時間（日中・夜）※記録がある日のみで平均を出す
-  daytime_durations = @daily_sleep.map { |d| d[:daytime] }.reject(&:zero?)
-  nighttime_durations = @daily_sleep.map { |d| d[:nighttime] }.reject(&:zero?)
-
-  @average_daytime_sleep = if daytime_durations.any?
-                             daytime_durations.sum.to_f / daytime_durations.size
-  else
-                             0
-  end
-
-  @average_nighttime_sleep = if nighttime_durations.any?
-                               nighttime_durations.sum.to_f / nighttime_durations.size
-  else
-                               0
-  end
-
-  # ✅ 昼・夜それぞれの記録日数
-  @daytime_record_days = daytime_durations.size
-  @nighttime_record_days = nighttime_durations.size
-end
 
   private
 

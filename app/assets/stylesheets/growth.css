@@ -104,6 +104,12 @@
   color: #000;
 }
 
+.growth-form-input:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #6fcf97;
+}
+
 /* アクションボタン */
 .growth-form-actions {
   margin-top: 16px;

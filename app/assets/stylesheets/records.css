@@ -135,6 +135,12 @@
   font-size: 14px;
 }
 
+.form-input:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #6fcf97;
+}
+
 .form-actions {
   text-align: center;
   margin-top: 1.5rem;

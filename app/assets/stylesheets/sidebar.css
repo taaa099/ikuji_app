@@ -277,6 +277,13 @@
   transition: border-color 0.2s;
 }
 
+.notification-number:focus,
+.child-goal:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #6fcf97;
+}
+
 .notification-option {
   display: flex;
   align-items: center;

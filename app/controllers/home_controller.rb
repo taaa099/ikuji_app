@@ -38,7 +38,7 @@ class HomeController < ApplicationController
     end.reverse
 
     # スケジュール一覧を取得（直近の予定が過ぎていない最大5件）
-    @latest_schedules = current_user.schedules.where("start_time >= ?", Time.current).order(start_time: :desc).limit(5)
+    @latest_schedules = current_user.schedules.where("start_time >= ?", Time.current).order(start_time: :desc, id: :desc).limit(5)
 
     # ----- 今週の記録数（育児記録） -----
     if current_child

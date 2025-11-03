@@ -1,22 +1,16 @@
 <%= form_with(model: schedule, data: { turbo_frame: "modal" }) do |form| %>
-  <% if @schedule.errors.any? %>
-    <div class="schedule-error-messages">
-      <h2><%= pluralize(@schedule.errors.count, "件のエラー") %>があります:</h2>
-      <ul>
-        <% @schedule.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div class="schedule-form-container">
     <div class="schedule-form-group">
       <%= form.label :title, class: "schedule-form-label" do %>
         タイトル
         <span class="required-badge">必須</span>
       <% end %>
-      <%= form.text_field :title, class: "schedule-form-input" %>
+      <%= form.text_field :title, class: "schedule-form-input #{'input-error' if schedule.errors[:title].any?}"%>
+      <% if schedule.errors[:title].any? %>
+        <div class="error-message">
+          <%= schedule.errors.full_messages_for(:title).join(", ") %>
+        </div>
+      <% end %>
     </div>
 
   <div class="schedule-form-group">
@@ -27,7 +21,7 @@
 
     <!-- ユーザー予定 -->
     <label class="schedule-checkbox-wrapper">
-      <%= form.check_box :child_ids, { multiple: true, class: "schedule-form-checkbox" }, "", nil %>
+      <%= form.check_box :user_only, { class: "schedule-form-checkbox" }, true, false %>
       <%= "#{current_user.name.presence || 'ユーザー'} 予定として登録" %>
     </label>
 
@@ -38,6 +32,11 @@
         <%= b.text %>
       </label>
     <% end %>
+    <% if schedule.errors[:child_ids].any? %>
+        <div class="error-message">
+          <%= schedule.errors.full_messages_for(:child_ids).join(", ") %>
+        </div>
+      <% end %>
   </div>
 
     <div class="schedule-form-group">
@@ -45,7 +44,12 @@
         開始日時
         <span class="required-badge">必須</span>
       <% end %>
-      <%= form.datetime_field :start_time, class: "schedule-form-input" %>
+      <%= form.datetime_field :start_time, class: "schedule-form-input #{'input-error' if schedule.errors[:start_time].any?}" %>
+      <% if schedule.errors[:start_time].any? %>
+        <div class="error-message">
+          <%= schedule.errors.full_messages_for(:start_time).join(", ") %>
+        </div>
+      <% end %>
     </div>
 
     <div class="schedule-form-group">
@@ -53,7 +57,12 @@
         終了日時
         <span class="required-badge">必須</span>
       <% end %>
-      <%= form.datetime_field :end_time, class: "schedule-form-input" %>
+      <%= form.datetime_field :end_time, class: "schedule-form-input #{'input-error' if schedule.errors[:end_time].any?}" %>
+      <% if schedule.errors[:end_time].any? %>
+        <div class="error-message">
+          <%= schedule.errors.full_messages_for(:end_time).join(", ") %>
+        </div>
+      <% end %>
     </div>
 
     <div class="schedule-form-group">

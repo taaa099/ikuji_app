@@ -86,6 +86,12 @@
   color: #000;
 }
 
+.schedule-form-input:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #6fcf97;
+}
+
 .schedule-form-actions {
   text-align: center;
   margin-top: 1.5rem;

@@ -46,17 +46,21 @@
           <!-- 🌟 中央表示部分 -->
           <% if @current_child.present? %>
             <% name = @current_child.name %>
-            <% gender_icon = @current_child.gender == "男" ? '<i class="fa-solid fa-mars text-blue-500"></i>' : '<i class="fa-solid fa-venus text-pink-500"></i>' %>
             <% birth_date = @current_child.birth_date %>
             <% age_in_days = (Date.today - birth_date).to_i %>
             <% months = age_in_days / 30 %>
             <% days = age_in_days % 30 %>
 
             <div class="absolute left-1/2 transform -translate-x-1/2 text-center leading-tight">
-              <div class="text-sm sm:text-base font-semibold text-gray-700 dark:text-gray-300">
-                <%= name %>
-                <%= @current_child.gender == "男" ? '<i class="fa-solid fa-mars text-blue-500"></i>'.html_safe : '<i class="fa-solid fa-venus text-pink-500"></i>'.html_safe %>
-                <%= "#{months}ヶ月#{days}日" %>
+              <div class="flex items-center justify-center gap-2 text-sm sm:text-base font-semibold text-gray-700 dark:text-gray-300">
+                <% if @current_child.image.attached? %>
+                  <%= image_tag @current_child.image.variant(resize_to_limit: [25, 25]), class: "rounded-full object-cover w-10 h-10" %>
+                <% end %>
+                <div>
+                  <%= name %>
+                  <%= @current_child.gender == "男" ? '<i class="fa-solid fa-mars text-blue-500"></i>'.html_safe : '<i class="fa-solid fa-venus text-pink-500"></i>'.html_safe %>
+                  <%= "#{months}ヶ月#{days}日" %>
+                </div>
               </div>
               <div class="text-lg sm:text-2xl font-bold text-gray-900 dark:text-gray-100">
                 <%= Time.current.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[Time.current.wday]})") %>

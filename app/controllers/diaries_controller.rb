@@ -68,8 +68,8 @@ class DiariesController < ApplicationController
     end
   end
 
-  def update
-    @diary = current_user.diaries.find(params[:id])
+def update
+  @diary = current_user.diaries.find(params[:id])
 
   # 1. 削除対象のメディアを purge
   if params[:diary][:remove_media_ids].present?
@@ -79,34 +79,44 @@ class DiariesController < ApplicationController
     end
   end
 
-    respond_to do |format|
-      if @diary.update(diary_params)
-        format.html { redirect_to diaries_path, notice: "日記を更新しました" }
-        # Turbo Streamで一覧置換＋フラッシュ追加＋モーダル閉じる
-        format.turbo_stream do
-          render turbo_stream: [
-            turbo_stream.replace("diaries-container", partial: "diaries/index", locals: { diaries: current_user.diaries.order(date: :desc) }),
-            turbo_stream.replace("diary-#{@diary.id}", partial: "diaries/show", locals: { diary: @diary }),
-            turbo_stream.prepend(
-              "flash-messages",
-              partial: "shared/flash",
-              locals: { flash: { notice: "日記を更新しました" } }
-            ),
-            turbo_stream.update("modal") { "" }
-          ]
+  respond_to do |format|
+    # 2. 既存の添付は保持して、他の属性だけ更新
+    if @diary.update(diary_params.except(:media))
+      # 3. 新しいファイルがあれば追加でattach（上書きではなく追加）
+      if params[:diary][:media].present?
+        params[:diary][:media].each do |new_file|
+          @diary.media.attach(new_file)
         end
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(
-            "modal",
-            partial: "diaries/form_modal",
-            locals: { diary: @diary }
-          )
-        end
+      end
+
+      format.html { redirect_to diaries_path, notice: "日記を更新しました" }
+
+      # 4. 非同期（Turbo Stream）対応
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.replace("diaries-container", partial: "diaries/index", locals: { diaries: current_user.diaries.order(date: :desc) }),
+          turbo_stream.replace("diary-#{@diary.id}", partial: "diaries/show", locals: { diary: @diary }),
+          turbo_stream.prepend(
+            "flash-messages",
+            partial: "shared/flash",
+            locals: { flash: { notice: "日記を更新しました" } }
+          ),
+          turbo_stream.update("modal") { "" }
+        ]
+      end
+    else
+      format.html { render :edit, status: :unprocessable_entity }
+
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(
+          "modal",
+          partial: "diaries/form_modal",
+          locals: { diary: @diary }
+        )
       end
     end
   end
+end
 
   def destroy
     @diary = current_user.diaries.find(params[:id])

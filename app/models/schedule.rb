@@ -13,7 +13,6 @@ class Schedule < ApplicationRecord
   validates :all_day, inclusion: { in: [ true, false ] }
   validates :user_only, inclusion: { in: [ true, false ] }
   VALID_REPEATS = %w[none daily weekly monthly yearly].freeze
-  validates :repeat, inclusion: { in: VALID_REPEATS }
   validates :memo, length: { maximum: 200 }
 
   private

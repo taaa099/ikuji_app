@@ -13,31 +13,31 @@
       <% end %>
     </div>
 
-  <div class="schedule-form-group">
-    <%= form.label :child_ids, class: "schedule-form-label" do %>
-      対象の子供
-      <span class="required-badge">必須</span>
-    <% end %>
-
-    <!-- ユーザー予定 -->
-    <label class="schedule-checkbox-wrapper">
-      <%= form.check_box :user_only, { class: "schedule-form-checkbox" }, true, false %>
-      <%= "#{current_user.name.presence || 'ユーザー'} 予定として登録" %>
-    </label>
-
-    <!-- 子供たち -->
-    <%= form.collection_check_boxes :child_ids, current_user.children, :id, :name do |b| %>
-      <label class="schedule-checkbox-wrapper">
-        <%= b.check_box(class: "schedule-form-checkbox") %>
-        <%= b.text %>
-      </label>
-    <% end %>
-    <% if schedule.errors[:child_ids].any? %>
-        <div class="error-message">
-          <%= schedule.errors.full_messages_for(:child_ids).join(", ") %>
-        </div>
+    <div class="schedule-form-group">
+      <%= form.label :child_ids, class: "schedule-form-label" do %>
+        対象の子供
+        <span class="required-badge">必須</span>
       <% end %>
-  </div>
+
+      <!-- ユーザー予定 -->
+      <label class="schedule-checkbox-wrapper">
+        <%= form.check_box :user_only, { class: "schedule-form-checkbox" }, true, false %>
+        <%= "#{current_user.name.presence || 'ユーザー'} 予定として登録" %>
+      </label>
+
+      <!-- 子供たち -->
+      <%= form.collection_check_boxes :child_ids, current_user.children, :id, :name do |b| %>
+        <label class="schedule-checkbox-wrapper">
+          <%= b.check_box(class: "schedule-form-checkbox") %>
+          <%= b.text %>
+        </label>
+      <% end %>
+      <% if schedule.errors[:child_ids].any? %>
+          <div class="error-message">
+            <%= schedule.errors.full_messages_for(:child_ids).join(", ") %>
+          </div>
+        <% end %>
+    </div>
 
     <div class="schedule-form-group">
       <%= form.label :start_time, class: "schedule-form-label" do %>
@@ -68,13 +68,6 @@
     <div class="schedule-form-group">
       <%= form.label :all_day, "終日", class: "schedule-form-label" %>
       <%= form.check_box :all_day, class: "schedule-form-checkbox" %>
-    </div>
-
-    <div class="schedule-form-group">
-      <%= form.label :repeat, "繰り返し", class: "schedule-form-label" %>
-      <%= form.select :repeat,
-          options_for_select(["none", "daily", "weekly", "monthly", "yearly"], @schedule.repeat),
-          {}, class: "schedule-form-input" %>
     </div>
 
     <div class="schedule-form-group">

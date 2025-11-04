@@ -4,10 +4,12 @@
 
 /* ページ全体背景グレー */
 .switch-child-page-wrapper {
-  min-height: 100vh;
+  height: 90vh;
+  width: 100%;
   background-color: #f3f4f6;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: center; /* 上寄せ→中央寄せに変更 */
   align-items: center;
 }
 
@@ -58,6 +60,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
 /* 子ども1人分（form） */

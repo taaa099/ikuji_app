@@ -3,12 +3,26 @@
    ============================== */
 
 /* 子供一覧タイトル */
-.children-index-title {
-  font-size: 1.6rem;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 20px;
-  text-align: center;
+.child-title {
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.3rem;
+}
+
+/* 下線アクセント */
+.child-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 50px; /* 線の長さ */
+  background: linear-gradient(90deg, #81c784, #66bb6a); /* 柔らかい緑系グラデーション */
 }
 
 /* 一覧全体 */
@@ -140,17 +154,6 @@
 /* ============================
    子ども詳細ページ（child-show）
    ============================ */
-
-/* タイトル */
-.child-title {
-  text-align: center;
-  font-size: 1.9rem;
-  font-weight: 700;
-  color: #2b2b2b;
-  margin: 40px 0 30px;
-  letter-spacing: 0.5px;
-}
-
 /* コンテナ */
 .child-container {
   max-width: 550px;

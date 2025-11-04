@@ -1,7 +1,28 @@
 /* ==============================
    成長記録機能専用スタイル
    ============================== */
+   /* ページタイトル */
+.growth-title {
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.3rem;
+}
 
+/* 下線アクセント */
+.growth-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 50px; /* 線の長さ */
+  background: linear-gradient(90deg, #81c784, #66bb6a); /* 柔らかい緑系グラデーション */
+}
 /* ==============================
    indexビュー（グラフ & 予定一覧）
    ============================== */
@@ -34,11 +55,6 @@
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
-}
-
-.growth-title {
-  font-size: 20px;
-  margin-bottom: 1rem;
 }
 
 .growth-table {
@@ -193,7 +209,7 @@
    PC: 1025px以上
    ============================== */
 @media screen and (min-width: 1025px) {
-  .growth-title { font-size: 28px; }
+  .growth-title { font-size: 24px; }
   .growth-chart { max-width: 1200px; }
   .growth-form-container { max-width: 700px; }
 }

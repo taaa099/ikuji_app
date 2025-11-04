@@ -1,11 +1,8 @@
-<h1>スケジュール一覧</h1>
+<h1 class="schedule-title">スケジュール一覧</h1>
 
-<h2>カレンダー</h2>
 <turbo-frame id="calendar">
   <%= render partial: "schedules/calendar", locals: { month: @month, schedules: @schedules } %>
 </turbo-frame>
-
-<h2 class="schedule-title">予定一覧</h2>
 
 <%= render partial: "schedules/index", locals: { grouped_schedules: @grouped_schedules, schedule_all_dates: @schedule_all_dates } %>
 

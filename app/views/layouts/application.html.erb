@@ -54,7 +54,7 @@
             <div class="absolute left-1/2 transform -translate-x-1/2 text-center leading-tight">
               <div class="flex items-center justify-center gap-2 text-sm sm:text-base font-semibold text-gray-700 dark:text-gray-300">
                 <% if @current_child.image.attached? %>
-                  <%= image_tag @current_child.image.variant(resize_to_limit: [25, 25]), class: "rounded-full object-cover w-10 h-10" %>
+                  <%= image_tag @current_child.image.variant(resize_to_fill: [25, 25]), class: "rounded-full object-cover" %>
                 <% end %>
                 <div>
                   <%= name %>

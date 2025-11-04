@@ -34,3 +34,7 @@ import "./sidebar";
 
 //ヘッダー機能関連
 import "./header";
+
+//Stimulus設定
+import "./controllers"
+

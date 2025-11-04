@@ -12,9 +12,9 @@
     <div class="diary-show-media">
       <% @diary.media.each do |file| %>
         <% if file.image? %>
-          <%= image_tag file.variant(resize_to_limit: [400, 400]), class: "diary-show-img" %>
+          <%= image_tag file.variant(resize_to_limit: [120, 120]), class: "diary-show-img" %>
         <% elsif file.video? %>
-          <%= video_tag file, controls: true, size: "400x300", class: "diary-show-video" %>
+          <%= video_tag file, controls: true, size: "120x120", class: "diary-show-video" %>
         <% end %>
       <% end %>
     </div>

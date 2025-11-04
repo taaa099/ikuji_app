@@ -221,3 +221,63 @@
 .btn-back:hover {
   background-color: #e5e7eb;
 }
+
+/* ==============================
+   フォーム（new,edit）デザイン
+   ============================== */
+.current-media-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.media-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.remove-media-label {
+  margin-top: 4px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* カスタムチェックボックス */
+.remove-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+/* チェック時 */
+.remove-checkbox:checked {
+  background-color: #4caf50;
+  border-color: #4caf50;
+}
+
+/* フォーカス時 */
+.remove-checkbox:focus {
+  box-shadow: 0 0 0 2px #4caf50;
+}
+
+/* プレビューおよび既存メディアの共通サイズ調整 */
+#current-media-container img,
+#current-media-container video,
+.media-thumb {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 4px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+/* コンテナを横並びで整列 */
+#current-media-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: flex-start;
+}

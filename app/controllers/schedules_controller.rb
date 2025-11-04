@@ -194,6 +194,6 @@ class SchedulesController < ApplicationController
 
   # フォームから送信されたパラメータのうち、許可するキーを指定
   def schedule_params
-    params.require(:schedule).permit(:start_time, :end_time, :title, :all_day, :repeat, :memo, :user_only, child_ids: [])
+    params.require(:schedule).permit(:start_time, :end_time, :title, :all_day, :memo, :user_only, child_ids: [])
   end
 end

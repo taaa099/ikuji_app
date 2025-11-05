@@ -1,42 +1,44 @@
-<div class="calendar-container">
-  <h1 class="calendar-title"><%= month.strftime("%Y年%m月") %></h1>
+<div id="calendar">
+  <div class="calendar-container">
+    <h1 class="calendar-title"><%= month.strftime("%Y年%m月") %></h1>
 
-  <div class="calendar-nav">
-    <%= link_to "← 前の月", schedules_path(start_date: month.prev_month), class: "btn-nav", data: { turbo_frame: "calendar" } %>
-    <%= link_to "今月", schedules_path(start_date: Date.current.beginning_of_month), class: "btn-nav", data: { turbo_frame: "calendar" } %>
-    <%= link_to "次の月 →", schedules_path(start_date: month.next_month), class: "btn-nav", data: { turbo_frame: "calendar" } %>
-  </div>
+    <div class="calendar-nav">
+      <%= link_to "← 前の月", schedules_path(start_date: month.prev_month), class: "btn-nav", data: { turbo_method: :get } %>
+      <%= link_to "今月", schedules_path(start_date: Date.current.beginning_of_month), class: "btn-nav", data: { turbo_method: :get } %>
+      <%= link_to "次の月 →", schedules_path(start_date: month.next_month), class: "btn-nav", data: { turbo_method: :get } %>
+    </div>
 
-  <div class="simple-calendar">
-    <% (month.to_date.beginning_of_month.beginning_of_week..month.to_date.end_of_month.end_of_week).to_a.in_groups_of(7) do |week| %>
-      <% week.each do |date| %>
-        <div class="day-cell <%= 'other-month' if date.month != month.month %>">
-          <div class="date-number"><%= date.day %></div>
+    <div class="simple-calendar">
+      <% (month.to_date.beginning_of_month.beginning_of_week..month.to_date.end_of_month.end_of_week).to_a.in_groups_of(7) do |week| %>
+        <% week.each do |date| %>
+          <div class="day-cell <%= 'other-month' if date.month != month.month %>">
+            <div class="date-number"><%= date.day %></div>
 
-          <% schedules.select { |s| s.start_time.to_date == date }.each do |schedule| %>
-            <% if schedule.children.any? %>
-              <% if schedule.children.size > 1 %>
-                <%= link_to schedule.title,
-                            schedule_path(schedule),
-                            class: "event-link multiple-children",
-                            data: { turbo_frame: "modal" } %>
+            <% schedules.select { |s| s.start_time.to_date == date }.each do |schedule| %>
+              <% if schedule.children.any? %>
+                <% if schedule.children.size > 1 %>
+                  <%= link_to schedule.title,
+                              schedule_path(schedule),
+                              class: "event-link multiple-children",
+                              data: { turbo_frame: "modal" } %>
+                <% else %>
+                  <% child = schedule.children.first %>
+                  <% index = current_user.children.order(:id).pluck(:id).index(child.id) || 0 %>
+                  <%= link_to schedule.title,
+                              schedule_path(schedule),
+                              class: "event-link child-color-#{index}",
+                              data: { turbo_frame: "modal" } %>
+                <% end %>
               <% else %>
-                <% child = schedule.children.first %>
-                <% index = current_user.children.order(:id).pluck(:id).index(child.id) || 0 %>
                 <%= link_to schedule.title,
                             schedule_path(schedule),
-                            class: "event-link child-color-#{index}",
+                            class: "event-link user-event",
                             data: { turbo_frame: "modal" } %>
               <% end %>
-            <% else %>
-              <%= link_to schedule.title,
-                          schedule_path(schedule),
-                          class: "event-link user-event",
-                          data: { turbo_frame: "modal" } %>
             <% end %>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
 </div>

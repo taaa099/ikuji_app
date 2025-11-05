@@ -38,7 +38,22 @@ class HomeController < ApplicationController
     end.reverse
 
     # スケジュール一覧を取得（直近の予定が過ぎていない最大5件）
-    @latest_schedules = current_user.schedules.where("start_time >= ?", Time.current).order(start_time: :desc, id: :desc).limit(5)
+    tokyo_now = Time.current.in_time_zone("Tokyo")
+
+    @latest_schedules = current_user.schedules
+      .where(
+        Schedule.arel_table[:start_time].gteq(tokyo_now.utc)
+        .or(
+          Schedule.arel_table[:all_day].eq(true)
+          .and(
+            Schedule.arel_table[:start_time].between(
+              tokyo_now.beginning_of_day.utc..tokyo_now.end_of_day.utc
+            )
+          )
+        )
+      )
+      .order(all_day: :desc, start_time: :desc, id: :desc)
+      .limit(5)
 
     # ----- 今週の記録数（育児記録） -----
     if current_child

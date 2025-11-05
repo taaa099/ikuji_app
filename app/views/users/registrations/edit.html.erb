@@ -1,8 +1,6 @@
-<h2 class="profile-title">プロフィール編集</h2>
+<h2 class="profile-title">アカウント設定</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true, class: "profile-form-container" }) do |f| %>
-  <%# hidden field でタブ情報を保持 %>
-  <%= f.hidden_field :tab, value: @current_tab %>
 
   <% if resource.errors.any? %>
     <div class="alert alert-danger">
@@ -15,60 +13,41 @@
     </div>
   <% end %>
 
-  <% if @current_tab == "password" %>
-    <!-- パスワード変更フォーム -->
-    <div class="profile-form-group">
-      <%= f.label :password, "新しいパスワード（変更する場合）", class: "profile-form-label" %>
-      <%= f.password_field :password, autocomplete: "new-password", class: "profile-form-input" %>
-    </div>
-
-    <div class="profile-form-group">
-      <%= f.label :password_confirmation, "新しいパスワード確認", class: "profile-form-label" %>
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "profile-form-input" %>
-    </div>
-
-    <div class="profile-form-group">
-      <%= f.label :current_password, "現在のパスワード（必須）", class: "profile-form-label" %>
-      <%= f.password_field :current_password, autocomplete: "current-password", class: "profile-form-input" %>
-    </div>
-  <% else %>
-    <!-- プロフィール編集フォーム -->
-    <div class="profile-form-group">
-      <%= f.label :name, "名前", class: "profile-form-label" %>
-      <%= f.text_field :name, autofocus: true, class: "profile-form-input" %>
-    </div>
-
-    <div class="profile-form-group">
-      <%= f.label :bio, "自己紹介", class: "profile-form-label" %>
-      <%= f.text_area :bio, rows: 5, class: "profile-form-input" %>
-    </div>
-
-    <div class="profile-form-group">
-      <%= f.label :avatar, "アバター", class: "profile-form-label" %>
-      <%= f.file_field :avatar, class: "profile-form-input" %>
-      <% if resource.avatar.attached? && resource.avatar.persisted? %>
-        <p>現在のアバター:</p>
-        <%= image_tag resource.avatar.variant(resize_to_limit: [150, 150]) %>
+  <!-- アバター -->
+  <div class="profile-avatar-wrapper">
+    <%= f.file_field :avatar, id: "avatar_input", class: "profile-avatar-input" %>
+    <label for="avatar_input" class="profile-avatar-label">
+      <% if resource.avatar.attached? %>
+        <%= image_tag resource.avatar.variant(resize_to_limit: [120, 120]), class: "profile-avatar-img" %>
+      <% else %>
+        <%= image_tag "default_avatar.png", class: "profile-avatar-img" %>
       <% end %>
-    </div>
+      <i class="fa fa-camera profile-avatar-camera"></i>
+    </label>
+  </div>
 
-    <div class="profile-form-group">
-      <%= f.label :email, "メールアドレス", class: "profile-form-label" %>
-      <%= f.email_field :email, class: "profile-form-input" %>
-    </div>
-  <% end %>
+  <!-- 名前 -->
+  <div class="profile-form-group">
+    <%= f.label :name, "名前", class: "profile-form-label" %>
+    <%= f.text_field :name, autofocus: true, class: "profile-form-input" %>
+  </div>
+
+  <!-- メール -->
+  <div class="profile-form-group">
+    <%= f.label :email, "メールアドレス", class: "profile-form-label" %>
+    <%= f.email_field :email, class: "profile-form-input" %>
+  </div>
 
   <div class="profile-form-actions">
-    <%= f.submit "更新", class: "profile-form-btn" %>
+    <%= f.submit "更新する", class: "profile-form-btn" %>
   </div>
 <% end %>
 
-<% if @current_tab != "password" %>
-  <div class="profile-form-actions" style="margin-top: 1rem;">
-    <%= link_to "パスワード変更", edit_user_registration_path(tab: "password"), class: "profile-form-btn" %>
-  </div>
-<% end %>
+<div class="profile-divider-wrapper">
+  <span class="profile-divider-text">または</span>
+</div>
 
-<div class="profile-form-actions">
+<div class="profile-form-actions profile-form-actions-inline" style="margin-top: 1rem;">
+  <%= link_to "パスワード変更", edit_user_registration_path, class: "profile-form-btn" %>
   <%= link_to "アカウント削除", registration_path(resource_name), data: { confirm: "本当に削除しますか？" }, method: :delete, class: "profile-form-btn profile-form-btn-danger" %>
 </div>

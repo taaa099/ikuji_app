@@ -12,13 +12,4 @@
   <p class="profile-show-item">
     <strong class="profile-show-label">名前:</strong> <%= @user.name %>
   </p>
-
-  <% if @user.bio.present? %>
-    <p class="profile-show-item">
-      <strong class="profile-show-label">自己紹介:</strong>
-      <%= simple_format(@user.bio) %>
-    </p>
-  <% else %>
-    <p class="profile-show-item">自己紹介は未設定です</p>
-  <% end %>
 </div>

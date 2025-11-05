@@ -29,7 +29,7 @@
    プロフィール編集フォーム (edit)
    ============================== */
 .profile-form-container {
-  max-width: 600px;
+  max-width: 500px;
   margin: 0 auto;
   padding: 1.5rem;
   background: #fff;
@@ -86,6 +86,47 @@
   background: #be123c;
 }
 
+/* 区切り「ーー または ーー」 */
+.profile-divider-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0; /* 上下の余白 */
+}
+
+.profile-divider-text {
+  position: relative;
+  font-size: 14px;
+  padding: 0 10px;
+}
+
+.profile-divider-text::before,
+.profile-divider-text::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 50px;
+  height: 1px;
+  background: #ccc;
+}
+
+.profile-divider-text::before {
+  left: -60px; /* 線とテキストの間隔 */
+}
+
+.profile-divider-text::after {
+  right: -60px;
+}
+
+/* 横並び用 */
+.profile-form-actions-inline {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 500px;
+  margin: 1rem auto 0 auto;
+}
+
 /* ==============================
    プロフィール表示 (show)
    ============================== */
@@ -122,107 +163,40 @@
 }
 
 /* ==============================
-   PC: 1025px以上
+   アバター編集用スタイル
    ============================== */
-@media screen and (min-width: 1025px) {
-  .profile-title { font-size: 24px; }
-
-  .profile-form-container {
-    max-width: 700px;
-    padding: 2rem;
-  }
-
-  .profile-form-label {
-    font-size: 15px;
-  }
-
-  .profile-form-input {
-    font-size: 15px;
-    padding: 10px;
-  }
-
-  .profile-show-container {
-    padding: 2rem;
-  }
-
-  .profile-show-item {
-    font-size: 15px;
-  }
-
-  .profile-show-label {
-    width: 100px;
-  }
+.profile-avatar-wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 20px;
 }
 
-/* ==============================
-   タブレット: 768px〜1024px
-   ============================== */
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-  .profile-title { font-size: 20px; }
-
-  .profile-form-container {
-    max-width: 90%;
-    padding: 1.5rem;
-  }
-
-  .profile-form-label {
-    font-size: 14px;
-  }
-
-  .profile-form-input {
-    font-size: 14px;
-    padding: 8px;
-  }
-
-  .profile-show-container {
-    padding: 1.5rem;
-  }
-
-  .profile-show-item {
-    font-size: 14px;
-  }
-
-  .profile-show-label {
-    width: 80px;
-  }
+.profile-avatar-input {
+  display: none;
 }
 
-/* ==============================
-   スマホ: 767px以下
-   ============================== */
-@media screen and (max-width: 767px) {
-  .profile-title { font-size: 18px; }
+.profile-avatar-label {
+  display: block;
+  cursor: pointer;
+  position: relative;
+}
 
-  .profile-form-container {
-    max-width: 100%;
-    padding: 1rem;
-    border: none;
-  }
+.profile-avatar-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ccc;
+}
 
-  .profile-form-label {
-    font-size: 13px;
-  }
-
-  .profile-form-input {
-    font-size: 13px;
-    padding: 6px;
-  }
-
-  .profile-show-container {
-    padding: 1rem;
-    border: none;
-  }
-
-  .profile-show-item {
-    font-size: 13px;
-  }
-
-  .profile-show-label {
-    width: auto;
-    margin-right: 0.5rem;
-  }
-
-  .profile-show-avatar img {
-    max-width: 120px;
-  }
+.profile-avatar-camera {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background-color: #6fcf97;
+  color: #fff;
+  border-radius: 50%;
+  padding: 5px;
+  font-size: 20px;
 }

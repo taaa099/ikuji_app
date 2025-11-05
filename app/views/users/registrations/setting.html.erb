@@ -1,0 +1,47 @@
+<div class="profile-title-wrapper">
+  <h2 class="profile-title">アカウント設定</h2>
+</div>
+
+<%= form_for(current_user, url: registration_path(current_user), html: { method: :put, class: "profile-form-container" }) do |f| %>
+
+  <!-- アバター -->
+  <div class="profile-avatar-wrapper">
+    <%= f.file_field :avatar, id: "avatar_input", class: "profile-avatar-input" %>
+    <label for="avatar_input" class="profile-avatar-label">
+      <% if current_user.avatar.attached? %>
+        <%= image_tag current_user.avatar.variant(resize_to_limit: [120, 120]), class: "profile-avatar-img" %>
+      <% else %>
+       <svg class="bg-gray-200 rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray" width="120" height="120">
+         <circle cx="12" cy="8" r="4"/>
+         <path d="M12 14c-4 0-6 2-6 4v2h12v-2c0-2-2-4-6-4z"/>
+       </svg>
+      <% end %>
+      <i class="fa fa-camera profile-avatar-camera"></i>
+    </label>
+  </div>
+
+  <!-- 名前 -->
+  <div class="profile-form-group">
+    <%= f.label :name, "名前", class: "profile-form-label" %>
+    <%= f.text_field :name, autofocus: true, class: "profile-form-input" %>
+  </div>
+
+  <!-- メール -->
+  <div class="profile-form-group">
+    <%= f.label :email, "メールアドレス", class: "profile-form-label" %>
+    <%= f.email_field :email, class: "profile-form-input" %>
+  </div>
+
+  <div class="profile-form-actions">
+    <%= f.submit "更新する", class: "profile-form-btn" %>
+  </div>
+<% end %>
+
+<div class="profile-divider-wrapper">
+  <span class="profile-divider-text">または</span>
+</div>
+
+<div class="profile-form-actions profile-form-actions-inline" style="margin-top: 1rem;">
+  <%= link_to "パスワード変更", edit_user_registration_path, class: "profile-form-btn" %>
+  <%= link_to "アカウント削除", registration_path(resource_name), data: { confirm: "本当に削除しますか？" }, method: :delete, class: "profile-form-btn profile-form-btn-danger" %>
+</div>

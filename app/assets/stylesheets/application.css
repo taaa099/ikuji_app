@@ -464,6 +464,48 @@ select {
   background-color: rgba(255,255,255,0.2); /* 薄い白のモヤ */
 }
 
+/* 静的ページ用(利用規約・プライバシーポリシー) */
+.static_pages-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic Pro", sans-serif;
+  line-height: 1.8;
+  color: #333;
+}
+
+.static_pages-container h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.static_pages-container h2 {
+  font-size: 20px;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  border-left: 4px solid #6fcf97;
+  padding-left: 10px;
+}
+
+.static_pages-container p {
+  margin-bottom: 15px;
+}
+
+.static_pages-container ul {
+  margin-left: 20px;
+  list-style-type: disc;
+}
+
+.static_pages-container ul li {
+  margin-bottom: 8px;
+}
+
+.static_pages-container a {
+  color: #4a90e2;
+  text-decoration: underline;
+}
+
 /* ==============================
    PC: 1025px以上
    ============================== */

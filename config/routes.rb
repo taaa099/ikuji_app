@@ -50,6 +50,10 @@ Rails.application.routes.draw do
     end
   end
 
+  # 利用規約・プライバシーポリシー
+  get "/terms", to: "static_pages#terms"
+  get "/privacy", to: "static_pages#privacy"
+
   # Defines the root path route ("/")
   root "home#index"
 end

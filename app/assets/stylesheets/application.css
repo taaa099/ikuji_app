@@ -82,8 +82,9 @@ select {
    mainコンテンツ領域
    ============================== */
 .main-content {
-  margin-top: 60px; /* ヘッダー分の余白を確保 */
-  padding: 20px;    /* 中身と枠の余白（任意） */
+  margin-top: 60px;
+  padding: 20px;
+  min-height: calc(100vh - 70px - 110px - 40px);
 }
 
 /* ==============================
@@ -359,6 +360,28 @@ select {
   min-width: 120px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   z-index: 100;
+}
+
+/* ==============================
+   フッター共通スタイル
+   ============================== */
+.site-footer {
+  height: 110px;
+  background-color: #f7f7f7;
+  border-top: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% - 240px);
+  margin-top: 50px;
+  margin-left: 240px;
+  box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.footer-inner {
+  text-align: center;
+  color: #666;
+  font-size: 14px;
 }
 
 /* ==============================

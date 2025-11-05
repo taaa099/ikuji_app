@@ -441,8 +441,18 @@
     transition: margin-left 0.3s;
   }
 
+  .site-footer {
+    margin-left: 240px;
+    transition: margin-left 0.3s;
+  }
+
   .sidebar.collapsed ~ .main-content {
     margin-left: 60px;
+  }
+
+    .sidebar.collapsed ~ .site-footer {
+    margin-left: 60px;
+    width: calc(100% - 60px);
   }
 
   .sidebar-overlay {

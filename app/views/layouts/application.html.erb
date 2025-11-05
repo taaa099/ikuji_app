@@ -216,9 +216,16 @@
     <turbo-frame id="modal"></turbo-frame>
 
     <!-- 通常ページのコンテンツ -->
-    <div class="main-content">
+    <main class="main-content">
       <%= yield %>
-    </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p>Ikuji App © <%= Time.current.year %></p>
+      </div>
+    </footer>
 
     <!-- 通知用コンテナ -->
     <div id="notification-container"></div>

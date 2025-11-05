@@ -1,8 +1,12 @@
 /* ==============================
     Childビュー専用スタイル
    ============================== */
+/* タイトルを包む親に中央揃え */
+.child-title-wrapper {
+  text-align: center;
+}
 
-/* 子供一覧タイトル */
+/* ページタイトル */
 .child-title {
   font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 700;
@@ -18,11 +22,12 @@
 .child-title::after {
   content: "";
   position: absolute;
-  left: 0;
+  left: 50%; /* 親要素中央に配置 */
   bottom: 0;
   height: 3px;
-  width: 50px; /* 線の長さ */
-  background: linear-gradient(90deg, #81c784, #66bb6a); /* 柔らかい緑系グラデーション */
+  width: 50px;
+  background: linear-gradient(90deg, #81c784, #66bb6a);
+  transform: translateX(-50%);
 }
 
 /* 一覧全体 */

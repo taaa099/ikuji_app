@@ -132,6 +132,57 @@
   margin: 1rem auto 0 auto;
 }
 
+/* 外側のモーダル背景 */
+.profile-destroy-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  z-index: 1000;
+}
+
+/* 内側のモーダル要素 */
+.profile-destroy-inner {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  width: auto;
+  max-width: 400px;
+  height: auto;
+  max-height: 90%;
+  overflow-y: auto;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* タイトル */
+.profile-destroy-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* 本文テキスト */
+.profile-destroy-text {
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+/* ボタンエリア */
+.profile-destroy-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
 /* ==============================
    プロフィール表示 (show)
    ============================== */

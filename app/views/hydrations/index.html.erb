@@ -1,5 +1,3 @@
-<%= render "shared/filters", url: child_hydrations_path(current_child) %>
-
 <h1 class="responsive-title"><%= current_child.name %> の水分補給記録一覧</h1>
 
 <%= render partial: "hydrations/index", locals: { hydrations: @hydrations, grouped_hydrations: @grouped_hydrations, hydration_all_dates: @hydration_all_dates, current_child: current_child } %>

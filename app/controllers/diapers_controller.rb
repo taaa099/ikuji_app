@@ -5,16 +5,6 @@ class DiapersController < ApplicationController
   def index
     @diapers = current_child.diapers
 
-    # 並び順
-    @diapers = case params[:sort]
-    when "date_desc"
-      @diapers.order(changed_at: :desc)
-    when "date_asc"
-      @diapers.order(changed_at: :asc)
-    else
-      @diapers.order(changed_at: :desc)
-    end
-
     # ==== 全日程取得 ====
     if @diapers.any?
       diaper_start_date = @diapers.minimum(:changed_at).in_time_zone("Tokyo").to_date

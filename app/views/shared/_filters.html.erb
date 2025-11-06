@@ -1,8 +1,8 @@
 <div class="filter-bar">
   <%= form_with url: (url || root_path), method: :get, local: true do |f| %>
-    <label>並び順:
-      <%= f.select :sort, options_for_select([["新しい順", "date_desc"], ["古い順", "date_asc"]], params[:sort]) %>
+    <label>日付で絞り込み
+      <%= f.date_field :date, value: params[:date] %>
     </label>
-    <%= f.submit "並び替え", class: "nav-btn" %>
+    <%= f.submit "絞り込む", class: "nav-btn" %>
   <% end %>
 </div>

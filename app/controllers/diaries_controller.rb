@@ -2,19 +2,20 @@ class DiariesController < ApplicationController
   # 未ログインユーザーをログイン画面へリダイレクトさせる
   before_action :authenticate_user!
 
-  def index
-    @diaries = current_user.diaries
+def index
+  @diaries = current_user.diaries
 
-    # 並び順
-    @diaries = case params[:sort]
-    when "date_desc"
-      @diaries.order(date: :desc)
-    when "date_asc"
-      @diaries.order(date: :asc)
-    else
-      @diaries.order(date: :desc)
+  # 日付で絞り込み
+  if params[:date].present?
+    date = Date.parse(params[:date]) rescue nil
+    if date
+      @diaries = @diaries.where(date: date.beginning_of_day..date.end_of_day)
     end
   end
+
+  # 新しい順に並べる（必要なら変更可）
+  @diaries = @diaries.order(date: :desc, id: :desc)
+end
 
   def show
     @diary = current_user.diaries.find(params[:id])

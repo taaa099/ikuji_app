@@ -1,5 +1,3 @@
-<%= render "shared/filters", url: child_baby_foods_path(current_child) %>
-
 <h2 class="responsive-title"><%= current_child.name %> の離乳食一覧</h2>
 
 <%= render partial: "baby_foods/index", locals: { baby_foods: @baby_foods, grouped_baby_foods: @grouped_baby_foods, baby_food_all_dates: @baby_food_all_dates, current_child: current_child } %>

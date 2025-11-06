@@ -1,5 +1,3 @@
-<%= render "shared/filters", url: child_vaccinations_path(current_child) %>
-
 <h2 class="responsive-title"><%= current_child.name %> の予防接種一覧</h2>
 
 <%= render partial: "vaccinations/index", locals: { vaccinations: @vaccinations, grouped_vaccinations: @grouped_vaccinations, vaccination_all_dates: @vaccination_all_dates, current_child: current_child } %>

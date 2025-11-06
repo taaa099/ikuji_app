@@ -1,5 +1,3 @@
-<%= render "shared/filters", url: child_temperatures_path(current_child) %>
-
 <h2 class="responsive-title"><%= current_child.name %> の体温記録一覧</h2>
 
 <%= render partial: "temperatures/index", locals: { temperatures: @temperatures, grouped_temperatures: @grouped_temperatures, temperature_all_dates: @temperature_all_dates, current_child: current_child } %>

@@ -5,16 +5,6 @@ class BottlesController < ApplicationController
   def index
     @bottles = current_child.bottles
 
-    # 並び順指定
-    @bottles = case params[:sort]
-    when "date_desc"
-      @bottles.order(given_at: :desc)
-    when "date_asc"
-      @bottles.order(given_at: :asc)
-    else
-      @bottles.order(given_at: :desc)
-    end
-
     # ==== 全日程取得 ====
     if @bottles.any?
       bottle_start_date = @bottles.minimum(:given_at).in_time_zone("Tokyo").to_date

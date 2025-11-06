@@ -5,16 +5,6 @@ class BabyFoodsController < ApplicationController
   def index
     @baby_foods = current_child.baby_foods
 
-    # 並び順指定
-    @baby_foods = case params[:sort]
-    when "date_desc"
-      @baby_foods.order(fed_at: :desc)
-    when "date_asc"
-      @baby_foods.order(fed_at: :asc)
-    else
-      @baby_foods.order(fed_at: :desc)
-    end
-
     # ==== 全日程取得 ====
     if @baby_foods.any?
       baby_food_start_date = @baby_foods.minimum(:fed_at).in_time_zone("Tokyo").to_date

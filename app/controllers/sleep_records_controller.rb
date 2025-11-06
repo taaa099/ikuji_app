@@ -5,16 +5,6 @@ class SleepRecordsController < ApplicationController
   def index
     @sleep_records = current_child.sleep_records
 
-    # 並び順指定
-    @sleep_records = case params[:sort]
-    when "date_desc"
-      @sleep_records.order(start_time: :desc)
-    when "date_asc"
-      @sleep_records.order(start_time: :asc)
-    else
-      @sleep_records.order(start_time: :desc)
-    end
-
     # ==== 全日程取得 ====
     if @sleep_records.any?
       sleep_record_start_date = @sleep_records.minimum(:start_time).in_time_zone("Tokyo").to_date

@@ -96,4 +96,14 @@ document.addEventListener("turbo:load", () => {
       }
     });
   }
+
+  // === 他モーダルを開くときに通知設定モーダルを閉じる ===
+  document.addEventListener("turbo:before-frame-render", () => {
+    const notificationModal = document.getElementById("notification-modal");
+    const contentBlock = document.getElementById("notification-settings-block");
+    if (notificationModal) {
+      notificationModal.classList.add("hidden");
+      if (contentBlock) contentBlock.classList.add("hidden");
+    }
+  });
 });

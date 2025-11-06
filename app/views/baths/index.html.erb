@@ -1,5 +1,3 @@
-<%= render "shared/filters", url: child_baths_path(current_child) %>
-
 <h2 class="responsive-title"><%= current_child.name %> のお風呂記録一覧</h2>
 
 <%= render partial: "baths/index", locals: { baths: @baths, grouped_baths: @grouped_baths, bath_all_dates: @bath_all_dates, current_child: current_child } %>

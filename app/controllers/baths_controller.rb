@@ -5,16 +5,6 @@ class BathsController < ApplicationController
   def index
     @baths = current_child.baths
 
-    # 並び順指定
-    @baths = case params[:sort]
-    when "date_desc"
-      @baths.order(bathed_at: :desc)
-    when "date_asc"
-      @baths.order(bathed_at: :asc)
-    else
-      @baths.order(bathed_at: :desc)
-    end
-
     # ==== 全日程取得 ====
     if @baths.any?
       bath_start_date = @baths.minimum(:bathed_at).in_time_zone("Tokyo").to_date

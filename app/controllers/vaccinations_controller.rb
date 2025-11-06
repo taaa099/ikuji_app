@@ -5,16 +5,6 @@ class VaccinationsController < ApplicationController
   def index
     @vaccinations = current_child.vaccinations
 
-    # 並び順指定
-    @vaccinations = case params[:sort]
-    when "date_desc"
-      @vaccinations.order(vaccinated_at: :desc)
-    when "date_asc"
-      @vaccinations.order(vaccinated_at: :asc)
-    else
-      @vaccinations.order(vaccinated_at: :desc)
-    end
-
     # ==== 全日程取得 ====
     if @vaccinations.any?
       vaccination_start_date = @vaccinations.minimum(:vaccinated_at).in_time_zone("Tokyo").to_date

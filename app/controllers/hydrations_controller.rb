@@ -5,16 +5,6 @@ class HydrationsController < ApplicationController
   def index
     @hydrations = current_child.hydrations
 
-    # 並び順指定
-    @hydrations = case params[:sort]
-    when "date_desc"
-      @hydrations.order(fed_at: :desc)
-    when "date_asc"
-      @hydrations.order(fed_at: :asc)
-    else
-      @hydrations.order(fed_at: :desc)
-    end
-
     # ==== 全日程取得 ====
     if @hydrations.any?
       hydration_start_date = @hydrations.minimum(:fed_at).in_time_zone("Tokyo").to_date

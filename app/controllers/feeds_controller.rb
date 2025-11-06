@@ -5,16 +5,6 @@ class FeedsController < ApplicationController
   def index
     @feeds = current_child.feeds
 
-    # 並び順指定
-    @feeds = case params[:sort]
-    when "date_desc"
-               @feeds.order(fed_at: :desc)
-    when "date_asc"
-               @feeds.order(fed_at: :asc)
-    else
-               @feeds.order(fed_at: :desc)
-    end
-
     # ==== 全日程取得 ====
     if @feeds.any?
       feed_start_date = @feeds.minimum(:fed_at).in_time_zone("Tokyo").to_date

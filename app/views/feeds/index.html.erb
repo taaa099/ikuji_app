@@ -1,5 +1,3 @@
-<%= render "shared/filters", url: child_feeds_path(current_child) %>
-
 <h2 class="responsive-title"><%= current_child.name %> の授乳記録一覧</h2>
 
 <%= render partial: "feeds/index", locals: { feeds: @feeds, grouped_feeds: @grouped_feeds, feed_all_dates: @feed_all_dates, current_child: current_child } %>

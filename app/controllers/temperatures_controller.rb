@@ -5,16 +5,6 @@ class TemperaturesController < ApplicationController
   def index
     @temperatures = current_child.temperatures
 
-    # 並び順指定
-    @temperatures = case params[:sort]
-    when "date_desc"
-      @temperatures.order(measured_at: :desc)
-    when "date_asc"
-      @temperatures.order(measured_at: :asc)
-    else
-      @temperatures.order(measured_at: :desc)
-    end
-
     # ==== 全日程取得 ====
     if @temperatures.any?
       temperature_start_date = @temperatures.minimum(:measured_at).in_time_zone("Tokyo").to_date

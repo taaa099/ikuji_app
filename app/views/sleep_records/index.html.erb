@@ -1,5 +1,3 @@
-<%= render "shared/filters", url: child_sleep_records_path(current_child) %>
-
 <h2 class="responsive-title"><%= current_child.name %> の睡眠記録一覧</h2>
 
 <%= render partial: "sleep_records/index", locals: { sleep_records: @sleep_records, grouped_sleep_records: @grouped_sleep_records, sleep_record_all_dates: @sleep_record_all_dates, current_child: current_child } %>

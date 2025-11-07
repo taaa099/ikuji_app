@@ -78,6 +78,7 @@
               </button>
 
               <!-- ドロップダウン -->
+              <% if current_child.present? %>
              <div id="record-icons" class="absolute right-0 mt-2 hidden bg-white border rounded shadow-md w-48 z-50 flex flex-col gap-2 p-2">
                 <%= link_to new_child_feed_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
                   <i class="fa-solid fa-person-breastfeeding text-gray-600 text-xl"></i> 授乳
@@ -129,6 +130,7 @@
                 <% end %>
               </div>          
             </div>
+            <% end %>
             
             <!-- 通知ベル -->
             <div class="notification">
@@ -209,8 +211,10 @@
     </header>
 
     <!-- サイドバー -->
+    <% if current_child.present? %>
     <div class="sidebar-overlay" id="sidebar-overlay"></div>
     <%= render "layouts/sidebar" %>
+    <% end %>
 
     <!-- モーダル枠 -->
     <turbo-frame id="modal"></turbo-frame>

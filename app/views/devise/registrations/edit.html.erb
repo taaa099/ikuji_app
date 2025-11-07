@@ -3,23 +3,46 @@
 </div>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource), html: { method: :put, class: "profile-form-container" }) do |f| %>
-  <!-- パスワード変更フォーム -->
+  <%= hidden_field_tag :form_type, "password" %>
+
+  <!-- 現在のパスワード -->
   <div class="profile-form-group">
-    <%= f.label :password, "新しいパスワード（変更する場合）", class: "profile-form-label" %>
-    <%= f.password_field :password, autocomplete: "new-password", class: "profile-form-input" %>
+    <%= f.label :current_password, "現在のパスワード", class: "profile-form-label" %>
+    <%= f.password_field :current_password, autocomplete: "current-password", class: "form-input #{'input-error' if resource.errors[:current_password].any?}" %>
+    <% if resource.errors[:current_password].any? %>
+      <div class="error-message">
+        <%= resource.errors.full_messages_for(:current_password).join(", ") %>
+      </div>
+    <% end %>
   </div>
 
+  <!-- 新しいパスワード -->
   <div class="profile-form-group">
-    <%= f.label :password_confirmation, "新しいパスワード確認", class: "profile-form-label" %>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "profile-form-input" %>
+    <%= f.label :password, "新しいパスワード", class: "profile-form-label" %>
+    <%= f.password_field :password, autocomplete: "new-password", class: "form-input #{'input-error' if resource.errors[:password].any?}" %>
+    <% if resource.errors[:password].any? %>
+      <div class="error-message">
+        <%= resource.errors.full_messages_for(:password).join(", ") %>
+      </div>
+    <% end %>
   </div>
 
+  <!-- 確認用パスワード -->
   <div class="profile-form-group">
-    <%= f.label :current_password, "現在のパスワード（必須）", class: "profile-form-label" %>
-    <%= f.password_field :current_password, autocomplete: "current-password", class: "profile-form-input" %>
+    <%= f.label :password_confirmation, "新しいパスワード（確認用）", class: "profile-form-label" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-input #{'input-error' if resource.errors[:password_confirmation].any?}" %>
+    <% if resource.errors[:password_confirmation].any? %>
+      <div class="error-message">
+        <%= resource.errors.full_messages_for(:password_confirmation).join(", ") %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="profile-form-actions">
+    <%= f.submit "パスワードを変更する", class: "profile-form-btn" %>
   </div>
 <% end %>
 
 <div class="profile-form-actions">
-<%= link_to "アカウント設定に戻る", user_account_path, class: "profile-form-btn" %>
+  <%= link_to "アカウント設定に戻る", user_account_path, class: "profile-form-btn" %>
 </div>

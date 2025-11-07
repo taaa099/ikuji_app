@@ -7,6 +7,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
   end
 
+def account
+  # Devise 用のリソースをセット
+  self.resource = current_user
+  # ビューで form_for に resource を渡せば OK
+  # self.resource_name は不要
+end
+
   private
 
   # タブ情報をセット

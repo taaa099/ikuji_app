@@ -1,63 +1,99 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :authenticate_user!
-  before_action :set_current_tab, only: [ :edit, :update ]
 
-  # GET /resource/edit
   def edit
     super
   end
 
-def account
-  # Devise 用のリソースをセット
-  self.resource = current_user
-  # ビューで form_for に resource を渡せば OK
-  # self.resource_name は不要
-end
+  def account
+    self.resource = current_user
+    render "devise/registrations/account"
+  end
+
+  def update
+    self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+
+    case params[:form_type]
+    when "password"
+      # パスワード変更フォーム
+      if update_password(resource, account_update_params)
+        bypass_sign_in resource, scope: resource_name
+        redirect_to edit_user_registration_path, notice: "パスワードを変更しました。"
+      else
+        clean_up_passwords resource
+        set_minimum_password_length
+        render :edit, status: :unprocessable_entity
+      end
+
+    when "profile"
+      # プロフィール更新フォーム
+      if update_profile(resource, profile_update_params)
+        redirect_to user_account_path, notice: "プロフィールを更新しました。"
+      else
+        render :account, status: :unprocessable_entity
+      end
+
+    else
+      redirect_to root_path, alert: "不正なリクエストです。"
+    end
+  end
+
+  protected
+
+  # ===== パスワード更新 =====
+  def update_password(resource, params)
+    has_error = false
+
+    if params[:current_password].blank?
+      resource.errors.add(:current_password, "を入力してください")
+      has_error = true
+    elsif !resource.valid_password?(params[:current_password])
+      resource.errors.add(:current_password, "が正しくありません")
+      has_error = true
+    end
+
+    if params[:password].blank?
+      resource.errors.add(:password, "を入力してください")
+      has_error = true
+    end
+
+    if params[:password_confirmation].blank?
+      resource.errors.add(:password_confirmation, "を入力してください")
+      has_error = true
+    end
+
+    return false if has_error
+    resource.update_with_password(params)
+  end
+
+  # ===== プロフィール更新 =====
+  def update_profile(resource, params)
+    has_error = false
+
+    if params[:name].blank?
+      resource.errors.add(:name, "を入力してください")
+      resource.name = "" # nameだけ空欄に戻す
+      has_error = true
+    end
+
+    if params[:email].blank?
+      resource.errors.add(:email, "を入力してください")
+      resource.email = "" # emailだけ空欄に戻す
+      has_error = true
+    end
+
+    return false if has_error
+
+    resource.update(params)
+  end
 
   private
 
-  # タブ情報をセット
-  def set_current_tab
-    # パラメータがあればそれを優先、なければ既存値かデフォルト profile
-    @current_tab = if params[:tab].present?
-                     params[:tab]
-    elsif defined?(@current_tab)
-                     @current_tab
-    else
-                     "profile"
-    end
-  end
-
-  # プロフィール変更とパスワード変更で挙動を分ける
-  def update_resource(resource, params)
-    tab = params.delete(:tab)
-
-    if tab == "password"
-      # パスワード変更タブ
-      if params[:password].blank? || params[:password_confirmation].blank?
-        resource.errors.add(:password, "を入力してください")
-        return false
-      end
-
-      unless resource.valid_password?(params[:current_password])
-        resource.errors.add(:current_password, "が正しくありません")
-        return false
-      end
-
-      # 正常なら Devise 標準更新
-      super
-    else
-      # プロフィール変更タブは current_password 不要
-      params.delete("current_password")
-      resource.update_without_password(params)
-    end
+  def profile_update_params
+    params.require(:user).permit(:name, :email, :avatar)
   end
 
   def account_update_params
-    params.require(:user).permit(
-      :email, :name, :bio, :avatar,
-      :password, :password_confirmation, :current_password,
-      :tab
-    )
+    params.require(:user).permit(:password, :password_confirmation, :current_password)
   end
 end

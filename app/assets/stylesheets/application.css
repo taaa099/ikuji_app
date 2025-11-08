@@ -112,7 +112,7 @@ select {
   background-color: #fff;
   padding: 10px 20px;
   overflow: visible;
-  z-index: 3;
+  z-index: 15;
   border-bottom: 1px solid #ddd; /* ← 境界線を追加 */
   box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* ← 薄い影で立体感 */
 }

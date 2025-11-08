@@ -15,7 +15,10 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "application", "child", "sidebar", "records", "schedule", "dashboard", "growth", "sleep_analysis", "diary", "user_settings/profile", "user_settings/darkmode", "modals", "notification", "tips", "error", "swich_child_page", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "child", "records", "schedule", "dashboard", "growth", "sleep_analysis", "diary", "user_settings/profile", "user_settings/darkmode", "modals", "notification", "tips", "error", "swich_child_page", "data-turbo-track": "reload" %>
+    <% if user_signed_in? %>
+      <%= stylesheet_link_tag "sidebar", "data-turbo-track": "reload" %>
+    <% end %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <%= javascript_importmap_tags %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
@@ -33,7 +36,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
-              <span class="tooltip-text">メニューを折りたたむ</span>
+              <span class="tooltip-text">メニューを開く/閉じる</span>
             </div>
 
             <!-- 左端ロゴ -->

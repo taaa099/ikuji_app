@@ -108,10 +108,11 @@ select {
   top: 0;
   left: 0;
   width: 100%;
+  height: 69px;
   background-color: #fff;
   padding: 10px 20px;
   overflow: visible;
-  z-index: 1100;
+  z-index: 3;
   border-bottom: 1px solid #ddd; /* ← 境界線を追加 */
   box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* ← 薄い影で立体感 */
 }
@@ -360,6 +361,59 @@ select {
   min-width: 120px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   z-index: 100;
+}
+
+/* ==============================
+   ログイン前デザイン共通
+   ============================== */
+.site-header .btn-guest-action {
+  height: 40px;        /* ログイン/新規登録ボタンの高さ統一 */
+  display: flex;
+  align-items: center; /* ボタン内も縦中央 */
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.btn-guest-action {
+  position: relative;
+  padding: 6px 12px;
+  font-size: 16px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  overflow: hidden; /* ::beforeをボタン内に制限 */
+  text-decoration: none; 
+}
+
+.btn-guest-action::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255,255,255,0); /* 初期は透明 */
+  transition: background-color 0.2s;
+  border-radius: 6px;
+  pointer-events: none; /* ボタン操作を妨げない */
+}
+
+.btn-guest-action:hover::before {
+  background-color: rgba(255,255,255,0.2); /* 薄い白のモヤ */
+}
+
+/* ログイン時 */
+footer.logged-in {
+  width: calc(100% - 240px);
+  margin-left: 240px;
+}
+
+/* ゲスト時 */
+footer.guest {
+  width: 100%;
+  margin-left: 0;
 }
 
 /* ==============================

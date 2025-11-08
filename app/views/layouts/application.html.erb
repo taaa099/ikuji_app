@@ -24,7 +24,6 @@
     <header class="site-header">
       <% if user_signed_in? %>
         <div class="header-container flex justify-between items-center">
-
           <div class="flex items-center gap-4">
 
           <!-- 左端ハンバーガーボタン -->
@@ -69,17 +68,17 @@
           <% end %>
 
           <!-- 右端アクション群 -->
+          <% if @current_child.present? %>
           <div class="header-actions flex items-center gap-4">
             <!-- 作成ボタン -->
             <div class="relative">
-              <button id="new-record-button" class="bg-blue-500 hover:bg-blue-600 text-white rounded-full px-4 py-2 flex items-center gap-2 shadow-md transition duration-200">
+              <button id="new-record-button" class="gap-2">
                 <i class="fa fa-plus"></i>
                 作成
               </button>
 
               <!-- ドロップダウン -->
-              <% if current_child.present? %>
-             <div id="record-icons" class="absolute right-0 mt-2 hidden bg-white border rounded shadow-md w-48 z-50 flex flex-col gap-2 p-2">
+              <div id="record-icons" class="absolute right-0 mt-2 hidden bg-white border rounded shadow-md w-48 z-50 flex flex-col gap-2 p-2">
                 <%= link_to new_child_feed_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
                   <i class="fa-solid fa-person-breastfeeding text-gray-600 text-xl"></i> 授乳
                 <% end %>
@@ -130,27 +129,28 @@
                 <% end %>
               </div>          
             </div>
-            <% end %>
-            
+
             <!-- 通知ベル -->
             <div class="notification">
-              <% if current_child.present? %>
-                <a href="javascript:void(0);" class="notification-link tooltip" id="notification-bell" data-mark-all-as-read-url="<%= mark_all_as_read_notifications_path %>">
-                  <i class="fa fa-bell"></i>
-                  <span class="tooltip-text">通知</span>
+              <a href="javascript:void(0);" class="notification-link tooltip" id="notification-bell" data-mark-all-as-read-url="<%= mark_all_as_read_notifications_path %>">
+                <i class="fa fa-bell"></i>
+                <span class="tooltip-text">通知</span>
+                <% if current_child.present? %>
                   <% unread_count = current_child.notifications.where(read: false).count %>
                   <% if unread_count > 0 %>
                     <span class="notification-count"><%= unread_count %></span>
                   <% end %>
-                </a>
+                <% end %>
+              </a>
 
-                <!-- ドロップダウン用枠 -->
-                <div class="notification-dropdown hidden" id="notification-dropdown">
-                  <div class="notification-dropdown-header">
-                    通知
-                  </div>
-                  <%= render "notifications/index", notifications: current_child.notifications.order(delivered_at: :desc) %>
+              <!-- ドロップダウン用枠 -->
+              <% if current_child.present? %>
+              <div class="notification-dropdown hidden" id="notification-dropdown">
+                <div class="notification-dropdown-header">
+                  通知
                 </div>
+                <%= render "notifications/index", notifications: current_child.notifications.order(delivered_at: :desc) %>
+              </div>
               <% end %>
             </div>
 
@@ -202,18 +202,32 @@
               </div>
             </div>
           </div>
+          <% end %>
+        </div>
+      <% else %>
+        <!-- ログイン前 -->
+        <div class="header-container flex justify-between items-center">
+          <div class="header-logo">
+            <%= link_to "IkujiApp", root_path, class: "logo-text" %>
+          </div>
+          <!-- 右端ログイン・新規登録 -->
+          <div class="header-actions flex items-center gap-4">
+            <%= link_to "ログイン", new_user_session_path, class: "btn-guest-action" %>
+            <%= link_to "新規登録", new_user_registration_path, class: "btn-guest-action" %>
+          </div>
         </div>
       <% end %>
-    <!-- フラッシュ表示用 -->
+
+      <!-- フラッシュ表示用 -->
       <div id="flash-messages">
         <%= render "shared/flash" %>
       </div>
     </header>
 
     <!-- サイドバー -->
-    <% if current_child.present? %>
-    <div class="sidebar-overlay" id="sidebar-overlay"></div>
-    <%= render "layouts/sidebar" %>
+    <% if user_signed_in? %>
+      <div class="sidebar-overlay" id="sidebar-overlay"></div>
+      <%= render "layouts/sidebar" %>
     <% end %>
 
     <!-- モーダル枠 -->
@@ -225,7 +239,7 @@
     </main>
 
     <!-- フッター -->
-    <footer class="site-footer">
+    <footer class="<%= user_signed_in? ? 'logged-in' : 'guest' %> site-footer">
       <div class="footer-inner">
 
         <!-- 上段: 利用規約・プライバシーポリシー -->

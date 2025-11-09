@@ -1,6 +1,7 @@
 class SchedulesController < ApplicationController
   # 未ログインユーザーをログイン画面へリダイレクトさせる
   before_action :authenticate_user!
+  before_action :ensure_child_selected
 
   def index
     @month = params[:start_date] ? Date.parse(params[:start_date]) : Date.current.beginning_of_month

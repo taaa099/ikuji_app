@@ -2,6 +2,7 @@ class NotificationSettingsController < ApplicationController
   # 未ログインユーザーをログイン画面へリダイレクトさせる
   before_action :authenticate_user!
   before_action :set_notification_setting, only: [ :update ]
+  before_action :ensure_child_selected
 
   # PATCH /notification_settings/:id
   def update

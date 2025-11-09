@@ -1,6 +1,7 @@
 class BabyFoodsController < ApplicationController
   # 未ログインユーザーをログイン画面へリダイレクトさせる
   before_action :authenticate_user!
+  before_action :ensure_child_selected
 
   def index
     @baby_foods = current_child.baby_foods

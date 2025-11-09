@@ -16,7 +16,7 @@
 
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "child", "records", "schedule", "dashboard", "growth", "sleep_analysis", "diary", "user_settings/profile", "user_settings/darkmode", "modals", "notification", "tips", "error", "swich_child_page", "data-turbo-track": "reload" %>
-    <% if user_signed_in? %>
+    <% if user_signed_in? && current_child.present? %>
       <%= stylesheet_link_tag "sidebar", "data-turbo-track": "reload" %>
     <% end %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
@@ -28,16 +28,17 @@
       <% if user_signed_in? %>
         <div class="header-container flex justify-between items-center">
           <div class="flex items-center gap-4">
-
-          <!-- 左端ハンバーガーボタン -->
-            <div class="tooltip">
-            <button id="sidebar-toggle" class="p-3 focus:outline-none bg-transparent border-none">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-              <span class="tooltip-text">メニューを開く/閉じる</span>
-            </div>
+            <!-- 左端ハンバーガーボタン -->
+            <% if @current_child.present? %>
+              <div class="tooltip">
+                <button id="sidebar-toggle" class="p-3 focus:outline-none bg-transparent border-none">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                </button>
+                <span class="tooltip-text">メニューを開く/閉じる</span>
+              </div>
+            <% end %>
 
             <!-- 左端ロゴ -->
             <div class="header-logo">
@@ -71,91 +72,90 @@
           <% end %>
 
           <!-- 右端アクション群 -->
-          <% if @current_child.present? %>
           <div class="header-actions flex items-center gap-4">
-            <!-- 作成ボタン -->
-            <div class="relative">
-              <button id="new-record-button" class="gap-2">
-                <i class="fa fa-plus"></i>
-                作成
-              </button>
+            <% if @current_child.present? %>
+              <!-- 作成ボタン -->
+              <div class="relative">
+                <button id="new-record-button" class="gap-2">
+                  <i class="fa fa-plus"></i>
+                  作成
+                </button>
 
-              <!-- ドロップダウン -->
-              <div id="record-icons" class="absolute right-0 mt-2 hidden bg-white border rounded shadow-md w-48 z-50 flex flex-col gap-2 p-2">
-                <%= link_to new_child_feed_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
-                  <i class="fa-solid fa-person-breastfeeding text-gray-600 text-xl"></i> 授乳
-                <% end %>
-                <%= link_to new_child_diaper_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
-                  <i class="fa-solid fa-baby text-gray-600 text-xl"></i> おむつ
-                <% end %>
-                <%= link_to new_child_bottle_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
-                  <i class="fa-solid fa-bottle-droplet text-gray-600 text-xl"></i> ミルク
-                <% end %>
-                <%= link_to new_child_hydration_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
-                  <i class="fa-solid fa-bottle-water text-gray-600 text-xl"></i> 水分補給
-                <% end %>
-                <%= link_to new_child_baby_food_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
-                  <i class="fa-solid fa-utensils text-gray-600 text-xl"></i> 離乳食
-                <% end %>
-                <%= link_to new_child_sleep_record_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
-                  <i class="fa-solid fa-moon text-gray-600 text-xl"></i> 睡眠
-                <% end %>
-                <%= link_to new_child_bath_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
-                  <i class="fa-solid fa-bath text-gray-600 text-xl"></i> お風呂
-                <% end %>
-               <%= link_to new_child_temperature_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
-                  <i class="fa-solid fa-temperature-three-quarters text-gray-600 text-xl"></i> 体温
-                <% end %>
-               <%= link_to new_child_vaccination_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
-                  <i class="fa-solid fa-syringe text-gray-600 text-xl"></i> 予防接種
-                <% end %>
+                <!-- ドロップダウン -->
+                <div id="record-icons" class="absolute right-0 mt-2 hidden bg-white border rounded shadow-md w-48 z-50 flex flex-col gap-2 p-2">
+                  <%= link_to new_child_feed_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
+                    <i class="fa-solid fa-person-breastfeeding text-gray-600 text-xl"></i> 授乳
+                  <% end %>
+                  <%= link_to new_child_diaper_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
+                    <i class="fa-solid fa-baby text-gray-600 text-xl"></i> おむつ
+                  <% end %>
+                  <%= link_to new_child_bottle_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
+                    <i class="fa-solid fa-bottle-droplet text-gray-600 text-xl"></i> ミルク
+                  <% end %>
+                  <%= link_to new_child_hydration_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
+                    <i class="fa-solid fa-bottle-water text-gray-600 text-xl"></i> 水分補給
+                  <% end %>
+                  <%= link_to new_child_baby_food_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
+                    <i class="fa-solid fa-utensils text-gray-600 text-xl"></i> 離乳食
+                  <% end %>
+                  <%= link_to new_child_sleep_record_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
+                    <i class="fa-solid fa-moon text-gray-600 text-xl"></i> 睡眠
+                  <% end %>
+                  <%= link_to new_child_bath_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
+                    <i class="fa-solid fa-bath text-gray-600 text-xl"></i> お風呂
+                  <% end %>
+                  <%= link_to new_child_temperature_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
+                    <i class="fa-solid fa-temperature-three-quarters text-gray-600 text-xl"></i> 体温
+                  <% end %>
+                  <%= link_to new_child_vaccination_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
+                    <i class="fa-solid fa-syringe text-gray-600 text-xl"></i> 予防接種
+                  <% end %>
 
-                <!-- 区切り線 -->
-                <hr class="menu-divider">
+                  <!-- 区切り線 -->
+                  <hr class="menu-divider">
 
-                <%= link_to new_schedule_path, data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
-                  <i class="fa-solid fa-calendar text-gray-600 text-xl"></i> スケジュール  
-                <% end %>
+                  <%= link_to new_schedule_path, data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
+                    <i class="fa-solid fa-calendar text-gray-600 text-xl"></i> スケジュール  
+                  <% end %>
 
-                <!-- 区切り線 -->
-                <hr class="menu-divider">
+                  <!-- 区切り線 -->
+                  <hr class="menu-divider">
 
-                <%= link_to new_child_growth_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
-                  <i class="fa-solid fa-hands-holding-child text-gray-600 text-xl"></i> 成長記録
-                <% end %>
+                  <%= link_to new_child_growth_path(current_child), data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
+                    <i class="fa-solid fa-hands-holding-child text-gray-600 text-xl"></i> 成長記録
+                  <% end %>
 
-                <!-- 区切り線 -->
-                <hr class="menu-divider">
+                  <!-- 区切り線 -->
+                  <hr class="menu-divider">
 
-                <%= link_to new_diary_path, data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
-                  <i class="fa-solid fa-book text-gray-600 text-xl"></i> 日記
-                <% end %>
-              </div>          
-            </div>
+                  <%= link_to new_diary_path, data: { turbo_frame: "modal" }, class: "px-2 py-1 hover:bg-gray-100 rounded" do %>
+                    <i class="fa-solid fa-book text-gray-600 text-xl"></i> 日記
+                  <% end %>
+                </div>          
+              </div>
 
-            <!-- 通知ベル -->
-            <div class="notification">
-              <a href="javascript:void(0);" class="notification-link tooltip" id="notification-bell" data-mark-all-as-read-url="<%= mark_all_as_read_notifications_path %>">
-                <i class="fa fa-bell"></i>
-                <span class="tooltip-text">通知</span>
-                <% if current_child.present? %>
+              <!-- 通知ベル -->
+              <div class="notification">
+                <a href="javascript:void(0);" class="notification-link tooltip" id="notification-bell" data-mark-all-as-read-url="<%= mark_all_as_read_notifications_path %>">
+                  <i class="fa fa-bell"></i>
+                  <span class="tooltip-text">通知</span>
                   <% unread_count = current_child.notifications.where(read: false).count %>
                   <% if unread_count > 0 %>
                     <span class="notification-count"><%= unread_count %></span>
                   <% end %>
-                <% end %>
-              </a>
+                </a>
 
-              <!-- ドロップダウン用枠 -->
-              <% if current_child.present? %>
-              <div class="notification-dropdown hidden" id="notification-dropdown">
-                <div class="notification-dropdown-header">
-                  通知
+                <!-- ドロップダウン用枠 -->
+                <div class="notification-dropdown hidden" id="notification-dropdown">
+                  <div class="notification-dropdown-header">
+                    通知
+                  </div>
+                  <%= render "notifications/index", notifications: current_child.notifications.order(delivered_at: :desc) %>
                 </div>
-                <%= render "notifications/index", notifications: current_child.notifications.order(delivered_at: :desc) %>
               </div>
-              <% end %>
-            </div>
+            <% else %>
+              <!-- 子供未選択時は通知ベルも作成ボタンも表示せずアカウントのみ -->
+            <% end %>
 
             <!-- アカウントアイコン -->
             <div class="account relative tooltip">
@@ -205,7 +205,6 @@
               </div>
             </div>
           </div>
-          <% end %>
         </div>
       <% else %>
         <!-- ログイン前 -->
@@ -228,7 +227,7 @@
     </header>
 
     <!-- サイドバー -->
-    <% if user_signed_in? %>
+    <% if user_signed_in? && current_child.present? %>
       <div class="sidebar-overlay" id="sidebar-overlay"></div>
       <%= render "layouts/sidebar" %>
     <% end %>
@@ -242,7 +241,7 @@
     </main>
 
     <!-- フッター -->
-    <footer class="<%= user_signed_in? ? 'logged-in' : 'guest' %> site-footer">
+   <footer class="<%= (user_signed_in? && current_child.present?) ? 'logged-in' : 'guest' %> site-footer">
       <div class="footer-inner">
 
         <!-- 上段: 利用規約・プライバシーポリシー -->

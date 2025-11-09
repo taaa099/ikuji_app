@@ -2,6 +2,7 @@ class ChildrenController < ApplicationController
   # 未ログインユーザーをログイン画面へリダイレクトさせる
   before_action :authenticate_user!
   before_action :set_child, only: [ :show, :edit, :update, :destroy, :update_daily_goal ]
+  before_action :ensure_child_selected, only: [ :index ]
 
   def index
     if current_user.children.empty?

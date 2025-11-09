@@ -1,6 +1,7 @@
 class SleepRecordsController < ApplicationController
   # 未ログインユーザーをログイン画面へリダイレクトさせる
   before_action :authenticate_user!
+  before_action :ensure_child_selected
 
   def index
     @sleep_records = current_child.sleep_records

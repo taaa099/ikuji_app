@@ -1,6 +1,7 @@
 class GrowthsController < ApplicationController
   # 未ログインユーザーをログイン画面へリダイレクトさせる
   before_action :authenticate_user!
+  before_action :ensure_child_selected
 
   def index
     @growths = current_child.growths.order(:recorded_at)

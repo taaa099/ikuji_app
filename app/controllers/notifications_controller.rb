@@ -1,6 +1,7 @@
 class NotificationsController < ApplicationController
   # 未ログインユーザーをログイン画面へリダイレクトさせる
   before_action :authenticate_user!
+  before_action :ensure_child_selected
 
   # 通知一覧
   def index

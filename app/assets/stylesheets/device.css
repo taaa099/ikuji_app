@@ -73,6 +73,26 @@
   margin-bottom: 1rem;
 }
 
+/* カスタムチェックボックス */
+.device-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+/* チェック時 */
+.device-checkbox:checked {
+  background-color: #4caf50;
+  border-color: #4caf50;
+}
+
+/* フォーカス時 */
+.device-checkbox:focus {
+  box-shadow: 0 0 0 2px #4caf50;
+}
+
 .form-actions {
   text-align: center;
   margin-top: 1.5rem;

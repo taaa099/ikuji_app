@@ -15,7 +15,7 @@
 
       <% if devise_mapping.rememberable? %>
         <div class="checkbox-group">
-          <%= f.check_box :remember_me %>
+          <%= f.check_box :remember_me, class: "device-checkbox" %>
           <%= f.label :remember_me, "ログイン状態を保持する" %>
         </div>
       <% end %>

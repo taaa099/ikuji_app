@@ -27,7 +27,6 @@ class ChildrenController < ApplicationController
       flash[:notice] = "子どもを登録しました"
       redirect_to children_path
     else
-      flash.now[:alert] = "登録に失敗しました"
       render :new
     end
   end
@@ -40,7 +39,6 @@ class ChildrenController < ApplicationController
       flash[:notice] = "子どもの情報を更新しました"
       redirect_to children_path
     else
-      flash.now[:alert] = "更新に失敗しました"
       render :edit
     end
   end
@@ -54,7 +52,8 @@ class ChildrenController < ApplicationController
   # 子供切り替え処理
   def switch
     session[:current_child_id] = params[:id]
-    redirect_to children_path, notice: "子どもを切り替えました"
+    redirect_to children_path
+    flash[:notice] = "子どもを切り替えました"
   end
 
   def switch_page

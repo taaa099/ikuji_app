@@ -7,6 +7,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   attr_accessor :skip_password_validation
+
   validate :password_required_for_password_tab, on: :update
 
   # 中間モデルとの関連

@@ -2,41 +2,53 @@
   <h1 class="child-title">子ども情報の編集</h1>
 </div>
 
-<div class="form-container">
+<div class="child-form-container">
   <%= form_with(model: @child, local: true, data: {turbo: false}, html: { multipart: true }) do |form| %>
-    <% if @child.errors.any? %>
-      <div id="error_explanation">
-        <h2>入力内容に <%= @child.errors.count %> 件のエラーがあります:</h2>
-        <ul>
-          <% @child.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
+    <div class="form-group">
+      <div class="profile-avatar-wrapper">
+        <%= form.file_field :image, id: "child_image_input", class: "profile-avatar-input" %>
+        <label for="child_image_input" class="profile-avatar-label">
+          <% if @child.image.attached? %>
+            <%= image_tag @child.image.variant(resize_to_limit: [120, 120]), class: "profile-avatar-img" %>
+          <% else %>
+            <svg class="bg-gray-200 rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray" width="120" height="120">
+              <circle cx="12" cy="8" r="4"/>
+              <path d="M12 14c-4 0-6 2-6 4v2h12v-2c0-2-2-4-6-4z"/>
+            </svg>
           <% end %>
-        </ul>
+          <i class="fa fa-camera profile-avatar-camera"></i>
+        </label>
       </div>
-    <% end %>
+    </div>
 
     <div class="form-group">
       <%= form.label :name, "名前", class: "form-label" %>
-      <%= form.text_field :name, class: "form-input" %>
+      <%= form.text_field :name, class: "form-input #{'input-error' if @child.errors[:name].any?}" %>
+      <% if @child.errors[:name].any? %>
+        <div class="error-message">
+          <%= @child.errors.full_messages_for(:name).join(", ") %>
+        </div>
+      <% end %>
     </div>
 
     <div class="form-group">
       <%= form.label :birth_date, "誕生日", class: "form-label" %>
-      <%= form.text_field :birth_date, type: :date, class: "form-input" %>
+      <%= form.text_field :birth_date, type: :date, class: "form-input #{'input-error' if @child.errors[:birth_date].any?}" %>
+      <% if @child.errors[:birth_date].any? %>
+        <div class="error-message">
+          <%= @child.errors.full_messages_for(:birth_date).join(", ") %>
+        </div>
+      <% end %>
     </div>
 
     <div class="form-group">
       <%= form.label :gender, "性別", class: "form-label" %>
-      <%= form.select :gender, options_for_select([["男の子", "男"], ["女の子", "女"]], @child.gender), {}, class: "form-input" %>
-    </div>
-
-    <div class="form-group">
-      <%= form.label :image, "写真アップロード", class: "form-label" %>
-      <% if @child.image.attached? %>
-        <p>現在の画像：</p>
-        <%= image_tag @child.image.variant(resize_to_limit: [150, 150]) %>
+      <%= form.select :gender, options_for_select([["男の子", "男"], ["女の子", "女"]], @child.gender), {}, class: "form-input #{'input-error' if @child.errors[:gender].any?}" %>
+      <% if @child.errors[:gender].any? %>
+        <div class="error-message">
+          <%= @child.errors.full_messages_for(:gender).join(", ") %>
+        </div>
       <% end %>
-      <%= form.file_field :image, class: "form-input" %>
     </div>
 
     <div class="form-actions">

@@ -28,6 +28,7 @@ class Child < ApplicationRecord
   # 子どもの名前と誕生日は必須項目(名前は30文字まで)
   validates :name, presence: true, length: { maximum: 30 }
   validates :birth_date, presence: true
+  validates :gender, presence: true
 
   # 指定した日付の全育児記録（授乳・おむつ・睡眠など）をまとめて取得し、日時の降順で返す(ダッシュボードの「home#index」で使用)
   def records_for_date(date)

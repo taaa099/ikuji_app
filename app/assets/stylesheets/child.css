@@ -18,6 +18,15 @@
   padding-bottom: 0.3rem;
 }
 
+.child-form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
 /* 下線アクセント */
 .child-title::after {
   content: "";

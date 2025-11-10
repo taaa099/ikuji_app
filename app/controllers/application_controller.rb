@@ -20,8 +20,8 @@ class ApplicationController < ActionController::Base
     def ensure_child_selected
     # ユーザーがサインインしている & current_child が未選択の場合
     if user_signed_in? && current_child.nil?
-      unless request.path == switch_child_page_path
-        redirect_to switch_child_page_path
+      unless request.path == switch_page_children_path
+        redirect_to switch_page_children_path
       end
     end
   end

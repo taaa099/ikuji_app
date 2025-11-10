@@ -50,9 +50,20 @@
           <% if @current_child.present? %>
             <% name = @current_child.name %>
             <% birth_date = @current_child.birth_date %>
-            <% age_in_days = (Date.today - birth_date).to_i %>
-            <% months = age_in_days / 30 %>
-            <% days = age_in_days % 30 %>
+            <% if birth_date %>
+              <% age_in_days = (Date.today - birth_date).to_i %>
+              <% if age_in_days < 0 %>
+                <% months = 0 %>
+                <% days = 0 %>
+              <% else %>
+                <% months = age_in_days / 30 %>
+                <% days = age_in_days % 30 %>
+              <% end %>
+            <% else %>
+              <% months = 0 %>
+              <% days = 0 %>
+            <% end %>
+
 
             <div class="absolute left-1/2 transform -translate-x-1/2 text-center leading-tight">
               <div class="flex items-center justify-center gap-2 text-sm sm:text-base font-semibold text-gray-700 dark:text-gray-300">
@@ -174,7 +185,7 @@
               <!-- ドロップダウンメニュー -->
               <div id="account-menu" class="absolute right-0 hidden bg-white shadow-md rounded mt-2 w-40 z-50">
                 <%= link_to "アカウント設定", user_account_path, class: "block px-4 py-2 hover:bg-gray-100" %>
-                <%= link_to "子供を切り替える", switch_child_page_path, class: "block px-4 py-2 hover:bg-gray-100" %>
+                <%= link_to "子供を切り替える", switch_page_children_path, class: "block px-4 py-2 hover:bg-gray-100" %>
 
                 <!-- 区切り線 -->
                 <hr class="menu-divider">

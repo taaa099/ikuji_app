@@ -2,7 +2,7 @@
   <h2 class="profile-title">アカウント設定</h2>
 </div>
 
-<%= form_for(current_user, url: registration_path(current_user), html: { method: :put, class: "profile-form-container" }) do |f| %>
+<%= form_for(current_user, url: user_account_path, html: { method: :put, class: "profile-form-container" }) do |f| %>
   <%= hidden_field_tag :form_type, "profile" %>
 
   <!-- アバター -->

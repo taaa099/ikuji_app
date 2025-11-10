@@ -50,20 +50,20 @@
 
 <div class="profile-form-actions profile-form-actions-inline" style="margin-top: 1rem;">
   <%= link_to "パスワード変更", edit_user_registration_path, class: "profile-form-btn" %>
-  <button type="button" class="profile-form-btn profile-form-btn-danger" id="deleteAccountBtn">アカウント削除</button>
+  <button type="button" class="profile-form-btn profile-form-btn-danger" id="deleteAccountBtn">退会のお手続き</button>
 </div>
 
 <!-- 削除警告モーダル -->
 <div id="deleteAccountModal" class="profile-destroy-modal hidden">
   <div class="profile-destroy-inner">
-    <h3 class="profile-destroy-title">退会</h3>
+    <h3 class="profile-destroy-title">退会のお手続き</h3>
     <p class="profile-destroy-text">
       アカウントを削除すると、これまでのデータは全て削除され、復元できなくなります。<br>
       この操作は取り消せません。本当にアカウントを削除してもよろしいですか？
     </p>
     <div class="profile-destroy-actions">
       <%= button_to "アカウント削除", registration_path(resource_name), method: :delete, class: "profile-form-btn profile-form-btn-danger" %>
-      <button type="button" class="profile-form-btn" id="cancelDeleteBtn">キャンセル</button>
+      <button type="button" class="profile-form-btn" id="cancelDeleteBtn">キャンセルする</button>
     </div>
   </div>
 </div>

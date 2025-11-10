@@ -6,6 +6,13 @@
       新しいパスワードを入力してください。
     </p>
 
+    <% if resource.errors[:reset_password_token].any? %>
+      <div class="token-error-message show">
+        パスワードの再設定リンクの有効期限が切れています。<br>
+        もう一度「パスワードを忘れた場合」から再送信してください。
+      </div>
+    <% end %>
+
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
       <%= f.hidden_field :reset_password_token %>
 

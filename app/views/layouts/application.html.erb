@@ -15,7 +15,7 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "application", "child", "records", "schedule", "dashboard", "growth", "sleep_analysis", "diary", "user_settings/profile", "user_settings/darkmode", "modals", "notification", "tips", "error", "swich_child_page", "device", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "child", "records", "schedule", "dashboard", "growth", "sleep_analysis", "diary", "user_settings/profile", "user_settings/darkmode", "modals", "notification", "tips", "swich_child_page", "device", "error", "data-turbo-track": "reload" %>
     <% if user_signed_in? && current_child.present? %>
       <%= stylesheet_link_tag "sidebar", "data-turbo-track": "reload" %>
     <% end %>

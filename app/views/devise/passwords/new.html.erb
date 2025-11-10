@@ -7,11 +7,14 @@
     </p>
 
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
-
       <div class="form-group">
         <%= f.label :email, "メールアドレス" %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-input" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-input #{'input-error' if resource.errors[:email].any?}" %>
+        <% if resource.errors[:email].any? %>
+          <div class="error-message">
+            <%= resource.errors.full_messages_for(:email).join(", ") %>
+          </div>
+        <% end %>
       </div>
 
       <div class="form-actions">

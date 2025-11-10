@@ -1,26 +1,41 @@
 <h1 class="dashboard-title">ダッシュボード</h1>
 
 <%# ----- 成長記録(ステータス) ----- %>
-<% if @latest_height && @latest_weight %>
-  <div class="stats-grid">
-    <div class="stat-card">
-      <h3>最新身長</h3>
+<div class="stats-grid">
+
+  <%# 最新身長カード %>
+  <div class="stat-card">
+    <h3>最新身長</h3>
+    <% if @latest_height %>
       <p class="stat-value"><%= @latest_height %> cm</p>
-      <span class="stat-diff <%= @height_diff >= 0 ? 'up' : 'down' %>">
-        <%= @height_diff >= 0 ? "+" : "" %><%= @height_diff %> cm
-      </span>
-    </div>
+      <div class="stat-diff-container">
+        <span class="stat-diff <%= @height_diff >= 0 ? 'up' : 'down' %>">
+          <%= @height_diff >= 0 ? "+" : "" %><%= @height_diff %> cm
+        </span>
+      </div>
+    <% else %>
+      <p class="stat-value">なし</p>
+    <% end %>
+  </div>
 
-    <div class="stat-card">
-      <h3>最新体重</h3>
+  <%# 最新体重カード %>
+  <div class="stat-card">
+    <h3>最新体重</h3>
+    <% if @latest_weight %>
       <p class="stat-value"><%= @latest_weight %> kg</p>
-      <span class="stat-diff <%= @weight_diff >= 0 ? 'up' : 'down' %>">
+      <div class="stat-diff-container">
+        <span class="stat-diff <%= @weight_diff >= 0 ? 'up' : 'down' %>">
         <%= @weight_diff >= 0 ? "+" : "" %><%= sprintf("%.1f", @weight_diff) %> kg
+      </div>
       </span>
-    </div>
+    <% else %>
+      <p class="stat-value">なし</p>
+    <% end %>
+  </div>
 
-    <div class="stat-card sleep-card">
-      <h3>平均睡眠時間</h3>
+  <%# 平均睡眠時間カード %>
+  <div class="stat-card">
+    <h3>平均睡眠時間</h3>
       <% avg_day = @average_daytime_sleep.to_i %>
       <% avg_day_hours = avg_day / 60 %>
       <% avg_day_minutes = avg_day % 60 %>
@@ -43,18 +58,17 @@
         </div>
         <span class="stat-diff-label">（先週比）</span>
       </div>
-    </div>
-
-    <div class="stat-card weekly-records-card">
-      <h3>今週の記録数</h3>
-        <p class="stat-value">
-          <%= @weekly_records_count %> 件
-        </p>
-    </div>
   </div>
-<% else %>
-  <p class="no-data-message">成長記録はまだ登録されていません。</p>
-<% end %>
+
+  <%# 今週の記録数カード（0でも表示） %>
+  <div class="stat-card">
+    <h3>今週の記録数</h3>
+    <p class="stat-value">
+      <%= @weekly_records_count || 0 %> 件
+    </p>
+  </div>
+
+</div>
 
 <%# スケジュール一覧部分を置き換え %>
 <%= render partial: "home/schedules_table_or_empty", locals: { latest_schedules: @latest_schedules } %>

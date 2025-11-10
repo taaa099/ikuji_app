@@ -4,6 +4,11 @@ module ApplicationHelper
     now = Time.zone.today
     age = now.year - birth_date.year
     age -= 1 if birth_date.to_date.change(year: now.year) > now
-    age
+
+    if age < 0
+      "まだ誕生していません"
+    else
+      "#{age}歳"
+    end
   end
 end

@@ -12,28 +12,29 @@ resources :users, only: [ :show ]
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  get "switch_child_page", to: "children#switch_page", as: :switch_child_page
-  post "switch_child", to: "children#switch", as: :switch_child
-
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   resources :children do
-   patch :update_daily_goal, on: :member
-   resources :feeds
-   resources :diapers
-   resources :bottles
-   resources :hydrations
-   resources :baby_foods
-   resources :sleep_records do
-     collection do
+    collection do
+      get :switch_page
+      post :switch
+    end
+    patch :update_daily_goal, on: :member
+    resources :feeds
+    resources :diapers
+    resources :bottles
+    resources :hydrations
+    resources :baby_foods
+    resources :sleep_records do
+      collection do
         get :analysis
       end
     end
-   resources :temperatures
-   resources :baths
-   resources :vaccinations
-   resources :growths
+    resources :temperatures
+    resources :baths
+    resources :vaccinations
+    resources :growths
   end
 
   resources :notification_settings, only: [ :update ]

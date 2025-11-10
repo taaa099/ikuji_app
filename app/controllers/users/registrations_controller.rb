@@ -10,12 +10,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
     render "devise/registrations/account"
   end
 
+  # 既存のupdateはそのまま
   def update
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
 
     case params[:form_type]
     when "password"
-      # パスワード変更フォーム
       if update_password(resource, account_update_params)
         bypass_sign_in resource, scope: resource_name
         redirect_to edit_user_registration_path, notice: "パスワードを変更しました。"
@@ -26,7 +26,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
       end
 
     when "profile"
-      # プロフィール更新フォーム
       if update_profile(resource, profile_update_params)
         redirect_to user_account_path, notice: "プロフィールを更新しました。"
       else
@@ -35,6 +34,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     else
       redirect_to root_path, alert: "不正なリクエストです。"
+    end
+  end
+
+  # 追加: /account 専用の更新処理
+  def update_account
+    self.resource = current_user
+    if update_profile(resource, profile_update_params)
+      redirect_to user_account_path, notice: "プロフィールを更新しました。"
+    else
+      render :account, status: :unprocessable_entity
     end
   end
 
@@ -72,13 +81,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     if params[:name].blank?
       resource.errors.add(:name, "を入力してください")
-      resource.name = "" # nameだけ空欄に戻す
+      resource.name = ""
       has_error = true
     end
 
     if params[:email].blank?
       resource.errors.add(:email, "を入力してください")
-      resource.email = "" # emailだけ空欄に戻す
+      resource.email = ""
       has_error = true
     end
 

@@ -4,6 +4,7 @@ devise_for :users, controllers: { sessions: "users/sessions" }
 
 devise_scope :user do
   get "account", to: "users/registrations#account", as: :user_account
+  put "account", to: "users/registrations#update_account"
 end
 
 resources :users, only: [ :show ]

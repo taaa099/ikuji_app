@@ -7,7 +7,6 @@
     </p>
 
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
       <%= f.hidden_field :reset_password_token %>
 
       <div class="form-group">
@@ -15,12 +14,22 @@
         <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %>文字以上)</em>
         <% end %>
-        <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "form-input" %>
+        <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "form-input #{'input-error' if resource.errors[:password].any?}"  %>
+        <% if resource.errors[:password].any? %>
+          <div class="error-message">
+            <%= resource.errors.full_messages_for(:password).join(", ") %>
+          </div>
+        <% end %>
       </div>
 
       <div class="form-group">
         <%= f.label :password_confirmation, "新しいパスワード（確認）" %>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-input" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-input #{'input-error' if resource.errors[:password_confirmation].any?}" %>
+        <% if resource.errors[:password_confirmation].any? %>
+          <div class="error-message">
+            <%= resource.errors.full_messages_for(:password_confirmation).join(", ") %>
+          </div>
+        <% end %>
       </div>
 
       <div class="form-actions">

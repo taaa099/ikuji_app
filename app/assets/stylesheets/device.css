@@ -13,6 +13,7 @@
 
 .auth-card {
   background-color: #fff;
+  border: 1px solid #ddd;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   padding: 2rem;
@@ -54,16 +55,9 @@
 .form-group input[type="password"] {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 14px;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.form-group input:focus {
-  border-color: #6fcf97;
-  box-shadow: 0 0 0 2px rgba(111, 207, 151, 0.3);
-  outline: none;
 }
 
 .checkbox-group {
@@ -225,30 +219,11 @@
   margin-bottom: 1rem;
 }
 
-.password-reset-container .form-group {
-  margin-bottom: 1rem;
-}
-
 .password-reset-container .form-label {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: bold;
   font-size: 14px;
-}
-
-.password-reset-container .form-input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.password-reset-container .form-input:focus {
-  outline: none;
-  border-color: #6fcf97;
-  box-shadow: 0 0 0 2px rgba(111,207,151,0.3);
 }
 
 .password-reset-container .form-actions {

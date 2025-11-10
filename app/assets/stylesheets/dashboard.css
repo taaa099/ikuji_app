@@ -183,14 +183,6 @@
   color: #777;
 }
 
-/* 今週の記録数カードだけ縦中央揃え */
-.weekly-records-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* 縦中央揃え */
-  min-height: 120px;
-}
-
 /* ==============================
    ダッシュボード：空データ用カード
    ============================== */

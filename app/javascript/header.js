@@ -57,7 +57,7 @@ document.addEventListener("turbo:load", () => {
 
   // 画面クリックでドロップダウン閉じる
   document.addEventListener("click", (e) => {
-    if (!recordIcons.contains(e.target) && e.target !== newRecordButton) {
+    if (!recordIcons.contains(e.target) && !newRecordButton.contains(e.target)) {
       recordIcons.classList.add("hidden");
     }
   });

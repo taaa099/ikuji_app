@@ -102,7 +102,7 @@ class HydrationNotificationService
       target: latest_hydration,
       notification_kind: :alert,
       title: "💧 水分補給",
-      message: "今日の水分摂取量が不足しています（現在 #{today_total}ml / #{today_count}回 / 目標 #{daily_goal}ml）",
+      message: "今日の水分摂取量が不足しています\n現在 #{today_total}ml / #{today_count}回 / 目標 #{daily_goal}ml",
       delivered_at: Time.current
     )
     Rails.logger.info("Created alert notification for child_id=#{child.id}, user_id=#{user.id}, latest_hydration_id=#{latest_hydration.id}")

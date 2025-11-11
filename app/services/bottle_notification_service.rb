@@ -98,7 +98,7 @@ class BottleNotificationService
       target: latest_bottle,
       notification_kind: :alert,
       title: "🍼 ミルク",
-      message: "今日のミルク摂取量が不足しています（現在 #{today_total}ml / #{today_count}回 / 目標 #{daily_goal}ml）",
+      message: "今日のミルク摂取量が不足しています\n現在 #{today_total}ml / #{today_count}回 / 目標 #{daily_goal}ml",
       delivered_at: Time.current
     )
     Rails.logger.info("Created alert notification for child_id=#{child.id}, user_id=#{user.id}, latest_bottle_id=#{latest_bottle.id}")

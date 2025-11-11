@@ -276,7 +276,7 @@
                   <%= number_field_tag "daily_bottle_goal_#{current_child.id}",
                                        current_child.daily_bottle_goal,
                                        min: 0,
-                                       step: 1,
+                                       step: 10,
                                        data: { child_id: current_child.id, field: "daily_bottle_goal" },
                                        class: "child-goal" %>
                   <span class="label-text">（ml）</span>
@@ -287,21 +287,21 @@
                   <%= number_field_tag "daily_hydration_goal_#{current_child.id}",
                                        current_child.daily_hydration_goal,
                                        min: 0,
-                                       step: 1,
+                                       step: 10,
                                        data: { child_id: current_child.id, field: "daily_hydration_goal" },
                                        class: "child-goal" %>
                   <span class="label-text">（ml）</span>
                 </label>
               <% when "baby_food" %>
                 <label class="notification-option">
-                  <span class="label-text">1日の離乳食目標量</span>
+                  <span class="label-text">1日の離乳食目標回数</span>
                   <%= number_field_tag "daily_baby_food_goal_#{current_child.id}",
                                        current_child.daily_baby_food_goal,
                                        min: 0,
                                        step: 1,
                                        data: { child_id: current_child.id, field: "daily_baby_food_goal" },
                                        class: "child-goal" %>
-                  <span class="label-text">（g）</span>
+                  <span class="label-text">回</span>
                 </label>
               <% end %>
             <% end %>

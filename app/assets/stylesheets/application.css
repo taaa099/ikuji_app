@@ -9,29 +9,11 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
-.notice {
-  background-color: #fff3cd; /* やさしい黄色 */
-  color: #856404;            /* 濃いめの文字色（ブラウン系） */
-  padding: 10px;
-  border: 1px solid #ffeeba;
-  border-radius: 4px;
-  margin: 10px 0;
-}
-
-.alert {
-  background-color: #f8d7da; /* ピンク系（エラー） */
-  color: #721c24;
-  padding: 10px;
-  border: 1px solid #f5c6cb;
-  border-radius: 4px;
-  margin: 10px 0;
-}
-
 .flash {
   position: relative; /* fixed はやめる */
   display: flex;
   justify-content: center;
-  margin: 20px auto 10px auto; /* 上下余白 */
+  margin: 10px auto 10px auto; /* 上下余白 */
   pointer-events: auto;
 }
 
@@ -40,6 +22,7 @@
   color: #856404;
   border: 1px solid #ffeeba;
   border-radius: 4px;
+  margin-top: 11px;
   padding: 10px 20px;
 }
 
@@ -48,6 +31,7 @@
   color: #721c24;
   border: 1px solid #f5c6cb;
   border-radius: 4px;
+  margin-top: 14px;
   padding: 10px 20px;
 }
 

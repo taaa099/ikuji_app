@@ -67,7 +67,7 @@ class BabyFoodNotificationService
           target: latest_food,
           notification_kind: :alert,
           title: "👶 離乳食",
-          message: "本日の離乳食回数が未達成です（現在 #{today_count}回 / 目標 #{daily_goal}回）",
+          message: "本日の離乳食回数が未達成です\n現在 #{today_count}回 / 目標 #{daily_goal}回",
           delivered_at: Time.current
         )
         Rails.logger.info("Created alert notification for child_id=#{child.id}, user_id=#{user.id}")

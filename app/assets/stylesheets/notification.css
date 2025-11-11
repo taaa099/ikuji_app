@@ -109,8 +109,10 @@
   position: absolute;
   top: 100%; /* ベルアイコンの真下に表示 */
   right: 0;
-  width: 300px; /* 好きな幅に調整 */
-  max-height: 400px; /* 高さ制限、スクロール可能 */
+  max-width: 420px;
+  min-width: 420px;
+  max-height: 560px;
+  min-height: 560px;
   overflow-y: auto;
   background-color: #fff;
   border: 1px solid #ccc;
@@ -118,6 +120,10 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1000; /* 他要素より前面に表示 */
   margin-top: 10px;
+}
+
+.notification-dropdown-header {
+  font-size: 18px;
 }
 
 .notification-dropdown.hidden {
@@ -152,13 +158,13 @@
 }
 
 .notification-title {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   color: #222;
 }
 
 .notification-kind.reminder {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
   color: #666;
   background-color: #ccffcc;
@@ -167,7 +173,7 @@
 }
 
 .notification-kind.alert {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
   color: #666;
   background-color: #ffcccc;
@@ -176,14 +182,15 @@
 }
 
 .notification-message {
-  font-size: 13px;
+  font-size: 15px;
   color: #444;
   margin: 4px 0;
   line-height: 1.4;
+  white-space: pre-line;
 }
 
 .notification-time {
-  font-size: 11px;
+  font-size: 13px;
   color: #999;
 }
 
@@ -194,4 +201,10 @@
 /* ドロップダウン開いているときはベルのホバー色を無効化 */
 .notification.dropdown-open:hover i.fa-bell {
   color: #333; /* 通常色に戻す */
+}
+
+.no-notifications {
+  font-size: 18px;
+  text-align: center;
+  padding-top: 200px;
 }

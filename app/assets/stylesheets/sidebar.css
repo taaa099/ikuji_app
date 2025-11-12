@@ -309,6 +309,10 @@
 /* ==============================
    トグルスイッチスタイル
    ============================== */
+#sidebar-toggle {
+  margin-top: 6px;
+}
+
 /* 入力自体を非表示 */
 .notification-switch {
   position: absolute;

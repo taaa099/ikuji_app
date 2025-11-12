@@ -122,6 +122,22 @@
   text-decoration: underline;
 }
 
+.header-container--guest {
+  display: flex;
+  justify-content: right;
+}
+
+.header-logo--guest {
+  position: fixed;
+  top: 6px;
+  left: 12px;
+  z-index: 16;
+}
+
+.header-logo--guest .logo-image {
+  height: 60px;
+}
+
 /* モバイル調整 */
 @media screen and (max-width: 767px) {
   .auth-card {

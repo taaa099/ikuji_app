@@ -107,11 +107,20 @@ select {
   align-items: center;
 }
 
-.header-logo .logo-text {
-  font-size: 20px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #333;
+.header-logo {
+  position: fixed;
+  top: 10px;
+  left: 60px;
+  z-index: 16;
+}
+
+.header-logo .logo-image {
+  height: 50px;
+}
+
+/* 子供切り替えビューのデザイン */
+.switch-logo-image {
+  height: 70px;
 }
 
 .header-actions {

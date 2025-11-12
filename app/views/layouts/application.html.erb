@@ -218,7 +218,7 @@
         </div>
       <% else %>
         <!-- ログイン前 -->
-        <div class="header-container flex justify-between items-center">
+        <div class="header-container--guest flex justify-between items-center">
           <div class="header-logo">
             <%= link_to "IkujiApp", root_path, class: "logo-text" %>
           </div>
@@ -235,6 +235,21 @@
         <%= render "shared/flash" %>
       </div>
     </header>
+
+    <!-- 左端ロゴ -->
+    <% if user_signed_in? && current_child.present? %>
+      <div class="header-logo">
+        <%= link_to root_path do %>
+          <%= image_tag "myapp_logo1.jpg", alt: "IkujiApp Logo", class: "logo-image" %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="header-logo--guest">
+        <%= link_to root_path do %>
+          <%= image_tag "myapp_logo1.jpg", alt: "IkujiApp Logo", class: "logo-image" %>
+        <% end %>
+      </div>
+    <% end %>
 
     <!-- サイドバー -->
     <% if user_signed_in? && current_child.present? %>

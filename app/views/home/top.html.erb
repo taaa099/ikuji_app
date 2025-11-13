@@ -1,0 +1,63 @@
+<div class="home-main">
+  <!-- ファーストビュー -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>育児の記録を、もっと簡単に。</h1>
+      <p>日々の成長を、手間なく残せる育児アプリ</p>
+      <%= link_to "無料で始める", new_user_registration_path, class: "btn-primary" %>
+    </div>
+    <div class="hero-image">
+      <%= image_tag "myapp_logo.jpg", alt: "アプリ画面", class: "mockup" %>
+    </div>
+  </section>
+
+  <!-- 特徴 -->
+  <section id="features" class="features">
+    <h2>IkujiAppの特徴</h2>
+    <div class="feature-cards">
+      <div class="top-card">
+        <div class="top-icon">📘</div>
+        <p>成長記録をシンプルに入力</p>
+      </div>
+      <div class="top-card">
+        <div class="top-icon">📅</div>
+        <p>日ごとの記録を自動整理</p>
+      </div>
+      <div class="top-card">
+        <div class="top-icon">📊</div>
+        <p>グラフで成長を見える化</p>
+      </div>
+      <div class="top-card">
+        <div class="top-icon">🔒</div>
+        <p>データは安全に保存</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 画面イメージ -->
+  <section id="how-to" class="top-screens">
+    <h2>こんなふうに使えます</h2>
+    <div class="top-screens-inner">
+      <%= image_tag "myapp_logo.jpg", alt: "記録画面", class: "top-screen-img" %>
+      <%= image_tag "myapp_logo.jpg", alt: "カレンダー画面", class: "top-screen-img" %>
+      <%= image_tag "myapp_logo.jpg", alt: "グラフ画面", class: "top-screen-img" %>
+    </div>
+  </section>
+
+  <!-- 利用シーン -->
+  <section class="use-cases">
+    <h2>こんな方におすすめ</h2>
+    <ul>
+      <li>👩 初めての育児で記録をまとめたい方</li>
+      <li>👨 夫婦で情報共有したい方</li>
+      <li>👶 成長の記録を残しておきたい方</li>
+    </ul>
+  </section>
+
+  <!-- 登録誘導 -->
+  <section id="pricing" class="cta">
+    <h2>今すぐ使ってみましょう</h2>
+    <p>基本機能はすべて無料・登録は1分で完了</p>
+    <%= link_to "無料で始める", new_user_registration_path, class: "btn-primary" %>
+  </section>
+</div>

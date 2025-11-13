@@ -10,6 +10,15 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_child
 
+  protected
+
+  # authenticate_user! のリダイレクト先を/topにオーバーライド
+  def authenticate_user!(opts = {})
+    unless user_signed_in?
+      redirect_to top_path
+    end
+  end
+
   private
 
   # 全ビューで @current_child を使えるようにセットする
@@ -17,7 +26,7 @@ class ApplicationController < ActionController::Base
     @current_child = current_child
   end
 
-    def ensure_child_selected
+  def ensure_child_selected
     # ユーザーがサインインしている & current_child が未選択の場合
     if user_signed_in? && current_child.nil?
       unless request.path == switch_page_children_path

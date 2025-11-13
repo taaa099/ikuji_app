@@ -52,8 +52,8 @@ class ChildrenController < ApplicationController
   # 子供切り替え処理
   def switch
     session[:current_child_id] = params[:id]
-    redirect_to children_path
     flash[:notice] = "子どもを切り替えました"
+    redirect_to root_path
   end
 
   def switch_page

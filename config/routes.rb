@@ -61,4 +61,6 @@ resources :users, only: [ :show ]
 
   # Defines the root path route ("/")
   root "home#index"
+
+  get "/top", to: "home#top"
 end

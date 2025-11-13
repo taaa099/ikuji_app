@@ -1,7 +1,11 @@
 class HomeController < ApplicationController
   # 未ログインユーザーをログイン画面へリダイレクトさせる
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [ :index ]
   before_action :ensure_child_selected
+
+  def top
+    redirect_to root_path if user_signed_in?
+  end
 
   def index
     records = []
@@ -149,12 +153,6 @@ class HomeController < ApplicationController
       @nighttime_record_days = sleep_stats[:nighttime_record_days]
       @daytime_change = sleep_stats[:daytime_change]
       @nighttime_change = sleep_stats[:nighttime_change]
-    end
-
-    # Turbo Stream リクエストに対応
-    respond_to do |format|
-      format.html
-      format.turbo_stream
     end
   end
 end

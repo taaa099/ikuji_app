@@ -1,0 +1,138 @@
+/* =============================
+   ファーストビュー
+============================= */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 0 20px;
+  gap: 40px;
+}
+
+.hero-content h1 {
+  font-size: 32px;
+  color: #1D3557;
+}
+
+.hero-content p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.btn-primary {
+  background: #457B9D;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.btn-primary:hover {
+  background: #1D3557;
+}
+
+.mockup {
+  max-width: 400px;
+  width: 100%;
+}
+
+/* =============================
+   特徴セクション
+============================= */
+.features {
+  background: #F9FAFB;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.features h2 {
+  font-size: 26px;
+  margin-bottom: 40px;
+}
+
+.feature-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.top-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  width: 200px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.top-card:hover {
+  transform: translateY(-4px);
+}
+
+.top-icon {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+/* =============================
+   画面紹介
+============================= */
+.top-screens {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.top-screens-inner {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.top-screen-img {
+  width: 300px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* =============================
+   利用シーン
+============================= */
+.use-cases {
+  background: #F1FAEE;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.use-cases ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 18px;
+  line-height: 2;
+}
+
+/* =============================
+   CTA
+============================= */
+.cta {
+  text-align: center;
+  padding: 80px 20px;
+  background: #A8DADC;
+  color: #003049;
+}
+
+.cta h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.cta p {
+  margin-bottom: 20px;
+  font-size: 18px;
+}

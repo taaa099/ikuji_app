@@ -130,4 +130,9 @@
 
 <%# ----- 成長記録(グラフ) ----- %>
 <h2 class="dashboard-title">成長グラフ(身長・体重統合)</h2>
-<canvas id="dashboardChart" data-growths='<%= raw @growths_for_chart.to_json %>'></canvas>
+
+<% if @growths_for_chart.present? && @growths_for_chart.any? %>
+  <canvas id="dashboardChart" data-growths='<%= raw @growths_for_chart.to_json %>'></canvas>
+<% else %>
+  <p class="no-record-card">グラフはまだありません</p>
+<% end %>

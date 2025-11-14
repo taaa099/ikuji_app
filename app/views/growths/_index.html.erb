@@ -6,6 +6,7 @@
     <% end %>
   <% else %>
     <div class="text-center py-12">
+      <%= image_tag "animal/seityou.jpg", alt: "犬とボール遊びをする男性のイラスト", class: "animal-image" %>
       <p class="text-gray-500 mb-4 text-lg">成長記録を入れてみましょう！</p>
       <%= link_to "新規追加", new_child_growth_path(current_child), data: { turbo_frame: "modal" }, class: "growth-create-btn" %>
     </div>

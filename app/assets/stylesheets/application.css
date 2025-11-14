@@ -118,6 +118,11 @@ select {
   height: 50px;
 }
 
+.animal-image {
+  height: 300px;
+
+}
+
 /* 子供切り替えビューのデザイン */
 .switch-logo-image {
   height: 70px;

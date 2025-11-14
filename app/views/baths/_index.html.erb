@@ -6,6 +6,7 @@
     <% end %>
   <% else %>
     <div class="text-center py-12">
+      <%= image_tag "animal/inu.jpg", alt: "犬のイラスト", class: "animal-image" %>
       <p class="text-gray-500 mb-4 text-lg">お風呂に入った時間を記録してみましょう！」</p>
       <%= link_to "新規作成", new_child_bath_path(current_child), data: { turbo_frame: "modal" }, class: "record-create-btn" %>
     </div>

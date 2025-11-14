@@ -6,6 +6,7 @@
     <% end %>
   <% else %>
     <div class="text-center py-12">
+      <%= image_tag "animal/kuma.jpg", alt: "熊のイラスト", class: "animal-image" %>
       <p class="text-gray-500 mb-4 text-lg">ミルクをあげた時間を記録してみましょう！</p>
       <%= link_to "新規作成", new_child_bottle_path(current_child), data: { turbo_frame: "modal" }, class: "record-create-btn" %>
     </div>

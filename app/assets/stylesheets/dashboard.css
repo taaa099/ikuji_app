@@ -1,7 +1,6 @@
 /* ==============================
    ダッシュボード共通スタイル
    ============================== */
-
 /* ボックスサイズを全要素で border-box に */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -15,7 +14,7 @@
   font-weight: 700;
   font-size: 24px;
   color: #1f2937;
-  margin-bottom: 1.5rem;
+  margin-bottom: 50px;
   position: relative;
   display: inline-block;
   padding-bottom: 0.3rem;
@@ -43,9 +42,10 @@
 .dashboard-table td {
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
-  padding: 8px;
+  padding: 10px;
   text-align: left;
   word-break: break-word;
+  font-size: 15px;
 }
 
 .dashboard-table th {
@@ -108,15 +108,6 @@
 .dashboard-schedule-col-date { width: 25%; }
 .dashboard-schedule-col-title { width: 35%; }
 .dashboard-schedule-col-detail { width: 40%; }
-
-/* PC: 1025px以上 */
-@media screen and (min-width: 1025px) {
-  .dashboard-schedule-table th,
-  .dashboard-schedule-table td {
-    font-size: 14px;
-    padding: 8px 10px;
-  }
-}
 
 /* ==============================
    ダッシュボード：成長記録ステータス専用
@@ -183,6 +174,12 @@
   color: #777;
 }
 
+#dashboardChart {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
 /* ==============================
    ダッシュボード：空データ用カード
    ============================== */
@@ -203,103 +200,4 @@
 .no-record-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-/* ==============================
-   PC: 1025px以上
-   ============================== */
-@media screen and (min-width: 1025px) {
-  .dashboard-title { font-size: 24px; }
-
-  .dashboard-table th,
-  .dashboard-table td {
-    font-size: 15px;
-    padding: 10px;
-  }
-
-  /* スケジュール部分 */
-  .dashboard-schedule-table th,
-  .dashboard-schedule-table td {
-    font-size: 14px;
-    padding: 8px 10px;
-  }
-}
-
-/* ==============================
-   タブレット: 768px〜1024px
-   ============================== */
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-  .dashboard-title { font-size: 20px; }
-
-  .dashboard-table th,
-  .dashboard-table td {
-    font-size: 13px;
-    padding: 6px;
-  }
-  /* スケジュール部分 */
-  .dashboard-schedule-table th,
-  .dashboard-schedule-table td {
-    font-size: 13px;
-    padding: 6px 8px;
-  }
-}
-
-/* ==============================
-   スマホ: 767px以下
-   ============================== */
-@media screen and (max-width: 767px) {
-  .dashboard-title { font-size: 18px; }
-
-  .dashboard-table thead {
-    display: none; /* ヘッダー非表示でカード風表示 */
-  }
-
-  .dashboard-table tr {
-    display: block;
-    margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    padding: 8px;
-  }
-
-  .dashboard-table td {
-    display: block;
-    border: none;
-    padding: 4px 0;
-    font-size: 14px;
-  }
-
-  /* スケジュール部分 */
-  .dashboard-schedule-table thead {
-    display: none; /* ヘッダー非表示 */
-  }
-
-  .dashboard-schedule-table tr {
-    display: block;
-    margin-bottom: 0.8rem;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    padding: 8px;
-    background-color: #fafafa;
-  }
-
-  .dashboard-schedule-table td {
-    display: flex;
-    justify-content: space-between;
-    padding: 4px 0;
-    font-size: 14px;
-  }
-
-  .dashboard-schedule-col-date::before {
-    content: "日時";
-    font-weight: bold;
-  }
-  .dashboard-schedule-col-title::before {
-    content: "タイトル";
-    font-weight: bold;
-  }
-  .dashboard-schedule-col-detail::before {
-    content: "詳細";
-    font-weight: bold;
-  }
 }

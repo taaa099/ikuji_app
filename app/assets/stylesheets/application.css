@@ -428,6 +428,7 @@ footer.guest {
   margin-top: 50px;
   margin-left: 240px;
   box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.05);
+  transition: margin-left 0.3s;
 }
 
 .footer-inner {
@@ -556,50 +557,4 @@ footer.guest {
 .static_pages-container a {
   color: #4a90e2;
   text-decoration: underline;
-}
-
-/* ==============================
-   PC: 1025px以上
-   ============================== */
-@media screen and (min-width: 1025px) {
-  .header-nav {
-    flex-direction: row;
-  }
-
-  .nav-btn {
-    width: auto;
-    font-size: 14px;
-    padding: 6px 12px;
-  }
-}
-
-/* ==============================
-   タブレット: 768px〜1024px
-   ============================== */
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-  .header-nav {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .nav-btn {
-    flex: 1 1 auto;
-    font-size: 13px;
-  }
-}
-
-/* ==============================
-   スマホ: 767px以下
-   ============================== */
-@media screen and (max-width: 767px) {
-  .header-nav {
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .nav-btn {
-    width: 100%;
-    font-size: 14px;
-    padding: 8px;
-  }
 }

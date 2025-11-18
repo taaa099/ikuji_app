@@ -58,8 +58,8 @@
               <% months = 0 %>
               <% days = 0 %>
             <% end %>
-
-            <div class="absolute left-1/2 transform -translate-x-1/2 text-center leading-tight">
+       
+            <div class="header-center-item absolute left-1/2 transform -translate-x-1/2 text-center leading-tight">
               <div class="flex items-center justify-center gap-2 text-sm sm:text-base font-semibold text-gray-700 dark:text-gray-300">
                 <% if @current_child.image.attached? %>
                   <%= image_tag @current_child.image.variant(resize_to_fill: [25, 25]), class: "rounded-full object-cover" %>
@@ -287,5 +287,46 @@
 
     <!-- 通知用コンテナ -->
     <div id="notification-container"></div>
+
+    <!-- 左端ロゴ(スマホ表示用) -->
+    <% if user_signed_in? && current_child.present? %>
+      <div class="mobile-header-logo">
+        <%= link_to root_path do %>
+          <%= image_tag "icononly.jpg", alt: "IkujiApp Logo", class: "mobile-logo-image" %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="mobile-header-logo--guest">
+        <%= link_to root_path do %>
+          <%= image_tag "icononly.jpg", alt: "IkujiApp Logo", class: "mobile-logo-image" %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <!--画面下ナビゲーション(スマホ表示用) -->
+    <% if user_signed_in? && current_child.present? %>
+      <nav class="mobile-bottom-nav">
+        <%= link_to root_path, class: "mobile-nav-item" do %>
+        <i class="fa-solid fa-chess-board text-gray-600 text-xl"></i>ホーム
+        <% end %>
+
+        <!-- 記録（9種類まとめ） -->
+        <%= link_to root_path, class: "mobile-nav-item" do %>
+          <i class="fa-solid fa-record-vinyl text-gray-600 text-xl"></i>記録一覧
+        <% end %>
+
+        <%= link_to schedules_path, class: "mobile-nav-item mobile-nav-create" do %>
+        <i class="fa-solid fa-plus"></i>
+        <% end %>
+
+        <%= link_to schedules_path, class: "mobile-nav-item" do %>
+          <i class="fa-solid fa-calendar text-gray-600 text-xl"></i>スケジュール
+        <% end %>
+
+        <%= link_to root_path, class: "mobile-nav-item" do %>
+          <i class="fa-solid fa-bars"></i>メニュー
+        <% end %>
+      </nav>
+    <% end %>
   </body>
 </html>

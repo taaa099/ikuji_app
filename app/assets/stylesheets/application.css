@@ -87,6 +87,11 @@ select {
 /* ==============================
    ヘッダー共通
    ============================== */
+/*スマホ表示時の画面下ナビゲーション */   
+.mobile-bottom-nav {
+  display: none;
+}
+
 .site-header {
   position: fixed;
   top: 0;
@@ -118,9 +123,14 @@ select {
   height: 50px;
 }
 
+.mobile-header-logo,
+.mobile-header-image,
+.mobile-header-logo--guest {
+  display: none;
+}
+
 .animal-image {
   height: 300px;
-
 }
 
 /* 子供切り替えビューのデザイン */

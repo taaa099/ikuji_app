@@ -1,164 +1,124 @@
-/* ==============================
-   タブレット: 768px〜1024px
-   ============================== */
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-
-  /* ダッシュボード */
-  .dashboard-title { font-size: 20px; }
-  .dashboard-table th,
-  .dashboard-table td { font-size: 13px; padding: 6px; }
-  .dashboard-schedule-table th,
-  .dashboard-schedule-table td { font-size: 13px; padding: 6px 8px; }
-
-  /* 成長表 */
-  .growth-table th,
-  .growth-table td { font-size: 13px; padding: 6px; }
-  .growth-title { font-size: 22px; }
-  .growth-chart { max-width: 800px; }
-  .growth-form-container { max-width: 600px; }
-
-  /* レスポンシブテーブル */
-  .responsive-table th,
-  .responsive-table td { font-size: 13px; padding: 6px; }
-  .responsive-title { font-size: 20px; }
-
-  /* フォーム */
-  .form-title { font-size: 20px; }
-  .form-container { max-width: 90%; padding: 1.5rem; }
-  .form-label { font-size: 14px; }
-  .form-input { font-size: 14px; padding: 8px; }
-  .form-actions input[type="submit"] { font-size: 14px; padding: 8px 16px; }
-
-  /* プロフィール */
-  .profile-container { padding: 1.5rem; }
-  .profile-item { font-size: 13px; }
-  .profile-item strong { width: 70px; }
-  .profile-btn { padding: 6px 12px; font-size: 13px; display: inline-block; width: auto; margin-bottom: 0; }
-
-  /* スケジュールテーブル */
-  .schedule-table th,
-  .schedule-table td { font-size: 13px; padding: 6px; }
-
-  /* スケジュールフォーム */
-  .schedule-form-container { max-width: 90%; padding: 1.5rem; }
-  .schedule-form-label { font-size: 14px; }
-  .schedule-form-input { font-size: 14px; padding: 8px; }
-  .schedule-form-actions input[type="submit"] { font-size: 14px; padding: 8px 16px; }
-
-  /* スケジュール表示 */
-  .schedule-show-container { max-width: 90%; padding: 1.5rem; }
-  .schedule-show-item { font-size: 14px; }
-  .schedule-show-item strong { width: 70px; }
-  .schedule-show-btn { padding: 8px 16px; font-size: 14px; margin-bottom: 0.5rem; }
-
-  /* カレンダー */
-  .simple-calendar { grid-template-columns: repeat(7, 1fr); }
-  .day-cell { min-height: 80px; font-size: 13px; padding: 2px; }
-  .date-number { font-size: 13px; }
-  .event { font-size: 11px; }
-
-  /* 睡眠グラフ */
-  #weeklySleepChart { max-width: 800px; height: 250px; }
-  .sleep-summary p { font-size: 16px; }
-
-}
-
-/* ==============================
-   スマホ: 767px以下
-   ============================== */
 @media screen and (max-width: 767px) {
 
-  /* ヘッダー */
-  .header-nav { flex-direction: column; gap: 4px; }
-  .nav-btn { width: 100%; font-size: 14px; padding: 8px; }
+  /* ヘッダー全体 */
+  .site-header {
+    height: 60px;
+  }
+  
+  /* スマホ表示専用アプリロゴ */
+  .mobile-header-logo,
+  .mobile-header-logo--guest {
+    display: flex;
+    position: fixed;
+    top: 3px;
+    left: 5px;
+    z-index: 16;
+  }
 
-  /* ダッシュボード */
-  .dashboard-title { font-size: 18px; }
-  .dashboard-table thead { display: none; }
-  .dashboard-table tr { display: block; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 6px; padding: 8px; }
-  .dashboard-table td { display: block; border: none; padding: 4px 0; font-size: 14px; }
-  .dashboard-schedule-table thead { display: none; }
-  .dashboard-schedule-table tr { display: block; margin-bottom: 0.8rem; border: 1px solid #ddd; border-radius: 6px; padding: 8px; background-color: #fafafa; }
-  .dashboard-schedule-table td { display: flex; justify-content: space-between; padding: 4px 0; font-size: 14px; }
-  .dashboard-schedule-col-date::before { content: "日時"; font-weight: bold; }
-  .dashboard-schedule-col-title::before { content: "タイトル"; font-weight: bold; }
-  .dashboard-schedule-col-detail::before { content: "詳細"; font-weight: bold; }
+  .mobile-logo-image {
+   height: 55px;
+  }
 
-  /* 成長表 */
-  .growth-table thead { display: none; }
-  .growth-table tr { display: block; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 6px; padding: 8px; }
-  .growth-table td { display: block; border: none; padding: 4px 0; font-size: 14px; }
-  .growth-title { font-size: 18px; }
-  .growth-chart { max-width: 100%; }
-  .growth-form-container { max-width: 100%; padding: 12px; }
+  /* 中央表示部分を少し小さく */
+  .header-center-item {
+    transform: scale(0.90);
+  }
 
-  /* レスポンシブテーブル */
-  .responsive-table thead { display: none; }
-  .responsive-table tr { display: block; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 6px; padding: 8px; }
-  .responsive-table td { display: block; border: none; padding: 4px 0; font-size: 14px; }
-  .responsive-title { font-size: 18px; }
+  /* アカウントアイコン */
+  #account-toggle {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%
+  }
 
-  /* フォーム */
-  .form-title { font-size: 18px; }
-  .form-container { max-width: 100%; padding: 1rem; border: none; }
-  .form-label { font-size: 13px; }
-  .form-input { font-size: 13px; padding: 6px; }
-  input[type="file"].form-input { width: 100%; }
-  .form-actions { display: block; text-align: center; margin-top: 1rem; }
-  .form-actions input[type="submit"],
-  .form-actions button,
-  .form-actions a { display: block; width: 90%; margin: 0.5rem auto; font-size: 14px; padding: 10px; border: none; border-radius: 6px; background: #4CAF50; color: #fff; text-decoration: none; cursor: pointer; }
-  .form-actions input[type="submit"]:hover,
-  .form-actions button:hover,
-  .form-actions a:hover { background: #45a049; }
+  /* アカウントアイコンのドロップダウン */
+  #account-menu {
+    top: 50px;
+  }
 
-  /* プロフィール */
-  .profile-container { padding: 1rem; }
-  .profile-item { font-size: 13px; }
-  .profile-item strong { width: 60px; }
-  .profile-btn { display: block; width: 90%; margin: 0.5rem auto; padding: 10px; background: #4CAF50; color: #fff; border-radius: 6px; text-align: center; }
-  .profile-btn:hover { background: #45a049; }
+  /* ベルマークのドロップダウン */
+  .notification-dropdown {
+    min-width: 300px;
+    top: 30px;
+    right: -50px;
+  }
 
-  /* スケジュールテーブル */
-  .schedule-table thead { display: none; }
-  .schedule-table tr { display: block; margin-bottom: 1rem; border: 1px solid #ccd; border-radius: 6px; padding: 8px; }
-  .schedule-table td { display: block; border: none; padding: 4px 0; font-size: 14px; }
+  #account-toggle:hover::before {
+    background-color: transparent;
+  }
 
-  /* スケジュールフォーム */
-  .schedule-form-container { max-width: 100%; padding: 1rem; border: none; }
-  .schedule-form-label { font-size: 13px; }
-  .schedule-form-input { font-size: 13px; padding: 6px; }
-  .schedule-form-actions input[type="submit"] { width: 100%; font-size: 14px; padding: 10px; }
-  .schedule-form-actions button,
-  .schedule-form-actions a { display: block; width: 100%; margin-bottom: 0.5rem; text-align: center; }
+  .notification-link:hover i.fa-bell {
+    color: inherit;
+  }
+  
+  /* ツールチップを非表示 */
+  .tooltip-text {
+    display: none;
+  }
 
-  /* スケジュール表示 */
-  .schedule-show-container { max-width: 100%; padding: 1rem; border: none; }
-  .schedule-show-item { font-size: 13px; }
-  .schedule-show-item strong { width: 60px; }
-  .schedule-show-btn { display: block; width: 100%; margin-bottom: 0.5rem; text-align: center; }
+  /* ログイン前のヘッダー右群の表示調整 */
+  .btn-guest-action {
+    font-size: 14px;
+    top: -5px;
+  }
 
-  /* カレンダー */
-  .calendar-container { padding: 0 2px; }
-  .calendar-title { font-size: 1.4rem; margin-bottom: 6px; }
-  .calendar-nav { flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
-  .btn-nav { font-size: 12px; padding: 4px 8px; }
-  .simple-calendar { grid-template-columns: repeat(7, 1fr); }
-  .day-cell { min-height: 60px; padding: 2px; font-size: 12px; }
-  .date-number { font-size: 12px; }
-  .event { font-size: 10px; padding: 1px 2px; }
+  /* スマホ画面では表示しないもの */
+  .header-logo,
+  .header-logo--guest,
+  #new-record-button,
+  .sidebar,
+  #sidebar-toggle {
+    display: none;
+  }
 
-  /* サイドバー */
-  .sidebar { width: 80%; max-width: 280px; padding: 10px; }
-  .sidebar ul li a,
-  .sidebar ul li button.nav-btn { padding: 8px; font-size: 14px; }
-  .notification-setting { padding: 8px; }
+  /* スマホ専用ナビゲーション(画面下固定) */
+  .mobile-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: #fff;
+  border-top: 1px solid #ddd;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  z-index: 1000;
+  }
 
-  /* 睡眠グラフ */
-  #weeklySleepChart { max-width: 100%; height: 200px; }
-  .sleep-summary p { font-size: 14px; }
+  .mobile-bottom-nav .mobile-nav-item {
+  display: flex;             /* flex化 */
+  flex-direction: column;    /* 縦並び */
+  width: 20%;
+  text-align: center;
+  font-size: 12px;
+  padding: 8px 0;
+  text-decoration: none;
+  color: #333;
+  gap: 3px;
+  }
 
-  /* 認証カード */
-  .auth-card { padding: 1rem; }
-  .form-actions input[type="submit"] { width: 90%; margin: 0.5rem auto; display: block; }
+  .mobile-bottom-nav .mobile-nav-item i {
+  font-size: 20px;           /* アイコンの大きさ調整 */
+}
+
+  /* ナビゲーション「＋」ボタン */
+  .mobile-bottom-nav .mobile-nav-create {
+    background: #f0f0f0;
+    border-radius: 50%;
+    position: relative;
+    color: #333;
+  }
+
+  /* ＋アイコンを大きく */
+  .mobile-bottom-nav .mobile-nav-create i {
+    font-size: 26px;
+  }
+    
+  /* フッターをサイドバーの非表示分左にずらして中央表示 */
+  footer.logged-in {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 60px;
+  }
 }

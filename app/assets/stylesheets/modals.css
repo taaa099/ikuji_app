@@ -65,7 +65,7 @@
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.3);
-  z-index: 2000;
+  z-index: 999;
 }
 
 /* モーダル本体：下部固定、横幅100% */

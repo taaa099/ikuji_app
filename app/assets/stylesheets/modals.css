@@ -55,3 +55,125 @@
 .modal-actions .modal-close:hover {
   background-color: #45a049; /* hover色 */
 }
+
+/* ==============================
+   スマホ専用スタイル
+   ============================== */
+/* スマホ専用モーダル（背景） */
+.mobile-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.3);
+  z-index: 2000;
+}
+
+/* モーダル本体：下部固定、横幅100% */
+.mobile-modal-content {
+  position: fixed;
+  bottom: 60px; /* ← ナビゲーションが60pxなのでその上に固定 */
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border-radius: 16px 16px 0 0; /* 上だけ丸く */
+  padding: 16px;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+}
+
+/* ヘッダー */
+.mobile-modal-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* モーダル内のアイコン＋テキスト表示 */
+.mobile-modal-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: flex-start; /* 左寄せでも中央寄せでも調整可能 */
+}
+
+.mobile-modal-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+  width: calc((100% - 16px * 4) / 5); /* gapを考慮して5個分の幅 */
+  cursor: pointer;
+}
+
+.mobile-modal-item:nth-child(n+10) {
+  margin-left: 0;
+}
+
+.mobile-modal-item-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px; /* 少し丸みをつける */
+  font-size: 24px; /* アイコンサイズ */
+  color: #fff;
+  margin-bottom: 4px; /* アイコンとテキストの間 */
+}
+
+/* アイコンごとの背景色 */
+.mobile-modal-feed {
+  background-color: #ff6b81;
+}
+
+.mobile-modal-diaper {
+  background-color: #facc15;
+}
+
+.mobile-modal-bottle {
+  background-color: #60a5fa;
+}
+
+.mobile-modal-hydration {
+  background-color: #38bdf8;
+}
+
+.mobile-modal-baby_food {
+  background-color: #fb923c;
+}
+
+.mobile-modal-sleep_record {
+  background-color: #8b5cf6;
+}
+
+.mobile-modal-bath {
+  background-color: #38bdf8;
+}
+
+.mobile-modal-temperature {
+  background-color: #ef4444;
+}
+
+.mobile-modal-vaccination {
+  background-color: #22c55e;
+}
+
+.mobile-modal-schedule {
+  background-color: #f97316;
+}
+
+.mobile-modal-growth {
+  background-color: #10b981;
+}
+
+.mobile-modal-diary {
+  background-color: #8b5cf6;
+}
+
+.mobile-modal-item-text {
+  font-size: 13px;
+  text-align: center;
+  line-height: 1.2;
+}

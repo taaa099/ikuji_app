@@ -1,0 +1,98 @@
+    <!-- ▼ スマホ専用モーダル -->
+    <div id="mobile-modal" class="mobile-modal-overlay">
+      <div class="mobile-modal-content">
+        <div class="mobile-modal-header">
+          <h2 id="mobile-modal-title"></h2>
+        </div>
+
+        <div class="mobile-modal-body">
+          <%= link_to new_child_feed_path(current_child), data: { turbo_frame: "modal", create_href: new_child_feed_path(current_child), index_href: child_feeds_path(current_child) }, class: "mobile-modal-item" do %>
+            <div class="mobile-modal-item-icon mobile-modal-feed">
+              <i class="fa-solid fa-person-breastfeeding"></i>
+            </div>
+            <div class="mobile-modal-item-text">授乳</div>
+          <% end %>
+
+          <%= link_to new_child_diaper_path(current_child), data: { turbo_frame: "modal", create_href: new_child_diaper_path(current_child), index_href: child_diapers_path(current_child) }, class: "mobile-modal-item" do %>
+            <div class="mobile-modal-item-icon mobile-modal-diaper">
+              <i class="fa-solid fa-baby"></i>
+            </div>
+            <div class="mobile-modal-item-text">おむつ</div>
+          <% end %>
+
+          <%= link_to new_child_bottle_path(current_child), data: { turbo_frame: "modal", create_href: new_child_bottle_path(current_child), index_href: child_bottles_path(current_child) }, class: "mobile-modal-item" do %>
+            <div class="mobile-modal-item-icon mobile-modal-bottle">
+              <i class="fa-solid fa-bottle-droplet"></i>
+            </div>
+            <div class="mobile-modal-item-text">ミルク</div>
+          <% end %>
+
+          <%= link_to new_child_hydration_path(current_child), data: { turbo_frame: "modal", create_href: new_child_hydration_path(current_child), index_href: child_hydrations_path(current_child) }, class: "mobile-modal-item" do %>
+            <div class="mobile-modal-item-icon mobile-modal-hydration">
+              <i class="fa-solid fa-bottle-water"></i>
+            </div>
+            <div class="mobile-modal-item-text">水分補給</div>
+          <% end %>
+
+          <%= link_to new_child_baby_food_path(current_child), data: { turbo_frame: "modal", create_href: new_child_baby_food_path(current_child), index_href: child_baby_foods_path(current_child) }, class: "mobile-modal-item" do %>
+            <div class="mobile-modal-item-icon mobile-modal-baby_food">
+              <i class="fa-solid fa-utensils"></i>
+            </div>
+            <div class="mobile-modal-item-text">離乳食</div>
+          <% end %>
+
+          <%= link_to new_child_sleep_record_path(current_child), data: { turbo_frame: "modal", create_href: new_child_sleep_record_path(current_child), index_href: child_sleep_records_path(current_child) }, class: "mobile-modal-item" do %>
+            <div class="mobile-modal-item-icon mobile-modal-sleep_record">
+              <i class="fa-solid fa-moon"></i>
+            </div>
+            <div class="mobile-modal-item-text">睡眠</div>
+          <% end %>
+
+          <%= link_to new_child_bath_path(current_child), data: { turbo_frame: "modal", create_href: new_child_bath_path(current_child), index_href: child_baths_path(current_child) }, class: "mobile-modal-item" do %>
+            <div class="mobile-modal-item-icon mobile-modal-bath">
+              <i class="fa-solid fa-bath"></i>
+            </div>
+            <div class="mobile-modal-item-text">お風呂</div>
+          <% end %>
+
+          <%= link_to new_child_temperature_path(current_child), data: { turbo_frame: "modal", create_href: new_child_temperature_path(current_child), index_href: child_temperatures_path(current_child) }, class: "mobile-modal-item" do %>
+            <div class="mobile-modal-item-icon mobile-modal-temperature">
+              <i class="fa-solid fa-temperature-three-quarters"></i>
+            </div>
+            <div class="mobile-modal-item-text">体温</div>
+          <% end %>
+
+          <%= link_to new_child_vaccination_path(current_child), data: { turbo_frame: "modal", create_href: new_child_vaccination_path(current_child), index_href: child_vaccinations_path(current_child) }, class: "mobile-modal-item" do %>
+            <div class="mobile-modal-item-icon mobile-modal-vaccination">
+              <i class="fa-solid fa-syringe"></i>
+            </div>
+            <div class="mobile-modal-item-text">予防接種</div>
+          <% end %>
+
+          <%# スケジュールの前に改行ダミー %>
+          <div class="mobile-modal-break" style="flex-basis:100%; height:0;"></div>
+
+          <%= link_to new_schedule_path, data: { turbo_frame: "modal", create_href: new_schedule_path, index_href: schedules_path }, class: "mobile-modal-item" do %>
+            <div class="mobile-modal-item-icon mobile-modal-schedule">
+              <i class="fa-solid fa-calendar"></i>
+            </div>
+            <div class="mobile-modal-item-text">スケジュール</div>
+          <% end %>
+
+          <%= link_to new_child_growth_path(current_child), data: { turbo_frame: "modal", create_href: new_child_growth_path(current_child), index_href: child_growths_path(current_child) }, class: "mobile-modal-item" do %>
+            <div class="mobile-modal-item-icon mobile-modal-growth">
+              <i class="fa-solid fa-hands-holding-child"></i>
+            </div>
+            <div class="mobile-modal-item-text">成長</div>
+          <% end %>
+
+
+          <%= link_to new_diary_path, data: { turbo_frame: "modal", create_href: new_diary_path, index_href: diaries_path }, class: "mobile-modal-item" do %>
+            <div class="mobile-modal-item-icon mobile-modal-diary">
+              <i class="fa-solid fa-book"></i>
+            </div>
+            <div class="mobile-modal-item-text">日記</div>
+          <% end %>
+        </div>
+      </div>
+    </div>

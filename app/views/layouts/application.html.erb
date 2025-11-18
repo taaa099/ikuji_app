@@ -310,14 +310,15 @@
         <i class="fa-solid fa-chess-board text-gray-600 text-xl"></i>ホーム
         <% end %>
 
-        <!-- 記録（9種類まとめ） -->
-        <%= link_to root_path, class: "mobile-nav-item" do %>
+        <!-- 記録一覧（モーダル起動） -->
+        <a href="#" class="mobile-nav-item open-mobile-modal" data-mode="list">
           <i class="fa-solid fa-record-vinyl text-gray-600 text-xl"></i>記録一覧
-        <% end %>
+        </a>
 
-        <%= link_to schedules_path, class: "mobile-nav-item mobile-nav-create" do %>
-        <i class="fa-solid fa-plus"></i>
-        <% end %>
+        <!-- 作成（モーダル起動） -->
+        <a href="#" class="mobile-nav-item mobile-nav-create open-mobile-modal" data-mode="create">
+          <i class="fa-solid fa-plus"></i>
+        </a>
 
         <%= link_to schedules_path, class: "mobile-nav-item" do %>
           <i class="fa-solid fa-calendar text-gray-600 text-xl"></i>スケジュール
@@ -328,5 +329,8 @@
         <% end %>
       </nav>
     <% end %>
+
+    <!-- 「記録一覧」「＋」のモーダル -->
+    <%= render "layouts/mobile_modal" %>
   </body>
 </html>

@@ -45,7 +45,7 @@ document.addEventListener("turbo:load", () => {
   });
 });
 
-// スマホ専用モーダル
+// スマホ専用「記録一覧」「＋」モーダル
 document.addEventListener("turbo:load", () => {
   const mobileModal = document.getElementById("mobile-modal");
   const mobileModalContent = document.querySelector(".mobile-modal-content");
@@ -97,5 +97,28 @@ document.addEventListener("turbo:load", () => {
       // indexへの通常遷移は Turbo Frame を外した href でそのまま行く
       // newは data-turbo-frame="modal" なのでモーダル表示される
     });
+  });
+});
+
+// スマホ専用「メニュー」モーダル
+document.addEventListener("turbo:load", () => {
+  const menuModal = document.getElementById("menu-modal");
+  const menuModalContent = menuModal?.querySelector(".mobile-modal-content");
+
+  if (!menuModal || !menuModalContent) return;
+
+  // メニューを開く
+  document.querySelectorAll(".open-menu-modal").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      menuModal.style.display = "block";
+    });
+  });
+
+  // 外側クリックで閉じる
+  menuModal.addEventListener("click", (e) => {
+    if (!menuModalContent.contains(e.target)) {
+      menuModal.style.display = "none";
+    }
   });
 });

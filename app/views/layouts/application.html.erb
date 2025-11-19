@@ -324,13 +324,17 @@
           <i class="fa-solid fa-calendar text-gray-600 text-xl"></i>スケジュール
         <% end %>
 
-        <%= link_to root_path, class: "mobile-nav-item" do %>
+        <!-- メニュー（モーダル起動） -->
+        <a href="#" class="mobile-nav-item open-menu-modal">
           <i class="fa-solid fa-bars"></i>メニュー
-        <% end %>
+        </a>
       </nav>
-    <% end %>
 
-    <!-- 「記録一覧」「＋」のモーダル -->
-    <%= render "layouts/mobile_modal" %>
+      <!-- 「記録一覧」「＋」のモーダル -->
+      <%= render "layouts/mobile_record_modal" %>
+
+      <!-- 「メニュー」のモーダル -->
+      <%= render "layouts/mobile_menu_modal" %>
+    <% end %>
   </body>
 </html>

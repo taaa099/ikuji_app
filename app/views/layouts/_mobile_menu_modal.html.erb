@@ -3,26 +3,35 @@
     <div class="mobile-modal-header">
       <h2>メニュー</h2>
     </div>
-    <div class="mobile-modal-body">
+    <div class="mobile-menu-modal-body">
       <%= link_to children_path, class: "mobile-modal-item" do %>
-        <div class="mobile-modal-item-icon mobile-modal-feed">
-            <i class="fa-solid fa-person-breastfeeding"></i>
+        <div class="mobile-modal-item-icon mobile-modal-child">
+            <i class="fa-solid fa-child"></i>
         </div>
         <div class="mobile-modal-item-text">子供一覧</div>
       <% end %>
 
       <%= link_to analysis_child_sleep_records_path(current_child), class: "mobile-modal-item" do %>
-        <div class="mobile-modal-item-icon mobile-modal-feed">
-            <i class="fa-solid fa-person-breastfeeding"></i>
+        <div class="mobile-modal-item-icon mobile-modal-analysis">
+            <i class="fa-solid fa-chart-simple"></i>
         </div>
         <div class="mobile-modal-item-text">睡眠分析</div>
       <% end %>
 
       <%= link_to tips_path, class: "mobile-modal-item" do %>
-        <div class="mobile-modal-item-icon mobile-modal-feed">
-            <i class="fa-solid fa-person-breastfeeding"></i>
+        <div class="mobile-modal-item-icon mobile-modal-tips">
+            <i class="fa-solid fa-lightbulb"></i>
         </div>
-        <div class="mobile-modal-item-text">育児のヒント</div>
+        <div class="mobile-modal-item-text-tips">育児のヒント</div>
       <% end %>
+
+      <button id="toggle-notification-settings"
+              type="button"
+              class="mobile-modal-item appearance-none bg-transparent border-none p-0">
+        <div class="mobile-modal-item-icon mobile-modal-notification">
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+        <div class="mobile-modal-item-text">通知設定</div>
+      </button>
   </div>
 </div>

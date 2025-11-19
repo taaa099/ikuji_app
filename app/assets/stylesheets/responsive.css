@@ -86,6 +86,10 @@
   z-index: 1010;
   }
 
+  .sidebar-modal {
+    z-index: 1009;
+  }
+
   .mobile-bottom-nav .mobile-nav-item {
   display: flex;             /* flex化 */
   flex-direction: column;    /* 縦並び */

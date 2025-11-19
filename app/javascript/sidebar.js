@@ -62,48 +62,4 @@ document.addEventListener("turbo:load", () => {
       localStorage.setItem("record-list-open", isOpen);
     });
   }
-
-  // === 通知設定モーダル表示 ===
-  const notificationToggleBtn = document.getElementById("toggle-notification-settings");
-  const modal = document.getElementById("notification-modal");
-  const closeBtn = document.getElementById("close-notification-modal");
-  const contentBlock = document.getElementById("notification-settings-block");
-
-  if (notificationToggleBtn && modal && closeBtn) {
-    notificationToggleBtn.addEventListener("click", () => {
-      modal.classList.remove("hidden");
-
-      // モーダル中身も必ず表示
-      if (contentBlock) contentBlock.classList.remove("hidden");
-
-      // 開いた直後にスクロール位置を先頭に戻す
-      const container = modal.querySelector(".sidebar-modal-content");
-      if (container) container.scrollTop = 0;
-    });
-
-    closeBtn.addEventListener("click", () => {
-      modal.classList.add("hidden");
-
-      // モーダル閉じるときに中身も hidden に戻す
-      if (contentBlock) contentBlock.classList.add("hidden");
-    });
-
-    // モーダル外クリックでも閉じる
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        modal.classList.add("hidden");
-        if (contentBlock) contentBlock.classList.add("hidden");
-      }
-    });
-  }
-
-  // === 他モーダルを開くときに通知設定モーダルを閉じる ===
-  document.addEventListener("turbo:before-frame-render", () => {
-    const notificationModal = document.getElementById("notification-modal");
-    const contentBlock = document.getElementById("notification-settings-block");
-    if (notificationModal) {
-      notificationModal.classList.add("hidden");
-      if (contentBlock) contentBlock.classList.add("hidden");
-    }
-  });
 });

@@ -212,6 +212,24 @@
     vertical-align: top;
   }
 
+  /* --- feedのnewフォームのplaceholderのサイズ調整 --- */
+  .form-input::placeholder {
+    font-size: 2.5vw;
+  }
+
+  .modal-container {
+    margin-bottom: 60px;
+  }
+  .no-record-modal-container {
+    height: 90%;
+    max-height: 600px;
+    margin-bottom: 60px;
+  }
+
+  .schedule-show-modern {
+    width: 90%;
+  }
+
   /* 日付検索機能バーのサイズ調整 */
   .filter-bar {
     font-size: 0.8rem;

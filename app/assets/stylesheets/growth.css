@@ -188,13 +188,3 @@
 .modal-background .modal-container .modal-close.growth-modal-close:hover {
   background-color: #5577aa; /* hover青色 */
 }
-
-/* growthモーダル専用削除ボタン */
-.modal-background .modal-container .growth-delete-btn {
-  background-color: #6699cc; /* 青 */
-  color: #fff;
-}
-
-.modal-background .modal-container .growth-delete-btn:hover {
-  background-color: #5577aa; /* hover青 */
-}

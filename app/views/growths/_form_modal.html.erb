@@ -1,6 +1,6 @@
 <turbo-frame id="modal">
   <div class="modal-background">
-    <div class="modal-container">
+    <div class="no-record-modal-container">
       <h2 class="form-title">
         <%= growth.persisted? ? "編集" : "新規作成" %> 成長記録
       </h2>
@@ -11,10 +11,8 @@
         <% if growth.persisted? %>
           <%= button_to "削除", child_growth_path(current_child, growth),
                 method: :delete,
-                data: { turbo_confirm: '本当に削除しますか？' },
-                class: "form-submit-btn growth-delete-btn" %>
+                data: { turbo_confirm: '本当に削除しますか？' } %>
         <% end %>
-        <a href="#" class="modal-close growth-modal-close">閉じる</a>
       </div>
     </div>
   </div>

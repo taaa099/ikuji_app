@@ -1,22 +1,22 @@
 <tr class="clickable-row" data-href="<%= edit_child_feed_path(current_child, feed) %>" data-turbo-frame="modal">
   <td class="col-date">
-    <span class="font-semibold text-gray-600">時間：</span>
+    <span class="font-semibold text-gray-600">時間:</span>
     <%= feed.fed_at.strftime("%H:%M") %>
   </td>
 
   <td class="col-item1">
-    <span class="font-semibold text-gray-600">左：</span>
+    <span class="font-semibold text-gray-600">左:</span>
     <%= feed.left_time.present? ? "#{feed.left_time/60}分 #{feed.left_time%60}秒" : "-" %>
   </td>
 
   <td class="col-item2">
-    <span class="font-semibold text-gray-600">右：</span>
+    <span class="font-semibold text-gray-600">右:</span>
     <%= feed.right_time.present? ? "#{feed.right_time/60}分 #{feed.right_time%60}秒" : "-" %>
   </td>
 
   <td class="col-memo">
     <% if feed.memo.present? %>
-      <span class="font-semibold text-gray-600">メモ：</span>
+      <span class="font-semibold text-gray-600">メモ:</span>
       <%= feed.memo %>
     <% end %>
   </td>

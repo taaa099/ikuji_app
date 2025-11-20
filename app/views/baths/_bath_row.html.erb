@@ -1,17 +1,17 @@
 <tr class="clickable-row" data-href="<%= edit_child_bath_path(current_child, bath) %>" data-turbo-frame="modal">
   <td class="col-date">
-    <span class="font-semibold text-gray-600">時間：</span>
+    <span class="font-semibold text-gray-600">時間:</span>
     <%= bath.bathed_at.strftime("%H:%M") %>
   </td>
 
   <td class="col-item1">
-    <span class="font-semibold text-gray-600">種類：</span>
+    <span class="font-semibold text-gray-600">種類:</span>
     <%= bath.bath_type %>
     </td>
 
   <td class="col-memo">
     <% if bath.memo.present? %>
-      <span class="font-semibold text-gray-600">メモ：</span>
+      <span class="font-semibold text-gray-600">メモ:</span>
       <%= bath.memo %>
     <% end %>
   </td>

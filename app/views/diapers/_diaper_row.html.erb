@@ -1,11 +1,11 @@
 <tr class="clickable-row" data-href="<%= edit_child_diaper_path(current_child, diaper) %>" data-turbo-frame="modal">
   <td class="col-date">
-    <span class="font-semibold text-gray-600">時間：</span>
+    <span class="font-semibold text-gray-600">時間:</span>
     <%= diaper.changed_at.strftime("%H:%M") %>
   </td>
 
-  <td class="col-item1">
-    <span class="font-semibold text-gray-600">種類：</span>
+  <td class="col-item1-diaper">
+    <span class="font-semibold text-gray-600">種類:</span>
     <% contents = [] %>
     <% contents << "おしっこ" if diaper.pee %>
     <% contents << "うんち" if diaper.poop %>
@@ -14,12 +14,12 @@
   
   <td class="col-memo">
     <% if diaper.memo.present? %>
-      <span class="font-semibold text-gray-600">メモ：</span>
+      <span class="font-semibold text-gray-600">メモ:</span>
       <%= diaper.memo %>
     <% end %>
   </td>
 
-  <td class="col-item2">
+  <td class="col-item2-diaper">
   </td>
 
   <td class="record-col-chevron text-right pr-2">

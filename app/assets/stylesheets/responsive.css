@@ -1,11 +1,10 @@
-@media screen and (max-width: 767px) {
-
-  /* ヘッダー全体 */
+@media screen and (max-width: 480px) {
+  /* --- ヘッダー全体 --- */
   .site-header {
     height: 60px;
   }
   
-  /* スマホ表示専用アプリロゴ */
+  /* --- スマホ表示専用アプリロゴ --- */
   .mobile-header-logo,
   .mobile-header-logo--guest {
     display: flex;
@@ -19,24 +18,24 @@
    height: 55px;
   }
 
-  /* 中央表示部分を少し小さく */
+  /* --- 中央表示部分を少し小さく --- */
   .header-center-item {
-    transform: scale(0.90);
+    transform: scale(0.80);
   }
 
-  /* アカウントアイコン */
+  /* --- アカウントアイコン --- */
   #account-toggle {
     height: 40px;
     width: 40px;
     border-radius: 50%
   }
 
-  /* アカウントアイコンのドロップダウン */
+  /* --- アカウントアイコンのドロップダウン --- */
   #account-menu {
     top: 50px;
   }
 
-  /* ベルマークのドロップダウン */
+  /* --- ベルマークのドロップダウン --- */
   .notification-dropdown {
     min-width: 300px;
     top: 30px;
@@ -51,27 +50,34 @@
     color: inherit;
   }
   
-  /* ツールチップを非表示 */
+  /* --- ツールチップを非表示 --- */
   .tooltip-text {
     display: none;
   }
 
-  /* ログイン前のヘッダー右群の表示調整 */
+  /* --- ログイン前のヘッダー右群の表示調整 --- */
   .btn-guest-action {
     font-size: 14px;
     top: -5px;
   }
 
-  /* スマホ画面では表示しないもの */
+  /* --- スマホ画面では表示しないもの --- */
   .header-logo,
   .header-logo--guest,
+  .header-months-days,
   #new-record-button,
+
+  /* サイドバー関連 */
   .sidebar,
-  #sidebar-toggle {
+  #sidebar-toggle,
+
+  /* record系 */
+  .clickable-row .col-date span,
+  .col-memo {
     display: none;
   }
 
-  /* スマホ専用ナビゲーション(画面下固定) */
+  /* --- スマホ専用ナビゲーション(画面下固定) --- */
   .mobile-bottom-nav {
   position: fixed;
   bottom: 0;
@@ -118,8 +124,95 @@
   .mobile-bottom-nav .mobile-nav-create i {
     font-size: 26px;
   }
+
+    /* --- record系indexビューのサイズ調整 --- */
+  .responsive-table {
+    font-size: 14px;
+  }
+
+  .col-date {
+    width: 20%;
+  }
+
+  /* 調整が必要なrecordはそれぞれ命名している */
+  .col-item1,
+  .col-item2 {
+    width: 40%;
+  }
+
+  /* おむつ */
+  .col-item1-diaper {
+    width: 70%;
+  }
+  .col-item2-diaper {
+    width: 10%;
+  }
+
+  /* 睡眠 */
+  .col-date-sleep span,
+  .col-item1-sleep span,
+  .col-item2-sleep span {
+    display: none;
+  }
+  .col-date-sleep::after {
+    content: "〜";
+  }
+  .col-date-sleep {
+    width: 35%;
+  }
+  .col-item1-sleep {
+    width: 30%;
+  }
+  .col-item2-sleep {
+    width: 35%;
+  }
+
+  /* 予防接種 */
+  .col-item1-vaccination {
+    width: 70%;
+  }
+  .col-item2-vaccination {
+    width: 10%;
+  }
+
+  /* --- record以外のindexビューのサイズ調整 --- */
+  /* スケジュール */
+  .schedule-table th,
+  .schedule-table td {
+    font-size: 14px;
+  }
+  .schedule-col-time,
+  .schedule-col-item span,
+  .schedule-col-memo {
+    display: none;
+  }
+  .schedule-col-date {
+    width: 45%;
+  }
+  .schedule-col-item {
+    width: 55%;
+  }
+
+  /* 成長 */
+  .growth-table th,
+  .growth-table td {
+    font-size: 14px;
+  }
+  .growth-col-item1 span,
+  .growth-col-item2 span,
+  .growth-col-item3 span,
+  .growth-col-item4 span {
+    display: block; /* ラベルと要素を縦並びに */
+    margin-bottom: 2px;
+  }
+  .growth-col-item1,
+  .growth-col-item2,
+  .growth-col-item3,
+  .growth-col-item4 {
+    vertical-align: top;
+  }
     
-  /* フッターをサイドバーの非表示分左にずらして中央表示 */
+  /* --- フッターをサイドバーの非表示分左にずらして中央表示 --- */
   footer.logged-in {
     width: 100%;
     margin-left: 0;

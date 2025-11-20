@@ -1,22 +1,22 @@
 <tr class="clickable-row" data-href="<%= edit_child_hydration_path(current_child, hydration) %>" data-turbo-frame="modal">
   <td class="col-date">
-    <span class="font-semibold text-gray-600">時間：</span>
+    <span class="font-semibold text-gray-600">時間:</span>
     <%= hydration.fed_at.strftime("%H:%M") %>
   </td>
 
   <td class="col-item1">
-    <span class="font-semibold text-gray-600">種類：</span>
+    <span class="font-semibold text-gray-600">種類:</span>
     <%= hydration.drink_type %>
   </td>
 
   <td class="col-item2">
-    <span class="font-semibold text-gray-600">量：</span>
+    <span class="font-semibold text-gray-600">量:</span>
     <%= hydration.amount %> ml
   </td>
 
   <td class="col-memo">
     <% if hydration.memo.present? %>
-      <span class="font-semibold text-gray-600">メモ：</span>
+      <span class="font-semibold text-gray-600">メモ:</span>
       <%= hydration.memo %>
     <% end %>
   </td>

@@ -1,7 +1,7 @@
 <div class="filter-bar">
   <%= form_with url: (url || root_path), method: :get, local: true do |f| %>
     <label>日付で絞り込み
-      <%= f.date_field :date, value: params[:date] %>
+      <%= f.date_field :date, value: params[:date], class: "filter-date-input" %>
     </label>
     <%= f.submit "絞り込む", class: "filter-nav-btn" %>
   <% end %>

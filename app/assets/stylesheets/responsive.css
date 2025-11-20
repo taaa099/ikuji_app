@@ -211,6 +211,17 @@
   .growth-col-item4 {
     vertical-align: top;
   }
+
+  /* 日付検索機能バーのサイズ調整 */
+  .filter-bar {
+    font-size: 0.8rem;
+  }
+  .filter-date-input {
+    width: 100px;
+  }
+  .filter-nav-btn {
+    font-size: 12px;
+  }
     
   /* --- フッターをサイドバーの非表示分左にずらして中央表示 --- */
   footer.logged-in {

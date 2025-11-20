@@ -1,6 +1,6 @@
 <tr class="clickable-row" data-href="<%= edit_schedule_path(schedule) %>" data-turbo-frame="modal">
   <td class="schedule-col-date">
-    <span class="font-semibold text-gray-600">時間：</span>
+    <span class="schedule-col-time font-semibold text-gray-600">時間:</span>
     <% if schedule.all_day? %>
       (終日)
     <% else %>
@@ -11,13 +11,13 @@
   </td>
 
   <td class="schedule-col-item">
-    <span class="font-semibold text-gray-600">タイトル：</span>
+    <span class="font-semibold text-gray-600">タイトル:</span>
     <%= schedule.title %>
   </td>
 
   <td class="schedule-col-memo">
     <% if schedule.memo.present? %>
-      <span class="font-semibold text-gray-600">メモ：</span>
+      <span class="font-semibold text-gray-600">メモ:</span>
       <%= schedule.memo %>
     <% end %>
   </td>

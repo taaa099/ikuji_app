@@ -1,22 +1,22 @@
 <tr class="clickable-row" data-href="<%= edit_child_temperature_path(current_child, temperature) %>" data-turbo-frame="modal">
   <td class="col-date">
-    <span class="font-semibold text-gray-600">時間：</span>
+    <span class="font-semibold text-gray-600">時間:</span>
     <%= temperature.measured_at.strftime("%H:%M") %>
   </td>
 
-  <td class="col-item1">
-    <span class="font-semibold text-gray-600">体温：</span>
+  <td class="col-item1-vaccination">
+    <span class="font-semibold text-gray-600">体温:</span>
     <%= sprintf("%.1f", temperature.temperature) %>(℃)
   </td>
 
   <td class="col-memo">
     <% if temperature.memo.present? %>
-      <span class="font-semibold text-gray-600">メモ：</span>
+      <span class="font-semibold text-gray-600">メモ:</span>
       <%= temperature.memo %>
     <% end %>
   </td>
 
-  <td class="col-item2">
+  <td class="col-item2-vaccination">
   </td>
 
   <td class="record-col-chevron text-right pr-2">

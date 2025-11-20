@@ -1,12 +1,12 @@
 <tr class="clickable-row" data-href="<%= edit_child_sleep_record_path(current_child, sleep_record) %>" data-turbo-frame="modal">
-  <td class="col-date">
-    <span class="font-semibold text-gray-600">開始時間：</span>
+  <td class="col-date-sleep">
+    <span class="font-semibold text-gray-600">開始時間:</span>
     <%= sleep_record.start_time.strftime("%H:%M") %>
     </td>
 
-  <td class="col-item1">
+  <td class="col-item1-sleep">
     
-    <span class="font-semibold text-gray-600">終了時間：</span>
+    <span class="font-semibold text-gray-600">終了時間:</span>
     <% if sleep_record.end_time.present? %>
       <%= sleep_record.end_time.strftime("%H:%M") %>
     <% else %>
@@ -14,8 +14,8 @@
     <% end %>
     </td>
 
-  <td class="col-item2">
-    <span class="font-semibold text-gray-600">睡眠時間：</span>
+  <td class="col-item2-sleep">
+    <span class="font-semibold text-gray-600">睡眠時間:</span>
     <% if sleep_record.start_time && sleep_record.end_time %>  
       <% hours = ((sleep_record.end_time - sleep_record.start_time) / 3600).floor %>
       <% minutes = (((sleep_record.end_time - sleep_record.start_time) % 3600) / 60).round %>
@@ -27,7 +27,7 @@
 
   <td class="col-memo">
     <% if sleep_record.memo.present? %>
-      <span class="font-semibold text-gray-600">メモ：</span>
+      <span class="font-semibold text-gray-600">メモ:</span>
       <%= sleep_record.memo %>
     <% end %>
   </td>

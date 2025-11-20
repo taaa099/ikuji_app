@@ -67,7 +67,9 @@
                 <div>
                   <%= name %>
                   <%= @current_child.gender == "男" ? '<i class="fa-solid fa-mars text-blue-500"></i>'.html_safe : '<i class="fa-solid fa-venus text-pink-500"></i>'.html_safe %>
-                  <%= "#{months}ヶ月#{days}日" %>
+                  <div class="header-months-days">
+                    <%= "#{months}ヶ月#{days}日" %>
+                  </div>
                 </div>
               </div>
               <div class="text-lg sm:text-2xl font-bold text-gray-900 dark:text-gray-100">

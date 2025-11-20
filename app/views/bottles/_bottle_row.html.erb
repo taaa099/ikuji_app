@@ -1,17 +1,17 @@
 <tr class="clickable-row" data-href="<%= edit_child_bottle_path(current_child, bottle) %>" data-turbo-frame="modal">
   <td class="col-date">
-    <span class="font-semibold text-gray-600">時間：</span>
+    <span class="font-semibold text-gray-600">時間:</span>
     <%= bottle.given_at.strftime("%H:%M") %>
   </td>
 
   <td class="col-item1">
-    <span class="font-semibold text-gray-600">量：</span>
+    <span class="font-semibold text-gray-600">量:</span>
     <%= bottle.amount %> ml
   </td>
 
   <td class="col-memo">
     <% if bottle.memo.present? %>
-      <span class="font-semibold text-gray-600">メモ：</span>
+      <span class="font-semibold text-gray-600">メモ:</span>
       <%= bottle.memo%>
     <% end %>
   </td>

@@ -123,6 +123,11 @@ select {
   height: 50px;
 }
 
+.header-center-item {
+  max-height: 60px;
+  overflow: auto;
+}
+
 .mobile-header-logo,
 .mobile-header-image,
 .mobile-header-logo--guest {

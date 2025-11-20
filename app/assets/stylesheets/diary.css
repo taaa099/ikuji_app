@@ -182,9 +182,29 @@
   pointer-events: none; /* アイコン自体はクリック伝播しない */
 }
 
+/* ==============================
+   フィルターバー（一覧ページ上部の操作用UI）
+   ============================== */
+.filter-bar {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.filter-date-input {
+  padding: 2px 4px;
+  width: 120px; 
+  height: 28px;
+}
+
 .filter-nav-btn {
   width: auto;
   font-size: 14px;
+  margin-left: 10px;
   padding: 6px 12px;
 }
  

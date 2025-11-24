@@ -106,7 +106,7 @@
 
   .mobile-bottom-nav .mobile-nav-item i {
   font-size: 20px;           /* アイコンの大きさ調整 */
-}
+  }
 
   /* ナビゲーション「＋」ボタン */
   .mobile-bottom-nav .mobile-nav-create {
@@ -311,7 +311,14 @@
   .static_pages-container h1 {
     font-size: 24px;
   }
-    
+
+  /* --- device関連 --- */
+  /* ログイン画面 */
+  .auth-container,
+  .password-reset-container {
+    margin-top: 40px;
+  }  
+
   /* --- フッターをサイドバーの非表示分左にずらして中央表示 --- */
   footer.logged-in {
     width: 100%;

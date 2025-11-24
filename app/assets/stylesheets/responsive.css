@@ -121,7 +121,26 @@
     font-size: 26px;
   }
 
-  /* 通知設定モーダル */
+  /* --- children/indexのレスポンシブ --- */
+  .child-card {
+    flex-direction: column;   /* 縦並びに変更 */
+    align-items: flex-start;  /* 左寄せ */ 
+  }
+  .child-actions {
+    flex-direction: row;      /* ボタンは横並びを維持 */
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* --- 子供切り替えページのロゴとタイトルのサイズ調整 --- */
+  .switch-logo-image {
+    height: 50px;
+  }
+  .switch-child-page-title {
+    font-size: 1rem;
+  }
+
+  /* --- 通知設定モーダル --- */
   .sidebar-modal {
     z-index: 1009;
     padding-top: 0;

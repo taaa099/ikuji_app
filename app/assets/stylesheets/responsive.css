@@ -92,6 +92,35 @@
   z-index: 1010;
   }
 
+  .mobile-bottom-nav .mobile-nav-item {
+  display: flex;             /* flex化 */
+  flex-direction: column;    /* 縦並び */
+  width: 20%;
+  text-align: center;
+  font-size: 12px;
+  padding: 8px 0;
+  text-decoration: none;
+  color: #333;
+  gap: 3px;
+  }
+
+  .mobile-bottom-nav .mobile-nav-item i {
+  font-size: 20px;           /* アイコンの大きさ調整 */
+}
+
+  /* ナビゲーション「＋」ボタン */
+  .mobile-bottom-nav .mobile-nav-create {
+    background: #f0f0f0;
+    border-radius: 50%;
+    position: relative;
+    color: #333;
+  }
+
+  /* ＋アイコンを大きく */
+  .mobile-bottom-nav .mobile-nav-create i {
+    font-size: 26px;
+  }
+
   /* 通知設定モーダル */
   .sidebar-modal {
     z-index: 1009;
@@ -129,35 +158,6 @@
   .notification-popup.show {
     opacity: 1;
     transform: translateY(10px); /* 下にズレて出現するアニメーション */
-  }
-
-  .mobile-bottom-nav .mobile-nav-item {
-  display: flex;             /* flex化 */
-  flex-direction: column;    /* 縦並び */
-  width: 20%;
-  text-align: center;
-  font-size: 12px;
-  padding: 8px 0;
-  text-decoration: none;
-  color: #333;
-  gap: 3px;
-  }
-
-  .mobile-bottom-nav .mobile-nav-item i {
-  font-size: 20px;           /* アイコンの大きさ調整 */
-}
-
-  /* ナビゲーション「＋」ボタン */
-  .mobile-bottom-nav .mobile-nav-create {
-    background: #f0f0f0;
-    border-radius: 50%;
-    position: relative;
-    color: #333;
-  }
-
-  /* ＋アイコンを大きく */
-  .mobile-bottom-nav .mobile-nav-create i {
-    font-size: 26px;
   }
 
     /* --- record系indexビューのサイズ調整 --- */
@@ -305,6 +305,11 @@
   }
   .filter-nav-btn {
     font-size: 12px;
+  }
+
+  /* 「利用規約」「プライバシーボリシー」タイトルを小さく */
+  .static_pages-container h1 {
+    font-size: 24px;
   }
     
   /* --- フッターをサイドバーの非表示分左にずらして中央表示 --- */

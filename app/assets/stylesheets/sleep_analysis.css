@@ -48,6 +48,8 @@
    グラフ
    ============================== */
 #dailySleepChart {
+  height: 100%;
+  max-height: 700px;
   width: 100%;
   max-width: 1500px;
   margin: 50px auto;

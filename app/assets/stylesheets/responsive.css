@@ -230,6 +230,37 @@
     width: 90%;
   }
 
+  /* --- 睡眠分析ビュー ---*/ 
+  /* グラフをスマホ用4:3に縮小 */
+  #dailySleepChart {
+    max-height: 300px;
+    max-width: 400px;
+    margin-bottom: 0;
+  }
+
+  /* カードビューを縦並び＋全体的にに小さく */ 
+  .sleep-summary-cards {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .sleep-card {
+    padding: 0.75rem;
+    border-radius: 10px;
+  }
+
+  .sleep-card h3 {
+    font-size: 12px;
+  }
+
+  .sleep-card .stat-value {
+    font-size: 18px;
+  }
+
+  .sleep-card .stat-sub {
+    font-size: 12px;
+  }
+
   /* 日付検索機能バーのサイズ調整 */
   .filter-bar {
     font-size: 0.8rem;

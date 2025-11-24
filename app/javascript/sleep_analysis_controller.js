@@ -36,6 +36,7 @@ function createSleepChart(isDarkMode) {
     },
     options: {
       responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: { labels: { color: textColor } },
         title: { display: true, text: "日別睡眠分析", color: textColor },

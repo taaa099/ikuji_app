@@ -92,8 +92,43 @@
   z-index: 1010;
   }
 
+  /* 通知設定モーダル */
   .sidebar-modal {
     z-index: 1009;
+    padding-top: 0;
+    padding-bottom: 60px;
+  }
+  /* 通知設定モーダルの高さを制限 */
+  .sidebar-modal-content {
+    max-height: 500px;
+  }
+  /* 通知ドロップダウンの高さ制限 */
+  .notification-dropdown {
+    max-height: 400px;
+    min-height: 400px;
+  }
+
+  /* --- 通知ポップアップを画面上中央へ --- */
+  #notification-container {
+    position: fixed;
+    top: 20px;         /* 画面上に移動 */
+    left: 50%;         /* 中央寄せ */
+    transform: translateX(-50%);
+    bottom: auto;      /* 右下指定の無効化 */
+    right: auto;
+    flex-direction: column; /* 上から順に積む */
+    align-items: center;
+    gap: 10px;
+    z-index: 1000;
+  }
+  .notification-popup {
+    min-width: 220px;
+    text-align: center;
+    transform: translateY(0); /* 初期状態の位置補正 */
+  }
+  .notification-popup.show {
+    opacity: 1;
+    transform: translateY(10px); /* 下にズレて出現するアニメーション */
   }
 
   .mobile-bottom-nav .mobile-nav-item {

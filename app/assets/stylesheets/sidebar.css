@@ -146,8 +146,6 @@
   border-color: #050505ff;;
 }
 
-
-
 /* オーバーレイ */
 .sidebar-overlay {
   position: fixed;
@@ -220,5 +218,4 @@
 .sidebar.collapsed #record-list-menu a:hover::after {
   display: block;
 }
-
 }

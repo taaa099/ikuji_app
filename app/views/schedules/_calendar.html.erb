@@ -17,20 +17,20 @@
             <% schedules.select { |s| s.start_time.to_date == date }.each do |schedule| %>
               <% if schedule.children.any? %>
                 <% if schedule.children.size > 1 %>
-                  <%= link_to schedule.title,
+                  <%= link_to truncate(schedule.title, length: 8),
                               schedule_path(schedule),
                               class: "event-link multiple-children",
                               data: { turbo_frame: "modal" } %>
                 <% else %>
                   <% child = schedule.children.first %>
                   <% index = current_user.children.order(:id).pluck(:id).index(child.id) || 0 %>
-                  <%= link_to schedule.title,
+                  <%= link_to truncate(schedule.title, length: 8),
                               schedule_path(schedule),
                               class: "event-link child-color-#{index}",
                               data: { turbo_frame: "modal" } %>
                 <% end %>
               <% else %>
-                <%= link_to schedule.title,
+                <%= link_to truncate(schedule.title, length: 8),
                             schedule_path(schedule),
                             class: "event-link user-event",
                             data: { turbo_frame: "modal" } %>

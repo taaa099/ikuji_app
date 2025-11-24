@@ -247,11 +247,6 @@
     vertical-align: top;
   }
 
-  /* --- feedのnewフォームのplaceholderのサイズ調整 --- */
-  .form-input::placeholder {
-    font-size: 2.5vw;
-  }
-
   .modal-container {
     margin-bottom: 60px;
   }
@@ -263,6 +258,25 @@
 
   .schedule-show-modern {
     width: 90%;
+    margin-bottom: 60px;
+  }
+
+  /* --- feedのnewフォームのplaceholderのサイズ調整 --- */
+  .form-input::placeholder {
+    font-size: 2.5vw;
+  }
+
+  /* --- schedule/newのチェックボックスを縦並びに --- */
+  .schedule-form-group .schedule-checkbox-wrapper {
+    display: flex;           /* ラベルを1行ブロックとして縦積み */
+    flex-direction: row;     /* ラベル内は横並び */
+    align-items: center;     /* チェックボックスとテキストを縦中央 */
+  }
+  /* ラベルの親要素で縦積みに */
+  .schedule-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* ラベル間の隙間 */
   }
 
   /* --- 睡眠分析ビュー ---*/ 

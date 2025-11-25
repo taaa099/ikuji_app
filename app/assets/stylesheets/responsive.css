@@ -156,6 +156,11 @@
     min-height: 400px;
   }
 
+  .growth-chart {
+    max-height: 300px;
+    max-width: 400px;
+  }
+
   /* --- 通知ポップアップを画面上中央へ --- */
   #notification-container {
     position: fixed;

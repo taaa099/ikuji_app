@@ -38,6 +38,7 @@ function createWeightChart(isDarkMode) {
     },
     options: {
       responsive: true,
+       maintainAspectRatio: false,
       plugins: {
         legend: { labels: { color: textColor } },
         title: { display: true, text: "乳児体重発育曲線", color: textColor },

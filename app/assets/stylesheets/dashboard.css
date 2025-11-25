@@ -140,6 +140,14 @@
   margin-bottom: 0.5rem;
 }
 
+.stat-value-container {
+  display: flex;
+  flex-direction: row;       /* 横並び */
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
 .stat-value {
   font-size: 24px;
   font-weight: 700;

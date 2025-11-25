@@ -34,18 +34,22 @@
   </div>
 
   <%# 平均睡眠時間カード %>
-  <div class="stat-card">
+  <div class="stat-card stat-sleep-card">
     <h3>平均睡眠時間</h3>
-      <% avg_day = @average_daytime_sleep.to_i %>
-      <% avg_day_hours = avg_day / 60 %>
-      <% avg_day_minutes = avg_day % 60 %>
-      <% avg_night = @average_nighttime_sleep.to_i %>
-      <% avg_night_hours = avg_night / 60 %>
-      <% avg_night_minutes = avg_night % 60 %>
-      <p class="stat-value">
-        昼: <%= avg_day_hours %>時間<%= avg_day_minutes %>分 /
-        夜: <%= avg_night_hours %>時間<%= avg_night_minutes %>分
-      </p>
+      <div class="stat-value-container">
+        <% avg_day = @average_daytime_sleep.to_i %>
+        <% avg_day_hours = avg_day / 60 %>
+        <% avg_day_minutes = avg_day % 60 %>
+        <% avg_night = @average_nighttime_sleep.to_i %>
+        <% avg_night_hours = avg_night / 60 %>
+        <% avg_night_minutes = avg_night % 60 %>
+        <p class="stat-value">
+          昼: <%= avg_day_hours %>時間<%= avg_day_minutes %>分 <span class="stat-divider">/</span>
+        </p>
+        <p class="stat-value">
+          夜: <%= avg_night_hours %>時間<%= avg_night_minutes %>分
+        </p>
+      </div>
 
       <div class="stat-diff-container">
         <div class="stat-diff-group">
@@ -63,7 +67,7 @@
   <%# 今週の記録数カード（0でも表示） %>
   <div class="stat-card">
     <h3>今週の記録数</h3>
-    <p class="stat-value">
+    <p class="stat-value stat-record-value">
       <%= @weekly_records_count || 0 %> 件
     </p>
   </div>

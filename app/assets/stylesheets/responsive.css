@@ -121,6 +121,73 @@
     font-size: 26px;
   }
 
+  /* --- home/index(ダッシュボード)  --- */
+  /*タイトルを50pxから30pxに変更 */
+  .dashboard-title {
+  margin-bottom: 30px;
+  }
+
+  /* カードビュー全体を２×２に*/
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 横2枚 */
+    gap: 10px;
+    padding: 0 10px;
+  }
+  .stat-card {
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+  .stat-card h3 {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+  .stat-value {
+    font-size: 18px;
+  }
+  .stat-diff-container {
+    margin-top: 4px;
+  }
+  .stat-diff {
+    font-size: 12px;
+  }
+
+  /* (先週比)をカードタイトル下に移動 */
+  .stat-sleep-card h3::after {
+    content: "(先週比)";
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+  }
+  /* (先週比)を非表示 */
+  .stat-diff-label {
+    display: none;
+  }
+
+  /* 「平均睡眠時間」カードの内容を縦並びにして小さく */
+  .stat-value-container {
+    display: flex;
+    flex-direction: column;  /* 縦並び */
+    align-items: center;
+    font-weight: 700;
+    gap: 4px;
+  }
+  .stat-value-container .stat-value {
+    font-size: 14px;
+  }
+
+  /*「/」を非表示 */
+  .stat-divider {
+    display: none;
+  }
+
+  /* 「今週の記録数」の内容を大きして中央へ */
+  .stat-record-value {
+    font-size: 24px;
+    margin-top: 25px;
+  }
+
   /* --- children/indexのレスポンシブ --- */
   .child-card {
     flex-direction: column;   /* 縦並びに変更 */
@@ -154,11 +221,6 @@
   .notification-dropdown {
     max-height: 400px;
     min-height: 400px;
-  }
-
-  .growth-chart {
-    max-height: 300px;
-    max-width: 400px;
   }
 
   /* --- 通知ポップアップを画面上中央へ --- */
@@ -232,6 +294,12 @@
   }
   .col-item2-vaccination {
     width: 10%;
+  }
+
+  /* 成長グラフのサイズ調整 */
+  .growth-chart {
+    max-height: 300px;
+    max-width: 400px;
   }
 
   /* --- record以外のindexビューのサイズ調整 --- */

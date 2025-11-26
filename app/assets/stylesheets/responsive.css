@@ -244,6 +244,13 @@
   td.dashboard-col-detail {
     font-size: 14px;
   }
+
+  /* home/growthのグラフ */
+  #dashboardChart {
+    max-height: 300px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
   
   /* --- children/indexのレスポンシブ --- */
   .child-card {

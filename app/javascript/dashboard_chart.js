@@ -32,6 +32,7 @@ function createDashboardChart(isDarkMode) {
     },
     options: {
       responsive: true,
+      maintainAspectRatio: false,
       plugins: { 
         legend: { position: 'top', labels: { color: textColor } }, 
         title: { display: true, text: '成長グラフ', color: textColor } 

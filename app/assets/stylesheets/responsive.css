@@ -176,6 +176,11 @@
   .stat-value-container .stat-value {
     font-size: 14px;
   }
+  
+  /* 「平均睡眠時間」カードのdiffだけ小さく */
+  .stat-sleep-card .stat-diff-container .stat-diff {
+    font-size: 10px;
+  }
 
   /*「/」を非表示 */
   .stat-divider {
@@ -199,6 +204,24 @@
     font-size: 14px;
   }
 
+  /* home/record系一覧の幅とサイズ調整 */
+  .dashboard-col-date { width: 25%; }
+  .dashboard-col-item { width: 5%; }
+  .dashboard-col-detail { width: 35%; }
+  .dashboard-col-memo {
+    display: none;
+  }
+  .clickable-row span {
+    display: none;
+  }
+  .clickable-row span.show {
+  display: inline;
+  }
+  td.dashboard-col-date,
+  td.dashboard-col-detail {
+    font-size: 14px;
+  }
+  
   /* --- children/indexのレスポンシブ --- */
   .child-card {
     flex-direction: column;   /* 縦並びに変更 */
@@ -270,6 +293,16 @@
   .col-item1,
   .col-item2 {
     width: 40%;
+  }
+
+  /* 授乳 */
+  .col-item1-feed,
+  .col-item2-feed {
+    width: 40%;
+  }
+  .col-item1-feed span,
+  .col-item2-feed span {
+    display: inline;
   }
 
   /* おむつ */

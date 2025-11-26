@@ -80,7 +80,7 @@
 <%# ----- 育児記録一覧 ----- %>
 <h2 class="dashboard-title">育児記録一覧</h2>
 
-<div class="flex justify-center items-center mb-4">
+<div class="flex justify-center items-center mb-4 nav-date-controller">
   <div class="flex items-center gap-4">
     <!-- 前日へ -->
     <div class="tooltip">
@@ -106,7 +106,7 @@
     </div>
 
     <!-- 📅 カレンダー選択 -->
-    <div class="relative">
+    <div class="relative calendar-responsive">
       <!-- 隠しinput -->
       <input type="date" id="calendar-input"
         class="absolute opacity-0 pointer-events-none"
@@ -119,13 +119,13 @@
         class="ml-2 px-3 py-1.5 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg border border-gray-300 hover:bg-gray-200 transition duration-200 flex items-center gap-1">
         <i class="fa-solid fa-calendar-days"></i> 日付選択
       </button>
-    </div>
 
-    <!-- 🟢 本日へ（過去・未来の日付時のみ表示） -->
-    <% if @selected_date != Date.current %>
-      <%= link_to "本日へ", root_path,
-        class: "ml-4 px-3 py-1.5 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg border border-gray-300 hover:bg-gray-200 transition duration-200 no-underline hover:no-underline" %>
-    <% end %>
+      <!-- 🟢 本日へ（過去・未来の日付時のみ表示） -->
+      <% if @selected_date != Date.current %>
+        <%= link_to "本日へ", root_path,
+          class: "ml-4 px-3 py-1.5 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg border border-gray-300 hover:bg-gray-200 transition duration-200 no-underline hover:no-underline" %>
+      <% end %>
+    </div>
   </div>
 </div>
 

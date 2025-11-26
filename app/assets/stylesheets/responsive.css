@@ -188,6 +188,17 @@
     margin-top: 25px;
   }
 
+  /* home/schedule一覧の幅とサイズ調整 */
+  .dashboard-schedule-col-date { width: 70%; }
+  .dashboard-schedule-col-title { width: 30%; }
+  .dashboard-schedule-col-detail {
+    display: none;
+  }
+  td.dashboard-schedule-col-date,
+  td.dashboard-schedule-col-title {
+    font-size: 14px;
+  }
+
   /* --- children/indexのレスポンシブ --- */
   .child-card {
     flex-direction: column;   /* 縦並びに変更 */

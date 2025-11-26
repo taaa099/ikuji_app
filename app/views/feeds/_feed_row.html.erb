@@ -4,12 +4,12 @@
     <%= feed.fed_at.strftime("%H:%M") %>
   </td>
 
-  <td class="col-item1">
+  <td class="col-item1-feed">
     <span class="font-semibold text-gray-600">左:</span>
     <%= feed.left_time.present? ? "#{feed.left_time/60}分 #{feed.left_time%60}秒" : "-" %>
   </td>
 
-  <td class="col-item2">
+  <td class="col-item2-feed">
     <span class="font-semibold text-gray-600">右:</span>
     <%= feed.right_time.present? ? "#{feed.right_time/60}分 #{feed.right_time%60}秒" : "-" %>
   </td>

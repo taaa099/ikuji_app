@@ -13,7 +13,7 @@
       "Vaccination" => :vaccinated_at
     } %>
     <% datetime = record.send(date_columns[record.class.name]) rescue nil %>
-    <span class="font-semibold text-gray-600">時間：</span>
+    <span class="font-semibold text-gray-600">時間:</span>
     <%= datetime ? datetime.strftime("%H:%M") : "時間なし" %>
   </td>
 
@@ -54,7 +54,7 @@
       </td>
       <td class="dashboard-col-memo">
       <% if record.memo.present? %>
-        <span class="font-semibold text-gray-600">メモ：</span>
+        <span class="font-semibold text-gray-600">メモ:</span>
         <%= truncate(record.memo.to_s, length: 10, omission: "…") %></td>
       <% end %>
 
@@ -73,57 +73,57 @@
       <td class="dashboard-col-detail"></td>
       <td class="dashboard-col-memo">
       <% if record.memo.present? %>
-        <span class="font-semibold text-gray-600">メモ：</span>
+        <span class="font-semibold text-gray-600">メモ:</span>
         <%= truncate(record.memo.to_s, length: 10, omission: "…") %></td>
       <% end %>
 
     <% when "Bottle" %>
       <td class="dashboard-col-detail">
-       <span class="font-semibold text-gray-600">量 (ml)：</span>
+       <span class="font-semibold text-gray-600">量 (ml):</span>
       <%= record.amount %>ml</td>
       <td class="dashboard-col-detail"></td>
       <td class="dashboard-col-memo">
       <% if record.memo.present? %>
-        <span class="font-semibold text-gray-600">メモ：</span>
+        <span class="font-semibold text-gray-600">メモ:</span>
         <%= truncate(record.memo.to_s, length: 10, omission: "…") %></td>
       <% end %>
 
     <% when "Hydration" %>
       <td class="dashboard-col-detail">
-      <span class="font-semibold text-gray-600">種類：</span>
+      <span class="font-semibold text-gray-600">種類:</span>
       <%= record.drink_type %></td>
       <td class="dashboard-col-detail">
       <% if record.amount.present? %>
-        <span class="font-semibold text-gray-600">量 (ml)：</span>
+        <span class="font-semibold text-gray-600">量 (ml):</span>
         <%= record.amount %>ml</td>
       <% end %>
       <td class="dashboard-col-memo">
       <% if record.memo.present? %>
-        <span class="font-semibold text-gray-600">メモ：</span>
+        <span class="font-semibold text-gray-600">メモ:</span>
         <%= truncate(record.memo.to_s, length: 10, omission: "…") %></td>
       <% end %>
 
     <% when "BabyFood" %>
       <td class="dashboard-col-detail">
-      <span class="font-semibold text-gray-600">量 (ml)：</span>
+      <span class="font-semibold text-gray-600">量 (ml):</span>
       <%= record.amount %>ml</td>
       <td class="dashboard-col-detail"></td>
       <td class="dashboard-col-memo">
       <% if record.memo.present? %>
-        <span class="font-semibold text-gray-600">メモ：</span>
+        <span class="font-semibold text-gray-600">メモ:</span>
         <%= truncate(record.memo.to_s, length: 10, omission: "…") %></td>
       <% end %>
 
     <% when "SleepRecord" %>
       <td class="dashboard-col-detail">
-        <span class="font-semibold text-gray-600">開始：</span>
+        <span class="font-semibold text-gray-600">開始:</span>
         <%= record.start_time&.strftime("%H:%M") %>
         <span class="mx-1">〜</span>
-        <span class="font-semibold text-gray-600">終了：</span>
+        <span class="font-semibold text-gray-600">終了:</span>
         <%= record.end_time&.strftime("%H:%M") %>
       </td>
       <td class="dashboard-col-detail">
-        <span class="font-semibold text-gray-600"> 睡眠合計：</span>
+        <span class="font-semibold text-gray-600"> 睡眠合計:</span>
         <% if record.start_time && record.end_time %>
           <% duration_in_seconds = record.end_time - record.start_time %>
           <% hours = (duration_in_seconds / 3600).floor %>
@@ -135,7 +135,7 @@
       </td>
       <td class="dashboard-col-memo">
       <% if record.memo.present? %>
-        <span class="font-semibold text-gray-600">メモ：</span>
+        <span class="font-semibold text-gray-600">メモ:</span>
         <%= truncate(record.memo.to_s, length: 10, omission: "…") %></td>
       <% end %>
 
@@ -144,29 +144,29 @@
       <td class="dashboard-col-detail"></td>
       <td class="dashboard-col-memo">
       <% if record.memo.present? %>
-        <span class="font-semibold text-gray-600">メモ：</span>
+        <span class="font-semibold text-gray-600">メモ:</span>
         <%= truncate(record.memo.to_s, length: 10, omission: "…") %></td>
       <% end %>
 
     <% when "Bath" %>
       <td class="dashboard-col-detail">
-      <span class="font-semibold text-gray-600">種類：</span>
+      <span class="font-semibold text-gray-600">種類:</span>
       <%= record.bath_type %></td>
       <td class="dashboard-col-detail"></td>
       <td class="dashboard-col-memo">
       <% if record.memo.present? %>
-        <span class="font-semibold text-gray-600">メモ：</span>
+        <span class="font-semibold text-gray-600">メモ:</span>
         <%= truncate(record.memo.to_s, length: 10, omission: "…") %></td>
       <% end %>
 
     <% when "Vaccination" %>
       <td class="dashboard-col-detail">
-      <span class="font-semibold text-gray-600">種類：</span>
+      <span class="font-semibold text-gray-600">種類:</span>
       <%= record.vaccine_name %></td>
       <td class="dashboard-col-detail"></td>
       <td class="dashboard-col-memo">
       <% if record.memo.present? %>
-        <span class="font-semibold text-gray-600">メモ：</span>
+        <span class="font-semibold text-gray-600">メモ:</span>
         <%= truncate(record.memo.to_s, length: 10, omission: "…") %></td>
       <% end %>
 

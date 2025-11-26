@@ -205,6 +205,29 @@
   }
 
   /* home/record系一覧の幅とサイズ調整 */
+/* 内側のブロックは横並びを維持する */
+  .nav-date-controller > div {
+    flex-direction: row;
+    flex-wrap: wrap; /* 必須：要素が収まらない時に折り返し */
+    justify-content: center;
+  }
+  /* カレンダーだけを改行して下に落とす */
+  .calendar-responsive {
+    flex-basis: 100%;       /* 1行を占有 → 自動で改行される */
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+
+  /* 「本日へ」をカレンダーの右横に */
+  .calendar-responsive + a {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 0.5rem;  /* 日付選択との間隔 */
+    margin-bottom: 10px;  /* 下余白はカレンダーと揃える */
+  }
+
   .dashboard-col-date { width: 25%; }
   .dashboard-col-item { width: 5%; }
   .dashboard-col-detail { width: 35%; }

@@ -99,6 +99,50 @@
   color: #fff;
 }
 
+.dark .sidebar {
+  background-color: #1f2937; /* ダーク背景 */
+  border-right: 1px solid #374151;
+  color: #f9fafb;
+}
+
+.dark .sidebar h3,
+.dark .sidebar h4,
+.dark .sidebar h5,
+.dark .sidebar i {
+  color: #f9fafb;
+}
+
+.dark .sidebar ul li a,
+.dark .sidebar ul li button.nav-btn {
+  background-color: transparent;
+  color: #f9fafb;
+}
+
+.dark .sidebar ul li a:hover,
+.dark .sidebar ul li button.nav-btn:hover {
+  background-color: #2563eb; /* 青系ホバー */
+  color: #f9fafb;
+  border-color: #1d4ed8;
+}
+
+.dark .notification-setting {
+  background-color: #374151;
+  border-color: #4b5563;
+  color: #f9fafb;
+}
+
+.dark .notification-setting label {
+  color: #f9fafb;
+}
+
+.dark .notification-number,
+.dark .notification-time,
+.dark .child-goal {
+  background-color: #1f2937;
+  color: #f9fafb;
+  border-color: #4b5563;
+}
+
 /* ==============================
    footer ダークモード
    ============================== */
@@ -474,53 +518,6 @@
 .dark .notification-count {
   background: #ef4444; /* 赤系バッジ */
   color: #fff;
-}
-
-/* ==============================
-   sidebar ダークモード
-   ============================== */
-.dark .sidebar {
-  background-color: #1f2937; /* ダーク背景 */
-  border-right: 1px solid #374151;
-  color: #f9fafb;
-}
-
-.dark .sidebar h3,
-.dark .sidebar h4,
-.dark .sidebar h5 {
-  color: #f9fafb;
-}
-
-.dark .sidebar ul li a,
-.dark .sidebar ul li button.nav-btn {
-  background-color: transparent;
-  color: #f9fafb;
-  border: 1px solid #4b5563;
-}
-
-.dark .sidebar ul li a:hover,
-.dark .sidebar ul li button.nav-btn:hover {
-  background-color: #2563eb; /* 青系ホバー */
-  color: #f9fafb;
-  border-color: #1d4ed8;
-}
-
-.dark .notification-setting {
-  background-color: #374151;
-  border-color: #4b5563;
-  color: #f9fafb;
-}
-
-.dark .notification-setting label {
-  color: #f9fafb;
-}
-
-.dark .notification-number,
-.dark .notification-time,
-.dark .child-goal {
-  background-color: #1f2937;
-  color: #f9fafb;
-  border-color: #4b5563;
 }
 
 /* ==============================

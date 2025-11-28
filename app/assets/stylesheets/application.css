@@ -99,16 +99,28 @@ select {
   align-items: center;
 }
 
-.header-logo {
+.header-logo,
+.header-logo--guest {
   position: fixed;
   top: 10px;
   left: 60px;
   z-index: 16;
 }
 
-.header-logo .logo-image {
+.header-logo .logo-image,
+.header-logo .logo-image-dark,
+.header-logo--guest .logo-image,
+.header-logo--guest .logo-image-dark {
   height: 50px;
 }
+
+/* 通常（ライト） */
+.logo-image { display: block; }
+.logo-image-dark  { display: none; }
+
+/*. ダークモード時 */
+.dark .logo-image { display: none; }
+.dark .logo-image-dark  { display: block; }
 
 .header-center-item {
   max-height: 60px;
@@ -116,7 +128,6 @@ select {
 }
 
 .mobile-header-logo,
-.mobile-header-image,
 .mobile-header-logo--guest {
   display: none;
 }

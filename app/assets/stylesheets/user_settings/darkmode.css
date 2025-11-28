@@ -77,9 +77,23 @@
 }
 
 /* ==============================
-   サイドバー ダークモード
+   sidebar ダークモード
    ============================== */
 .dark #sidebar-toggle svg {
+  color: #fff;
+}
+
+/* ==============================
+   footer ダークモード
+   ============================== */
+.dark .site-footer {
+  background-color: #111827;
+  border-top: 1px solid #374151;
+}
+
+.dark .footer-links a,
+.dark .footer-bottom a,
+.dark .footer-bottom p {
   color: #fff;
 }
 

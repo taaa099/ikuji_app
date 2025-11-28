@@ -89,6 +89,35 @@
   background: #111827;
 }
 
+/* ベルマークのドロップダウン */
+.dark .notification-dropdown,
+.dark .notification-item {
+  background-color: #111827;
+}
+
+.dark .notification-item:hover {
+  background-color: #1b2236;
+}
+
+.dark .notification-kind.reminder {
+  background-color: #8aff8a;
+}
+
+.dark .notification-kind.alert {
+  background-color: #ff8a8a;
+}
+
+.dark .notification-title,
+.dark .notification-message,
+.dark .notification-time {
+  color: #fff;
+}
+
+.dark .notification-dropdown-header {
+  background-color: #111827;
+  color: #fff;
+}
+
 /* ==============================
    スマホ用ナビゲーション ダークモード
    ============================== */
@@ -123,7 +152,7 @@
 }
 
 .dark .sidebar {
-  background-color: #1f2937; /* ダーク背景 */
+  background-color: #111827; /* ダーク背景 */
   border-right: 1px solid #374151;
   color: #f9fafb;
 }
@@ -467,56 +496,8 @@
 }
 
 /* ==============================
-   notification.css ダークモード
+   notification ポップアップ ダークモード
    ============================== */
-.dark .notifications-list {
-  background-color: #1f2937; /* ダーク背景 */
-  color: #e5e7eb;            /* 標準文字色 */
-  border: 1px solid #374151;
-  border-radius: 6px;
-  padding: 10px;
-}
-
-.dark .notification-item {
-  border-bottom: 1px solid #374151;
-  padding: 8px 0;
-}
-
-/* 未読強調 */
-.dark .notification-item.unread {
-  background-color: #374151;
-}
-
-/* 通知種別（アイコンやラベル） */
-.dark .notification-item .kind {
-  color: #93c5fd; /* 青系で通知種別 */
-}
-
-/* タイトル */
-.dark .notification-item strong {
-  color: #facc15; /* 黄色で目立たせる */
-}
-
-/* 本文 */
-.dark .notification-item p {
-  color: #e5e7eb; /* 明るめグレーで読みやすく */
-}
-
-/* リンク */
-.dark .notification-item .target-link a {
-  color: #f3f4f6;
-}
-
-.dark .notification-item .target-link a:hover {
-  color: #60a5fa;
-}
-
-/* ステータス表示 */
-.dark .notification-item .status {
-  font-size: 12px;
-  color: #9ca3af;
-}
-
 /* ポップアップ全体 */
 .dark .notification-popup {
   border: 1px solid #374151;

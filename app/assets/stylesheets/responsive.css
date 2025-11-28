@@ -1,4 +1,4 @@
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 959px) {
   /* --- ヘッダー全体 --- */
   .site-header {
     height: 60px;
@@ -122,8 +122,9 @@
   }
 
   /* --- home/index(ダッシュボード)  --- */
-  /*タイトルを50pxから30pxに変更 */
+  /*タイトルのサイズ変更 */
   .dashboard-title {
+  font-size: 20px;
   margin-bottom: 30px;
   }
 
@@ -213,7 +214,7 @@
   }
   /* カレンダーだけを改行して下に落とす */
   .calendar-responsive {
-    flex-basis: 100%;       /* 1行を占有 → 自動で改行される */
+    flex-basis: 100%;
     display: flex;
     justify-content: center;
     margin-top: 0;

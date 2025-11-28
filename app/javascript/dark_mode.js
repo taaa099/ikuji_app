@@ -64,4 +64,13 @@ document.addEventListener("turbo:load", () => {
       });
     });
   }
+
+  // ログアウト時にダークモード解除
+  const logoutLink = document.querySelector('a[href="/users/sign_out"]');
+  if (logoutLink) {
+    logoutLink.addEventListener("click", () => {
+      localStorage.removeItem("theme");              // 保存されているテーマを削除
+      document.documentElement.classList.remove("dark"); // darkクラスを削除
+    });
+  }
 });

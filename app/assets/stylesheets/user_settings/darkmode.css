@@ -67,9 +67,25 @@
 }
 
 /* ==============================
+   スマホ用ナビゲーション ダークモード
+   ============================== */
+.dark .mobile-bottom-nav {
+  background-color: #111827;
+  border-top: 1px solid #374151
+}
+
+.dark .mobile-bottom-nav a,
+.dark .mobile-bottom-nav i {
+  color: #fff;
+}
+
+.dark .mobile-bottom-nav .mobile-nav-create {
+  background: #1F2937;
+}
+
+/* ==============================
    フィルターバー（一覧ページ上部の操作用UI）
    ============================== */
-
 .dark .filter-bar {
   background: #1f2937;
   border-color: #374151;

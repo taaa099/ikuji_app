@@ -222,6 +222,10 @@ select {
 /* ==============================
    アカウントメニュー共通スタイル
    ============================== */
+#account-menu {
+  border: 1px solid #e5e7eb;
+}
+
 #account-menu a,
 #account-menu form,
 #account-menu button {

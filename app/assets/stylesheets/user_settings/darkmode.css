@@ -66,6 +66,29 @@
   color: #f9fafb;
 }
 
+/* 「＋作成する」のドロップダウン */
+.dark #record-icons {
+  background-color: #111827;
+  border-color: #374151;
+}
+
+.dark #record-icons a,
+.dark #record-icons i {
+  color: #fff;
+}
+
+/* アカウントアイコンのドロップダウン */
+.dark #account-menu,
+.dark #theme-menu {
+  background-color: #111827;
+  border-color: #374151;
+}
+
+.dark #account-menu a {
+  color: #fff;
+  background: #111827;
+}
+
 /* ==============================
    スマホ用ナビゲーション ダークモード
    ============================== */

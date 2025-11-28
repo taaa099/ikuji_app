@@ -216,9 +216,6 @@
       <% else %>
         <!-- ログイン前 -->
         <div class="header-container--guest flex justify-between items-center">
-          <div class="header-logo">
-            <%= link_to "IkujiApp", root_path, class: "logo-text" %>
-          </div>
           <!-- 右端ログイン・新規登録 -->
           <div class="header-actions flex items-center gap-4">
             <%= link_to "ログイン", new_user_session_path, class: "btn-guest-action" %>
@@ -237,13 +234,15 @@
     <% if user_signed_in? && current_child.present? %>
       <div class="header-logo">
         <%= link_to root_path do %>
-          <%= image_tag "myapp_logo1.jpg", alt: "IkujiApp Logo", class: "logo-image" %>
+          <%= image_tag "myapp_logo.jpg", alt: "IkujiApp Logo", class: "logo-image" %>
+          <%= image_tag "myapp_logo_dark.jpg", alt: "IkujiApp Logo", class: "logo-image-dark" %>
         <% end %>
       </div>
     <% else %>
       <div class="header-logo--guest">
         <%= link_to root_path do %>
-          <%= image_tag "myapp_logo1.jpg", alt: "IkujiApp Logo", class: "logo-image" %>
+          <%= image_tag "myapp_logo.jpg", alt: "IkujiApp Logo", class: "logo-image" %>
+          <%= image_tag "myapp_logo_dark.jpg", alt: "IkujiApp Logo", class: "logo-image-dark" %>
         <% end %>
       </div>
     <% end %>
@@ -295,12 +294,14 @@
       <div class="mobile-header-logo">
         <%= link_to root_path do %>
           <%= image_tag "icononly.jpg", alt: "IkujiApp Logo", class: "mobile-logo-image" %>
+          <%= image_tag "icononly_dark.jpg", alt: "IkujiApp Logo", class: "mobile-logo-image-dark" %>
         <% end %>
       </div>
     <% else %>
       <div class="mobile-header-logo--guest">
         <%= link_to root_path do %>
           <%= image_tag "icononly.jpg", alt: "IkujiApp Logo", class: "mobile-logo-image" %>
+          <%= image_tag "icononly_dark.jpg", alt: "IkujiApp Logo", class: "mobile-logo-image-dark" %>
         <% end %>
       </div>
     <% end %>

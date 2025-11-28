@@ -134,7 +134,8 @@
   z-index: 16;
 }
 
-.header-logo--guest .logo-image {
+.header-logo--guest .logo-image,
+.header-logo--guest .logo-image-dark {
   height: 60px;
 }
 

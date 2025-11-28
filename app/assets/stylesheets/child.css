@@ -286,9 +286,18 @@
 }
 
 /* 子供切り替えビューのデザイン */
-.switch-logo-image {
+.switch-logo-image,
+.switch-logo-image-dark {
   height: 70px;
 }
+
+/* 通常（ライト） */
+.switch-logo-image { display: block; }
+.switch-logo-image-dark  { display: none; }
+
+/*. ダークモード時 */
+.dark .switch-logo-image { display: none; }
+.dark .switch-logo-image-dark  { display: block; }
 
 /* ロゴ */
 .switch-child-page-logo span {

@@ -257,12 +257,12 @@
 }
 
 /* 「スケジュール/記録がありません」の表示 */
-.no-record-card {
+.dark .no-record-card {
   background-color: #111827;
   color: #fff;
 }
 
-.no-record-card {
+.dark .no-record-card {
   border-color: #374151;
 }
 
@@ -297,6 +297,95 @@
 }
 
 /* ==============================
+   child.css ダークモード
+   ============================== */
+/* タイトル */
+.dark .child-title {
+  color: #fff;
+}
+
+/* --- index --- */
+/* カードビュー */
+.dark .child-card {
+  background-color: #111827;
+  border-color: #374151;
+}
+
+.dark .child-card p,
+.dark .child-card span {
+  color: #fff;
+}
+
+/* 表示ボタン */
+.dark .view-btn {
+  background-color: #1b2236;
+  color: #60a5fa;
+  border: 1px solid #2563eb;
+}
+
+.dark .view-btn:hover {
+  background-color: #2563eb;
+  color: #fff;
+}
+
+/* 編集ボタン */
+.dark .edit-btn {
+  background-color: #1b2236;
+  color: #facc15;
+  border: 1px solid #b58900;
+}
+
+.dark .edit-btn:hover {
+  background-color: #b58900; 
+  color: #fff;
+}
+
+/* 削除ボタン */
+.dark .delete-btn {
+  background-color: #1b2236;
+  color: #f87171; /* 赤系で目立たせる */
+  border: 1px solid #d32f2f;
+}
+
+.dark .delete-btn:hover {
+  background-color: #d32f2f;
+  color: #fff;
+}
+
+/* 新規作成ボタン */
+.dark .new-child-btn {
+  background-color: #6fcf97;
+  color: #fff;
+}
+
+.dark .new-child-btn:hover {
+  background-color: #fff;
+  color: #4caf50;
+}
+
+/* --- show --- */
+.dark .child-container {
+  background-color: #111827;
+  border: 1px solid #374151;
+}
+
+.dark .child-image,
+.dark .child-item,
+.dark .child-container strong {
+  color: #fff;
+}
+
+/* new/edit */
+.dark .child-form-container {
+  background-color: #111827;
+  border-color: #374151;
+}
+
+.dark .form-label {
+  color: #fff;
+}
+
+/* ==============================
    record.css ダークモード
    ============================== */
 .dark .col-detail a {
@@ -317,19 +406,6 @@
   background-color: #374151;
   color: #f9fafb;
   border-color: #4b5563;
-}
-
-.dark .form-actions a,
-.dark .form-actions input[type="submit"],
-.dark .form-actions button {
-  background: #2563eb;
-  color: #f9fafb;
-}
-
-.dark .form-actions a:hover,
-.dark .form-actions input[type="submit"]:hover,
-.dark .form-actions button:hover {
-  background: #1d4ed8;
 }
 
 /* ==============================
@@ -549,37 +625,6 @@
 
 .dark .profile-show-avatar img {
   border-color: #4b5563;
-}
-
-/* ==============================
-   children/show (プロフィール) ダークモード
-   ============================== */
-.dark .profile-container {
-  background-color: #1f2937; /* ダーク背景 */
-  border-color: #374151;
-  color: #f9fafb;
-}
-
-.dark .profile-item {
-  color: #f9fafb;
-}
-
-.dark .profile-item strong {
-  color: #f9fafb;
-}
-
-.dark .profile-image img {
-  border: 1px solid #4b5563;
-  border-radius: 6px;
-}
-
-.dark .profile-btn {
-  background-color: #2563eb;
-  color: #f9fafb;
-}
-
-.dark .profile-btn:hover {
-  background-color: #1d4ed8;
 }
 
 /* ==============================

@@ -77,6 +77,10 @@
   color: #fff;
 }
 
+.dark #record-icons a:hover {
+  background-color: #1b2236;
+}
+
 /* アカウントアイコンのドロップダウン */
 .dark #account-menu,
 .dark #theme-menu {
@@ -87,6 +91,12 @@
 .dark #account-menu a {
   color: #fff;
   background: #111827;
+}
+
+.dark #account-menu a:hover,
+.dark #account-menu form:hover,
+.dark #account-menu button:hover {
+  background-color: #1b2236;
 }
 
 /* ベルマークのドロップダウン */
@@ -206,6 +216,83 @@
 .dark .footer-links a,
 .dark .footer-bottom a,
 .dark .footer-bottom p {
+  color: #fff;
+}
+
+/* ==============================
+   dashboard.css ダークモード
+   ============================== */
+/* --- 共通 --- */
+.dark .dashboard-title {
+  color: #fff;
+}
+
+/* カードビュー */
+.dark .stat-card {
+  background-color: #111827;
+  border: 1px solid #374151;
+}
+
+/* カードタイトル */
+.dark .stat-card h3 {
+  color: #fff;
+}
+
+/* カード内容 */
+.dark .stat-value {
+  color: #fff;
+}
+
+/* カードのステータス情報 */
+.dark .stat-diff.up { color: #4ade80; }
+.dark .stat-diff.down { color: #ef4444; }
+
+.dark .stat-diff-label {
+  color: #fff;
+}
+
+/* テーブルのボーダー */
+.dark .dashboard-table td {
+  border-color: #fff;
+}
+
+/* 「スケジュール/記録がありません」の表示 */
+.no-record-card {
+  background-color: #111827;
+  color: #fff;
+}
+
+.no-record-card {
+  border-color: #374151;
+}
+
+/* --- scheduleレコード行 --- */
+/* レコードの中身 */
+.dark .dashboard-schedule-col-date,
+.dark .dashboard-schedule-col-title,
+.dark .dashboard-schedule-col-detail,
+.dark .dashboard-col-chevron i {
+  color: #fff;
+}
+
+/* レコードホバー時 */
+.dark .dashboard-table tr:hover {
+  background-color: #1b2236;
+}
+
+/* --- recordレコード行 --- */
+/* ナビゲーション（テキストだけはtailwindで実装） */
+.dark .nav-date-controller .fa-chevron-left,
+.dark .nav-date-controller .fa-chevron-right {
+  color: #fff;
+}
+
+/* レコードの中身 */
+.dark .dashboard-col-date,
+.dark .dashboard-col-detail,
+.dark .dashboard-col-item,
+.dark .dashboard-col-memo,
+.dark #dashboard-records span {
   color: #fff;
 }
 

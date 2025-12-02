@@ -419,13 +419,8 @@
   color: #6fcf97;
 }
 
-.dark .col-detail a {
-  background-color: #2563eb;
-  color: #f9fafb;
-}
-
-.dark .col-detail a:hover {
-  background-color: #1d4ed8;
+.dark .checkbox-wrapper {
+  color: #fff;
 }
 
 .dark .form-container {

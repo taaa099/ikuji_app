@@ -20,7 +20,7 @@
         <span class="required-badge">いずれかを入力</span>
       </label>
 
-      <div class="grid grid-cols-4 gap-2 p-3 bg-white">
+      <div class="grid grid-cols-4 gap-2 p-3">
         <div>
           <%= number_field_tag :left_minutes, (@left_minutes == 0 ? "" : @left_minutes), min: 0, class: "form-input #{'input-error' if feed.errors[:base].any?}", placeholder: "左（分）" %>
         </div>

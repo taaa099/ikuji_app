@@ -780,6 +780,10 @@
 /* ==============================
    tips.css ダークモード
    ============================== */
+/* 共通タイトル */
+.dark .responsive-tip-title {
+  color: #fff;
+}
 
 /* --- show ページ用 --- */
 .dark .tip-container {
@@ -803,13 +807,13 @@
 }
 
 .dark .tip-actions .nav-btn {
-  background: #2563eb;
+  background: #4CAF50;
   color: #f9fafb;
-  border: 1px solid #1d4ed8;
+  border: 1px solid #45a049;
 }
 
 .dark .tip-actions .nav-btn:hover {
-  background: #1d4ed8;
+  background: #45a049;
 }
 
 /* --- index ページ用 --- */
@@ -828,7 +832,7 @@
 }
 
 .dark .tip-title a:hover {
-  color: #60a5fa; /* 青系でホバー */
+  color: #6fcf97;
 }
 
 .dark .tip-category {

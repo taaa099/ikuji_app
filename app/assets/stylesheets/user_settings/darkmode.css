@@ -495,20 +495,9 @@
   color: #fff;
 }
 
-
 /* ==============================
    schedule.css ダークモード
    ============================== */
-.dark .schedule-table {
-  background-color: #1f2937;
-  color: #f9fafb;
-}
-
-.dark .schedule-table th,
-.dark .schedule-table td {
-  border-color: #374151;
-}
-
 .dark .schedule-index-btn {
   background-color: #2563eb;
   color: #f9fafb;
@@ -602,6 +591,51 @@
 .dark .event-link.child-color-3 { background-color: #be123c; } /* 落ち着いた赤 */
 .dark .event-link.child-color-4 { background-color: #ca8a04; } /* 深い黄色 */
 .dark .event-link.user-event { background-color: #4b5563; } /* より暗いグレー */
+
+/* --- index --- */
+/* タイトル・日付セクションタイトル */
+.dark .schedule-title {
+  color: #fff;
+}
+
+/* レコード内容 */
+.dark .schedule-table td,
+.dark .schedule-table span {
+  border-color: #fff;
+  color: #fff;
+}
+
+/* レコード行ホバー */
+.dark .schedule-table tr:hover {
+  background-color: #1b2236;
+}
+
+/* --- show ---*/
+.dark .schedule-show-modern {
+  background-color: #111827;
+}
+
+.dark .schedule-show-title,
+.dark .schedule-show-detail p,
+.dark .schedule-show-detail strong,
+.dark .schedule-show-detail span {
+  color: #fff;
+}
+
+.dark .schedule-show-detail i {
+  color: #4ade80;
+}
+
+/* 「新規作成」ボタン */
+.dark .schedule-create-btn {
+  background-color: #6fcf97;
+  color: #fff;
+}
+
+.dark .schedule-create-btn:hover {
+  background-color: #fff;
+  color: #6fcf97;
+}
 
 /* ==============================
    growth.css ダークモード

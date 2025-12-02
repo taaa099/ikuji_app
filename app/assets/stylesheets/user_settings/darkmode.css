@@ -498,52 +498,6 @@
 /* ==============================
    schedule.css ダークモード
    ============================== */
-.dark .schedule-index-btn {
-  background-color: #2563eb;
-  color: #f9fafb;
-  border-color: #1e40af;
-}
-
-.dark .schedule-form-container {
-  background: #1f2937;
-  border-color: #374151;
-  color: #f9fafb;
-}
-
-.dark .schedule-form-input {
-  background-color: #374151;
-  color: #f9fafb;
-  border-color: #4b5563;
-}
-
-.dark .schedule-form-actions a,
-.dark .schedule-form-actions input[type="submit"],
-.dark .schedule-form-actions button {
-  background: #2563eb;
-  color: #f9fafb;
-}
-
-.dark .schedule-form-actions a:hover,
-.dark .schedule-form-actions input[type="submit"]:hover,
-.dark .schedule-form-actions button:hover {
-  background: #1d4ed8;
-}
-
-.dark .schedule-show-container {
-  background: #1f2937;
-  border-color: #374151;
-  color: #f9fafb;
-}
-
-.dark .schedule-show-btn {
-  background-color: #2563eb;
-  color: #f9fafb;
-}
-
-.dark .schedule-show-btn:hover {
-  background-color: #1d4ed8;
-}
-
 .dark .calendar-container {
   background-color: #111827;
   color: #f9fafb;
@@ -626,6 +580,7 @@
   color: #4ade80;
 }
 
+/* --- new/edit --- */
 /* 「新規作成」ボタン */
 .dark .schedule-create-btn {
   background-color: #6fcf97;
@@ -635,6 +590,12 @@
 .dark .schedule-create-btn:hover {
   background-color: #fff;
   color: #6fcf97;
+}
+
+.dark .schedule-form-input {
+  background-color: #374151;
+  color: #f9fafb;
+  border-color: #4b5563;
 }
 
 /* ==============================

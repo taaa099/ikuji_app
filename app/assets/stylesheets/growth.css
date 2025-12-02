@@ -142,7 +142,7 @@
   cursor: pointer;
   display: inline-block;
   text-decoration: none;
-  background-color: #6699cc;
+  background-color: #4CAF50;
   color: #fff;
 }
 
@@ -150,7 +150,7 @@
 .growth-form-actions input[type="submit"]:hover,
 .growth-form-actions a:hover,
 .growth-form-actions button:hover {
-  background-color: #5577aa;
+  background-color: #45a049;
 }
 
 /* ==============================
@@ -183,10 +183,10 @@
 
 /* growthモーダル専用の閉じるボタン */
 .modal-background .modal-container .modal-close.growth-modal-close {
-  background-color: #6699cc; /* 青色 */
+  background-color: #4CAF50;
   color: #fff;
 }
 
 .modal-background .modal-container .modal-close.growth-modal-close:hover {
-  background-color: #5577aa; /* hover青色 */
+  background-color: #45a049;
 }

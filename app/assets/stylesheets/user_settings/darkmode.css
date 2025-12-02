@@ -437,41 +437,62 @@
 /* ==============================
    diary.css ダークモード
    ============================== */
+/* --- index --- */
+/* タイトル */
 .dark .responsive-diary-title {
   color: #fff;
 }
 
+/* カードビュー */
 .dark .diary-index-item {
   background-color: #111827;
   border: 1px solid #374151;
 }
 
+/* 中身 */
 .dark .diary-index-title,
 .dark .diary-index-date,
 .dark .diary-index-content {
   color: #fff;
 }
 
+/* 写真・動画アイコン */
 .dark .diary-index-media-icons {
   color: #fff;
 }
 
+/* --- show --- */
+/* タイトル */
 .dark .responsive-diary-show-title {
   color: #fff;
 }
 
+/* カードビュー */
 .dark .diary-show-card {
   background-color: #111827;
   border: 1px solid #374151;
 }
 
+/* 中身 */
 .dark .diary-show-title,
 .dark .diary-show-content {
   color: #fff;
 }
 
+/* 日付 */
 .dark .diary-show-date {
   color: #6B7280 ;
+}
+
+/* --- new/edit --- */
+/* モーダル */
+.dark .no-record-modal-container {
+  background-color: #111827;
+}
+
+/* 「削除する」ラベル */
+.dark .remove-media-label {
+  color: #fff;
 }
 
 

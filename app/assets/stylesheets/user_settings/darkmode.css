@@ -601,70 +601,43 @@
 /* ==============================
    growth.css ダークモード
    ============================== */
-.dark .growth-index-btn {
-  background-color: #2563eb;
-  color: #f9fafb;
+/* タイトル */
+.dark .growth-title {
+  color: #fff;
 }
 
-.dark .growth-index-btn:hover {
-  background-color: #1d4ed8;
+/* レコード内容 */
+.dark .growth-table td,
+.dark .growth-table span {
+  border-color: #fff;
+  color: #fff;
 }
 
-.dark .growth-table {
-  background-color: #1f2937;
-  border-color: #374151;
-  color: #f9fafb;
+/* レコード行ホバー */
+.dark .growth-table tr:hover {
+  background-color: #1b2236;
 }
 
-.dark .growth-table th,
-.dark .growth-table td {
-  border-color: #4b5563;
+/* 「新規作成」ボタン */
+.dark .growth-create-btn {
+  background-color: #6fcf97;
+  color: #fff;
 }
 
-.dark .growth-table th {
-  background-color: #374151;
-}
-
-.dark .growth-table td {
-  background-color: #1f2937;
-}
-
-.dark .growth-col-detail a {
-  background-color: #2563eb;
-  color: #f9fafb;
-}
-
-.dark .growth-col-detail a:hover {
-  background-color: #1d4ed8;
-}
-
-.dark .growth-chart {
-  background-color: #1f2937;
+.dark .growth-create-btn:hover {
+  background-color: #fff;
+  color: #6fcf97;
 }
 
 .dark .growth-form-container {
-  background-color: #1f2937;
+  background: #1f2937;
   border-color: #374151;
-  color: #f9fafb;
 }
 
 .dark .growth-form-input {
   background-color: #374151;
   color: #f9fafb;
   border-color: #4b5563;
-}
-
-.dark .growth-form-actions input[type="submit"],
-.dark .growth-form-actions a,
-.dark .growth-form-actions button {
-  background-color: #2563eb;
-  color: #f9fafb;
-}
-
-.dark .growth-form-actions input[type="submit"]:hover,
-.dark .growth-form-actions a:hover,
-.dark .growth-form-actions button:hover {
-  background-color: #1d4ed8;
 }
 
 /* ==============================

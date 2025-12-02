@@ -187,24 +187,6 @@
   border-color: #1d4ed8;
 }
 
-.dark .notification-setting {
-  background-color: #374151;
-  border-color: #4b5563;
-  color: #f9fafb;
-}
-
-.dark .notification-setting label {
-  color: #f9fafb;
-}
-
-.dark .notification-number,
-.dark .notification-time,
-.dark .child-goal {
-  background-color: #1f2937;
-  color: #f9fafb;
-  border-color: #4b5563;
-}
-
 /* ==============================
    footer ダークモード
    ============================== */
@@ -663,9 +645,10 @@
 }
 
 /* ==============================
-   notification ポップアップ ダークモード
+   notification.css ポップアップ/通知設定 ダークモード
    ============================== */
-/* ポップアップ全体 */
+/* --- ポップアップ ---*/
+/* 全体 */
 .dark .notification-popup {
   border: 1px solid #374151;
   border-radius: 6px;
@@ -689,6 +672,47 @@
 .dark .notification-count {
   background: #ef4444; /* 赤系バッジ */
   color: #fff;
+}
+
+/* --- 通知設定 --- */
+/* モーダル全体 */
+.dark .sidebar-modal-content {
+  background-color: #111827;
+}
+
+/* 中身（ヘッダーとカードビュー） */
+.dark .notification-modal-header,
+.dark .notification-setting {
+  background-color: #374151;
+  color: #fff;
+  border-color: #4b5563;
+}
+
+/* 「×」閉じるボタン */
+.dark .header-close-btn {
+  color: #fff;
+}
+
+.dark .header-close-btn:hover {
+  color: #111827;
+}
+
+/* 中身のテキスト */
+.dark .notification-setting label,
+.dark .notification-setting h5 {
+  color: #fff;
+}
+
+.dark .notification-number,
+.dark .notification-time,
+.dark .child-goal {
+  background-color: #1f2937;
+  color: #fff;
+  border-color: #4b5563;
+}
+
+.dark .notification-option:hover {
+  background-color: #1b2236;
 }
 
 /* ==============================

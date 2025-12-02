@@ -435,6 +435,47 @@
 }
 
 /* ==============================
+   diary.css ダークモード
+   ============================== */
+.dark .responsive-diary-title {
+  color: #fff;
+}
+
+.dark .diary-index-item {
+  background-color: #111827;
+  border: 1px solid #374151;
+}
+
+.dark .diary-index-title,
+.dark .diary-index-date,
+.dark .diary-index-content {
+  color: #fff;
+}
+
+.dark .diary-index-media-icons {
+  color: #fff;
+}
+
+.dark .responsive-diary-show-title {
+  color: #fff;
+}
+
+.dark .diary-show-card {
+  background-color: #111827;
+  border: 1px solid #374151;
+}
+
+.dark .diary-show-title,
+.dark .diary-show-content {
+  color: #fff;
+}
+
+.dark .diary-show-date {
+  color: #6B7280 ;
+}
+
+
+/* ==============================
    schedule.css ダークモード
    ============================== */
 .dark .schedule-table {

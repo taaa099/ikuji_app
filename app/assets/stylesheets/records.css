@@ -66,6 +66,18 @@
 .col-item2 { width: 25%; }
 .col-memo { width: 25%; }
 
+.col-item1-feed,
+.col-item2-feed,
+.col-item1-diaper,
+.col-item2-diaper,
+.col-date-sleep,
+.col-item1-sleep,
+.col-item2-sleep,
+.col-item1-vaccination,
+.col-item2-vaccination {
+  width: 25%
+}
+
 .index-btn {
   display: inline-block;
   padding: 6px 12px;

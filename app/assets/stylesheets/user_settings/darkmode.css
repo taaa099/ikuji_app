@@ -388,6 +388,37 @@
 /* ==============================
    record.css ダークモード
    ============================== */
+/* タイトル・日付セクションタイトル */
+.dark .responsive-title,
+.dark .date-heading {
+  color: #fff;
+}
+
+/* レコード内容 */
+.dark .responsive-table td,
+.dark .responsive-table span,
+.dark .record-col-chevron i,
+.dark .date-section {
+  border-color: #fff;
+  color: #fff;
+}
+
+/* レコード行ホバー */
+.dark .responsive-table tr:hover {
+  background-color: #1b2236;
+}
+
+/* 「新規作成」ボタン */
+.dark .record-create-btn {
+  background-color: #6fcf97;
+  color: #fff;
+}
+
+.dark .record-create-btn:hover {
+  background-color: #fff;
+  color: #6fcf97;
+}
+
 .dark .col-detail a {
   background-color: #2563eb;
   color: #f9fafb;

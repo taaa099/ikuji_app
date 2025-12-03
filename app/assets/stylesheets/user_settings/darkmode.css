@@ -782,6 +782,14 @@
 }
 
 /* ==============================
+   static_pages ダークモード
+   ============================== */
+.dark .static_pages-container {
+  background-color: #111827;
+  color: #fff;
+}
+
+/* ==============================
    modal ダークモード
    ============================== */
 .dark .modal-background {

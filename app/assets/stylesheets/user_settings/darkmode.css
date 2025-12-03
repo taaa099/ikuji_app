@@ -367,6 +367,33 @@
   color: #fff;
 }
 
+/* --- switch_page --- */
+/* 全体 */
+.dark .switch-child-page-box {
+  background-color: #111827;
+  border-color: #374151;
+}
+
+/* タイトル */
+.dark .switch-child-page-title {
+  color: #fff;
+}
+
+/* 子供カードビュー */
+.dark .switch-child-page-child-item {
+  background-color: #111827;
+  border-color: #fff;
+}
+
+.dark .switch-child-page-child-item:hover {
+  background-color: #1b2236;
+}
+
+/* 中身（名前） */
+.dark .switch-child-page-child-name {
+  color: #fff;
+}
+
 /* ==============================
    record.css ダークモード
    ============================== */

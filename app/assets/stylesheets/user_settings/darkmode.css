@@ -145,6 +145,16 @@
   background: #1F2937;
 }
 
+.dark .mobile-modal-content {
+  background-color: #111827;
+  border: 1px solid #374151;
+}
+
+.dark #mobile-modal-title,
+.dark .mobile-modal-item-text {
+  color: #fff;
+}
+
 /* ==============================
    フィルターバー（一覧ページ上部の操作用UI）
    ============================== */

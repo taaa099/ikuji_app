@@ -4,6 +4,14 @@ document.addEventListener("turbo:load", () => {
   const lightCheckbox = document.getElementById("theme-light");
   const darkCheckbox = document.getElementById("theme-dark");
 
+  // bodyのdata-logged-in属性を参照
+  const isLoggedIn = document.body.dataset.loggedIn === "true";
+  if (!isLoggedIn) {
+    localStorage.removeItem("theme");              // 保存されているテーマを削除
+    document.documentElement.classList.remove("dark"); // darkクラスを削除
+  }
+  // ==============================
+
   // 保存されているテーマを反映
   let savedTheme = localStorage.getItem("theme") || "light";
   let isDark = savedTheme === "dark";

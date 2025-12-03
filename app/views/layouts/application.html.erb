@@ -23,7 +23,7 @@
     <%= javascript_importmap_tags %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
   </head>
-  <body data-current-child-id="<%= @current_child&.id || 0 %>" class="bg-white text-black dark:bg-gray-900 dark:text-gray-100">
+  <body data-current-child-id="<%= @current_child&.id || 0 %>" data-logged-in="<%= user_signed_in? %>" class="bg-white text-black dark:bg-gray-900 dark:text-gray-100">
     <header class="site-header">
       <% if user_signed_in? %>
         <div class="header-container flex justify-between items-center">

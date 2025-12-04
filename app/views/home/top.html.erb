@@ -7,7 +7,7 @@
       <%= link_to "無料で始める", new_user_registration_path, class: "btn-primary" %>
     </div>
     <div class="hero-image">
-      <%= image_tag "myapp_logo.jpg", alt: "アプリ画面", class: "mockup" %>
+      <%= image_tag "mockup.jpg", alt: "アプリ画面", class: "mockup" %>
     </div>
   </section>
 
@@ -15,22 +15,32 @@
   <section id="features" class="features">
     <h2>IkujiAppの特徴</h2>
     <div class="feature-cards">
+
       <div class="top-card">
-        <div class="top-icon">📘</div>
-        <p>成長記録をシンプルに入力</p>
+        <div class="top-icon"><i class="fa-solid fa-book"></i></div>
+        <p>ストレスなく瞬時に入力</p>
       </div>
+
       <div class="top-card">
-        <div class="top-icon">📅</div>
-        <p>日ごとの記録を自動整理</p>
+        <div class="top-icon"><i class="fa-solid fa-calendar-days"></i></div>
+        <p>一目で今日の状況が分かる</p>
       </div>
+
       <div class="top-card">
-        <div class="top-icon">📊</div>
+        <div class="top-icon"><i class="fa-solid fa-bell"></i></div>
+        <p>完全リアルタイム通知</p>
+      </div>
+
+      <div class="top-card">
+        <div class="top-icon"><i class="fa-solid fa-chart-line"></i></div>
         <p>グラフで成長を見える化</p>
       </div>
+
       <div class="top-card">
-        <div class="top-icon">🔒</div>
-        <p>データは安全に保存</p>
+        <div class="top-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+        <p>スマホでも快適に利用</p>
       </div>
+
     </div>
   </section>
 
@@ -38,9 +48,22 @@
   <section id="how-to" class="top-screens">
     <h2>こんなふうに使えます</h2>
     <div class="top-screens-inner">
-      <%= image_tag "myapp_logo.jpg", alt: "記録画面", class: "top-screen-img" %>
-      <%= image_tag "myapp_logo.jpg", alt: "カレンダー画面", class: "top-screen-img" %>
-      <%= image_tag "myapp_logo.jpg", alt: "グラフ画面", class: "top-screen-img" %>
+
+      <div class="top-screen-block">
+        <%= image_tag "mockup.jpg", alt: "記録画面", class: "top-screen-img" %>
+        <p class="top-screen-caption">毎日の記録を素早く入力</p>
+      </div>
+
+      <div class="top-screen-block">
+        <%= image_tag "mockup.jpg", alt: "カレンダー画面", class: "top-screen-img" %>
+        <p class="top-screen-caption">過去の記録をカレンダーで確認</p>
+      </div>
+
+      <div class="top-screen-block">
+        <%= image_tag "mockup.jpg", alt: "グラフ画面", class: "top-screen-img" %>
+        <p class="top-screen-caption">成長をグラフでわかりやすく把握</p>
+      </div>
+
     </div>
   </section>
 
@@ -48,16 +71,16 @@
   <section class="use-cases">
     <h2>こんな方におすすめ</h2>
     <ul>
-      <li>👩 初めての育児で記録をまとめたい方</li>
-      <li>👨 夫婦で情報共有したい方</li>
-      <li>👶 成長の記録を残しておきたい方</li>
+      <li><i class="fa-solid fa-layer-group"></i> 多機能だけど迷わない、ちょうど良い育児アプリを使いたい方</li>
+      <li><i class="fa-solid fa-comment-dots"></i> SNSのように直感的でサクサク記録したい方</li>
+      <li><i class="fa-solid fa-eye"></i> 記録を一画面でパッと把握したい方</li>
     </ul>
   </section>
 
   <!-- 登録誘導 -->
   <section id="pricing" class="cta">
     <h2>今すぐ使ってみましょう</h2>
-    <p>基本機能はすべて無料・登録は1分で完了</p>
+    <p>すぐに使い始められる・登録は1分で完了</p>
     <%= link_to "無料で始める", new_user_registration_path, class: "btn-primary" %>
   </section>
 </div>

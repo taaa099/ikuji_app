@@ -36,8 +36,8 @@
 }
 
 .mockup {
-  max-width: 400px;
-  width: 100%;
+  height: 600px;
+  width: auto;
 }
 
 /* =============================
@@ -65,7 +65,7 @@
   background: #fff;
   border-radius: 12px;
   padding: 20px;
-  width: 200px;
+  width: 235px;
   box-shadow: 0 3px 8px rgba(0,0,0,0.1);
   transition: transform 0.2s;
 }
@@ -79,6 +79,27 @@
   margin-bottom: 10px;
 }
 
+/* 個別の色設定 */
+.top-card .fa-book {
+  color: #3B82F6; /* 青 */
+}
+
+.top-card .fa-calendar-days {
+  color: #EF4444; /* オレンジ */
+}
+
+.top-card .fa-bell {
+  color: #F59E0B; /* 赤 */
+}
+
+.top-card .fa-chart-line {
+  color: #10B981; /* 緑 */
+}
+
+.top-card .fa-mobile-screen-button {
+  color: #8B5CF6; /* 紫 */
+}
+
 /* =============================
    画面紹介
 ============================= */
@@ -87,17 +108,28 @@
   padding: 60px 20px;
 }
 
+.top-screen-block {
+  text-align: center;
+}
+
 .top-screens-inner {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 100px;
+  margin-top: 30px;
 }
 
 .top-screen-img {
-  width: 300px;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  height: 560px;
+  width: auto;
+}
+
+
+.top-screen-caption {
+  margin-top: 12px;
+  font-size: 16px;
+  color: #4B5563; /* gray-600 */
 }
 
 /* =============================
@@ -109,12 +141,28 @@
   padding: 60px 20px;
 }
 
+.use-cases h2 {
+  margin-bottom: 10px;
+}
+
 .use-cases ul {
   list-style: none;
   padding: 0;
   margin: 0;
   font-size: 18px;
   line-height: 2;
+}
+
+.use-cases .fa-layer-group {
+  color: #3B82F6;
+}
+
+.use-cases .fa-comment-dots {
+  color: #F59E0B;
+}
+
+.use-cases .fa-eye {
+  color: #10B981;
 }
 
 /* =============================

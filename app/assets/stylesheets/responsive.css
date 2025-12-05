@@ -520,6 +520,79 @@
     margin-top: 40px;
   }  
 
+  /* --- topページ --- */
+  /* 先頭見出しのモックアップを縦並びに */
+  .hero {
+    display: flex;
+    flex-direction: column;  /* 縦並び */
+    justify-content: center;
+    gap: 0;
+  }
+
+  /* サイズ調整 */
+  .hero-content h1 {
+    font-size: 20px;
+  }
+
+  .hero-content p {
+    font-size: 14px;
+  }
+
+  .mockup {
+    margin-top: 50px;
+    height: 300px;
+    width: auto;
+  }
+
+  /* 横並びスクロール式にしつつ必要ない場合は均等揃え */
+  .top-screens-inner {
+    justify-content: space-evenly;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 50px;
+  }
+
+  /* モックアップ下のテキストの横幅制限 */
+  .top-screen-block p {
+    max-width: 150px;
+  }
+
+  /* サイズ調整 */
+  .top-screen-img {
+    height: 260px;
+    width: auto;
+  }
+
+  /* 「無料で始める」ボタンのサイズと余白調整 */
+  .hero-content .btn-primary {
+    margin-top: 20px;
+    padding: 12px 24px;
+    font-size: 20px;
+    display: inline-block;
+  }
+
+  .cta .btn-primary {
+  margin-top: 50px;
+  padding: 14px 26px;
+  font-size: 20px;
+  display: inline-block;
+}
+
+  /* 改行した時の始点をアイコンではなくテキストの先頭に合わせる */
+  .use-cases li {
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+    margin-bottom: 12px;
+  }
+
+  .use-cases li i {
+    flex-shrink: 0; 
+    line-height: 2; 
+    font-size: 20px;
+    color: inherit;
+  }
+  
   /* --- フッターをサイドバーの非表示分左にずらして中央表示 --- */
   footer.logged-in {
     width: 100%;

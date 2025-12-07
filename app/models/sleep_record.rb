@@ -8,7 +8,7 @@ class SleepRecord < ApplicationRecord
   # 直近1週間（日曜〜土曜）の睡眠集計（homeとanalysisの共通処理）
   def self.weekly_summary_for(child)
     start_date = Date.today.beginning_of_week(:sunday)
-    end_date   = Date.today.end_of_week(:saturday)
+    end_date   = start_date + 6.days
 
     # 今週の記録
     records = child.sleep_records

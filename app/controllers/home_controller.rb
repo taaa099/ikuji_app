@@ -62,8 +62,8 @@ class HomeController < ApplicationController
 
     # ----- 今週の記録数（育児記録） -----
     if current_child
-      start_of_week = Date.current.beginning_of_week(:sunday)
-      end_of_week   = Date.current.end_of_week(:saturday)
+      start_of_week = Time.zone.today.beginning_of_week(:sunday).beginning_of_day
+      end_of_week   = Time.zone.today.end_of_week(:saturday).end_of_day
 
       start_of_last_week = start_of_week - 7.days
       end_of_last_week   = end_of_week - 7.days
@@ -88,21 +88,6 @@ class HomeController < ApplicationController
                                            .where(col => start_of_week..end_of_week))
       end
       @weekly_records_count = this_week_records.size
-
-      # 先週の件数
-      last_week_records = []
-      date_columns.each do |model, col|
-        last_week_records.concat(current_child.send(model.name.underscore.pluralize)
-                                            .where(col => start_of_last_week..end_of_last_week))
-      end
-      last_week_count = last_week_records.size
-
-      # 先週比（%）
-      @weekly_change = if last_week_count > 0
-                         ((@weekly_records_count - last_week_count) / last_week_count.to_f * 100).round(1)
-      else
-                         0
-      end
     end
 
     # ----- 成長記録（グラフ用） -----

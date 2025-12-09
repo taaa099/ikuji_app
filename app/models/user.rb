@@ -58,7 +58,7 @@ class User < ApplicationRecord
                      reminder_on: true,
                      alert_on: true,
                      alert_time: nil,
-                     extra_setting: nil
+                     extra_settings: nil
                    }
       when "diaper"
                    {
@@ -68,7 +68,7 @@ class User < ApplicationRecord
                      reminder_on: true,
                      alert_on: true,
                      alert_time: nil,
-                     extra_setting: nil
+                     extra_settings: nil
                    }
       when "bottle"
                    {
@@ -78,7 +78,7 @@ class User < ApplicationRecord
                      reminder_on: true,     # オン/オフのみ
                      alert_on: true,        # daily_bottle_goal に基づく
                      alert_time: nil,
-                     extra_setting: nil
+                     extra_settings: nil
                    }
       when "hydration"
                    {
@@ -88,7 +88,7 @@ class User < ApplicationRecord
                      reminder_on: true,     # オン/オフのみ
                      alert_on: true,        # daily_hydration_goal に基づく
                      alert_time: nil,
-                     extra_setting: nil
+                     extra_settings: nil
                    }
       when "baby_food"
                    {
@@ -98,7 +98,7 @@ class User < ApplicationRecord
                      reminder_on: true,     # オン/オフのみ
                      alert_on: true,        # daily_baby_food_goal に基づく
                      alert_time: nil,
-                     extra_setting: nil
+                     extra_settings: nil
                    }
       when "sleep_record"
                    {
@@ -108,7 +108,7 @@ class User < ApplicationRecord
                      reminder_on: true,
                      alert_on: true,        # オン/オフのみ
                      alert_time: nil,
-                     extra_setting: nil
+                     extra_settings: nil
                    }
       when "temperature"
                    {
@@ -118,7 +118,7 @@ class User < ApplicationRecord
                      reminder_on: false,     # リマインダーなし
                      alert_on: true,
                      alert_time: nil,
-                     extra_setting: nil
+                     extra_settings: nil
                    }
       when "bath"
                    {
@@ -128,7 +128,7 @@ class User < ApplicationRecord
                      reminder_on: true,      # オン/オフのみ
                      alert_on: true,
                      alert_time: nil,
-                     extra_setting: nil
+                     extra_settings: nil
                    }
       when "vaccination"
                    {
@@ -138,7 +138,7 @@ class User < ApplicationRecord
                      reminder_on: true,
                      alert_on: true,
                      alert_time: "08:00",    # 通知時刻指定
-                     extra_setting: nil
+                     extra_settings: nil
                    }
       when "schedule"
                    {
@@ -148,7 +148,7 @@ class User < ApplicationRecord
                      reminder_on: true,
                      alert_on: true,
                      alert_time: "08:00",    # 通知時刻指定
-                     extra_setting: nil
+                     extra_settings: nil
                    }
       end
 

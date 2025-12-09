@@ -551,6 +551,10 @@
     gap: 50px;
   }
 
+  .top-screens-row {
+    gap: 50px;
+  }
+
   /* モックアップ下のテキストの横幅制限 */
   .top-screen-block p {
     max-width: 150px;
@@ -571,7 +575,6 @@
   }
 
   .cta .btn-primary {
-  margin-top: 50px;
   padding: 14px 26px;
   font-size: 20px;
   display: inline-block;

@@ -130,6 +130,13 @@
   width: auto;
 }
 
+.top-screens-row {
+  display: flex;
+  flex-direction: row;  
+  gap: 100px;
+  flex-basis: 100%;
+  justify-content: center;
+}
 
 .top-screen-caption {
   margin-top: 12px;

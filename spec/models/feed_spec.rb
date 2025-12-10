@@ -39,7 +39,9 @@ RSpec.describe Feed, type: :model do
       expect(feed).to be_invalid
       expect(feed.errors[:base]).to include("左右どちらかの授乳時間を1秒以上入力してください")
     end
+  end
 
+  describe "関連付け" do
     it "user が無いと無効になる" do
       feed = Feed.new(
         user: nil,

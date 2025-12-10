@@ -1,5 +1,0 @@
-require 'rails_helper'
-
-RSpec.describe "Users", type: :request do
-  pending "temperaturesコントローラー実装待ちのためテストスキップ中です"
-end

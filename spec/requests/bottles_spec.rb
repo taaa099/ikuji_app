@@ -61,7 +61,7 @@ RSpec.describe "Bottles", type: :request do
     it "Bottle が更新されリダイレクトされる" do
       patch child_bottle_path(child, bottle), params: {
 
-        bottle: { pee: "true", poop: "false", memo: "変更後", given_at: bottle.given_at }
+        bottle: { amount: 100, memo: "変更後", given_at: bottle.given_at }
       }
       expect(bottle.reload.memo).to eq("変更後")
       expect(response).to have_http_status(:found)

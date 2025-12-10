@@ -41,12 +41,22 @@
 
     <div class="growth-form-group">
       <%= form.label :head_circumference, "頭囲(cm)", class: "growth-form-label" %>
-      <%= form.number_field :head_circumference, min: 0, step: 0.1, class: "growth-form-input" %>
+      <%= form.number_field :head_circumference, min: 0, step: 0.1, class: "growth-form-input #{'input-error' if growth.errors[:head_circumference].any?}" %>
+      <% if growth.errors[:weight].any? %>
+        <div class="error-message">
+          <%= growth.errors.full_messages_for(:head_circumference).join(", ") %>
+        </div>
+      <% end %>
     </div>
 
     <div class="growth-form-group">
       <%= form.label :chest_circumference, "胸囲(cm)", class: "growth-form-label" %>
-      <%= form.number_field :chest_circumference, min: 0, step: 0.1, class: "growth-form-input" %>
+      <%= form.number_field :chest_circumference, min: 0, step: 0.1, class: "growth-form-input #{'input-error' if growth.errors[:chest_circumference].any?}" %>
+      <% if growth.errors[:weight].any? %>
+        <div class="error-message">
+          <%= growth.errors.full_messages_for(:chest_circumference).join(", ") %>
+        </div>
+      <% end %>
     </div>
 
     <div class="growth-form-actions">

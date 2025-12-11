@@ -29,7 +29,7 @@ document.addEventListener("turbo:load", () => {
       const field = e.target.dataset.field;
       const value = e.target.value;
 
-      fetch(`/children/${childId}/update_daily_goal`, {   // ← 修正済み
+      fetch(`/children/${childId}/update_daily_goal`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

@@ -53,7 +53,7 @@ window.createDashboardChart = createDashboardChart; // ダークモード切替�
 
     if (button && input) {
       button.addEventListener("click", () => {
-        input.showPicker(); // ✅ ボタンクリックで直接カレンダーを開く
+        input.showPicker(); // ボタンクリックで直接カレンダーを開く
       });
 
       input.addEventListener("change", () => {

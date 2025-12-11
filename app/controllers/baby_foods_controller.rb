@@ -20,6 +20,7 @@ class BabyFoodsController < ApplicationController
   end
 
   def show
+    redirect_to child_baby_foods_path(current_child)
   end
 
   def new

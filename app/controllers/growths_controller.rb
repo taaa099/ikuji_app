@@ -26,6 +26,10 @@ class GrowthsController < ApplicationController
     @growth_all_dates = @grouped_growths.keys.sort.reverse
   end
 
+  def show
+    redirect_to child_growths_path(current_child)
+  end
+
   def new
     @growth = current_child.growths.new(recorded_at: Time.current)
   end

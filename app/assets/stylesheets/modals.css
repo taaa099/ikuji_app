@@ -35,14 +35,14 @@
 /* モーダル内「閉じる」ボタン */
 .modal-actions {
   display: flex;
-  justify-content: center; /* 横方向中央 */
+  justify-content: center;
   margin-top: 1.5rem;
 }
 
 .modal-actions .modal-close {
   display: inline-block;
   padding: 8px 16px;
-  background-color: #4CAF50; /* 登録ボタンと同じ緑 */
+  background-color: #4CAF50;
   color: #fff;
   border-radius: 4px;
   text-decoration: none;
@@ -53,7 +53,7 @@
 }
 
 .modal-actions .modal-close:hover {
-  background-color: #45a049; /* hover色 */
+  background-color: #45a049;
 }
 
 /* ==============================
@@ -71,11 +71,11 @@
 /* モーダル本体：下部固定、横幅100% */
 .mobile-modal-content {
   position: fixed;
-  bottom: 60px; /* ← ナビゲーションが60pxなのでその上に固定 */
+  bottom: 60px;
   left: 0;
   width: 100%;
   background: #fff;
-  border-radius: 16px 16px 0 0; /* 上だけ丸く */
+  border-radius: 16px 16px 0 0;
   padding: 16px;
   box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
 }
@@ -94,7 +94,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  justify-content: flex-start; /* 左寄せでも中央寄せでも調整可能 */
+  justify-content: flex-start;
 }
 
 /* menuモーダル内のアイコン＋テキスト表示 */
@@ -111,7 +111,7 @@
   align-items: center;
   text-decoration: none;
   color: #333;
-  width: calc((100% - 16px * 4) / 5); /* gapを考慮して5個分の幅 */
+  width: calc((100% - 16px * 4) / 5);
   cursor: pointer;
 }
 
@@ -125,10 +125,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 8px; /* 少し丸みをつける */
-  font-size: 24px; /* アイコンサイズ */
+  border-radius: 8px;
+  font-size: 24px;
   color: #fff;
-  margin-bottom: 4px; /* アイコンとテキストの間 */
+  margin-bottom: 4px;
 }
 
 /* アイコンごとの背景色 */
@@ -239,7 +239,7 @@
 
 .notification-modal-header {
   display: flex;
-  justify-content: space-between; /* 左にタイトル、右にボタン */
+  justify-content: space-between;
   align-items: center;
   position: sticky;
   top: 0;
@@ -335,7 +335,7 @@
 }
 
 .notification-option:hover {
-  background-color: #f3f4f6; /* 薄いグレー */
+  background-color: #f3f4f6;
   cursor: pointer;
 }
 

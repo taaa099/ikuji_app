@@ -24,8 +24,8 @@
   left: 0;
   bottom: 0;
   height: 3px;
-  width: 50px; /* 線の長さ */
-  background: linear-gradient(90deg, #81c784, #66bb6a); /* 柔らかい緑系グラデーション */
+  width: 50px;
+  background: linear-gradient(90deg, #81c784, #66bb6a);
 }
 
 .responsive-diary-show-title {
@@ -138,7 +138,7 @@
 }
 
 .diary-index-item-wrapper {
-  position: relative; /* アイコン絶対配置の基準 */
+  position: relative;
 }
 
 .diary-delete-btn {
@@ -159,7 +159,7 @@
 }
 
 .diary-delete-btn i {
-  pointer-events: none; /* アイコン自体はクリック伝播しない */
+  pointer-events: none;
 }
 
 /* ==============================

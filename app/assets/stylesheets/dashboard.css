@@ -27,8 +27,8 @@
   left: 0;
   bottom: 0;
   height: 3px;
-  width: 50px; /* 線の長さ */
-  background: linear-gradient(90deg, #81c784, #66bb6a); /* 柔らかい緑系グラデーション */
+  width: 50px;
+  background: linear-gradient(90deg, #81c784, #66bb6a);
 }
 
 /* テーブル共通 */
@@ -56,7 +56,7 @@
    レコード行のホバー効果
    ============================== */
 .dashboard-table tr:hover {
-  background-color: #f3f4f6; /* グレー（Tailwindのgray-100相当） */
+  background-color: #f3f4f6;
   transition: background-color 0.2s ease;
   cursor: pointer;
 }
@@ -67,9 +67,9 @@
 .dashboard-col-memo { width: 25%; }
 
 .dashboard-col-item i {
-  flex-shrink: 0;          /* アイコンの幅を縮めない */
-  width: 24px;             /* アイコンの横幅を固定 */
-  text-align: center;      /* 中央揃え */
+  flex-shrink: 0;
+  width: 24px;
+  text-align: center;
 }
 
 .dashboard-col-memo {
@@ -87,7 +87,7 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  color: #4b5563;           /* アイコン色 */
+  color: #4b5563;
   transition: all 0.2s ease;
   text-decoration: none;
 }
@@ -101,9 +101,9 @@
 }
 
 .calendar-responsive {
-  display: flex;           /* 横並びにする */
-  align-items: center;     /* 垂直方向中央揃え */
-  gap: 1rem;             /* 日付選択と本日への間隔 */
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 /* ==============================
@@ -148,7 +148,7 @@
 
 .stat-value-container {
   display: flex;
-  flex-direction: row;       /* 横並び */
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 4px;
@@ -170,7 +170,7 @@
 
 .stat-diff-group {
   display: flex;
-  gap: 0.8rem; /* 昼夜の間隔 */
+  gap: 0.8rem;
 }
 
 .stat-diff {
@@ -178,8 +178,8 @@
   font-weight: 600;
 }
 
-.stat-diff.up { color: #16a34a; }    /* 緑 */
-.stat-diff.down { color: #dc2626; }  /* 赤 */
+.stat-diff.up { color: #16a34a; }
+.stat-diff.down { color: #dc2626; }
 
 .stat-diff-label {
   position: absolute;

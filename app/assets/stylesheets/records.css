@@ -2,9 +2,7 @@
    育児記録共通スタイル（record系）
    ============================== */
 
-/* ==============================
-   ページタイトル共通
-   ============================== */
+/* --- ページタイトル共通 --- */
 .responsive-title {
   font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 700;
@@ -23,8 +21,8 @@
   left: 0;
   bottom: 0;
   height: 3px;
-  width: 50px; /* 線の長さ */
-  background: linear-gradient(90deg, #81c784, #66bb6a); /* 柔らかい緑系グラデーション */
+  width: 50px;
+  background: linear-gradient(90deg, #81c784, #66bb6a);
 }
 
 .form-title {
@@ -56,7 +54,7 @@
 }
 
 .responsive-table tr:hover {
-  background-color: #f3f4f6; /* グレー（Tailwindのgray-100相当） */
+  background-color: #f3f4f6;
   transition: background-color 0.2s ease;
   cursor: pointer;
 }
@@ -102,7 +100,7 @@
   align-items: center;
   width: 28px;
   height: 28px;
-  color: #4b5563;           /* アイコン色 */
+  color: #4b5563;
   text-decoration: none;
 }
 
@@ -115,14 +113,14 @@
    ============================== */
 .date-section {
   margin-bottom: 2rem;
-  border-top: 2px solid #e5e7eb; /* Tailwind gray-200 */
+  border-top: 2px solid #e5e7eb;
   padding-top: 1rem;
 }
 
 .date-heading {
   font-size: 18px;
   font-weight: 600;
-  color: #374151; /* Tailwind gray-700 */
+  color: #374151;
   margin-bottom: 0.5rem;
   display: flex;
   align-items: center;
@@ -144,7 +142,7 @@
    ============================== */
 .form-container {
   max-width: 500px;
-  margin: 0 auto; /* 中央寄せ */
+  margin: 0 auto;
   padding: 1.5rem;
   background: #fff;
   border: 1px solid #ddd;
@@ -181,7 +179,7 @@
   margin-top: 1.5rem;
   display: flex;
   justify-content: center;
-  gap: 0.5rem; /* ボタンとリンクの間隔 */
+  gap: 0.5rem;
 }
 
 /* 通常のボタン・リンク */
@@ -191,7 +189,7 @@
   font-size: 14px;
   border: none;
   border-radius: 4px;
-  background: #4CAF50; /* 緑系 */
+  background: #4CAF50;
   color: #fff;
   cursor: pointer;
   text-decoration: none; /* aタグの下線を消す */
@@ -203,28 +201,27 @@
   font-size: 14px;
   border: none;
   border-radius: 4px;
-  background: #e53935; /* 赤系 */
+  background: #e53935;
   color: #fff;
   cursor: pointer;
   text-decoration: none; /* aタグの下線を消す */
   display: inline-block;
 }
 
-/* hover */
 .form-actions a:hover,
 .form-actions input[type="submit"]:hover {
   background: #45a049;
 }
 
 .form-actions button:hover {
-  background: #c62828; /* 濃い赤 */
+  background: #c62828;
 }
 
 /* チェックボックス＋テキストを揃えるラベル */
 .checkbox-wrapper {
   display: inline-flex;
   align-items: center;
-  gap: 4px; /* チェックとテキストの間隔 */
+  gap: 4px;
 }
 
 /* カスタムチェックボックス */
@@ -249,7 +246,7 @@
   box-shadow: 0 0 0 2px #4caf50;
 }
 
-/* 必須項目　*/
+/* 必須項目 */
 .required-badge {
   background-color: #f56565;
   color: #fff;
@@ -266,10 +263,10 @@
   display: inline-block;
   padding: 10px 20px;
   margin-top: 20px;
-  border: 1px solid #6fcf97; ;   /* やさしい緑 */
+  border: 1px solid #6fcf97;
   border-radius: 6px;
-  background-color: #fff;      /* 通常は白背景 */
-  color: #4caf50; ;              /* 緑の文字 */
+  background-color: #fff;
+  color: #4caf50;
   text-decoration: none;
   text-align: center;
   cursor: pointer;
@@ -277,8 +274,8 @@
 }
 
 .record-create-btn:hover {
-  background-color: #6fcf97;   /* 緑背景 */
-  color: #fff;                 /* 白文字 */
+  background-color: #6fcf97;
+  color: #fff;
 }
 
 /* クリック時の押し感 */
@@ -292,7 +289,7 @@
    ============================== */
 .profile-container {
   max-width: 600px;
-  margin: 0 auto; /* 中央寄せ */
+  margin: 0 auto;
   padding: 1.5rem;
   background: #fff;
   border: 1px solid #ddd;

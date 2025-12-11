@@ -10,10 +10,10 @@
  */
 
 .flash {
-  position: relative; /* fixed はやめる */
+  position: relative;
   display: flex;
   justify-content: center;
-  margin: 10px auto 10px auto; /* 上下余白 */
+  margin: 10px auto 10px auto;
   pointer-events: auto;
 }
 
@@ -57,7 +57,7 @@
 }
 
 select {
-  padding-right: 2em; /* 矢印やチェックマークと文字がかぶらないように余白を確保 */
+  padding-right: 2em;
   font-size: 14px;
   line-height: 1.4;
 }
@@ -89,8 +89,8 @@ select {
   padding: 10px 20px;
   overflow: visible;
   z-index: 15;
-  border-bottom: 1px solid #ddd; /* ← 境界線を追加 */
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* ← 薄い影で立体感 */
+  border-bottom: 1px solid #ddd;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
 .header-container {
@@ -154,11 +154,11 @@ select {
 
 /* 通知ベルアイコン */
 .notification-link i.fa-bell {
-  font-size: 24px;       /* ベルの大きさを調整 */
-  line-height: 1;        /* バッジとの縦位置調整用 */
+  font-size: 24px;
+  line-height: 1;
   vertical-align: middle;
   position: relative;
-  left: -9px; /* ← 左に9pxずらす */
+  left: -9px;
 }
 
 .notification-link:hover i.fa-bell {
@@ -169,12 +169,12 @@ select {
 .notification-count {
   position: absolute;
   top: -6px;
-  right: -10px;          /* ベルが大きくなった分少し右に */
+  right: -10px;          /* ベルが大きい分少し右に */
   background: red;
   color: white;
-  font-size: 14px;       /* バッジも少し大きく */
+  font-size: 14px;
   font-weight: bold;
-  padding: 3px 7px;      /* バッジ内余白を広げる */
+  padding: 3px 7px;
   border-radius: 50%;
 }
 
@@ -198,7 +198,7 @@ select {
   padding: 5px 8px;
   position: absolute;
   z-index: 1000;
-  bottom: -35px; /* ベルの下に表示 */
+  bottom: -35px;
   left: -18px;
   white-space: nowrap;
   transition: opacity 0.1s ease-in-out;
@@ -231,8 +231,8 @@ select {
 #account-menu button {
   display: block;
   width: 100%;
-  padding: 8px 12px;      /* 内側余白 */
-  margin-bottom: 4px;      /* アイテム間隔 */
+  padding: 8px 12px;
+  margin-bottom: 4px;
   text-align: left;
   background-color: white;
   border: none;
@@ -246,11 +246,11 @@ select {
 #account-menu a:hover,
 #account-menu form:hover,
 #account-menu button:hover {
-  background-color: #f0f0f0; /* ホバーで少し色を変えるだけ */
+  background-color: #f0f0f0;
 }
 
 #account-toggle {
-  position: relative; /* ::before を相対配置 */
+  position: relative;
   overflow: hidden;
 }
 
@@ -261,11 +261,11 @@ select {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255,255,255,0); /* 初期は透明 */
+  background-color: rgba(255,255,255,0);
   transition: background-color 0.2s;
-  border-radius: 50%; /* アイコン丸に合わせる */
-  pointer-events: none; /* ボタン操作は妨げない */
-  z-index: 1; /* 画像より前面に */
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
 }
 
 #account-toggle:hover::before {
@@ -277,7 +277,7 @@ select {
    ============================== */
 .menu-divider {
   border: none;
-  border-bottom: 1px solid #e5e7eb; /* 子供切り替えページと同じ薄いグレー */
+  border-bottom: 1px solid #e5e7eb;
   margin: 4px 0;
 }
 
@@ -293,7 +293,7 @@ select {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  overflow: hidden; /* ::beforeをボタン内に制限 */
+  overflow: hidden;
 }
 
 #new-record-button::before {
@@ -303,14 +303,14 @@ select {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255,255,255,0); /* 初期は透明 */
+  background-color: rgba(255,255,255,0);
   transition: background-color 0.2s;
   border-radius: 6px;
-  pointer-events: none; /* ボタン操作を妨げない */
+  pointer-events: none;
 }
 
 #new-record-button:hover::before {
-  background-color: rgba(255,255,255,0.2); /* 薄い白のモヤ */
+  background-color: rgba(255,255,255,0.2);
 }
 
 /* ドロップダウンメニュー */
@@ -319,7 +319,7 @@ select {
   top: 100%;
   right: 0;
   background-color: #fff;
-  border: 1px solid #e5e7eb; /* 薄いグレーで境界 */
+  border: 1px solid #e5e7eb;
   border-radius: 6px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   display: flex;
@@ -335,22 +335,22 @@ select {
 #record-icons a {
   display: block;
   padding: 6px 10px;
-  color: #1f2937;  /* ダークグレー */
+  color: #1f2937;
   text-decoration: none;
   border-radius: 4px;
   transition: background-color 0.2s;
 }
 
 #record-icons a i {
-  flex-shrink: 0;          /* アイコンの幅を縮めない */
-  width: 24px;             /* アイコンの横幅を固定 */
-  text-align: center;      /* アイコン内部も中央揃え */
+  flex-shrink: 0;
+  width: 24px;
+  text-align: center;
   font-size: 20px;
-  margin-right: 8px;       /* ここでテキストとの間隔を指定 */
+  margin-right: 8px;
 }
 
 #record-icons a:hover {
-  background-color: #f3f4f6; /* 薄いグレー */
+  background-color: #f3f4f6;
 }
 
 /* ドロップダウン非表示状態 */
@@ -363,7 +363,7 @@ select {
   position: absolute;
   top: 0;           /* ボタンの上端に揃える */
   right: 0;       /* ボタンの右横に配置 */
-  transform: translateX(-150px); /* 微調整：右に4pxずらす */
+  transform: translateX(-150px); /* 右に4pxずらす */
   background-color: #fff;
   border: 1px solid #e5e7eb;
   border-radius: 0.5rem;
@@ -379,7 +379,7 @@ select {
 .site-header .btn-guest-action {
   height: 40px;        /* ログイン/新規登録ボタンの高さ統一 */
   display: flex;
-  align-items: center; /* ボタン内も縦中央 */
+  align-items: center;
   justify-content: center;
   margin-top: 5px;
 }
@@ -393,7 +393,7 @@ select {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  overflow: hidden; /* ::beforeをボタン内に制限 */
+  overflow: hidden;
   text-decoration: none; 
 }
 
@@ -404,14 +404,14 @@ select {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255,255,255,0); /* 初期は透明 */
+  background-color: rgba(255,255,255,0);
   transition: background-color 0.2s;
   border-radius: 6px;
-  pointer-events: none; /* ボタン操作を妨げない */
+  pointer-events: none;
 }
 
 .btn-guest-action:hover::before {
-  background-color: rgba(255,255,255,0.2); /* 薄い白のモヤ */
+  background-color: rgba(255,255,255,0.2);
 }
 
 /* ログイン時 */
@@ -452,17 +452,17 @@ footer.guest {
 /* 上段: 利用規約・プライバシーポリシー */
 .footer-links {
   display: flex;
-  flex-direction: row;  /* 横並び */
+  flex-direction: row;
   justify-content: center;
   gap: 15px;
   font-size: 13px;
-  color: #333; /* 文字を黒っぽく */
+  color: #333;
 }
 
 .footer-links a {
-  color: #333; /* 文字を黒っぽく */
-  text-decoration: none; /* 下線なし */
-  position: relative; /* モヤ用 */
+  color: #333;
+  text-decoration: none;
+  position: relative;
   padding: 2px 4px;
   border-radius: 4px;
   transition: color 0.2s;
@@ -473,25 +473,25 @@ footer.guest {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background-color: rgba(255,255,255,0); /* 初期は透明 */
+  background-color: rgba(255,255,255,0);
   border-radius: 4px;
   transition: background-color 0.2s;
   pointer-events: none;
 }
 
 .footer-links a:hover::before {
-  background-color: rgba(255,255,255,0.2); /* 薄い白のモヤ */
+  background-color: rgba(255,255,255,0.2);
 }
 
 /* 下段: コピーライト＋SNSリンク */
 .footer-bottom {
   display: flex;
-  flex-direction: row;  /* 横並び */
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 30px;
   font-size: 14px;
-  color: #333; /* 文字を黒め */
+  color: #333;
 }
 
 /* コピーライト部分 */
@@ -506,7 +506,7 @@ footer.guest {
 }
 
 .footer-sns a {
-  color: #333; /* 黒め */
+  color: #333;
   font-size: 18px;
   position: relative;
   border-radius: 6px;
@@ -526,7 +526,7 @@ footer.guest {
 }
 
 .footer-sns a:hover::before {
-  background-color: rgba(255,255,255,0.2); /* 薄い白のモヤ */
+  background-color: rgba(255,255,255,0.2);
 }
 
 /* 静的ページ用(利用規約・プライバシーポリシー) */

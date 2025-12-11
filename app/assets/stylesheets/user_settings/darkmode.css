@@ -2,14 +2,14 @@
    notice / alert ダークモード
    ============================== */
 .dark .notice {
-  background-color: #78350f; /* ダークイエロー系 */
-  color: #ffecb5;            /* 明るめ文字 */
+  background-color: #78350f;
+  color: #ffecb5;
   border-color: #b45309;
 }
 
 .dark .alert {
-  background-color: #7f1d1d; /* ダークレッド系 */
-  color: #fecaca;             /* 明るめ文字 */
+  background-color: #7f1d1d;
+  color: #fecaca;
   border-color: #991b1b;
 }
 
@@ -17,7 +17,7 @@
    header ダークモード
    ============================== */
 .dark .site-header {
-  background-color: #111827; /* ダーク背景 */
+  background-color: #111827;
   border-bottom: 1px solid #374151;
   color: #f9fafb;
 }
@@ -558,12 +558,12 @@
   background-color: #2563eb;
 }
 
-.dark .event-link.child-color-0 { background-color: #d97706; } /* 落ち着いたオレンジ */
-.dark .event-link.child-color-1 { background-color: #059669; } /* 深めの緑 */
-.dark .event-link.child-color-2 { background-color: #6d28d9; } /* 濃い紫 */
-.dark .event-link.child-color-3 { background-color: #be123c; } /* 落ち着いた赤 */
-.dark .event-link.child-color-4 { background-color: #ca8a04; } /* 深い黄色 */
-.dark .event-link.user-event { background-color: #4b5563; } /* より暗いグレー */
+.dark .event-link.child-color-0 { background-color: #d97706; }
+.dark .event-link.child-color-1 { background-color: #059669; }
+.dark .event-link.child-color-2 { background-color: #6d28d9; }
+.dark .event-link.child-color-3 { background-color: #be123c; }
+.dark .event-link.child-color-4 { background-color: #ca8a04; }
+.dark .event-link.user-event { background-color: #4b5563; }
 
 /* --- index --- */
 /* タイトル・日付セクションタイトル */
@@ -694,20 +694,20 @@
 
 /* アラートごとの背景色に応じた文字色 */
 .dark .notification-popup.reminder {
-  background-color: #059669; /* 緑系 */
-  color: #e5e7eb;            /* 明るめ文字 */
+  background-color: #059669;
+  color: #e5e7eb;
   border-color: #065f46;
 }
 
 .dark .notification-popup.alert {
-  background-color: #be123c; /* ピンク系 / ダークレッド寄り */
-  color: #fce7f3;            /* 明るすぎず読みやすい文字色 */
+  background-color: #be123c;
+  color: #fce7f3;
   border-color: #991b1b;
 }
 
 /* 未読件数バッジ */
 .dark .notification-count {
-  background: #ef4444; /* 赤系バッジ */
+  background: #ef4444;
   color: #fff;
 }
 
@@ -762,22 +762,22 @@
 
 /* --- show ページ用 --- */
 .dark .tip-container {
-  background-color: #1f2937; /* ダーク背景 */
+  background-color: #1f2937;
   color: #f9fafb;
   border: 1px solid #374151;
 }
 
 .dark .tip-container h2 {
-  border-bottom: 2px solid #facc15; /* 黄色系でアクセント */
+  border-bottom: 2px solid #facc15;
   color: #f9fafb;
 }
 
 .dark .tip-content-show {
-  color: #e5e7eb; /* 明るめのグレー */
+  color: #e5e7eb;
 }
 
 .dark .tip-content-show h2 {
-  color: #facc15; /* サブ見出しを黄色系で強調 */
+  color: #facc15;
   border-left: 4px solid #facc15;
 }
 
@@ -811,11 +811,11 @@
 }
 
 .dark .tip-category {
-  color: #9ca3af; /* グレーでカテゴリー表示 */
+  color: #9ca3af;
 }
 
 .dark .tip-content-index {
-  color: #d1d5db; /* トーンを落としたグレー */
+  color: #d1d5db;
 }
 
 /* ==============================
@@ -830,12 +830,12 @@
    modal ダークモード
    ============================== */
 .dark .modal-background {
-  background-color: rgba(0, 0, 0, 0.7); /* 半透明の黒背景に */
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .dark .modal-container {
-  background-color: #1f2937; /* フォームと同じダーク背景 */
-  color: #f9fafb;           /* 文字色を明るめに */
+  background-color: #1f2937;
+  color: #f9fafb;
   border: 1px solid #374151;
   border-radius: 8px;
   padding: 1rem;

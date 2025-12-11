@@ -20,15 +20,15 @@
 
 .sidebar a i,
 .sidebar button i {
-  flex-shrink: 0;          /* アイコンの幅を縮めない */
-  width: 24px;             /* アイコンの横幅を固定 */
-  text-align: center;      /* アイコン内部も中央揃え */
-  margin-right: 8px;       /* ここでテキストとの間隔を指定 */
+  flex-shrink: 0;
+  width: 24px;
+  text-align: center;
+  margin-right: 8px;
 }
 
 .sidebar a,
 .sidebar button.nav-btn {
-  font-size: 16px;     /* 親要素のフォントサイズを統一 */
+  font-size: 16px;
   font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
 }
 
@@ -40,7 +40,7 @@
 
 /* アイコンだけ表示 */
 .sidebar.collapsed {
-  width: 60px;         /* アイコンだけの幅 */
+  width: 60px;
 }
 
 .sidebar.collapsed ~ .main-content {
@@ -74,14 +74,14 @@
 }
 
 #record-list-menu a i {
-  flex-shrink: 0;          /* アイコンの幅を縮めない */
-  width: 10px;             /* アイコンの横幅を固定 */
-  text-align: center;      /* アイコン内部も中央揃え */
+  flex-shrink: 0;
+  width: 10px;
+  text-align: center;
   margin-left: 35px;
 }
 
 #record-list-menu > li:first-child {
-  margin-top: 8px; /* 「記録一覧」と「授乳一覧」の間だけスペース */
+  margin-top: 8px;
 }
 
 .chevron {
@@ -138,7 +138,6 @@
   cursor: pointer;
 }
 
-/* ホバー時 */
 .sidebar ul li a:hover,
 .sidebar ul li button.nav-btn:hover {
   background-color: #f0f0f0;;
@@ -146,7 +145,6 @@
   border-color: #050505ff;;
 }
 
-/* オーバーレイ */
 .sidebar-overlay {
   position: fixed;
   top: 0;

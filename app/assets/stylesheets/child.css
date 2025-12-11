@@ -64,7 +64,6 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
-/* 左側情報 */
 .child-info {
   flex: 1;
 }
@@ -86,7 +85,6 @@
   color: #888;
 }
 
-/* 右側ボタン */
 .child-actions {
   display: flex;
   gap: 10px;
@@ -144,10 +142,10 @@
   display: inline-block;
   padding: 10px 20px;
   margin-top: 20px;
-  border: 1px solid #6fcf97; ;   /* やさしい緑 */
+  border: 1px solid #6fcf97;
   border-radius: 6px;
-  background-color: #fff;      /* 通常は白背景 */
-  color: #4caf50; ;              /* 緑の文字 */
+  background-color: #fff;
+  color: #4caf50;
   text-decoration: none;
   text-align: center;
   cursor: pointer;
@@ -155,8 +153,8 @@
 }
 
 .new-child-btn:hover {
-  background-color: #6fcf97;   /* 緑背景 */
-  color: #fff;                 /* 白文字 */
+  background-color: #6fcf97;
+  color: #fff;
 }
 
 /* クリック時の押し感 */
@@ -239,7 +237,7 @@
   font-size: 14px;
   border: none;
   border-radius: 4px;
-  background: #4CAF50; /* 緑系 */
+  background: #4CAF50;
   color: #fff;
   cursor: pointer;
   text-decoration: none; /* aタグの下線を消す */
@@ -258,7 +256,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* 上寄せ→中央寄せに変更 */
+  justify-content: center;
   min-height: calc(100vh - 69px - 110px - 40px - 41px);
   align-items: center;
 }
@@ -382,7 +380,7 @@
   min-height: 2rem;
 }
 
-/* 名前（太字） */
+/* 名前 */
 .switch-child-page-child-name {
   font-weight: 700;
   font-size: 1rem;

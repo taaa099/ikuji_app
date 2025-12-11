@@ -1,7 +1,7 @@
 /* ==============================
    成長記録機能専用スタイル
    ============================== */
-   /* ページタイトル */
+/* ページタイトル */
 .growth-title {
   font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 700;
@@ -20,8 +20,8 @@
   left: 0;
   bottom: 0;
   height: 3px;
-  width: 50px; /* 線の長さ */
-  background: linear-gradient(90deg, #81c784, #66bb6a); /* 柔らかい緑系グラデーション */
+  width: 50px;
+  background: linear-gradient(90deg, #81c784, #66bb6a);
 }
 /* ==============================
    indexビュー（グラフ & 予定一覧）
@@ -72,7 +72,7 @@
 }
 
 .growth-table tr:hover {
-  background-color: #f3f4f6; /* グレー（Tailwindのgray-100相当） */
+  background-color: #f3f4f6;
   transition: background-color 0.2s ease;
   cursor: pointer;
 }
@@ -160,10 +160,10 @@
   display: inline-block;
   padding: 10px 20px;
   margin-top: 20px;
-  border: 1px solid #6fcf97; ;   /* やさしい緑 */
+  border: 1px solid #6fcf97;
   border-radius: 6px;
-  background-color: #fff;      /* 通常は白背景 */
-  color: #4caf50; ;              /* 緑の文字 */
+  background-color: #fff;
+  color: #4caf50;
   text-decoration: none;
   text-align: center;
   cursor: pointer;
@@ -171,8 +171,8 @@
 }
 
 .growth-create-btn:hover {
-  background-color: #6fcf97;   /* 緑背景 */
-  color: #fff;                 /* 白文字 */
+  background-color: #6fcf97;
+  color: #fff;
 }
 
 /* クリック時の押し感 */

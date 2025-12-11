@@ -1,9 +1,7 @@
 /* ==============================
    device関連専用スタイル
    ============================== */
-/* ==============================
-   認証フォーム共通
-   ============================== */
+/* --- 認証フォーム共通 --- */
 .auth-container {
   display: flex;
   justify-content: center;
@@ -25,7 +23,7 @@
   font-size: 24px;
   text-align: center;
   margin-bottom: 1.5rem;
-  color: #2e7d32; /* 緑系タイトル */
+  color: #2e7d32;
   position: relative;
 }
 
@@ -168,8 +166,8 @@
 
 /* 通常リンク */
 .auth-links a {
-  background-color: #e8f5e9; /* 薄い緑背景 */
-  color: #2e7d32;            /* 緑文字 */
+  background-color: #e8f5e9;
+  color: #2e7d32;
   border: 1px solid #c8e6c9;
 }
 
@@ -258,9 +256,9 @@
 
 /* トークン切れエラー用メッセージ */
 .token-error-message {
-  background-color: #fee2e2;  /* 薄い赤背景 */
-  border: 1px solid #f87171; /* 赤い枠線 */
-  color: #b91c1c;             /* 濃い赤文字 */
+  background-color: #fee2e2;
+  border: 1px solid #f87171;
+  color: #b91c1c;
   padding: 12px 16px;
   border-radius: 8px;
   margin-bottom: 20px;

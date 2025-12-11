@@ -1,3 +1,7 @@
+/* ==============================
+   通知設定
+   ============================== */
+
 /* 通知リンクのベルマーク用 */
 .notification-link {
   position: relative;
@@ -39,16 +43,16 @@
   min-width: 200px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  color: #000; /* デフォルト文字色を黒に */
+  color: #000;
 }
 
-/* notification_kind に応じた背景色（ライトモード） */
+/* notification_kind に応じた背景色 */
 .notification-popup.reminder {
-  background-color: #ccffcc; /* 緑系 */
+  background-color: #ccffcc;
 }
 
 .notification-popup.alert {
-  background-color: #ffcccc; /* 赤系 */
+  background-color: #ffcccc;
 }
 
 /* 表示時 */
@@ -85,7 +89,7 @@
   color: #333;
   padding: 10px 12px;
   border-bottom: 1px solid #ddd;
-  z-index: 10; /* 通知項目より前面に */
+  z-index: 10;
 }
 
 .notification-link {
@@ -97,7 +101,7 @@
   position: absolute;
   top: -5px;
   right: -5px;
-  background-color: #ff4d4f; /* 赤色 */
+  background-color: #ff4d4f;
   color: #fff;
   border-radius: 50%;
   padding: 2px 6px;
@@ -118,7 +122,7 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  z-index: 1000; /* 他要素より前面に表示 */
+  z-index: 1000;
   margin-top: 10px;
 }
 
@@ -200,7 +204,7 @@
 
 /* ドロップダウン開いているときはベルのホバー色を無効化 */
 .notification.dropdown-open:hover i.fa-bell {
-  color: #333; /* 通常色に戻す */
+  color: #333;
 }
 
 .no-notifications {

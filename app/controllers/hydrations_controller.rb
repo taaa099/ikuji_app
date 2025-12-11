@@ -20,6 +20,7 @@ class HydrationsController < ApplicationController
   end
 
   def show
+    redirect_to child_hydrations_path(current_child)
   end
 
   def new

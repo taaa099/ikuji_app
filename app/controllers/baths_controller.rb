@@ -20,6 +20,7 @@ class BathsController < ApplicationController
   end
 
   def show
+    redirect_to child_baths_path(current_child)
   end
 
   def new

@@ -20,6 +20,7 @@ class FeedsController < ApplicationController
   end
 
   def show
+    redirect_to child_feeds_path(current_child)
   end
 
   def new

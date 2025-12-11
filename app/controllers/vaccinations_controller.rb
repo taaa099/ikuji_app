@@ -20,6 +20,7 @@ class VaccinationsController < ApplicationController
   end
 
   def show
+    redirect_to child_vaccinations_path(current_child)
   end
 
   def new

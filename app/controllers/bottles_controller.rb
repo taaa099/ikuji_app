@@ -20,6 +20,7 @@ class BottlesController < ApplicationController
   end
 
   def show
+    redirect_to child_bottles_path(current_child)
   end
 
   def new

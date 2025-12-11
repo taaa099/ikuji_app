@@ -13,6 +13,7 @@ class ChildrenController < ApplicationController
   end
 
   def show
+    redirect_to children_path
   end
 
   def new

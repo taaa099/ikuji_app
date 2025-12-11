@@ -20,6 +20,7 @@ class TemperaturesController < ApplicationController
   end
 
   def show
+    redirect_to child_temperatures_path(current_child)
   end
 
   def new

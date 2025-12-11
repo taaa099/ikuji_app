@@ -20,6 +20,7 @@ class DiapersController < ApplicationController
   end
 
   def show
+    redirect_to child_diapers_path(current_child)
   end
 
   def new

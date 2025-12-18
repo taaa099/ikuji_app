@@ -16,14 +16,14 @@ else
 fi
 
 # DB接続確認 + create / migrate / seed
-echo "Creating database if it doesn't exist..."
-bundle exec rails db:create
+#echo "Creating database if it doesn't exist..."
+#bundle exec rails db:create
 
 echo "Running migrations..."
 bundle exec rails db:migrate
 
-echo "Seeding database..."
-bundle exec rails db:seed
+#echo "Seeding database..."
+#bundle exec rails db:seed
 
 echo "Database setup finished"
 

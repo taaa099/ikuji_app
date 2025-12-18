@@ -79,7 +79,7 @@ RUN groupadd --system --gid 1000 rails && \
 USER 1000:1000
 
 # Entrypoint prepares the database.
-ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+ENTRYPOINT ["./entrypoint.sh"]
 
 # Start server via Thruster by default, this can be overwritten at runtime
 EXPOSE 80

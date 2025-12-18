@@ -1,30 +1,17 @@
 #!/bin/bash
 set -e
 
-# Rails サーバのPIDファイルが残っていたら削除（再起動対策）
+# PIDファイル削除
 rm -f tmp/pids/server.pid
 
-# MySQLが立ち上がるまで待機（DB名やPWはdocker-compose.ymlで渡される）
-until mysqladmin ping -h db -p"$IKUJI_APP_DATABASE_PASSWORD" --silent; do
-  echo "Waiting for MySQL..."
-  sleep 2
-done
-
-# 本番環境では SECRET_KEY_BASE が必要なのでチェック
+# 本番では必須
 if [ -z "$SECRET_KEY_BASE" ]; then
-  echo "WARNING: SECRET_KEY_BASE is not set"
+  echo "ERROR: SECRET_KEY_BASE is not set"
+  exit 1
 fi
 
-# 初回はDB起動を待つ
+# DB接続確認 + 必要なら作成 / migrate
 bundle exec rails db:prepare
 
-# assets:precompile（事前に存在確認）
-if [ ! -d "public/assets" ] || [ -z "$(ls -A public/assets)" ]; then
-  echo "Precompiling assets..."
-  bundle exec rails assets:precompile
-else
-  echo "Assets already precompiled, skipping..."
-fi
-
-# CMD ["rails", "server", "-b", "0.0.0.0"] を実行
+# CMD を実行
 exec "$@"

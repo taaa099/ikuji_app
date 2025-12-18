@@ -52,9 +52,19 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    host: ikujiapp-db.cveq28sws49w.ap-northeast-1.rds.amazonaws.com
     database: ikuji_production
-    username: admin
-    password: <%= ENV["DB_PASSWORD"] %>
-
+    username: ikuji_app
+    password: <%= ENV["IKUJI_APP_DATABASE_PASSWORD"] %>
+  cache:
+    <<: *primary_production
+    database: ikuji_production_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *primary_production
+    database: ikuji_production_queue
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *primary_production
+    database: ikuji_production_cable
+    migrations_paths: db/cable_migrate
 

@@ -1,8 +1,11 @@
 :concurrency: 5
 :queues:
   - default
+
+production:
+  url: <%= ENV["REDIS_URL"] %>
+
 :schedule:
   notification_job:
-    cron: "*/1 * * * *" # 1分ごとにジョブ実行
+    cron: "*/1 * * * *"
     class: "NotificationJob"
-    

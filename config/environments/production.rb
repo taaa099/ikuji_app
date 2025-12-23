@@ -49,6 +49,11 @@ Rails.application.configure do
   # Replace the default in-process memory cache store with a durable alternative.
   # config.cache_store = :mem_cache_store
 
+  config.cache_store = :redis_cache_store, {
+  url: ENV.fetch("REDIS_URL"),
+  reconnect_attempts: 1
+}
+
   # Replace the default in-process and non-durable queuing backend for Active Job.
   # config.active_job.queue_adapter = :resque
 

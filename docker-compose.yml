@@ -29,6 +29,7 @@ services:
     environment:
       IKUJI_APP_DATABASE_PASSWORD: ${IKUJI_APP_DATABASE_PASSWORD}
       REDIS_URL: redis://redis:6379/1
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
 
   sidekiq:
     build:
@@ -43,6 +44,7 @@ services:
     environment:
       IKUJI_APP_DATABASE_PASSWORD: ${IKUJI_APP_DATABASE_PASSWORD}
       REDIS_URL: redis://redis:6379/1
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
 
 volumes:
   db_data:

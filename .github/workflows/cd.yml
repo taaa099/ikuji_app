@@ -32,6 +32,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build and push Docker image (SHA tag)
+        id: build
         run: |
           IMAGE_TAG=${GITHUB_SHA}
           IMAGE_URI=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}:${IMAGE_TAG}
@@ -40,7 +41,7 @@ jobs:
           docker tag ${ECR_REPOSITORY}:${IMAGE_TAG} ${IMAGE_URI}
           docker push ${IMAGE_URI}
 
-          echo "IMAGE_URI=${IMAGE_URI}" >> $GITHUB_ENV
+          echo "IMAGE_URI=${IMAGE_URI}" >> $GITHUB_OUTPUT
 
       - name: Render task definition for rails
         id: render-rails
@@ -48,7 +49,7 @@ jobs:
         with:
           task-definition: ${{ env.ECS_TASK_DEFINITION }}
           container-name: rails
-          image: ${{ env.IMAGE_URI }}
+          image: ${{ steps.build.outputs.IMAGE_URI }}
 
       - name: Render task definition for sidekiq
         id: render-sidekiq
@@ -56,7 +57,7 @@ jobs:
         with:
           task-definition: ${{ steps.render-rails.outputs.task-definition }}
           container-name: sidekiq
-          image: ${{ env.IMAGE_URI }}
+          image: ${{ steps.build.outputs.IMAGE_URI }}
 
       - name: Deploy ECS service
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1

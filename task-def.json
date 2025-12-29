@@ -1,0 +1,118 @@
+{
+  "family": "ikujiapp-rails",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "4096",
+  "executionRoleArn": "arn:aws:iam::873540496048:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::873540496048:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "rails",
+      "image": "873540496048.dkr.ecr.ap-northeast-1.amazonaws.com/rails-ikujiapp:latest",
+      "essential": true,
+      "cpu": 512,
+      "memory": 1024,
+      "memoryReservation": 1024,
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        { "name": "RAILS_ENV", "value": "production" }
+      ],
+      "secrets": [
+        {
+          "name": "PRODUCTION_DB_HOST",
+          "valueFrom": "prod/db_host"
+        },
+        {
+          "name": "PRODUCTION_DB_USERNAME",
+          "valueFrom": "prod/db_username"
+        },
+        {
+          "name": "PRODUCTION_DB_PASSWORD",
+          "valueFrom": "prod/db_password"
+        },
+        {
+          "name": "RAILS_MASTER_KEY",
+          "valueFrom": "prod/rails_master_key"
+        },
+        {
+          "name": "SECRET_KEY_BASE",
+          "valueFrom": "prod/secret_key_base"
+        },
+        {
+          "name": "OTP_SECRET_ENCRYPTION_KEY",
+          "valueFrom": "prod/otp_secret_key"
+        },
+        {
+          "name": "REDIS_URL",
+          "valueFrom": "prod/redis_url"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/ikujiapp-rails",
+          "awslogs-region": "ap-northeast-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    },
+    {
+      "name": "sidekiq",
+      "image": "873540496048.dkr.ecr.ap-northeast-1.amazonaws.com/rails-ikujiapp:latest",
+      "essential": false,
+      "cpu": 512,
+      "memory": 3072,
+      "memoryReservation": 3072,
+      "entryPoint": ["/rails/entrypoint.sh"],
+      "command": ["bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml"],
+      "environment": [
+        { "name": "RAILS_ENV", "value": "production" }
+      ],
+      "secrets": [
+        {
+          "name": "PRODUCTION_DB_HOST",
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:873540496048:secret:prod/db_host"
+        },
+        {
+          "name": "PRODUCTION_DB_USERNAME",
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:873540496048:secret:prod/db_username"
+        },
+        {
+          "name": "PRODUCTION_DB_PASSWORD",
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:873540496048:secret:prod/db_password"
+        },
+        {
+          "name": "RAILS_MASTER_KEY",
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:873540496048:secret:prod/rails_master_key"
+        },
+        {
+          "name": "SECRET_KEY_BASE",
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:873540496048:secret:prod/secret_key_base"
+        },
+        {
+          "name": "OTP_SECRET_ENCRYPTION_KEY",
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:873540496048:secret:prod/otp_secret_key"
+        },
+        {
+          "name": "REDIS_URL",
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:873540496048:secret:prod/redis_url"
+        }
+      ],
+      "workingDirectory": "/rails",
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/ikujiapp-rails",
+          "awslogs-region": "ap-northeast-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}

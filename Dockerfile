@@ -72,7 +72,8 @@ FROM base
 COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
 COPY --from=build /rails /rails
 
-RUN chmod +x /rails/entrypoint.sh
+# Entrypoint権限付与
+RUN chmod +x /rails/entrypoint.sh /rails/entrypoint-sidekiq.sh
 
 # Run and own only the runtime files as a non-root user for security
 RUN groupadd --system --gid 1000 rails && \

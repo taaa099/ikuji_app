@@ -26,31 +26,31 @@
       "secrets": [
         {
           "name": "PRODUCTION_DB_HOST",
-          "valueFrom": "prod/db_host"
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:873540496048:secret:prod/db_host"
         },
         {
           "name": "PRODUCTION_DB_USERNAME",
-          "valueFrom": "prod/db_username"
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:873540496048:secret:prod/db_username"
         },
         {
           "name": "PRODUCTION_DB_PASSWORD",
-          "valueFrom": "prod/db_password"
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:873540496048:secret:prod/db_password"
         },
         {
           "name": "RAILS_MASTER_KEY",
-          "valueFrom": "prod/rails_master_key"
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:873540496048:secret:prod/rails_master_key"
         },
         {
           "name": "SECRET_KEY_BASE",
-          "valueFrom": "prod/secret_key_base"
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:873540496048:secret:prod/secret_key_base"
         },
         {
           "name": "OTP_SECRET_ENCRYPTION_KEY",
-          "valueFrom": "prod/otp_secret_key"
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:873540496048:secret:prod/otp_secret_key"
         },
         {
           "name": "REDIS_URL",
-          "valueFrom": "prod/redis_url"
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:873540496048:secret:prod/redis_url"
         }
       ],
       "logConfiguration": {

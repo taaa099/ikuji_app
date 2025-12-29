@@ -69,7 +69,7 @@
       "cpu": 512,
       "memory": 3072,
       "memoryReservation": 3072,
-      "entryPoint": ["/rails/entrypoint-sidekiq.sh"],
+      "entryPoint": ["/rails/entrypoint.sh"],
       "command": ["bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml"],
       "environment": [
         { "name": "RAILS_ENV", "value": "production" }

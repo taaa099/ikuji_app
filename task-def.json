@@ -21,7 +21,9 @@
         }
       ],
       "environment": [
-        { "name": "RAILS_ENV", "value": "production" }
+        { "name": "RAILS_ENV", "value": "production" },
+        { "name": "APP_HOST", "value": "ikujiapp.com" },
+        { "name": "MAIL_FROM", "value": "no-reply@ikujiapp.com" }
       ],
       "secrets": [
         {
@@ -51,6 +53,14 @@
         {
           "name": "REDIS_URL",
           "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:873540496048:secret:prod/redis_url"
+        },
+        {
+          "name": "SMTP_USERNAME",
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:873540496048:secret:prod/smtp_username"
+        },
+        {
+          "name": "SMTP_PASSWORD",
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:873540496048:secret:prod/smtp_password"
         }
       ],
       "logConfiguration": {

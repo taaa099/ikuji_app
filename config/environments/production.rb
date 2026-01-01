@@ -63,12 +63,12 @@ Rails.application.configure do
 
   # Set host to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = {
-    host: ENV.fetch("APP_HOST"),
+    host: ENV.fetch("APP_HOST", "example.com"),
     protocol: "https"
   }
 
   config.action_mailer.default_options = {
-    from: "ikujiapp <#{ENV.fetch("MAIL_FROM")}>"
+    from: "ikujiapp <#{ENV.fetch("MAIL_FROM", "no-reply@example.com")}>"
   }
 
   config.action_mailer.delivery_method = :smtp

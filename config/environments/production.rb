@@ -71,15 +71,17 @@ Rails.application.configure do
     from: "ikujiapp <#{ENV.fetch("MAIL_FROM", "no-reply@example.com")}>"
   }
 
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address: "email-smtp.ap-northeast-1.amazonaws.com",
-    port: 587,
-    user_name: ENV.fetch("SMTP_USERNAME"),
-    password: ENV.fetch("SMTP_PASSWORD"),
-    authentication: :login,
-    enable_starttls_auto: true
-  }
+  if ENV["SMTP_USERNAME"].present?
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      address: "email-smtp.ap-northeast-1.amazonaws.com",
+      port: 587,
+      user_name: ENV.fetch("SMTP_USERNAME"),
+      password: ENV.fetch("SMTP_PASSWORD"),
+      authentication: :login,
+      enable_starttls_auto: true
+    }
+  end
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
   # config.action_mailer.smtp_settings = {

@@ -60,7 +60,7 @@ https://x.com/taaa_099
 
 ## メイン機能の使い方
 
-<table style="width:100%; table-layout: fixed;">
+<table>
   <tr>
     <th style="text-align:center; font-size:1.15em; font-weight:600;">子供を切り替える</th>
     <th style="text-align:center; font-size:1.15em; font-weight:600;">記録作成・一覧表示</th>
@@ -68,45 +68,45 @@ https://x.com/taaa_099
     <th style="text-align:center; font-size:1.15em; font-weight:600;">成長記録・睡眠分析</th>
   </tr>
     <tr>
-    <td style="vertical-align: top; text-align: center;">
+    <td>
         <img src="./public/images/demo/1-子供切り替え.gif" />
-        <p style="min-height:5em;">子供を切り替えて表示できるため、兄弟・姉妹それぞれの記録を分けて管理できます。</p>
+        <p>子供を切り替えて表示できるため、兄弟・姉妹それぞれの記録を分けて管理できます。</p>
     </td>
-    <td style="vertical-align: top; text-align: center;">
+    <td>
         <img src="./public/images/demo/2-記録作成・一覧.gif" />
-        <p style="min-height:5em;">ナビゲーションバーから各記録を入力し、ワンタップで登録できます。記録は項目別・日別の一覧やダッシュボードからまとめて確認できます</p>
+        <p>ナビゲーションバーから各記録を入力し、ワンタップで登録できます。記録は項目別・日別の一覧やダッシュボードからまとめて確認できます</p>
     </td>
-    <td style="vertical-align: top; text-align: center;">
+    <td>
         <img src="./public/images/demo/3-カレンダー.gif" />
-        <p style="min-height:5em;">家族ごとの予定をカレンダーで一元管理でき、育児や生活のスケジュールを把握しやすくします。</p>
+        <p>家族ごとの予定をカレンダーで一元管理でき、育児や生活のスケジュールを把握しやすくします。</p>
     </td>
-    <td style="vertical-align: top; text-align: center;">
+    <td>
         <img src="./public/images/demo/4-成長記録・睡眠分析.gif" />
-        <p style="min-height:5em;">成長の推移や睡眠状況をグラフで可視化し、日々の変化を直感的に確認できます。</p>
+        <p>成長の推移や睡眠状況をグラフで可視化し、日々の変化を直感的に確認できます。</p>
     </td>
     </tr>
 </table>
 
 ## 利便性を高めるその他の機能
 
-<table style="width:100%; table-layout: fixed;">
+<table>
   <tr>
     <th style="text-align:center; font-size:1.15em; font-weight:600;">リアルタイム通知</th>
     <th style="text-align:center; font-size:1.15em; font-weight:600;">ダークモード対応</th>
     <th style="text-align:center; font-size:1.15em; font-weight:600;">レスポンシブ対応</th>
   </tr>
   <tr>
-    <td style="vertical-align: top; text-align: center;">
+    <td>
       <img src="./public/images/demo/5-リアルタイム通知.gif" />
-      <p style="min-height:5em;">記録や予定に応じて、リアルタイムで通知が届きます。通知のON/OFFや時間は設定画面から柔軟にカスタマイズできます。</p>
+      <p>記録や予定に応じて、リアルタイムで通知が届きます。通知のON/OFFや時間は設定画面から柔軟にカスタマイズできます。</p>
     </td>
-    <td style="vertical-align: top; text-align: center;">
+    <td>
       <img src="./public/images/demo/6-ダークモード.gif" />
-      <p style="min-height:5em;">ダークモードに対応しており、夜間や暗い環境でも目に優しく快適に記録できます。</p>
+      <p>ダークモードに対応しており、夜間や暗い環境でも目に優しく快適に記録できます。</p>
     </td>
-        <td style="vertical-align: top; text-align: center;">
+        <td>
       <img src="./public/images/demo/7-PC版.gif" />
-      <p style="min-height:5em;">PC版でもサイドバーにより快適に利用できます。</p>
+      <p>PC版でもサイドバーにより快適に利用できます。</p>
     </td>
   </tr>
 </table>

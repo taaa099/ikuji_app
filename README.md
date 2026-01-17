@@ -99,19 +99,31 @@ https://x.com/taaa_099
 
 <table>
   <tr>
-    <th style="text-align:center; font-size:1.15em; font-weight:600;">リアルタイム通知</th>
-    <th style="text-align:center; font-size:1.15em; font-weight:600;">ダークモード対応</th>
-    <th style="text-align:center; font-size:1.15em; font-weight:600;">レスポンシブ対応</th>
+    <th align="center">リアルタイム通知</th>
+    <th align="center">ダークモード対応</th>
+    <th align="center">レスポンシブ対応</th>
   </tr>
   <tr>
-    <td>
-      <img src="./public/images/demo/5-リアルタイム通知.gif" />記録や予定に応じて、リアルタイムで通知が届きます。通知のON/OFFや時間は設定画面から柔軟にカスタマイズできます。
+    <td align="center" valign="top">
+      <img src="./public/images/demo/5-リアルタイム通知.gif" width="200" />
+      <div>
+        記録や予定に応じて、リアルタイムで通知が届きます。
+        通知のON/OFFや時間は設定画面から柔軟にカスタマイズできます。
+      </div>
     </td>
-    <td>
-      <img src="./public/images/demo/6-ダークモード.gif" />ダークモードに対応しており、夜間や暗い環境でも目に優しく快適に記録できます。
+    <td align="center" valign="top">
+      <img src="./public/images/demo/6-ダークモード.gif" width="200" />
+      <div>
+        ダークモードに対応しており、夜間や暗い環境でも
+        目に優しく快適に記録できます。
+      </div>
     </td>
-        <td>
-      <img src="./public/images/demo/7-PC版.gif" />PC版でもサイドバーにより快適に利用できます。
+    <td align="center" valign="top">
+      <img src="./public/images/demo/7-PC版.gif" width="200" />
+      <div>
+        PC版でもサイドバーを活用でき、
+        大画面で快適に利用できます。
+      </div>
     </td>
   </tr>
 </table>

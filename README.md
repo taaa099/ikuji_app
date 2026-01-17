@@ -62,25 +62,37 @@ https://x.com/taaa_099
 
 <table>
   <tr>
-    <th style="text-align:center; font-weight:600;">子供を切り替える</th>
-    <th style="text-align:center; font-weight:600;">記録作成・一覧表示</th>
-    <th style="text-align:center; font-weight:600;">スケジュール管理</th>
-    <th style="text-align:center; font-weight:600;">成長記録・睡眠分析</th>
+    <th align="center">子供を切り替える</th>
+    <th align="center">記録作成・一覧表示</th>
+    <th align="center">スケジュール管理</th>
+    <th align="center">成長記録・睡眠分析</th>
   </tr>
-    <tr>
-    <td>
-        <img src="./public/images/demo/1-子供切り替え.gif" />子供を切り替えて表示できるため、兄弟・姉妹それぞれの記録を分けて管理できます。
+  <tr>
+    <td align="center" valign="top">
+      <img src="./public/images/demo/1-子供切り替え.gif" width="200" />
+      <div>
+        子供を切り替えて表示できるため、兄弟・姉妹それぞれの記録を分けて管理できます。
+      </div>
     </td>
-    <td>
-        <img src="./public/images/demo/2-記録作成・一覧.gif" />ナビゲーションバーから各記録を入力し、ワンタップで登録できます。記録は項目別・日別の一覧やダッシュボードからまとめて確認できます。
+    <td align="center" valign="top">
+      <img src="./public/images/demo/2-記録作成・一覧.gif" width="200" />
+      <div>
+        ナビゲーションバーから各記録を入力し、ワンタップで登録できます。記録は項目別・日別の一覧やダッシュボードからまとめて確認できます。
+      </div>
     </td>
-    <td>
-        <img src="./public/images/demo/3-カレンダー.gif" />家族ごとの予定をカレンダーで一元管理でき、育児や生活のスケジュールを把握しやすくします。
+    <td align="center" valign="top">
+      <img src="./public/images/demo/3-カレンダー.gif" width="200" />
+      <div>
+        家族ごとの予定をカレンダーで一元管理でき、育児や生活のスケジュールを把握しやすくします。
+      </div>
     </td>
-    <td>
-        <img src="./public/images/demo/4-成長記録・睡眠分析.gif" />成長の推移や睡眠状況をグラフで可視化し、日々の変化を直感的に確認できます。
+    <td align="center" valign="top">
+      <img src="./public/images/demo/4-成長記録・睡眠分析.gif" width="200" />
+      <div>
+        成長の推移や睡眠状況をグラフで可視化し、日々の変化を直感的に確認できます。
+      </div>
     </td>
-    </tr>
+  </tr>
 </table>
 
 ## 利便性を高めるその他の機能

@@ -62,27 +62,23 @@ https://x.com/taaa_099
 
 <table>
   <tr>
-    <th style="text-align:center; font-size:1.15em; font-weight:600;">子供を切り替える</th>
-    <th style="text-align:center; font-size:1.15em; font-weight:600;">記録作成・一覧表示</th>
-    <th style="text-align:center; font-size:1.15em; font-weight:600;">スケジュール管理</th>
-    <th style="text-align:center; font-size:1.15em; font-weight:600;">成長記録・睡眠分析</th>
+    <th style="text-align:center; font-weight:600;">子供を切り替える</th>
+    <th style="text-align:center; font-weight:600;">記録作成・一覧表示</th>
+    <th style="text-align:center; font-weight:600;">スケジュール管理</th>
+    <th style="text-align:center; font-weight:600;">成長記録・睡眠分析</th>
   </tr>
     <tr>
     <td>
-        <img src="./public/images/demo/1-子供切り替え.gif" />
-        <p>子供を切り替えて表示できるため、兄弟・姉妹それぞれの記録を分けて管理できます。</p>
+        <img src="./public/images/demo/1-子供切り替え.gif" />子供を切り替えて表示できるため、兄弟・姉妹それぞれの記録を分けて管理できます。
     </td>
     <td>
-        <img src="./public/images/demo/2-記録作成・一覧.gif" />
-        <p>ナビゲーションバーから各記録を入力し、ワンタップで登録できます。記録は項目別・日別の一覧やダッシュボードからまとめて確認できます</p>
+        <img src="./public/images/demo/2-記録作成・一覧.gif" />ナビゲーションバーから各記録を入力し、ワンタップで登録できます。記録は項目別・日別の一覧やダッシュボードからまとめて確認できます。
     </td>
     <td>
-        <img src="./public/images/demo/3-カレンダー.gif" />
-        <p>家族ごとの予定をカレンダーで一元管理でき、育児や生活のスケジュールを把握しやすくします。</p>
+        <img src="./public/images/demo/3-カレンダー.gif" />家族ごとの予定をカレンダーで一元管理でき、育児や生活のスケジュールを把握しやすくします。
     </td>
     <td>
-        <img src="./public/images/demo/4-成長記録・睡眠分析.gif" />
-        <p>成長の推移や睡眠状況をグラフで可視化し、日々の変化を直感的に確認できます。</p>
+        <img src="./public/images/demo/4-成長記録・睡眠分析.gif" />成長の推移や睡眠状況をグラフで可視化し、日々の変化を直感的に確認できます。
     </td>
     </tr>
 </table>
@@ -97,16 +93,13 @@ https://x.com/taaa_099
   </tr>
   <tr>
     <td>
-      <img src="./public/images/demo/5-リアルタイム通知.gif" />
-      <p>記録や予定に応じて、リアルタイムで通知が届きます。通知のON/OFFや時間は設定画面から柔軟にカスタマイズできます。</p>
+      <img src="./public/images/demo/5-リアルタイム通知.gif" />記録や予定に応じて、リアルタイムで通知が届きます。通知のON/OFFや時間は設定画面から柔軟にカスタマイズできます。
     </td>
     <td>
-      <img src="./public/images/demo/6-ダークモード.gif" />
-      <p>ダークモードに対応しており、夜間や暗い環境でも目に優しく快適に記録できます。</p>
+      <img src="./public/images/demo/6-ダークモード.gif" />ダークモードに対応しており、夜間や暗い環境でも目に優しく快適に記録できます。
     </td>
         <td>
-      <img src="./public/images/demo/7-PC版.gif" />
-      <p>PC版でもサイドバーにより快適に利用できます。</p>
+      <img src="./public/images/demo/7-PC版.gif" />PC版でもサイドバーにより快適に利用できます。
     </td>
   </tr>
 </table>

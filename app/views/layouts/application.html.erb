@@ -255,6 +255,13 @@
     <!-- モーダル枠 -->
     <turbo-frame id="modal"></turbo-frame>
 
+    <!-- デモユーザー表示用 -->
+    <% if user_signed_in? && demo_user? %>
+      <div class="demo-banner">
+        ⚠ デモユーザーとしてログイン中のため、データの作成・更新・削除はできません
+      </div>
+    <% end %>
+
     <!-- 通常ページのコンテンツ -->
     <main class="main-content">
       <%= yield %>

@@ -40,6 +40,8 @@ class ApplicationController < ActionController::Base
   def reject_demo_user
     return unless user_signed_in?
     return unless demo_user?
+    return if request.path == destroy_user_session_path
+    return if controller_name == "children" && action_name == "switch"
 
     if request.post? || request.patch? || request.put? || request.delete?
       redirect_back(

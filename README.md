@@ -63,6 +63,14 @@ SNSアプリのようなナビゲーションを採用し、
 
 https://x.com/taaa_099
 
+### ▼ Qiitaアカウント
+
+https://qiita.com/taaa_09
+
+### ▼ はてなブログアカウント
+
+https://taaa-0991.hatenablog.com
+
 日々の開発成果などを主に投稿しております。
 
 ## メイン機能の使い方

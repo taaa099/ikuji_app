@@ -9,6 +9,18 @@
 }
 
 /* ページタイトル */
+.dashboard-title-main {
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  color: #1f2937;
+  margin-bottom: 50px;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.3rem;
+}
+
+/* ページタイトル */
 .dashboard-title {
   font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 700;
@@ -22,6 +34,16 @@
 
 /* 下線アクセント */
 .dashboard-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 50px;
+  background: linear-gradient(90deg, #81c784, #66bb6a);
+}
+
+.dashboard-title-main::after {
   content: "";
   position: absolute;
   left: 0;
@@ -182,6 +204,7 @@
 .stat-diff.down { color: #dc2626; }
 
 .stat-diff-label {
+  display: none;
   position: absolute;
   right: 0;
   font-size: 14px;

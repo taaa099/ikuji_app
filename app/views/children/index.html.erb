@@ -12,7 +12,6 @@
       </div>
 
       <div class="child-actions">
-        <%= link_to '表示', child_path(child), class: 'child-btn view-btn' %>
         <%= link_to '編集', edit_child_path(child), class: 'child-btn edit-btn' %>
         <%= link_to '削除', child_path(child),
             data: { turbo_method: :delete, turbo_confirm: 'この子供を削除すると、関連するデータは全て削除され、復元できません。本当に削除してよろしいですか？' },

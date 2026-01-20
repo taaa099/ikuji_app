@@ -18,11 +18,6 @@
 
 https://ikujiapp.com
 
-デモユーザーは以下の通りです。
-
-テストユーザーemail：demo@example.com<br>
-テストユーザーパスワード：password123
-
 ### ▼ 概要
 
 IkujiApp は、「シンプルな操作性」と「十分な機能性」を両立した育児記録Webアプリです。

@@ -18,6 +18,10 @@
 
 https://ikujiapp.com
 
+### ▼ Qiita紹介記事 
+
+https://qiita.com/taaa_09/items/c80e7ee080976d153bb5
+
 ### ▼ 概要
 
 IkujiApp は、「シンプルな操作性」と「十分な機能性」を両立した育児記録Webアプリです。

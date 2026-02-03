@@ -52,7 +52,7 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    host: <%= ENV["PRODUCTION_DB_HOST"] %>
-    database: ikuji_production
-    username: <%= ENV["PRODUCTION_DB_USERNAME"] %>
-    password: <%= ENV["PRODUCTION_DB_PASSWORD"] %>
+    host: db
+    database: <%= ENV["MYSQL_DATABASE"] %>
+    username: <%= ENV["IKUJI_APP_DATABASE_USERNAME"] %>
+    password: <%= ENV["IKUJI_APP_DATABASE_PASSWORD"] %>

@@ -20,7 +20,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - .:/app
+      - .:/rails
     ports:
       - "3000:3000"
     depends_on:
@@ -45,7 +45,7 @@ services:
     entrypoint: ["./entrypoint-sidekiq.sh"]
     command: bundle exec sidekiq -C config/sidekiq.yml
     volumes:
-      - .:/app
+      - .:/rails
     depends_on:
       - web
       - redis

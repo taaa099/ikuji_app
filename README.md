@@ -16,7 +16,10 @@
 
 ### ▼ サービスURL
 
-https://ikujiapp.com
+https://www.ikujiapp.com
+
+※現在ルートドメイン（ikujiapp.com）でのアクセスが不可となっております。
+サブドメイン（www.ikujiapp.com）は可能ですのでご了承ください。
 
 ### ▼ Qiita紹介記事 
 

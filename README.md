@@ -18,9 +18,6 @@
 
 https://www.ikujiapp.com
 
-※現在ルートドメイン（ikujiapp.com）でのアクセスが不可となっております。
-サブドメインは可能ですのでご了承ください。（www.ikujiapp.com）
-
 ### ▼ Qiita紹介記事 
 
 https://qiita.com/taaa_09/items/c80e7ee080976d153bb5

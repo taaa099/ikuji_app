@@ -215,6 +215,7 @@
    dashboard.css ダークモード
    ============================== */
 /* --- 共通 --- */
+.dark .dashboard-title-main,
 .dark .dashboard-title {
   color: #fff;
 }

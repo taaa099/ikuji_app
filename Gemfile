@@ -78,7 +78,7 @@ gem "image_processing", "~> 1.12"
 gem "ruby-vips", require: false, group: :production
 
 
-gem "tailwindcss-rails", "~> 4.3"
+gem "tailwindcss-rails", "~> 4.4"
 
 gem "sidekiq"
 gem "sidekiq-scheduler"

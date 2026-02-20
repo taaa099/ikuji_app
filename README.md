@@ -16,7 +16,7 @@
 
 ### ▼ サービスURL
 
-https://www.ikujiapp.com
+https://ikujiapp.com
 
 ### ▼ Qiita紹介記事 
 
